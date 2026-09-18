@@ -16,7 +16,7 @@ home = ["HTML", "RSS", "JSON"]
   # Git hub repo link
   editURL = ""
   description = "FCAJ Workforce Bootcamp 2026 - Internship Report and Agentic RAG on AWS Workshop"
-  author = "Lam Huy"
+  author = "Lam Quang Huy"
   showVisitedLinks = false
   disableBreadcrumb = false
   disableNextPrev = false

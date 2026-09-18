@@ -27,7 +27,42 @@ pre: " <b> 1.1. </b> "
 
 ### Verified AWS Technical Configuration:
 - **AWS Account ID**: `677994024390`
+- **AWS Account Name**: `huylam`
 - **IAM User**: `dev_admin` (`arn:aws:iam::677994024390:user/dev_admin`)
 - **Default Region**: `ap-southeast-1` (Singapore)
 - **Root Account MFA**: Enabled (`MFA: 1`)
 - **AWS Budgets**: `My Monthly Cost Budget` (100 USD) and `My-200$-budget` (200 USD) active.
+
+---
+
+### Proof of Work & Hands-on Verifications
+
+#### 1. Personal AWS Account Verification & Free Tier Status
+- **Description**: Verified official AWS personal account enrolled in 12-month Free Tier with account name `huylam` and Account ID `677994024390`. Active promotional credits balance stands at 188.21 USD.
+- **Red highlighted areas**: Top navigation account pill, Account ID `6779-9402-4390`, Account name `huylam`, and remaining credits.
+
+![AWS Account Verification huylam](/images/week1/01-account-huylam.png)
+
+---
+
+#### 2. Root Account Multi-Factor Authentication (MFA) Hardening
+- **Description**: In strict compliance with AWS Well-Architected Security Pillar and CIS AWS Foundations Benchmark, Virtual MFA is enabled on the Root account and no root access keys are provisioned.
+- **Red highlighted areas**: Green checkmarks for both "Root user has MFA" and "Root user has no active access keys".
+
+![MFA Verification on Root Account](/images/week1/02-mfa-root.png)
+
+---
+
+#### 3. Automated Cost Anomaly Defense with AWS Budgets
+- **Description**: Configured monthly budget `My Monthly Cost Budget` with a threshold limit of 100 USD to continuously track actual vs. forecasted spend and trigger immediate automated email alerts upon reaching set variance percentages.
+- **Red highlighted areas**: Budget name `My Monthly Cost Budget`, `Healthy` health status, `OK` alert thresholds, and 100.00 USD allocation.
+
+![AWS Budgets Configuration](/images/week1/03-aws-budgets.png)
+
+---
+
+#### 4. AWS CLI v2 Local Setup & STS Identity Verification
+- **Description**: Installed AWS CLI v2 locally on macOS, securely configured developer profile for `dev_admin`, and executed `aws sts get-caller-identity`. The Secret Access Key is masked to uphold enterprise security disclosure guidelines.
+- **Red highlighted areas**: Executed `aws sts get-caller-identity` command and resulting JSON payload confirming Account ID `677994024390` and User ARN `arn:aws:iam::677994024390:user/dev_admin`.
+
+![AWS CLI v2 Identity Verification](/images/week1/04-aws-cli-verified.png)
