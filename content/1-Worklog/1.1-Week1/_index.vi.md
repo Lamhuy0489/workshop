@@ -1,65 +1,33 @@
 ---
 title: "Worklog Tuần 1"
-date: 2026-04-12
+date: 2026-09-18
 weight: 1
 chapter: false
 pre: " <b> 1.1. </b> "
 ---
 
 ### Mục tiêu tuần 1:
+* Đăng ký và thiết lập tài khoản AWS cá nhân mới (Free Tier 12 tháng).
+* Thiết lập an toàn bảo mật tài khoản: Kích hoạt xác thực 2 bước (MFA) cho tài khoản Root.
+* Quản lý phân quyền và kiểm soát truy cập với AWS IAM: Tạo IAM User `dev_admin` và Group quản trị.
+* Thiết lập công cụ kiểm soát chi phí tự động với AWS Budgets để phòng ngừa rủi ro phát sinh phí.
+* Cài đặt và cấu hình AWS CLI v2 trên môi trường macOS cục bộ.
+* Thiết lập hệ sinh thái lưu trữ tri thức bộ não ngoại vi (Obsidian / Knowledge Brain) và khởi tạo Website Báo cáo thực tập trên GitHub Pages.
 
-* Làm quen với môi trường thực tập và kiến thức cơ bản về AWS.
-* Tìm hiểu IAM và quản lý quyền truy cập.
-* Tìm hiểu cách triển khai và quản lý Amazon EC2.
-* Tìm hiểu Amazon VPC và mạng trên AWS.
-* Tìm hiểu cách triển khai website tĩnh bằng Amazon S3.
-* Thực hành IAM Role và AWS CLI.
+### Các công việc đã triển khai trong tuần 1:
 
-### Các công việc cần triển khai trong tuần này:
+| Thứ | Công việc | Kết quả đạt được | Nguồn tài liệu |
+| :--- | :--- | :--- | :--- |
+| **Thứ 2** | - Tìm hiểu nội quy thực tập FCAJ Bootcamp 2026.<br>- Nghiên cứu khung chương trình The First Cloud Journey (FCJ). | Nắm rõ nội quy tại hn-rules.awsfcaj.com và tiêu chuẩn tốt nghiệp. | https://cloudjourney.awsstudygroup.com |
+| **Thứ 3** | - Đăng ký tài khoản AWS cá nhân.<br>- Cấu hình MFA cho tài khoản Root (Lab 000001). | Kích hoạt thành công Virtual MFA trên điện thoại; Root Account được bảo vệ tuyệt đối. | https://000001.awsstudygroup.com |
+| **Thứ 4** | - Cấu hình AWS Budgets khóa chi phí (Lab 000007). | Tạo thành công 2 ngân sách (100 USD và 200 USD) trạng thái HEALTHY. | https://000007.awsstudygroup.com |
+| **Thứ 5** | - Cấu hình phân quyền IAM (Lab 000002). | Tạo User `dev_admin`, gán quyền AdministratorAccess, tạo Access Key CLI. | https://000002.awsstudygroup.com |
+| **Thứ 6** | - Cài đặt AWS CLI v2 trên máy macOS (Lab 000011).<br>- Cấu hình profile kết nối bằng lệnh `aws configure`. | AWS CLI v2.36.48 hoạt động ổn định; xác thực thành công qua `aws sts get-caller-identity`. | https://000011.awsstudygroup.com |
+| **Thứ 7** | - Thiết lập Hugo Learn Theme và deploy website Báo cáo thực tập lên GitHub Pages.<br>- Soạn thảo đề xuất dự án Capstone: Enterprise Agentic RAG Platform on AWS. | Website báo cáo thực tập hoạt động trực tuyến song ngữ tại lamhuy0489.github.io/workshop. | https://github.com/AWS-First-Cloud-Journey/Workshop-template |
 
-| Thứ | Công việc | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu |
-| --- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ | --------------- | ----------------------------------------- |
-| 2 | - Tham gia buổi định hướng thực tập.<br>- Tìm hiểu kiến thức cơ bản về AWS Cloud.<br>- Tạo IAM Group và IAM User.<br>- Gán quyền AdministratorAccess và kiểm tra đăng nhập. | 12/04/2026 | 12/04/2026 | https://cloudjourney.awsstudygroup.com/ |
-| 3 | - Tìm hiểu Amazon EC2.<br>- Tạo EC2 Instance dùng Amazon Linux.<br>- Cấu hình Security Group.<br>- Kết nối SSH.<br>- Cài Apache và triển khai website đơn giản. | 13/04/2026 | 13/04/2026 | https://cloudjourney.awsstudygroup.com/ |
-| 4 | - Tìm hiểu Amazon VPC.<br>- Tạo VPC.<br>- Tạo Public và Private Subnet.<br>- Gắn Internet Gateway.<br>- Cấu hình Route Table. | 14/04/2026 | 14/04/2026 | https://cloudjourney.awsstudygroup.com/ |
-| 5 | - Tìm hiểu Amazon S3.<br>- Tạo S3 Bucket.<br>- Tải website lên Bucket.<br>- Cấu hình Bucket Policy.<br>- Bật Static Website Hosting. | 15/04/2026 | 15/04/2026 | https://cloudjourney.awsstudygroup.com/ |
-| 6 | - Tìm hiểu IAM Role và AWS CLI.<br>- Tạo IAM Role cho EC2.<br>- Gán quyền AmazonS3ReadOnlyAccess.<br>- Kết nối SSH.<br>- Thực hành các lệnh AWS CLI. | 16/04/2026 | 16/04/2026 | https://cloudjourney.awsstudygroup.com/ |
-
-### Kết quả đạt được tuần 1:
-
-* Nắm được kiến thức cơ bản về AWS và môi trường thực tập.
-
-* Tìm hiểu IAM:
-  * Tạo IAM Group và IAM User.
-  * Gán Policy.
-  * Đăng nhập bằng tài khoản IAM.
-
-* Triển khai EC2:
-  * Cấu hình Security Group.
-  * Kết nối SSH.
-  * Cài Apache.
-  * Triển khai website đơn giản.
-
-* Tìm hiểu Amazon VPC:
-  * Tạo VPC.
-  * Cấu hình Public và Private Subnet.
-  * Gắn Internet Gateway.
-  * Cấu hình Route Table.
-  * Gán Public IPv4.
-
-* Triển khai website tĩnh bằng Amazon S3:
-  * Tạo S3 Bucket.
-  * Tải website lên.
-  * Cấu hình Bucket Policy.
-  * Bật Static Website Hosting.
-
-* Thực hành IAM Role và AWS CLI:
-  * Tạo IAM Role.
-  * Gán quyền AmazonS3ReadOnlyAccess.
-  * Sử dụng AWS CLI.
-  * Liệt kê S3 Bucket.
-  * Hiểu lỗi AccessDenied.
-
-* Có thêm kinh nghiệm thực hành với IAM, EC2, VPC, S3 và AWS CLI.
-
-* Hiểu cách phân quyền bằng IAM User, IAM Role và Policy.
+### Chi tiết các thông số kỹ thuật đã xác thực trên AWS:
+- **AWS Account ID**: `677994024390`
+- **IAM User**: `dev_admin` (`arn:aws:iam::677994024390:user/dev_admin`)
+- **Default Region**: `ap-southeast-1` (Singapore)
+- **Root Account MFA**: Đã kích hoạt (`MFA: 1`)
+- **AWS Budgets**: `My Monthly Cost Budget` (100 USD) và `My-200$-budget` (200 USD) đang hoạt động.

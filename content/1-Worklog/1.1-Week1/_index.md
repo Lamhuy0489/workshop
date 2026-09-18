@@ -1,65 +1,33 @@
 ---
 title: "Week 1 Worklog"
-date: 2026-04-12
+date: 2026-09-18
 weight: 1
 chapter: false
 pre: " <b> 1.1. </b> "
 ---
 
 ### Week 1 Objectives:
+* Register and configure a new AWS personal account with 12-month Free Tier benefits.
+* Enforce security best practices: Enable Multi-Factor Authentication (MFA) on the Root Account.
+* Manage access control with AWS IAM: Create the `dev_admin` administrative IAM User and Group.
+* Configure automated cost alerts using AWS Budgets to mitigate unexpected spending risks.
+* Install and configure AWS CLI v2 on the local macOS environment.
+* Establish an Obsidian-based external knowledge brain and launch the Hugo Internship Report site on GitHub Pages.
 
-* Get familiar with the internship environment and AWS basics.
-* Learn IAM and user permission management.
-* Learn to deploy and manage Amazon EC2.
-* Understand Amazon VPC networking.
-* Learn static website hosting with Amazon S3.
-* Practice IAM Role and AWS CLI.
+### Completed Tasks in Week 1:
 
-### Tasks to be carried out this week:
+| Day | Task Description | Deliverables & Outcomes | Resource Link |
+| :--- | :--- | :--- | :--- |
+| **Mon** | - Review FCAJ Workforce Bootcamp 2026 regulations.<br>- Study The First Cloud Journey (FCJ) curriculum. | Familiarized with bootcamp rules at hn-rules.awsfcaj.com and graduation criteria. | https://cloudjourney.awsstudygroup.com |
+| **Tue** | - Register AWS account.<br>- Configure Root MFA (Lab 000001). | Successfully enabled Virtual MFA device on mobile; Root account secured. | https://000001.awsstudygroup.com |
+| **Wed** | - Configure AWS Budgets (Lab 000007). | Configured two active budgets (100 USD & 200 USD) in HEALTHY state. | https://000007.awsstudygroup.com |
+| **Thu** | - Configure IAM permissions (Lab 000002). | Created `dev_admin` user, attached AdministratorAccess, generated CLI access keys. | https://000002.awsstudygroup.com |
+| **Fri** | - Install AWS CLI v2 on macOS (Lab 000011).<br>- Configure profile credentials via `aws configure`. | AWS CLI v2.36.48 working; authenticated successfully via `aws sts get-caller-identity`. | https://000011.awsstudygroup.com |
+| **Sat** | - Set up Hugo Learn Theme and deploy report site to GitHub Pages.<br>- Draft Capstone Proposal: Enterprise Agentic RAG Platform on AWS. | Bilingual report site live on GitHub Pages at lamhuy0489.github.io/workshop. | https://github.com/AWS-First-Cloud-Journey/Workshop-template |
 
-| Day | Task | Start Date | Completion Date | Reference Material |
-| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------- | --------------- | ----------------------------------------- |
-| 1 | - Attend internship orientation.<br>- Learn AWS Cloud basics.<br>- Create IAM Group and IAM User.<br>- Assign AdministratorAccess policy and test IAM login. | 12/04/2026 | 12/04/2026 | https://cloudjourney.awsstudygroup.com/ |
-| 2 | - Learn Amazon EC2.<br>- Launch an Amazon Linux EC2 instance.<br>- Configure Security Group.<br>- Connect via SSH.<br>- Install Apache and deploy a simple web page. | 13/04/2026 | 13/04/2026 | https://cloudjourney.awsstudygroup.com/ |
-| 3 | - Learn Amazon VPC.<br>- Create a VPC.<br>- Create Public and Private Subnets.<br>- Attach an Internet Gateway.<br>- Configure Route Tables. | 14/04/2026 | 14/04/2026 | https://cloudjourney.awsstudygroup.com/ |
-| 4 | - Learn Amazon S3.<br>- Create an S3 Bucket.<br>- Upload website files.<br>- Configure Bucket Policy.<br>- Enable Static Website Hosting. | 15/04/2026 | 15/04/2026 | https://cloudjourney.awsstudygroup.com/ |
-| 5 | - Learn IAM Role and AWS CLI.<br>- Create an IAM Role for EC2.<br>- Attach AmazonS3ReadOnlyAccess.<br>- Connect via SSH.<br>- Practice AWS CLI commands. | 16/04/2026 | 16/04/2026 | https://cloudjourney.awsstudygroup.com/ |
-
-### Week 1 Achievements:
-
-* Learned AWS Cloud basics and internship workflow.
-
-* Learned IAM:
-  * Create IAM Groups and Users.
-  * Assign policies.
-  * Log in with IAM users.
-
-* Deployed an EC2 instance:
-  * Configure Security Groups.
-  * Connect via SSH.
-  * Install Apache.
-  * Deploy a simple website.
-
-* Learned Amazon VPC:
-  * Create a VPC.
-  * Configure Public and Private Subnets.
-  * Attach an Internet Gateway.
-  * Configure Route Tables.
-  * Assign Public IPv4.
-
-* Hosted a static website on Amazon S3:
-  * Create an S3 Bucket.
-  * Upload website files.
-  * Configure Bucket Policy.
-  * Enable Static Website Hosting.
-
-* Practiced IAM Role and AWS CLI:
-  * Create an IAM Role.
-  * Attach AmazonS3ReadOnlyAccess.
-  * Use AWS CLI.
-  * List S3 Buckets.
-  * Understand AccessDenied errors.
-
-* Gained hands-on experience with IAM, EC2, VPC, S3, and AWS CLI.
-
-* Learned basic AWS security using IAM Users, Roles, and Policies.
+### Verified AWS Technical Configuration:
+- **AWS Account ID**: `677994024390`
+- **IAM User**: `dev_admin` (`arn:aws:iam::677994024390:user/dev_admin`)
+- **Default Region**: `ap-southeast-1` (Singapore)
+- **Root Account MFA**: Enabled (`MFA: 1`)
+- **AWS Budgets**: `My Monthly Cost Budget` (100 USD) and `My-200$-budget` (200 USD) active.
