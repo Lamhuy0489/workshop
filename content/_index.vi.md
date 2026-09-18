@@ -8,15 +8,19 @@ chapter: false
 # Báo cáo thực tập
 
 ### Thông tin sinh viên:
-&emsp; **Họ và tên:** Lam Huy
+&emsp; **Họ và tên:** Lâm Quang Huy
+
+&emsp; **Tên tài khoản (Account Name):** huylam
+
+&emsp; **AWS Account ID:** 677994024390
 
 &emsp; **Email:** huyngu127@gmail.com
 
-&emsp; **Vị trí thực tập:** Workforce Bootcamp - First Cloud AI Journey (FCAJ)
+&emsp; **Chương trình đào tạo:** FCAJ Workforce Bootcamp 2026 - First Cloud AI Journey
 
-&emsp; **Đề tài Capstone:** Enterprise Agentic RAG Platform on AWS (Hệ thống Trợ lý Tri thức Thông minh và Tự động hóa Nghiệp vụ trên AWS)
+&emsp; **Đề tài Capstone Project:** Enterprise Agentic RAG Platform on AWS (Hệ thống Trợ lý Tri thức Thông minh và Tự động hóa Nghiệp vụ trên AWS)
 
-&emsp; **Thời gian thực tập:** 2026
+&emsp; **Khu vực triển khai (Default Region):** ap-southeast-1 (Singapore)
 
 ---
 

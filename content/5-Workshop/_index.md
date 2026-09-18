@@ -1,32 +1,33 @@
 ---
 title: "Workshop"
-date: 2026-01-01
+date: 2026-09-18
 weight: 5
 chapter: false
 pre: " <b> 5. </b> "
 ---
 
-# Deploying the Second-Hand Marketplace on AWS
+# Building an Enterprise Agentic RAG Platform on AWS
 
 #### Overview
+In this workshop, we will build and deploy a comprehensive **Enterprise Agentic RAG** platform on AWS using a Serverless and Cloud-Native architecture.
 
-In this workshop, we will build and deploy the **Second-Hand Marketplace** using a cloud-native architecture on AWS.
+The platform unifies advanced Retrieval-Augmented Generation (RAG) with autonomous AI Agents capable of multi-step reasoning and automated operational tool execution:
+- **Agent Orchestration Core**: Deployed on **AWS Lambda** (Python) using the ReAct (Reasoning + Acting) loop.
+- **Credential Security Layer**: Managed securely via **AWS Systems Manager Parameter Store (SecureString)**.
+- **Knowledge & State Storage**: Raw files stored in **Amazon S3**, conversation memory stored in **Amazon DynamoDB** with TTL cleanup.
+- **Communication & Delivery**: Managed REST API via **Amazon API Gateway** and client distribution via **Amazon S3 + CloudFront**.
+- **Observability**: Real-time logging, latency measurement, and token tracking with **Amazon CloudWatch**.
 
-The solution leverages AWS managed services including **Amazon ECS Fargate**, **Amazon ECR**, **Amazon S3**, **AWS CodeBuild**, **Application Load Balancer**, **Amazon CloudWatch**, **Amazon Route 53**, and **AWS Certificate Manager (ACM)**, integrated with **MongoDB Atlas** to provide a scalable, secure, highly available, and automated deployment platform.
-
-Throughout this workshop, you will prepare the project environment, configure networking, containerize the application using Docker, deploy it to Amazon ECS Fargate, configure a custom domain with HTTPS, automate deployment using AWS CodeBuild, monitor system health, perform end-to-end testing, and finally clean up all AWS resources.
-
-#### Content
+#### Workshop Structure
 
 1. [Workshop Overview](5.1-Workshop-overview/)
-2. [Prerequisite](5.2-Prerequisite/)
-3. [Project Foundation](5.3-Project-foundation/)
-4. [Networking](5.4-Networking/)
-5. [Application Services](5.5-Application-Services/)
-6. [Containerization](5.6-Containerization/)
-7. [Deploy Application](5.7-Deploy-Application/)
-8. [Domain and HTTPS](5.8-Domain-and-HTTPS/)
-9. [CI/CD](5.9-CICD/)
-10. [Monitoring](5.10-Monitoring/)
-11. [Testing](5.11-Testing/)
-12. [Cleanup](5.12-Cleanup/)
+2. [Prerequisites](5.2-Prerequisite/)
+3. [Knowledge Base Storage with Amazon S3](5.3-Knowledge-Base-S3/)
+4. [Session Memory Management with Amazon DynamoDB](5.4-DynamoDB-Memory/)
+5. [Credential Management with AWS Systems Manager](5.5-SSM-Secrets/)
+6. [Agent Controller Implementation on AWS Lambda](5.6-Lambda-Agent/)
+7. [API Management with Amazon API Gateway](5.7-API-Gateway/)
+8. [Frontend Delivery with CloudFront and S3](5.8-Frontend-CDN/)
+9. [Observability & Monitoring with Amazon CloudWatch](5.9-Monitoring/)
+10. [End-to-End Testing & Validation](5.10-Testing/)
+11. [Resource Cleanup](5.11-Cleanup/)

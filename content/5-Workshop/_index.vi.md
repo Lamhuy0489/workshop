@@ -1,32 +1,33 @@
 ---
 title: "Workshop"
-date: 2026-01-01
+date: 2026-09-18
 weight: 5
 chapter: false
 pre: " <b> 5. </b> "
 ---
 
-# Triển khai Second-Hand Marketplace trên AWS
+# Xây dựng Hệ thống Enterprise Agentic RAG trên AWS
 
 #### Tổng quan
+Trong workshop này, chúng ta sẽ xây dựng và triển khai một nền tảng **Enterprise Agentic RAG** hoàn chỉnh trên AWS dựa trên kiến trúc Serverless và Cloud-Native.
 
-Trong workshop này, chúng ta sẽ xây dựng và triển khai **Second-Hand Marketplace** bằng kiến trúc cloud-native trên AWS.
+Hệ thống kết hợp giữa khả năng truy xuất dữ liệu nâng cao (RAG) và trí tuệ nhân tạo tác nhân (AI Agents) có khả năng tự suy luận và thực thi công cụ nghiệp vụ:
+- **Tầng Điều phối Agent**: Triển khai trên **AWS Lambda** (Python) với cơ chế ReAct (Reasoning + Acting).
+- **Tầng Bảo mật API Key**: Quản lý tập trung trong **AWS Systems Manager Parameter Store (SecureString)**.
+- **Tầng Lưu trữ Tri thức & Dữ liệu**: Tài liệu thô lưu trên **Amazon S3**, bộ nhớ phiên hội thoại lưu trên **Amazon DynamoDB** với tính năng tự động dọn dẹp TTL.
+- **Tầng Giao tiếp & Phân phối**: Cung cấp API qua **Amazon API Gateway** và giao diện người dùng phân phối toàn cầu qua **Amazon S3 + CloudFront**.
+- **Giám sát & Vận hành**: Đo lường độ trễ, số lượng token và log thực thi qua **Amazon CloudWatch**.
 
-Giải pháp sử dụng các dịch vụ AWS như **Amazon ECS Fargate**, **Amazon ECR**, **Amazon S3**, **AWS CodeBuild**, **Application Load Balancer**, **Amazon CloudWatch**, **Amazon Route 53** và **AWS Certificate Manager (ACM)**, kết hợp với **MongoDB Atlas** nhằm xây dựng một nền tảng có khả năng mở rộng, bảo mật, tính sẵn sàng cao và hỗ trợ triển khai tự động.
-
-Trong suốt workshop này, bạn sẽ chuẩn bị môi trường dự án, cấu hình hạ tầng mạng, tích hợp các dịch vụ của ứng dụng, đóng gói ứng dụng bằng Docker, triển khai lên Amazon ECS Fargate, cấu hình tên miền và HTTPS, tự động hóa quá trình triển khai bằng AWS CodeBuild, giám sát hệ thống, thực hiện kiểm thử toàn bộ ứng dụng và cuối cùng dọn dẹp tất cả tài nguyên AWS đã tạo.
-
-#### Nội dung
+#### Nội dung chi tiết các bước
 
 1. [Tổng quan Workshop](5.1-Workshop-overview/)
 2. [Điều kiện chuẩn bị](5.2-Prerequisite/)
-3. [Chuẩn bị nền tảng dự án](5.3-Project-foundation/)
-4. [Cấu hình hạ tầng mạng](5.4-Networking/)
-5. [Cấu hình các dịch vụ ứng dụng](5.5-Application-Services/)
-6. [Đóng gói ứng dụng bằng Docker](5.6-Containerization/)
-7. [Triển khai ứng dụng](5.7-Deploy-Application/)
-8. [Cấu hình tên miền và HTTPS](5.8-Domain-and-HTTPS/)
-9. [Thiết lập CI/CD](5.9-CICD/)
-10. [Giám sát hệ thống](5.10-Monitoring/)
-11. [Kiểm thử hệ thống](5.11-Testing/)
-12. [Dọn dẹp tài nguyên](5.12-Cleanup/)
+3. [Lưu trữ tài liệu tri thức với Amazon S3](5.3-Knowledge-Base-S3/)
+4. [Quản lý bộ nhớ phiên với Amazon DynamoDB](5.4-DynamoDB-Memory/)
+5. [Quản lý khóa bí mật với AWS Systems Manager](5.5-SSM-Secrets/)
+6. [Triển khai Agent Controller với AWS Lambda](5.6-Lambda-Agent/)
+7. [Cấu hình Cổng giao tiếp Amazon API Gateway](5.7-API-Gateway/)
+8. [Phân phối giao diện với CloudFront và S3](5.8-Frontend-CDN/)
+9. [Giám sát hệ thống với Amazon CloudWatch](5.9-Monitoring/)
+10. [Kiểm thử các kịch bản thực tế](5.10-Testing/)
+11. [Dọn dẹp tài nguyên](5.11-Cleanup/)
