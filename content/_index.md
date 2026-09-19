@@ -1,62 +1,62 @@
 ---
-title: "Internship Report"
+title: "Báo cáo thực tập"
 date: 2026-09-18
 weight: 1
 chapter: false
 ---
 
-# Internship Graduation Report
+# Báo cáo thực tập tốt nghiệp
 
-## Internship Introduction
+## Giới thiệu thông tin thực tập
 
-### Student Information
+### Thông tin sinh viên
 
-![Student Portrait - Lam Quang Huy](/images/avatar.png?width=180px&classes=border,shadow)
+![Ảnh chân dung sinh viên Lâm Quang Huy](/images/avatar.png?width=180px&classes=border,shadow)
 
-| Information Item | Details |
+| Tiêu chí | Thông tin chi tiết |
 | :--- | :--- |
-| **Full Name** | **Lam Quang Huy** |
-| **Student ID (MSSV)** | `0212267` |
-| **University** | Hanoi University of Civil Engineering (HUCE) |
-| **Faculty** | Information Technology |
-| **Major** | Computer Science |
-| **Class / Academic Year** | Class 67CS - Academic Year 67 |
-| **Academic Advisor** | MSc. Le Van Minh |
-| **Student Email** | `huyngu127@gmail.com` |
+| **Họ và tên sinh viên** | **Lâm Quang Huy** |
+| **Mã số sinh viên (MSSV)** | `0212267` |
+| **Trường đào tạo** | Trường Đại học Xây dựng Hà Nội (HUCE) |
+| **Khoa** | Công nghệ thông tin |
+| **Ngành học** | Khoa học máy tính |
+| **Lớp / Khóa học** | Lớp 67CS - Khóa 67 |
+| **Giảng viên hướng dẫn** | ThS. Lê Văn Minh |
+| **Email sinh viên** | `huyngu127@gmail.com` |
 
 ---
 
-### Host Organization Information
+### Thông tin đơn vị hướng dẫn thực tập (ĐVHD)
 
-| Information Item | Details |
+| Tiêu chí | Thông tin chi tiết |
 | :--- | :--- |
-| **Host Organization** | **AMAZON WEB SERVICES VIETNAM COMPANY LIMITED** |
-| **Address** | 36th Floor, Bitexco Financial Tower, No. 2 Hai Trieu Street, Ben Nghe Ward (now Saigon Ward), District 1, Ho Chi Minh City, Vietnam |
-| **Supervisor / Mentor** | Nguyen Gia Hung |
-| **Phone Number** | +841277870645 |
-| **Contact Email** | `hunggia@amazon.com.vn` |
-| **Internship Position / Program** | First Cloud AI Journey (FCAJ Workforce Bootcamp 2026) |
-| **Internship Duration** | From August 03, 2026 to September 27, 2026 (8 weeks) |
+| **Tên đơn vị thực tập** | **CÔNG TY TNHH AMAZON WEB SERVICES VIỆT NAM** |
+| **Địa chỉ ĐVHD** | Tầng 36 Tòa nhà Bitexco Financial Tower, Số 2 đường Hải Triều, Phường Sài Gòn, Thành phố Hồ Chí Minh, Việt Nam |
+| **Người phụ trách (ĐVHD)** | Nguyễn Gia Hưng |
+| **Số điện thoại liên hệ** | +841277870645 |
+| **Email liên hệ** | `hunggia@amazon.com.vn` |
+| **Vị trí / Chương trình thực tập** | First Cloud AI Journey (FCAJ Workforce Bootcamp 2026) |
+| **Thời gian thực tập** | Từ ngày 03-08-2026 đến ngày 27-09-2026 (8 tuần) |
 
 ---
 
-### Cloud Environment & Capstone Project
+### Môi trường Cloud và Đề tài Capstone Project
 
-| Information Item | Details |
+| Tiêu chí | Thông tin chi tiết |
 | :--- | :--- |
-| **AWS Account Name** | `huylam` |
+| **Tên tài khoản AWS (Account Name)** | `huylam` |
 | **AWS Account ID** | `677994024390` |
-| **Deployment Region** | `ap-southeast-1` (Singapore) |
-| **Capstone Topic** | **Enterprise Agentic RAG Platform on AWS** (Smart Knowledge Assistant & Operational Tool Orchestration) |
+| **Khu vực triển khai (Default Region)** | `ap-southeast-1` (Singapore) |
+| **Đề tài Capstone Project** | **Enterprise Agentic RAG Platform on AWS** (Hệ thống Trợ lý Tri thức Thông minh và Tự động hóa Nghiệp vụ trên AWS) |
 
 ---
 
-### Report Contents
+### Mục lục nội dung báo cáo thực tập
 
-1. [Worklog](1-worklog/)
-2. [Proposal](2-proposal/)
-3. [Blogs Posted](3-blogsposted/)
-4. [Events Participated](4-eventparticipated/)
-5. [Technical Workshop](5-workshop/)
-6. [Self-evaluation](6-self-evaluation/)
-7. [Sharing & Feedback](7-feedback/)
+1. [Nhật ký công việc (Worklog)](1-worklog/)
+2. [Đề xuất dự án (Proposal)](2-proposal/)
+3. [Các bài blog chuyên môn (Blogs Posted)](3-blogsposted/)
+4. [Các sự kiện đã tham gia (Events Participated)](4-eventparticipated/)
+5. [Dự án kỹ thuật chính (Workshop)](5-workshop/)
+6. [Tự đánh giá năng lực (Self-evaluation)](6-self-evaluation/)
+7. [Chia sẻ và phản hồi (Feedback)](7-feedback/)
