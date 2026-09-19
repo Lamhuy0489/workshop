@@ -5,26 +5,53 @@ weight: 1
 chapter: false
 ---
 
-# Báo cáo thực tập
+# Báo cáo thực tập tốt nghiệp
 
-### Thông tin sinh viên:
-&emsp; **Họ và tên:** Lâm Quang Huy
+## Giới thiệu thông tin thực tập
 
-&emsp; **Tên tài khoản (Account Name):** huylam
+### Thông tin sinh viên
 
-&emsp; **AWS Account ID:** 677994024390
+![Ảnh chân dung sinh viên Lâm Quang Huy](/images/avatar.png?width=180px&classes=border,shadow)
 
-&emsp; **Email:** huyngu127@gmail.com
-
-&emsp; **Chương trình đào tạo:** FCAJ Workforce Bootcamp 2026 - First Cloud AI Journey
-
-&emsp; **Đề tài Capstone Project:** Enterprise Agentic RAG Platform on AWS (Hệ thống Trợ lý Tri thức Thông minh và Tự động hóa Nghiệp vụ trên AWS)
-
-&emsp; **Khu vực triển khai (Default Region):** ap-southeast-1 (Singapore)
+| Tiêu chí | Thông tin chi tiết |
+| :--- | :--- |
+| **Họ và tên sinh viên** | **Lâm Quang Huy** |
+| **Mã số sinh viên (MSSV)** | `0212267` |
+| **Trường đào tạo** | Trường Đại học Xây dựng Hà Nội (HUCE) |
+| **Khoa** | Công nghệ thông tin |
+| **Ngành học** | Khoa học máy tính |
+| **Lớp / Khóa học** | Lớp 67CS - Khóa 67 |
+| **Giảng viên hướng dẫn** | ThS. Lê Văn Minh |
+| **Email sinh viên** | `huyngu127@gmail.com` |
 
 ---
 
-### Nội dung báo cáo
+### Thông tin đơn vị hướng dẫn thực tập (ĐVHD)
+
+| Tiêu chí | Thông tin chi tiết |
+| :--- | :--- |
+| **Tên đơn vị thực tập** | **CÔNG TY TNHH AMAZON WEB SERVICES VIỆT NAM** |
+| **Địa chỉ ĐVHD** | Tầng 36 Tòa nhà Bitexco Financial Tower, Số 2 đường Hải Triều, Phường Sài Gòn, Thành phố Hồ Chí Minh, Việt Nam |
+| **Người phụ trách (ĐVHD)** | Nguyễn Gia Hưng |
+| **Số điện thoại liên hệ** | +841277870645 |
+| **Email liên hệ** | `hunggia@amazon.com.vn` |
+| **Vị trí / Chương trình thực tập** | First Cloud AI Journey (FCAJ Workforce Bootcamp 2026) |
+| **Thời gian thực tập** | Từ ngày 03-08-2026 đến ngày 27-09-2026 (8 tuần) |
+
+---
+
+### Môi trường Cloud và Đề tài Capstone Project
+
+| Tiêu chí | Thông tin chi tiết |
+| :--- | :--- |
+| **Tên tài khoản AWS (Account Name)** | `huylam` |
+| **AWS Account ID** | `677994024390` |
+| **Khu vực triển khai (Default Region)** | `ap-southeast-1` (Singapore) |
+| **Đề tài Capstone Project** | **Enterprise Agentic RAG Platform on AWS** (Hệ thống Trợ lý Tri thức Thông minh và Tự động hóa Nghiệp vụ trên AWS) |
+
+---
+
+### Mục lục nội dung báo cáo thực tập
 
 1. [Nhật ký công việc (Worklog)](1-worklog/)
 2. [Đề xuất dự án (Proposal)](2-proposal/)

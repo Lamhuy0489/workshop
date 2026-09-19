@@ -5,22 +5,49 @@ weight: 1
 chapter: false
 ---
 
-# Internship Report
+# Internship Graduation Report
 
-### Student Information:
-&emsp; **Full Name:** Lam Quang Huy
+## Internship Introduction
 
-&emsp; **AWS Account Name:** huylam
+### Student Information
 
-&emsp; **AWS Account ID:** 677994024390
+![Student Portrait - Lam Quang Huy](/images/avatar.png?width=180px&classes=border,shadow)
 
-&emsp; **Email:** huyngu127@gmail.com
+| Information Item | Details |
+| :--- | :--- |
+| **Full Name** | **Lam Quang Huy** |
+| **Student ID (MSSV)** | `0212267` |
+| **University** | Hanoi University of Civil Engineering (HUCE) |
+| **Faculty** | Information Technology |
+| **Major** | Computer Science |
+| **Class / Academic Year** | Class 67CS - Academic Year 67 |
+| **Academic Advisor** | MSc. Le Van Minh |
+| **Student Email** | `huyngu127@gmail.com` |
 
-&emsp; **Internship Program:** FCAJ Workforce Bootcamp 2026 - First Cloud AI Journey
+---
 
-&emsp; **Capstone Topic:** Enterprise Agentic RAG Platform on AWS (Smart Knowledge Assistant & Operational Tool Orchestration)
+### Host Organization Information
 
-&emsp; **Deployment Region:** ap-southeast-1 (Singapore)
+| Information Item | Details |
+| :--- | :--- |
+| **Host Organization** | **AMAZON WEB SERVICES VIETNAM COMPANY LIMITED** |
+| **Address** | 36th Floor, Bitexco Financial Tower, No. 2 Hai Trieu Street, Ben Nghe Ward (now Saigon Ward), District 1, Ho Chi Minh City, Vietnam |
+| **Supervisor / Mentor** | Nguyen Gia Hung |
+| **Phone Number** | +841277870645 |
+| **Contact Email** | `hunggia@amazon.com.vn` |
+| **Internship Position / Program** | First Cloud AI Journey (FCAJ Workforce Bootcamp 2026) |
+| **Internship Duration** | From August 03, 2026 to September 27, 2026 (8 weeks) |
+
+---
+
+### Cloud Environment & Capstone Project
+
+| Information Item | Details |
+| :--- | :--- |
+| **AWS Account Name** | `huylam` |
+| **AWS Account ID** | `677994024390` |
+| **Deployment Region** | `ap-southeast-1` (Singapore) |
+| **Capstone Topic** | **Enterprise Agentic RAG Platform on AWS** (Smart Knowledge Assistant & Operational Tool Orchestration) |
 
 ---
 
