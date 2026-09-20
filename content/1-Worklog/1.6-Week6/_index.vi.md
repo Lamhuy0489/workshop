@@ -234,3 +234,52 @@ Tất cả các hình ảnh minh chứng dưới đây đều được trích xu
 3. **Bảo mật bí mật và cấu hình tập trung**: Hiểu sâu sắc sự khác biệt giữa String thông thường và SecureString mã hóa bởi AWS KMS, đảm bảo tuân thủ các chuẩn mực bảo mật ngành.
 4. **Quản trị tài nguyên thông minh (Resource Governance)**: Sử dụng AWS Resource Groups và chiến lược gắn thẻ Tagging chuẩn mực để quản lý vòng đời tài nguyên, phục vụ tự động hóa và phân bổ chi phí minh bạch.
 5. **Kỷ luật tài chính đám mây FinOps**: Kiểm soát chặt chẽ chi phí phát sinh (chỉ tiêu hao 0.10 USD), vận hành hệ thống máy chủ và lưu trữ an toàn trong phạm vi miễn phí của AWS Free Tier.
+
+---
+
+### Quy trình dọn dẹp tài nguyên (FinOps Cleanup):
+
+Để bảo toàn ngân sách đám mây và duy trì chi phí ở mức 0 USD theo tiêu chuẩn AWS Free Tier, toàn bộ các tài nguyên tính toán và lưu trữ khởi tạo trong bài thực hành Tuần 6 đã được dọn dẹp hoàn toàn theo quy trình kỹ thuật chuẩn xác sau:
+
+#### 1. Chấm dứt máy chủ ảo Amazon EC2 (Terminate Instance):
+Máy chủ EC2 `huylam-ssm-instance` cần được chấm dứt đầu tiên để giải phóng tài nguyên tính toán vCPU, RAM, địa chỉ Public IPv4 và phân vùng ổ đĩa đính kèm EBS gp3:
+```bash
+aws ec2 terminate-instances --instance-ids i-07c150e87aa231c61
+```
+*Chờ cho trạng thái phiên bản máy chủ chuyển đổi từ `shutting-down` sang `terminated` hoàn tất trước khi xóa nhóm bảo mật.*
+
+#### 2. Xóa các tham số trong AWS Systems Manager Parameter Store:
+Xóa toàn bộ các tham số cấu hình chuỗi thông thường và bí mật mã hóa KMS đã tạo để không chiếm dụng hạn mức lưu trữ:
+```bash
+aws ssm delete-parameters --names \
+  "/huylam/app/db_password" \
+  "/huylam/app/environment" \
+  "/huylam/app/student_name"
+```
+
+#### 3. Xóa nhóm tài nguyên AWS Resource Groups:
+Xóa Resource Group `huylam-fcj-resources` (thao tác này chỉ xóa định nghĩa nhóm mà không làm ảnh hưởng tới các tài nguyên khác):
+```bash
+aws resource-groups delete-group --group-name huylam-fcj-resources
+```
+
+#### 4. Xóa nhóm bảo mật Security Group:
+Sau khi máy chủ EC2 đã chấm dứt hoàn toàn (`terminated`) và Network Interface (ENI) được gỡ bỏ, tiến hành xóa Security Group `huylam-ssm-sg`:
+```bash
+aws ec2 delete-security-group --group-id sg-08a93d881545a9cf8
+```
+
+#### 5. Xác thực kết quả dọn dẹp trên AWS CLI:
+Thực hiện các câu lệnh kiểm tra trạng thái nhằm xác nhận hệ thống đã hoàn toàn sạch tài nguyên nhàn rỗi:
+```bash
+# 1. Xác thực không còn EC2 instance nào đang chạy hoặc chờ chạy
+aws ec2 describe-instances --filters "Name=instance-state-name,Values=running,pending" \
+  --query "Reservations[*].Instances[*].[InstanceId,State.Name]" --output table
+
+# 2. Xác thực danh sách tham số Parameter Store đã rỗng
+aws ssm describe-parameters --query "Parameters[*].[Name]" --output table
+
+# 3. Xác thực danh sách Resource Groups đã được xóa
+aws resource-groups list-groups --query "GroupIdentifiers[*].[GroupName]" --output table
+```
+*Kết quả kiểm toán thực tế xác nhận 100% tài nguyên đã được giải phóng thành công, bảo toàn ngân sách Free Tier không phát sinh thêm chi phí.*

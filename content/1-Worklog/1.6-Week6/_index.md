@@ -234,3 +234,52 @@ All evidence images below were captured directly from the live AWS Management Co
 3. **Enterprise Configuration Management**: Separating application configuration from code via Parameter Store and securing credentials using KMS keys aligns with modern cloud security best practices.
 4. **Automated Resource Governance**: Tag-based Resource Groups streamline management of multi-tier applications, facilitating batch automation and granular cost visibility.
 5. **FinOps Discipline**: Real-time billing monitoring ensured all experiments were conducted within Free Tier boundaries ($0.10 MTD expenditure).
+
+---
+
+### Resource Teardown & FinOps Cleanup:
+
+To safeguard cloud financial thresholds and ensure 0 USD ongoing expenditure within AWS Free Tier limits, all provisioned compute, storage, and parameter assets were systematically decommissioned using the following standard operational procedures:
+
+#### 1. Terminate Amazon EC2 Compute Instance:
+The managed EC2 instance `huylam-ssm-instance` is terminated first to halt vCPU, memory, public IPv4 address, and attached EBS gp3 root volume charges:
+```bash
+aws ec2 terminate-instances --instance-ids i-07c150e87aa231c61
+```
+*Wait until the instance transitions from `shutting-down` to `terminated` before deleting dependent network resources.*
+
+#### 2. Delete SSM Parameter Store Parameters:
+Purge all plain-text and KMS-encrypted parameters to prevent unnecessary configuration storage:
+```bash
+aws ssm delete-parameters --names \
+  "/huylam/app/db_password" \
+  "/huylam/app/environment" \
+  "/huylam/app/student_name"
+```
+
+#### 3. Delete AWS Resource Group:
+Remove the Resource Group entity `huylam-fcj-resources` (deleting the group does not affect underlying AWS resources):
+```bash
+aws resource-groups delete-group --group-name huylam-fcj-resources
+```
+
+#### 4. Delete Security Group (Post-Termination):
+Once the EC2 instance has terminated completely and its Elastic Network Interface (ENI) is detached, delete Security Group `huylam-ssm-sg`:
+```bash
+aws ec2 delete-security-group --group-id sg-08a93d881545a9cf8
+```
+
+#### 5. Verify Decommissioning via AWS CLI:
+Execute audit queries to confirm zero running or orphaned resources remain:
+```bash
+# 1. Confirm no active or pending EC2 instances
+aws ec2 describe-instances --filters "Name=instance-state-name,Values=running,pending" \
+  --query "Reservations[*].Instances[*].[InstanceId,State.Name]" --output table
+
+# 2. Confirm Parameter Store inventory is empty
+aws ssm describe-parameters --query "Parameters[*].[Name]" --output table
+
+# 3. Confirm Resource Group has been removed
+aws resource-groups list-groups --query "GroupIdentifiers[*].[GroupName]" --output table
+```
+*Audit verification confirmed 100% of lab assets successfully reclaimed, preserving Free Tier allowances without residual cost.*
