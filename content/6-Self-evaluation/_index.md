@@ -17,18 +17,18 @@ Besides improving my technical knowledge, I developed practical skills in cloud 
 
 | No. | Criteria | Good | Fair | Average |
 | --- | ------------------------------- | :--: | :--: | :-----: |
-| 1 | AWS technical knowledge | ✅ | | |
-| 2 | Learning ability | ✅ | | |
-| 3 | Hands-on practice | ✅ | | |
-| 4 | Responsibility | ✅ | | |
-| 5 | Time management | | ✅ | |
-| 6 | Continuous improvement | ✅ | | |
-| 7 | Communication | | ✅ | |
-| 8 | Teamwork | ✅ | | |
-| 9 | Professional attitude | ✅ | | |
-| 10 | Problem-solving ability | | ✅ | |
-| 11 | Participation in learning activities | ✅ | | |
-| 12 | Overall evaluation | ✅ | | |
+| 1 | AWS technical knowledge | x | | |
+| 2 | Learning ability | x | | |
+| 3 | Hands-on practice | x | | |
+| 4 | Responsibility | x | | |
+| 5 | Time management | | x | |
+| 6 | Continuous improvement | x | | |
+| 7 | Communication | | x | |
+| 8 | Teamwork | x | | |
+| 9 | Professional attitude | x | | |
+| 10 | Problem-solving ability | | x | |
+| 11 | Participation in learning activities | x | | |
+| 12 | Overall evaluation | x | | |
 
 ---
 

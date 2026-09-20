@@ -17,18 +17,18 @@ Bên cạnh việc nâng cao kiến thức chuyên môn, tôi còn phát triển
 
 | STT | Tiêu chí | Tốt | Khá | Trung bình |
 | --- | ------------------------------ | :--: | :--: | :--------: |
-| 1 | Kiến thức kỹ thuật AWS | ✅ | | |
-| 2 | Khả năng học hỏi | ✅ | | |
-| 3 | Kỹ năng thực hành | ✅ | | |
-| 4 | Tinh thần trách nhiệm | ✅ | | |
-| 5 | Quản lý thời gian | | ✅ | |
-| 6 | Tinh thần cầu tiến | ✅ | | |
-| 7 | Kỹ năng giao tiếp | | ✅ | |
-| 8 | Làm việc nhóm | ✅ | | |
-| 9 | Tác phong chuyên nghiệp | ✅ | | |
-| 10 | Khả năng giải quyết vấn đề | | ✅ | |
-| 11 | Tham gia các hoạt động học tập | ✅ | | |
-| 12 | Đánh giá tổng thể | ✅ | | |
+| 1 | Kiến thức kỹ thuật AWS | x | | |
+| 2 | Khả năng học hỏi | x | | |
+| 3 | Kỹ năng thực hành | x | | |
+| 4 | Tinh thần trách nhiệm | x | | |
+| 5 | Quản lý thời gian | | x | |
+| 6 | Tinh thần cầu tiến | x | | |
+| 7 | Kỹ năng giao tiếp | | x | |
+| 8 | Làm việc nhóm | x | | |
+| 9 | Tác phong chuyên nghiệp | x | | |
+| 10 | Khả năng giải quyết vấn đề | | x | |
+| 11 | Tham gia các hoạt động học tập | x | | |
+| 12 | Đánh giá tổng thể | x | | |
 
 ---
 

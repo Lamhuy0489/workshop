@@ -265,7 +265,7 @@ HealthLakeDataStore:
         Value: medical-record-digitization
 ```
 
-## ⚠️ Lưu ý quan trọng về bảo mật
+##  Lưu ý quan trọng về bảo mật
 
 Giải pháp mẫu này được thiết kế **chỉ để sử dụng với dữ liệu tổng hợp (synthetic data)**. Hệ thống **chưa sẵn sàng để đưa vào môi trường sản xuất với Thông tin Y tế được Bảo vệ (PHI) thực tế** nếu chưa được bổ sung các biện pháp kiểm soát bảo mật HIPAA, ví dụ:
 

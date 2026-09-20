@@ -265,7 +265,7 @@ HealthLakeDataStore:
         Value: medical-record-digitization
 ```
 
-## ⚠️ Important security note
+##  Important security note
 
 This reference solution is designed **for synthetic data only**. The system is **not production-ready for real Protected Health Information (PHI)** without additional HIPAA controls, for example:
 

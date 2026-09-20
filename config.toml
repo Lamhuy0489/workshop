@@ -1,6 +1,7 @@
 baseURL = "https://Lamhuy0489.github.io/workshop/"
 relativeURLs = true
 canonifyURLs = true
+buildFuture = true
 defaultContentLanguage = "en"
 
 # Change the default theme to be use when building the site with Hugo
