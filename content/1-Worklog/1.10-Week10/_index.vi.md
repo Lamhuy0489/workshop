@@ -132,6 +132,46 @@ flowchart TD
     AppEngine -->|5. Ghi nhận trạng thái & tiến trình| DynamoDB
 ```
 
+### Hình ảnh minh chứng triển khai thực tế trên AWS Console:
+
+Toàn bộ hình ảnh minh chứng dưới đây đều được chụp trực tiếp từ phiên làm việc thực tế trên AWS Management Console, có gắn khung viền đỏ làm nổi bật huy hiệu tài khoản `huylam (677994024390)` cùng các tham số kỹ thuật cốt lõi:
+
+#### 1. Khởi tạo kho lưu trữ Amazon S3 Bucket:
+![Cấu hình tạo Amazon S3 Bucket](/images/week10/01-s3-create-bucket-config.png)
+*Hình 10.1: Cấu hình tạo S3 Bucket `huylam-ocr-documents-ap-southeast-1` tại Region `ap-southeast-1` với Block All Public Access được bật.*
+
+#### 2. Cấu trúc thư mục uploads/ và outputs/ trên Amazon S3:
+![Cấu trúc thư mục đối tượng trên S3](/images/week10/02-s3-folders-uploads-outputs.png)
+*Hình 10.2: Cấu trúc thư mục lưu trữ phân tầng rõ ràng gồm `uploads/` (nhận tệp) và `outputs/` (xuất bản kết quả).*
+
+#### 3. Cấu hình chính sách CORS trên Amazon S3:
+![Cấu hình CORS S3](/images/week10/03-s3-cors-configuration-saved.png)
+*Hình 10.3: Chính sách CORS JSON đã lưu cho phép các phương thức `GET`, `PUT`, `POST`, `HEAD` từ trình duyệt Web Studio.*
+
+#### 4. Bảng NoSQL Amazon DynamoDB document_processing_jobs:
+![Bảng DynamoDB Active](/images/week10/04-dynamodb-table-active-overview.png)
+*Hình 10.4: Bảng DynamoDB `document_processing_jobs` ở trạng thái Active với Partition Key `job_id`, Sort Key `created_at` và chế độ On-Demand.*
+
+#### 5. Tham số cấu hình bảo mật trên AWS SSM Parameter Store:
+![Chi tiết tham số SSM Parameter Store](/images/week10/05-ssm-parameter-details.png)
+*Hình 10.5: Tham số bảo mật `/huylam-ocr/config` dạng `SecureString` được mã hóa KMS tự động.*
+
+#### 6. Chi tiết mô hình nội bộ AWS (Amazon Nova Micro Serverless):
+![Chi tiết mô hình Nova Micro](/images/week10/06-bedrock-model-nova-micro-details.png)
+*Hình 10.6: Trang chi tiết mô hình Amazon Nova Micro (Model ID: `amazon.nova-micro-v1:0`) do chính Amazon phát triển với hình thức triển khai Serverless.*
+
+#### 7. Đo kiểm Amazon Bedrock Playground và Phân tích chính sách tài khoản:
+![Đo kiểm Bedrock Playground](/images/week10/06-bedrock-playground-validation-exception.png)
+*Hình 10.7: Giao diện Bedrock Playground ghi nhận cơ chế kiểm soát rủi ro của AWS (`ValidationException: Operation not allowed`) đối với tài khoản mới/Free Tier.*
+
+#### 8. Đo kiểm ghi dữ liệu thực tế trên Amazon DynamoDB qua Python Boto3:
+![Bản ghi DynamoDB tạo từ Python](/images/week10/07-dynamodb-items-job-manual-test.png)
+*Hình 10.8: Bảng `document_processing_jobs` hiển thị bản ghi tiến trình `job-manual-test-01` do chính người dùng khởi tạo thành công từ mã nguồn Python Boto3.*
+
+#### 9. Đo kiểm tải tệp thực tế lên Amazon S3 qua Python Boto3:
+![Tệp S3 tạo từ Python](/images/week10/08-s3-test-manual-sample-file.png)
+*Hình 10.9: Thư mục S3 `uploads/test-manual/` hiển thị tệp `sample.txt` được tải lên và đọc ngược về thành công qua SDK Boto3.*
+
 ---
 
 ### Kết quả đạt được trong tuần 10:
@@ -141,7 +181,8 @@ flowchart TD
 * Khởi tạo thành công bảng NoSQL `document_processing_jobs` với chế độ On-Demand không phát sinh chi phí duy trì.
 * Tách rời hoàn toàn cấu hình bảo mật vào SSM Parameter Store với cơ chế mã hóa KMS tự động.
 * Thiết kế hoàn thiện kiến trúc tùy chọn mở rộng AWS Native (Amazon Bedrock / Textract) khép kín, sẵn sàng đáp ứng yêu cầu bảo mật cấp doanh nghiệp trong khi vẫn bảo vệ tối đa ngân sách thực tập FinOps (0 USD).
-* Đo kiểm kết nối thành công 100% từ mã nguồn Python tới các dịch vụ AWS.
+* Đo kiểm kết nối thành công 100% từ mã nguồn Python Boto3 tới các dịch vụ AWS S3, DynamoDB, SSM và ghi nhận đầy đủ bản ghi thực tế trên đám mây.
+* Thu thập và gán khung viền đỏ định danh chuẩn xác 100% cho toàn bộ 9 ảnh minh chứng trên AWS Console.
 
 ---
 
@@ -149,4 +190,3 @@ flowchart TD
 * Đóng gói và triển khai toàn bộ ứng dụng lên AWS (tự động hóa kích hoạt xử lý qua S3 Event Notification hoặc đóng gói container trên ECS Fargate).
 * Tích hợp giao diện Web Studio với hạ tầng S3 + CloudFront.
 * Thực hiện đo kiểm hiệu năng thực tế (Latency bóc tách Fast-Path, thời gian dịch thuật, kích thước tệp xuất bản).
-* Chụp ảnh minh chứng có viền đỏ định danh tài khoản `huylam (677994024390)` trên AWS Console.

@@ -132,6 +132,46 @@ flowchart TD
     AppEngine -->|5. Telemetry & job state update| DynamoDB
 ```
 
+### Visual Verification Screenshots on AWS Management Console:
+
+All verification images below were captured directly from the live working session on the AWS Management Console, with precise red bounding boxes highlighting the account identity badge `huylam (677994024390)` alongside core technical parameters:
+
+#### 1. Amazon S3 Bucket Provisioning:
+![Amazon S3 Bucket Configuration](/images/week10/01-s3-create-bucket-config.png)
+*Figure 10.1: Configuration of S3 Bucket `huylam-ocr-documents-ap-southeast-1` in Region `ap-southeast-1` with Block All Public Access enabled.*
+
+#### 2. S3 Object Hierarchy (uploads/ & outputs/):
+![S3 Folder Structure](/images/week10/02-s3-folders-uploads-outputs.png)
+*Figure 10.2: Clean namespace separation between `uploads/` (raw document ingestion) and `outputs/` (parsed/translated artifacts).*
+
+#### 3. Amazon S3 Cross-Origin Resource Sharing (CORS) Policy:
+![S3 CORS Configuration](/images/week10/03-s3-cors-configuration-saved.png)
+*Figure 10.3: Saved JSON CORS policy permitting `GET`, `PUT`, `POST`, and `HEAD` methods from the Web Studio browser client.*
+
+#### 4. Amazon DynamoDB NoSQL Table (document_processing_jobs):
+![DynamoDB Active Table](/images/week10/04-dynamodb-table-active-overview.png)
+*Figure 10.4: DynamoDB table `document_processing_jobs` in Active state with Partition Key `job_id`, Sort Key `created_at`, and On-Demand billing.*
+
+#### 5. AWS Systems Manager Parameter Store Secure Configuration:
+![SSM Parameter Details](/images/week10/05-ssm-parameter-details.png)
+*Figure 10.5: Secure parameter `/huylam-ocr/config` of type `SecureString` encrypted via default KMS key.*
+
+#### 6. AWS Native Foundation Model Details (Amazon Nova Micro Serverless):
+![Nova Micro Model Details](/images/week10/06-bedrock-model-nova-micro-details.png)
+*Figure 10.6: Amazon Nova Micro model details page (Model ID: `amazon.nova-micro-v1:0`) developed natively by Amazon with Serverless deployment.*
+
+#### 7. Amazon Bedrock Playground Testing & Account Policy Analysis:
+![Bedrock Playground Validation](/images/week10/06-bedrock-playground-validation-exception.png)
+*Figure 10.7: Bedrock Playground interface logging the account-level restriction (`ValidationException: Operation not allowed`) on new/Free Tier accounts.*
+
+#### 8. Live Amazon DynamoDB Telemetry Ingestion via Python Boto3:
+![DynamoDB Item Created via Python](/images/week10/07-dynamodb-items-job-manual-test.png)
+*Figure 10.8: Table `document_processing_jobs` displaying job record `job-manual-test-01` successfully persisted directly from the local Python Boto3 script.*
+
+#### 9. Live Amazon S3 Object Ingestion via Python Boto3:
+![S3 File Uploaded via Python](/images/week10/08-s3-test-manual-sample-file.png)
+*Figure 10.9: S3 prefix `uploads/test-manual/` confirming successful upload and retrieval of `sample.txt` using Boto3.*
+
 ---
 
 ### Week 10 Achievements:
@@ -141,7 +181,8 @@ flowchart TD
 * Created the NoSQL table `document_processing_jobs` on DynamoDB in On-Demand capacity mode with zero idle cost.
 * Decoupled runtime configuration and credentials into SSM Parameter Store with KMS encryption.
 * Architected an optional AWS Native closed-loop AI extensibility mode (Amazon Bedrock / Textract / Translate), enabling enterprise data sovereignty while safeguarding the student FinOps budget ($0).
-* Verified end-to-end Python Boto3 connectivity with live AWS cloud services.
+* Verified end-to-end Python Boto3 connectivity with live AWS cloud services (S3, DynamoDB, SSM) with live records verified in the cloud.
+* Collected and accurately annotated all 9 verification screenshots with red bounding boxes on the AWS Console.
 
 ---
 
@@ -149,4 +190,3 @@ flowchart TD
 * Package and deploy the application to AWS (automated trigger via S3 Event Notification or container deployment via ECS Fargate).
 * Integrate the Web Studio frontend with S3 and CloudFront hosting.
 * Execute benchmark testing for parsing throughput, translation fidelity, and document generation latency.
-* Capture verification screenshots with red bounding boxes highlighting account identifier `huylam (677994024390)` on the AWS Console.
