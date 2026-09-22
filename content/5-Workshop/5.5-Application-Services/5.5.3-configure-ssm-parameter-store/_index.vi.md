@@ -68,6 +68,8 @@ Sau khi tạo thành công, tham số xuất hiện trong danh sách với ARN:
 arn:aws:ssm:ap-southeast-1:677994024390:parameter/huylam-ocr/config
 ```
 
+![Chi tiết tham số bảo mật SecureString trong AWS Systems Manager Parameter Store](/images/week10/05-ssm-parameter-details.png)
+
 ### Cách thức ứng dụng Web Studio đọc cấu hình an toàn:
 Trong tệp `src/backend/aws/storage_service.py`, ứng dụng sử dụng thư viện Boto3 để đọc và giải mã tham số tự động:
 

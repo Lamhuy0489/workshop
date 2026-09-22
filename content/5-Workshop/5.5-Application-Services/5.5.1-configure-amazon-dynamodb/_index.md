@@ -57,6 +57,8 @@ Table ARN conforms to:
 arn:aws:dynamodb:ap-southeast-1:677994024390:table/document_processing_jobs
 ```
 
+![Amazon DynamoDB document_processing_jobs Table in Active State](/images/week10/04-dynamodb-table-active-overview.png)
+
 ### Document Schema Example:
 When a document is parsed and translated, a state record is written automatically:
 

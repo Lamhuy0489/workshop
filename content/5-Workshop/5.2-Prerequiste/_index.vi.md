@@ -22,6 +22,10 @@ Thiết lập và kiểm tra toàn diện môi trường làm việc cục bộ 
    * Sử dụng người dùng IAM quản trị phát triển (`dev_admin`) có quyền cấu hình VPC, EC2, Application Load Balancer, S3, DynamoDB, Systems Manager, Lambda và CloudWatch.
    * Tuyệt đối không sử dụng tài khoản gốc (Root Account) cho các thao tác triển khai hàng ngày theo chuẩn AWS Well-Architected Framework.
 
+![Xác thực tài khoản AWS huylam tại khu vực Singapore](/images/week1/01-account-huylam.png)
+
+![Cấu hình ngân sách AWS Budgets kiểm soát chi phí 0.00 USD](/images/week1/03-aws-budgets.png)
+
 ---
 
 ## 2. Công cụ phát triển trên máy cục bộ
@@ -79,6 +83,8 @@ aws sts get-caller-identity
     "Arn": "arn:aws:iam::677994024390:user/dev_admin"
 }
 ```
+
+![Kiểm tra danh tính AWS STS get-caller-identity trên terminal](/images/week1/04-aws-cli-verified.png)
 
 ---
 

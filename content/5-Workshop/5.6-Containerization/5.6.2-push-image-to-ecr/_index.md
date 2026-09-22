@@ -31,6 +31,10 @@ Amazon ECR is a fully managed container registry providing built-in vulnerabilit
 
 4. Click **Create repository**.
 
+![Amazon ECR Repositories Initial List](/images/week8/01-ecr-repositories-list-initial.png)
+
+![Provision Private Amazon ECR Repository huylam-web-app](/images/week8/02-ecr-create-repository.png)
+
 ---
 
 ## 2. Authenticating Docker CLI with Amazon ECR
@@ -74,6 +78,8 @@ Docker compresses and streams image layers to Amazon ECR. Due to the lightweight
 1. Navigate to **Amazon ECR -> Repositories -> huylam-web-app**.
 2. Confirm the **`latest`** tag appears in the image list alongside its Image URI and compressed size.
 3. Review **Vulnerabilities** report: confirms zero Critical security findings.
+
+![Amazon ECR huylam-web-app Repository Details](/images/week8/03-ecr-repository-details-empty.png)
 
 ---
 

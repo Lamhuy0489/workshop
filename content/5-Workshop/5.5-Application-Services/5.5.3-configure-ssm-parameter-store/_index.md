@@ -68,6 +68,8 @@ Once created, the parameter ARN is:
 arn:aws:ssm:ap-southeast-1:677994024390:parameter/huylam-ocr/config
 ```
 
+![AWS Systems Manager Parameter Store SecureString Configuration Details](/images/week10/05-ssm-parameter-details.png)
+
 ### Application Retrieval Logic:
 Inside `src/backend/aws/storage_service.py`, the system fetches and decrypts settings dynamically via Boto3:
 

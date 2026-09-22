@@ -31,6 +31,10 @@ Amazon ECR là dịch vụ lưu trữ container image được quản lý hoàn 
 
 4. Nhấp nút **Create repository**.
 
+![Danh sách kho lưu trữ Amazon ECR](/images/week8/01-ecr-repositories-list-initial.png)
+
+![Cấu hình tạo kho lưu trữ riêng tư huylam-web-app trên Amazon ECR](/images/week8/02-ecr-create-repository.png)
+
 ---
 
 ## 2. Xác thực Docker CLI với Amazon ECR
@@ -74,6 +78,8 @@ Docker sẽ lần lượt tải các lớp nén lên máy chủ Amazon ECR. Nh�
 1. Truy cập **Amazon ECR -> Repositories -> huylam-web-app**.
 2. Xác nhận thẻ **`latest`** xuất hiện trong danh sách kèm định danh Image URI và kích thước nén.
 3. Kiểm tra kết quả quét bảo mật **Vulnerabilities**: Ghi nhận không có lỗ hổng nghiêm trọng (0 Critical).
+
+![Chi tiết kho lưu trữ Amazon ECR huylam-web-app](/images/week8/03-ecr-repository-details-empty.png)
 
 ---
 

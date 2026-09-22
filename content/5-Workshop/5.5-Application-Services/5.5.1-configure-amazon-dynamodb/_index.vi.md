@@ -57,6 +57,8 @@ ARN của bảng sẽ có định dạng:
 arn:aws:dynamodb:ap-southeast-1:677994024390:table/document_processing_jobs
 ```
 
+![Bảng Amazon DynamoDB document_processing_jobs ở trạng thái Active](/images/week10/04-dynamodb-table-active-overview.png)
+
 ### Lược đồ dữ liệu bản ghi mẫu (Item Schema):
 Mỗi khi tài liệu được bóc tách và dịch thuật, một bản ghi tiến trình sẽ được tự động lưu vào bảng với cấu trúc JSON:
 

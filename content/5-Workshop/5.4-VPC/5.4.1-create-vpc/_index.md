@@ -29,6 +29,8 @@ Provision an Amazon Virtual Private Cloud (VPC) named `huylam-vpc` in region `ap
 
 4. Click **Create VPC**.
 
+![Amazon VPC huylam-vpc Configuration Preview](/images/week3/01-vpc-create-settings-preview.png)
+
 ---
 
 ## 2. Enabling DNS Hostnames & DNS Resolution
@@ -40,6 +42,8 @@ To ensure seamless internal resolution for EC2 instances and Application Load Ba
    * **Enable DNS resolution**: Permits internal AWS DNS lookups.
    * **Enable DNS hostnames**: Assigns public DNS hostnames to instances with public IPs.
 4. Click **Save changes**.
+
+![Enable DNS Hostnames and DNS Resolution](/images/week3/02-vpc-create-nat-dns-options.png)
 
 ---
 
@@ -62,6 +66,10 @@ Application Load Balancer strictly requires a minimum of 2 Subnets spanning at l
 * **Availability Zone**: `ap-southeast-1b`.
 * **IPv4 CIDR block**: `10.0.16.0/21` (2,048 available IP addresses).
 * Enable Public IPv4 Auto-assignment: Select subnet -> **Actions -> Edit subnet settings -> Enable auto-assign public IPv4 address**.
+
+![VPC Resource Map and Subnet Multi-AZ Distribution](/images/week3/03-vpc-resource-map.png)
+
+![Enable Auto-assign Public IPv4 Address on Subnet](/images/week3/04-subnet-enable-auto-assign-public-ip.png)
 
 ---
 

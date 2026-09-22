@@ -22,6 +22,10 @@ Establish and verify the local development environment and AWS Management Consol
    * Administered IAM user (`dev_admin`) possessing administrative policies to provision VPC, EC2, Application Load Balancers, S3, DynamoDB, Systems Manager, Lambda, and CloudWatch.
    * Avoid using root account credentials for daily deployment procedures according to AWS Well-Architected Framework security principles.
 
+![Verified AWS Account huylam in Singapore Region](/images/week1/01-account-huylam.png)
+
+![AWS Budgets Zero Spend Budget Configuration](/images/week1/03-aws-budgets.png)
+
 ---
 
 ## 2. Local Workstation Development Tooling
@@ -79,6 +83,8 @@ aws sts get-caller-identity
     "Arn": "arn:aws:iam::677994024390:user/dev_admin"
 }
 ```
+
+![AWS CLI STS get-caller-identity verification](/images/week1/04-aws-cli-verified.png)
 
 ---
 

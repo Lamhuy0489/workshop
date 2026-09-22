@@ -29,6 +29,8 @@ Khởi tạo mạng ảo Amazon Virtual Private Cloud (VPC) mang tên `huylam-vp
 
 4. Nhấp nút **Create VPC**.
 
+![Cấu hình tạo VPC huylam-vpc](/images/week3/01-vpc-create-settings-preview.png)
+
 ---
 
 ## 2. Kích hoạt thuộc tính DNS Hostnames & DNS Resolution
@@ -40,6 +42,8 @@ Khởi tạo mạng ảo Amazon Virtual Private Cloud (VPC) mang tên `huylam-vp
    * **Enable DNS resolution**: Cho phép phân giải truy vấn DNS nội bộ AWS.
    * **Enable DNS hostnames**: Tự động gán tên miền công khai cho các instance có IP công khai.
 4. Nhấp **Save changes**.
+
+![Kích hoạt DNS Hostnames và DNS Resolution](/images/week3/02-vpc-create-nat-dns-options.png)
 
 ---
 
@@ -62,6 +66,10 @@ Application Load Balancer yêu cầu tối thiểu 2 Subnet đặt trên 2 Avail
 * **Availability Zone**: `ap-southeast-1b`.
 * **IPv4 CIDR block**: `10.0.16.0/21` (Cung cấp 2,048 địa chỉ IP).
 * Bật tính năng tự động gán IPv4: Chọn subnet -> **Actions -> Edit subnet settings -> Enable auto-assign public IPv4 address**.
+
+![Sơ đồ tài nguyên VPC Resource Map và phân bố Subnet](/images/week3/03-vpc-resource-map.png)
+
+![Kích hoạt tự động gán IPv4 công khai cho Subnet](/images/week3/04-subnet-enable-auto-assign-public-ip.png)
 
 ---
 
