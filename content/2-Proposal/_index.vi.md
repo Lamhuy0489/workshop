@@ -1,6 +1,6 @@
 ---
 title: "Đề xuất dự án"
-date: 2026-09-18
+date: 2026-09-23
 weight: 2
 chapter: false
 pre: " <b> 2. </b> "
@@ -8,109 +8,186 @@ pre: " <b> 2. </b> "
 
 # Serverless Hybrid Document OCR, Parsing & Technical Translation Platform on AWS
 
-## Nền Tảng Bóc Tách, OCR Lai & Dịch Thuật Tài Liệu Kỹ Thuật Trên Đám Mây AWS
+## Đề Án Tốt Nghiệp: Nền Tảng Bóc Tách, OCR Lai & Dịch Thuật Tài Liệu Kỹ Thuật Đa Tầng Trên Đám Mây AWS
 
 ---
 
-# 1. Tóm tắt dự án (Executive Summary)
+### Thông Tin Định Danh Học Viên & Hệ Thống
 
-**Serverless Hybrid Document OCR, Parsing & Technical Translation Platform on AWS** là nền tảng xử lý, số hóa và dịch thuật tài liệu kỹ thuật thông minh thế hệ mới, kết hợp giữa kỹ thuật trích xuất cấu trúc văn bản nhanh (Native Document Parsing), mô hình thị giác nhân tạo chọn lọc (Selective Vision OCR) và động cơ dịch thuật chuyên sâu bảo toàn định dạng Markdown. Hệ thống cho phép người dùng tự động bóc tách, nhận dạng các tệp tài liệu phức tạp (hợp đồng, hóa đơn, báo cáo tài chính dạng PDF hoặc ảnh scan đa ngôn ngữ) thành định dạng có cấu trúc chuẩn như Markdown (`.md`), Microsoft Word (`.docx`) và PDF có khả năng tìm kiếm mà vẫn giữ nguyên vẹn 100% bố cục, tiêu đề và bảng biểu số liệu.
-
-Hệ thống được thiết kế theo kiến trúc phi máy chủ (Serverless) và hướng sự kiện (Event-Driven) trên AWS, hỗ trợ mô hình tính cước thông minh nhằm tối ưu hóa triệt để chi phí vận hành (0 USD trong giai đoạn thử nghiệm):
-- **Cơ chế xử lý hai tầng (Two-Stage Hybrid Parsing)**:
-  - *Tầng 1 (Fast-Path)*: Tự động bóc tách trực tiếp luồng văn bản số và cấu trúc bảng bằng thư viện native (`PyMuPDF`) với tốc độ 0.1 - 0.3 giây/trang cho các tài liệu PDF văn phòng thông thường mà không phát sinh chi phí tính toán AI.
-  - *Tầng 2 (Selective Vision OCR)*: Tự động phân loại và chỉ gửi các trang là ảnh scan hoặc chứa biểu mẫu phức tạp sang mô hình thị giác AI để nhận dạng.
-- **Động cơ Dịch thuật Kỹ thuật Đa ngôn ngữ (Technical Translation Engine)**:
-  - Tự động phân trang và chuyển ngữ văn bản bóc tách sang nhiều ngôn ngữ (Tiếng Việt, Tiếng Anh, Tiếng Nhật, Tiếng Hàn, Tiếng Trung, Tiếng Pháp, Tiếng Đức).
-  - Giữ nguyên vẹn các thành phần cú pháp Markdown: bảng biểu số liệu, đoạn mã nguồn, tiêu đề và liên kết.
-- **Khả năng mở rộng đa chế độ (Multi-Mode Extensibility)**:
-  - *Chế độ FinOps Tiết kiệm (Mặc định)*: Kết hợp tài nguyên GPU/TPU miễn phí trên Kaggle (chạy Qwen2.5-VL qua Cloudflare Tunnel) và cơ chế tự phục hồi (Failover) sang Google Gemini 3.6 Flash.
-  - *Chế độ Đám mây Khép kín AWS Native (Tùy chọn mở rộng)*: Cho phép người dùng chủ động kích hoạt các mô hình nội bộ của AWS như **Amazon Bedrock** (Anthropic Claude 3.5 Haiku, Amazon Nova) hoặc **Amazon Textract** / **Amazon Translate** khi doanh nghiệp có yêu cầu nghiêm ngặt về bảo mật dữ liệu tuyệt đối (Zero Data Outflow). Chế độ này được cấu hình ở dạng tùy chọn phụ nhằm bảo vệ tối đa ngân sách thực tập FinOps của học viên.
-- **Tầng Quản lý Cấu hình & Khóa bảo mật**: Quản lý tập trung qua **AWS Systems Manager (SSM) Parameter Store (SecureString)** được mã hóa bởi **AWS KMS**, giải quyết triệt để rủi ro lộ khóa API.
-- **Tầng Lưu trữ & Dữ liệu**: Tệp gốc và tệp kết quả sau xử lý lưu trữ trên **Amazon S3**; Siêu dữ liệu tiến trình (Metadata) và thời gian thực thi lưu trên **Amazon DynamoDB**.
-- **Tầng Giao tiếp & Phân phối**: Cung cấp API tiếp nhận qua **Amazon API Gateway** (hỗ trợ cấp S3 Presigned URL để tải tệp lớn an toàn) và giao diện web đơn trang (SPA) phân phối toàn cầu qua **Amazon S3 + Amazon CloudFront** có chứng chỉ SSL/TLS từ **AWS Certificate Manager (ACM)**.
+* **Họ và tên sinh viên**: Lâm Quang Huy
+* **Mã số sinh viên (MSSV)**: `0212267`
+* **Lớp chuyên ngành**: 67CS - Khoa Công nghệ Thông tin
+* **Cơ sở đào tạo**: Trường Đại học Xây dựng Hà Nội (HUCE)
+* **Tài khoản AWS (Account ID)**: `677994024390` | **Account Name**: `huylam`
+* **Khu vực triển khai (AWS Region)**: `ap-southeast-1` (Asia Pacific - Singapore)
+* **Đường link hệ thống thực tế (Live Production URL)**: `http://huylam-ocr-alb-1284818160.ap-southeast-1.elb.amazonaws.com`
 
 ---
 
-# 2. Vấn đề và Giải pháp (Problem Statement & Solution)
+## 1. Tóm Tắt Dự Án (Executive Summary)
 
-## 2.1. Vấn đề thực tế
-1. **Hạn chế của OCR truyền thống**: Các công cụ OCR thông thường chỉ bóc tách văn bản thô dạng phẳng (flat text), làm vỡ cấu trúc bảng biểu, xáo trộn thứ tự đọc của văn bản nhiều cột, và làm mất hoàn toàn các định dạng phân cấp tiêu đề.
-2. **Chi phí và thời gian xử lý khi lạm dụng mô hình Vision AI**: Việc nạp toàn bộ tài liệu 50 - 100 trang vào các mô hình AI thị giác nặng gây nghẽn cổ chai, thời gian chờ đợi kéo dài và phát sinh chi phí tính toán GPU rất lớn, trong khi đa số trang tài liệu văn phòng đã có sẵn văn bản số.
-3. **Thách thức dịch thuật tài liệu kỹ thuật**: Các công cụ dịch tự động thông thường làm vỡ cú pháp bảng biểu số liệu, thay đổi cấu trúc định dạng tài liệu và làm mất ngữ cảnh kỹ thuật chuyên ngành.
-4. **Yêu cầu bảo mật dữ liệu nội bộ**: Một số tổ chức yêu cầu toàn bộ luồng xử lý AI phải diễn ra khép kín trong hạ tầng AWS mà không được truyền dữ liệu ra ngoài Internet.
+**Serverless Hybrid Document OCR, Parsing & Technical Translation Platform on AWS** là nền tảng điện toán đám mây cấp doanh nghiệp, được thiết kế nhằm giải quyết bài toán số hóa, bóc tách cấu trúc và chuyển ngữ các tài liệu kỹ thuật phức tạp (hồ sơ thiết kế, hợp đồng, báo cáo tài chính, bài báo khoa học dạng PDF và ảnh scan đa ngôn ngữ) với độ chính xác cao, thời gian xử lý tức thì và chi phí vận hành tối ưu tuyệt đối (0.00 USD trong suốt kỳ thực tập).
 
-## 2.2. Giải pháp đề xuất
-Dự án xây dựng nền tảng **Serverless Hybrid Document OCR, Parsing & Technical Translation Platform** giải quyết trọn vẹn các thách thức trên:
-- **Tối ưu hóa tốc độ và chi phí bằng cơ chế Hybrid**: 80-90% các trang PDF số được bóc tách tức thì ở Tầng 1 với chi phí 0 đồng; chỉ 10-20% các trang scan mới kích hoạt Tầng 2.
-- **Bảo toàn 100% định dạng và bảng biểu**: Tái lập chính xác bảng biểu thành Markdown Table (`| Cột 1 | Cột 2 |`), phân định rõ ràng các cấp tiêu đề và đoạn văn, hỗ trợ xuất sang định dạng `.md`, `.docx` và `.pdf` chuẩn A4.
-- **Dịch thuật giữ nguyên cấu trúc**: Ứng dụng LLM với prompt chuyên biệt giúp dịch thuật chính xác thuật ngữ kỹ thuật mà không làm biến dạng cấu trúc văn bản.
-- **Hỗ trợ tùy chọn AWS Native khép kín**: Tích hợp sẵn adapter kết nối Amazon Bedrock / Amazon Textract / Amazon Translate khi người dùng lựa chọn, tạo nên một hệ sinh thái đám mây khép kín hoàn chỉnh.
+Hệ thống kết hợp ba trụ cột công nghệ cốt lõi:
+1. **Động cơ Bóc tách Cấu trúc Lai Đa tầng (Two-Stage Hybrid Parsing Engine)**:
+   * **Tầng 1 (Fast-Path Native)**: Trích xuất trực tiếp luồng văn bản số và bảng biểu trong tệp PDF bằng thư viện chuyên dụng (`PyMuPDF`) với độ trễ cực thấp từ **0.1s - 0.3s/trang** mà không cần qua mô hình AI, giúp tiết kiệm 100% chi phí tính toán cho hơn 80% tài liệu văn phòng thông thường.
+   * **Tầng 2 (Selective Vision OCR)**: Tự động phát hiện các trang là ảnh scan hoặc biểu mẫu phức tạp để định tuyến có chọn lọc sang mô hình thị giác AI (Kaggle Qwen2.5-VL qua Cloudflare Tunnel kết hợp cơ chế tự phục hồi Failover sang Google Gemini 3.6 Flash và tùy chọn AWS Native Bedrock Nova).
+2. **Động cơ Dịch thuật Kỹ thuật Đa ngôn ngữ Bảo toàn Cấu trúc (Markdown-Preserving Technical Translation Engine)**:
+   * Phân trang và chuyển ngữ văn bản chuyên ngành sang Tiếng Việt và các ngôn ngữ phổ biến (Tiếng Anh, Tiếng Nhật, Tiếng Hàn, Tiếng Trung, Tiếng Pháp, Tiếng Đức).
+   * Bảo toàn 100% cú pháp cấu trúc Markdown, tiêu đề phân cấp, danh sách lồng nhau và các bảng biểu số liệu kỹ thuật phức tạp.
+3. **Động cơ Xuất bản Đa định dạng (Multi-Format Export Engine)**:
+   * Kết xuất tự động tài liệu sang Markdown (`.md`), Microsoft Word (`.docx` chuẩn tương thích macOS và Windows) và PDF in ấn chuẩn A4.
+
+Hệ thống được triển khai trên nền tảng AWS theo kiến trúc **Mạng doanh nghiệp 3 tầng (Three-Tier Enterprise Cloud Architecture)** kết hợp với mô hình **Phi máy chủ hướng sự kiện (Event-Driven Serverless)**:
+* **Tầng phân phối lưu lượng (Ingress Tier)**: Application Load Balancer `huylam-ocr-alb` đa vùng sẵn sàng Multi-AZ, tiếp nhận lưu lượng HTTP cổng 80 từ Internet và định tuyến thông minh.
+* **Tầng máy chủ ứng dụng (Application Tier)**: Máy chủ ảo Amazon EC2 `huylam-ocr-web-server` (AL2023, t2.micro) đặt sau chuỗi bảo mật Security Group Chaining, vận hành dịch vụ daemon systemd Gunicorn trên cổng nội bộ 5000, quản trị an toàn từ xa qua AWS Systems Manager Session Manager mà không cần mở cổng SSH.
+* **Tầng lưu trữ & cơ sở dữ liệu (Storage & Database Tier)**: Kho đối tượng Amazon S3 `huylam-ocr-documents-ap-southeast-1` lưu trữ tệp gốc (`uploads/`) và tệp kết quả (`outputs/`); Cơ sở dữ liệu NoSQL Amazon DynamoDB `document_processing_jobs` ghi nhận siêu dữ liệu tiến trình xử lý.
+* **Tầng quản trị cấu hình bảo mật**: AWS Systems Manager Parameter Store `/huylam-ocr/config` (loại `SecureString` mã hóa bởi AWS KMS), loại bỏ hoàn toàn việc lưu trữ khóa API cứng trong mã nguồn.
+* **Tầng tự động hóa hướng sự kiện (Event-Driven Pipeline)**: Tự động kích hoạt khi có tệp mới tải lên S3 (`s3:ObjectCreated:*`), kích hoạt AWS Lambda `huylam-ocr-processor` khởi tạo bản ghi tiến trình trong DynamoDB và giám sát qua Amazon CloudWatch Logs với thời gian phản hồi chỉ 214 ms.
 
 ---
 
-# 3. Sơ đồ kiến trúc giải pháp (Architecture Diagram)
+## 2. Vấn Đề Thực Tế & Giải Pháp Đề Xuất (Problem Statement & Solution)
+
+### 2.1. Thách thức trong xử lý tài liệu kỹ thuật hiện nay
+1. **Làm vỡ cấu trúc và bảng biểu**: Các giải pháp OCR truyền thống (như Tesseract) chỉ nhận dạng ký tự rời rạc dạng phẳng, làm xáo trộn thứ tự đọc của bố cục nhiều cột và phá vỡ cấu trúc bảng biểu số liệu kỹ thuật.
+2. **Chi phí và độ trễ khổng lồ khi lạm dụng Vision AI**: Nạp toàn bộ tài liệu 50 - 100 trang vào các API thị giác lớn (Vision LLM) gây nghẽn băng thông, thời gian phản hồi lên tới vài phút và phát sinh chi phí tính toán GPU đắt đỏ, trong khi thực tế phần lớn các trang tài liệu kỹ thuật văn phòng đã có sẵn luồng văn bản số.
+3. **Mất định dạng khi dịch thuật tự động**: Các công cụ dịch thuật văn phòng thông thường làm gãy liên kết cú pháp Markdown, đảo lộn tiêu đề và làm hỏng bảng biểu khi chuyển ngữ.
+4. **Bảo mật và cô lập hạ tầng đám mây**: Việc quản trị máy chủ qua cổng SSH 22 công khai tiềm ẩn nguy cơ tấn công brute-force; lưu trữ cứng thông tin xác thực trên máy chủ dễ dẫn đến rò rỉ bảo mật.
+
+### 2.2. Giải pháp kỹ thuật của đề tài
+Nền tảng của đồ án giải quyết trọn vẹn các bài toán trên thông qua các đột phá kiến trúc:
+* **Cơ chế phân luồng Fast-Path + Selective OCR**: Phân loại tài liệu tại chỗ, bóc tách tức thì 80 - 90% các trang văn bản số chỉ trong 0.1s - 0.3s bằng PyMuPDF với chi phí 0 USD; chỉ kích hoạt mô hình thị giác cho các trang chứa ảnh quét scan.
+* **Kỹ thuật dịch thuật Prompt Engineering định hướng cấu trúc**: Giữ nguyên vẹn 100% ma trận bảng biểu Markdown (`| Cột 1 | Cột 2 |`), danh sách gạch đầu dòng và tiêu đề kỹ thuật.
+* **Chuỗi an ninh phân tầng Security Group Chaining**: Cô lập hoàn toàn máy chủ EC2 khỏi Internet; cổng ứng dụng 5000 chỉ mở duy nhất cho địa chỉ của Application Load Balancer.
+* **Cơ chế xác thực không dùng khóa tĩnh (Zero Static Credentials)**: Ứng dụng EC2 và Lambda tương tác với S3 và DynamoDB thông qua IAM Instance Profile và STS Token tạm thời; cấu hình quản trị tập trung tại SSM Parameter Store mã hóa KMS.
+
+---
+
+## 3. Sơ Đồ Kiến Trúc Hệ Thống (Architecture Blueprint)
 
 ```text
-[ Người Dùng / Trình Duyệt Web Studio ]
-              │
-              ▼ HTTPS (SSL/TLS)
-[ Amazon CloudFront + Amazon S3 Static Hosting ] (Giao diện SPA Studio & Preview)
-              │
-              ▼ REST API Request (Xin Presigned URL hoặc Tra Cứu Trạng Thái)
-[ Amazon API Gateway ]
-              │
-              ├──> 1. Trả về S3 Presigned PUT URL an toàn
-              │
-[ Amazon S3 Bucket ]
-      │
-      ├── /uploads/ (File PDF / Ảnh gốc tải lên trực tiếp)
-      │      │
-      │      ▼ (Sự kiện s3:ObjectCreated tự động kích hoạt)
-      ▼
-[ AWS Lambda / Compute Engine ]
-      │
-      ├── 2. Đọc cấu hình & API Keys ──> [ AWS SSM Parameter Store (SecureString) ]
-      │
-      ├── 3. Tầng 1: Bóc tách cấu trúc nhanh (Fast-Path bằng PyMuPDF, 0.1s - 0.3s)
-      │
-      ├── 4. Tầng 2: OCR chọn lọc (Chỉ xử lý trang scan):
-      │      ├── [Mặc định 1: Kaggle GPU/TPU qua Cloudflare Tunnel]
-      │      ├── [Mặc định 2: Google Gemini 3.6 Flash Failover]
-      │      └── [Tùy chọn phụ AWS Native: Amazon Bedrock / Amazon Textract]
-      │
-      ├── 5. Động cơ Dịch thuật Kỹ thuật:
-      │      ├── [Mặc định: Gemini Flash Translator]
-      │      └── [Tùy chọn phụ AWS Native: Amazon Bedrock / Amazon Translate]
-      │
-      ├── 6. Xuất bản đa định dạng ────> [ Amazon S3: /outputs/ ] (.md, .docx, .pdf)
-      │
-      └── 7. Ghi nhận siêu dữ liệu ─────> [ Amazon DynamoDB (document_processing_jobs) ]
-                                          [ Amazon CloudWatch (Logs & Metrics) ]
+                                [ Người Dùng / Internet Client ]
+                                               │
+                                               ▼ HTTP : 80
+                    ┌─────────────────────────────────────────────────────┐
+                    │      AWS Application Load Balancer (Multi-AZ)        │
+                    │        huylam-ocr-alb (Public DNS Endpoint)         │
+                    │            Security Group: huylam-alb-sg            │
+                    └──────────────────────────┬──────────────────────────┘
+                                               │
+                       Forward to Target Group │ Port 5000
+                       Health Check: /login    │ (HTTP 200 OK)
+                                               ▼
+                    ┌─────────────────────────────────────────────────────┐
+                    │         Amazon EC2 Application Host (AL2023)        │
+                    │        huylam-ocr-web-server (t2.micro / 10.0.8.15) │
+                    │            Security Group: huylam-web-sg            │
+                    │      (Chỉ cho phép TCP 5000 từ huylam-alb-sg)       │
+                    │                                                     │
+                    │   ┌─────────────────────────────────────────────┐   │
+                    │   │        Gunicorn WSGI (huylam-ocr.service)   │   │
+                    │   │          Flask Web Studio SPA (Port 5000)   │   │
+                    │   └──────────────────────┬──────────────────────┘   │
+                    │                          │                          │
+                    │      ┌───────────────────┴───────────────────┐      │
+                    │      ▼                                       ▼      │
+                    │  [ Tầng 1: Fast-Path ]              [ Tầng 2: OCR ] │
+                    │   PyMuPDF (0.1s-0.3s)                Kaggle GPU     │
+                    │   Chi phí: 0.00 USD                  Gemini Flash   │
+                    │                                      AWS Bedrock    │
+                    │      │                                       │      │
+                    │      └───────────────────┬───────────────────┘      │
+                    │                          ▼                          │
+                    │            [ Động cơ Dịch thuật Kỹ thuật ]          │
+                    │            Bảo toàn 100% Markdown syntax            │
+                    │                          │                          │
+                    │            [ Bộ Xuất bản Đa định dạng ]             │
+                    │            Markdown (.md), Word (.docx), PDF        │
+                    └──────────────┬───────────────────────┬──────────────┘
+                                   │ IAM Role              │ IAM Role
+                                   │ huylam-ssm-role       │ huylam-ssm-role
+                                   ▼                       ▼
+                    ┌────────────────────────────┐  ┌─────────────────────┐
+                    │    Amazon S3 Storage       │  │   Amazon DynamoDB   │
+                    │    huylam-ocr-documents-   │  │   document_         │
+                    │    ap-southeast-1          │  │   processing_jobs   │
+                    │    - uploads/ (Tệp gốc)    │  │   (PK: job_id,      │
+                    │    - outputs/ (Kết quả)    │  │    SK: created_at)  │
+                    └──────────────┬─────────────┘  └──────────▲──────────┘
+                                   │                           │
+                                   │ Event: s3:ObjectCreated:* │ PutItem
+                                   ▼                           │ (214 ms)
+                    ┌────────────────────────────┐             │
+                    │   AWS Lambda Function      │─────────────┘
+                    │   huylam-ocr-processor     │
+                    │   (Python 3.11 Serverless) │
+                    └──────────────┬─────────────┘
+                                   │
+                                   ▼ Logs & Metrics
+                    ┌────────────────────────────┐
+                    │   Amazon CloudWatch Logs   │
+                    │   /aws/lambda/huylam-ocr-  │
+                    │   processor                │
+                    └────────────────────────────┘
 ```
 
 ---
 
-# 4. Danh mục dịch vụ AWS sử dụng
+## 4. Danh Mục Dịch Vụ AWS & Công Nghệ Cốt Lõi
 
-| Dịch vụ AWS | Vai trò trong hệ thống | Lý do lựa chọn |
+| Dịch vụ / Công nghệ | Vai trò trong hệ thống | Lý do lựa chọn kỹ thuật |
 | :--- | :--- | :--- |
-| **Amazon S3** | Lưu trữ tài liệu gốc (`/uploads/`), tệp kết quả (`/outputs/`) và Web tĩnh | Độ bền 99.999999999%, tích hợp Presigned URL và Event Notification |
-| **Amazon DynamoDB** | Lưu trữ trạng thái xử lý, siêu dữ liệu tài liệu và độ trễ thực thi | Tốc độ mili-giây, NoSQL linh hoạt, chế độ On-Demand chi phí 0 USD khi nhàn rỗi |
-| **AWS Systems Manager** | Quản lý cấu hình chế độ và khóa API an toàn (Parameter Store) | Lưu trữ tham số mã hóa KMS, cho phép đổi cấu hình mà không cần sửa mã nguồn |
-| **AWS Lambda** | Trung tâm điều phối bóc tách và tạo Presigned URL (Compute) | Phi máy chủ, tự động kích hoạt theo sự kiện S3, nằm trong hạn ngạch Free Tier |
-| **Amazon API Gateway** | Tiếp nhận yêu cầu tải tệp và truy vấn kết quả | Cung cấp REST API an toàn, hỗ trợ CORS và sinh URL có chữ ký SigV4 |
-| **Amazon CloudFront** | Mạng phân phối nội dung (CDN) toàn cầu | Tăng tốc độ tải trang giao diện Web Studio, chứng chỉ HTTPS miễn phí từ ACM |
-| **Amazon CloudWatch** | Giám sát, ghi nhật ký và đo lường hiệu năng | Theo dõi thời gian thực thi Fast-Path và thời gian gọi OCR / Dịch thuật |
-| **Amazon Bedrock / Textract** | Tùy chọn mở rộng: Xử lý AI nội bộ khép kín trên AWS (Optional) | Cung cấp mô hình nền tảng cấp doanh nghiệp khi người dùng chủ động kích hoạt |
+| **Amazon VPC** (`huylam-vpc`) | Mạng ảo phân tầng doanh nghiệp | Dải mạng `10.0.0.0/16`, 2 Public Subnet Multi-AZ (`1a` và `1b`), Internet Gateway `huylam-igw` |
+| **Security Groups** | Chuỗi tường lửa phân tầng (Chaining) | `huylam-alb-sg` mở HTTP 80 cho Internet; `huylam-web-sg` chỉ mở TCP 5000 từ ALB SG |
+| **Application Load Balancer** (`huylam-ocr-alb`) | Cân bằng tải và cấp tên miền công khai | Phân phối lưu lượng Multi-AZ, tự động kiểm tra sức khỏe máy chủ qua đường dẫn `/login` |
+| **Amazon EC2** (`huylam-ocr-web-server`) | Máy chủ ứng dụng Web Studio | Amazon Linux 2023, loại t2.micro (Free Tier), chạy daemon systemd Gunicorn |
+| **AWS Systems Manager** | Quản trị từ xa và cấu hình bảo mật | Session Manager (không mở SSH 22); Parameter Store lưu cấu hình mã hóa KMS |
+| **Amazon S3** (`huylam-ocr-documents-ap-southeast-1`) | Kho lưu trữ tài liệu gốc và kết quả | Tích hợp thư mục `uploads/`, `outputs/`, chính sách CORS và sự kiện Event Notification |
+| **Amazon DynamoDB** (`document_processing_jobs`) | Quản lý tiến trình và trạng thái xử lý | Cơ sở dữ liệu NoSQL On-Demand (`PAY_PER_REQUEST`), truy xuất mili-giây, chi phí 0 USD nhàn rỗi |
+| **AWS Lambda** (`huylam-ocr-processor`) | Xử lý sự kiện tự động Serverless | Khởi tạo bản ghi DynamoDB tức thì khi có tài liệu mới tải lên S3, thời gian chạy 214 ms |
+| **Amazon CloudWatch** | Giám sát và ghi nhận nhật ký tập trung | Giám sát CloudWatch Logs cho Lambda, theo dõi tình trạng Target Group và EC2 |
+| **PyMuPDF & Python 3.11** | Bóc tách văn bản số Tầng 1 (Fast-Path) | Trích xuất văn bản số trực tiếp trong 0.1s - 0.3s/trang với chi phí tính toán 0 USD |
+| **Kaggle GPU & Gemini Flash** | Nhận diện thị giác Tầng 2 (Selective OCR) | Nhận diện trang scan đa ngôn ngữ, tự động chuyển đổi dự phòng (Failover) an toàn |
+| **Amazon Bedrock (Nova)** | Tùy chọn AI khép kín nội bộ AWS | Cung cấp tùy chọn mô hình AWS Native độc lập trong Web Studio khi cần bảo mật khép kín |
+| **Docker & Amazon ECR** | Đóng gói và lưu trữ Container | Image chuẩn OCI Container trên nền `python:3.11-slim`, sẵn sàng triển khai đám mây |
 
 ---
 
-# 5. Kế hoạch triển khai 12 tuần (Implementation Roadmap)
+## 5. Bảng Số Liệu Đo Kiểm Thực Nghiệm (Benchmark Empirical Metrics)
 
-- **Tuần 1 - 4**: Nền tảng hạ tầng đám mây AWS (IAM, VPC, EC2, S3, Systems Manager).
-- **Tuần 5 - 8**: Giám sát, cân bằng tải tự động, hạ tầng dạng mã (CloudFormation) và điều phối Container (ECR, ECS Fargate).
-- **Tuần 9**: Thiết kế kiến trúc giải pháp Serverless Microservices và phân tầng xử lý tài liệu.
-- **Tuần 10**: Triển khai hạ tầng lưu trữ S3, cơ sở dữ liệu DynamoDB và quản trị cấu hình SSM Parameter Store trên AWS.
-- **Tuần 11**: Tích hợp luồng bóc tách OCR, dịch thuật kỹ thuật, xuất bản đa định dạng và đo kiểm hiệu năng thực tế.
-- **Tuần 12**: Báo cáo kiểm toán chi phí FinOps (0 USD), quay video demo hoàn chỉnh và bảo vệ đồ án tốt nghiệp.
+| Hạng mục kiểm thử | Mẫu thử nghiệm | Động cơ thực thi | Thời gian xử lý | Chi phí ước tính | Đánh giá chất lượng |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| **Bóc tách văn bản số (Fast-Path)** | `cv.pdf` (1 trang) | Fast-Path Native (PyMuPDF) | **0.31 giây** | 0.00 USD | Xuất sắc, phản hồi tức thì |
+| **Bóc tách bài báo khoa học** | `28_Bai_Bao_...pdf` (11 trang) | Fast-Path Native (PyMuPDF) | **3.07 giây** (~0.28s/trang) | 0.00 USD | Xuất sắc, cấu trúc bài báo nguyên vẹn |
+| **Bóc tách ảnh quét scan (OCR)** | Ảnh scan biểu mẫu tiếng Việt | Kaggle Qwen2.5-VL / Gemini | **2.54 giây** | 0.00 USD (Free Tier) | Nhận dạng tiếng Việt có dấu đầy đủ |
+| **Bóc tách tùy chọn AWS Native** | Ảnh scan văn bản | Amazon Bedrock (Nova) | **4.61s - 6.99s** | Pay-as-you-go | Trích xuất chính xác bảng biểu số liệu |
+| **Dịch thuật bảo toàn Markdown** | `cv.pdf` (Anh -> Việt) | Gemini Flash Translator | **2.80 giây** | 0.00 USD (Free Tier) | Bảo toàn 100% tiêu đề và bảng biểu |
+| **Xuất bản Microsoft Word (.docx)** | `cv.pdf` -> `cv.pdf.docx` | DocxExporter Module | **0.15 giây** | 0.00 USD | Tệp 38.2 KB mở chuẩn trên Word macOS |
+| **Kích hoạt tự động S3 -> Lambda** | Tệp tải lên `uploads/` | AWS Lambda (Python 3.11) | **214 - 257 ms** | 0.00 USD (Free Tier) | Tự động tạo bản ghi DynamoDB tức thì |
+| **Độ trễ phản hồi ALB Production** | Truy cập `http://huylam-ocr-alb...` | Application Load Balancer | **15 - 25 ms** | 0.00 USD (Free Tier) | Chuyển hướng 302 sang `/login` mượt mà |
+
+---
+
+## 6. Lộ Trình Triển Khai 12 Tuần & Kết Quả Đạt Được
+
+- **Tuần 1 - 4 (Nền tảng hạ tầng đám mây AWS)**: Quản trị danh tính IAM, thiết lập mạng VPC, máy chủ EC2 Linux, lưu trữ đối tượng Amazon S3 và quản lý hệ thống qua AWS Systems Manager.
+- **Tuần 5 - 8 (Giám sát, Cân bằng tải & Containerization)**: Thiết lập giám sát CloudWatch Alarms, hạ tầng dạng mã CloudFormation, đóng gói Docker và lưu trữ image trên Amazon ECR.
+- **Tuần 9 (Thiết kế Kiến trúc Serverless)**: Thiết kế kiến trúc giải pháp Serverless Microservices, lập lược đồ DynamoDB `document_processing_jobs`, xây dựng cơ chế cấp S3 Presigned URL.
+- **Tuần 10 (Triển khai Hạ tầng Lưu trữ & Dữ liệu AWS)**: Tạo S3 Bucket `huylam-ocr-documents-ap-southeast-1` (`uploads/`, `outputs/`), bảng DynamoDB On-Demand, và tham số SSM Parameter Store `/huylam-ocr/config`.
+- **Tuần 11 (Đo kiểm Hiệu năng & Tự động hóa Event-Driven)**: Đo kiểm bộ Benchmark thực nghiệm, đóng gói Dockerfile OCI Container, thiết lập kiến trúc tự động hóa S3 Event Notification -> AWS Lambda -> DynamoDB -> CloudWatch Logs.
+- **Tuần 12 (Triển khai Đám mây 3 Tầng & Cấp Link Thật Công Khai)**:
+  * Triển khai VPC Multi-AZ (`huylam-vpc`), Subnets, Internet Gateway và chuỗi Security Groups (`huylam-alb-sg`, `huylam-web-sg`).
+  * Khởi chạy máy chủ EC2 `huylam-ocr-web-server` với IAM Role `huylam-ssm-role`, kết nối an toàn qua Session Manager, kích hoạt dịch vụ daemon systemd Gunicorn chạy Web Studio.
+  * Cấu hình Target Group `huylam-ocr-tg` (Health check `/login`, trạng thái Healthy 1/1) và Application Load Balancer `huylam-ocr-alb` đa vùng sẵn sàng.
+  * Cấp phát đường link công khai thật hoạt động trên toàn cầu: `http://huylam-ocr-alb-1284818160.ap-southeast-1.elb.amazonaws.com`.
+  * Thu thập bộ 10 ảnh minh chứng có khung viền đỏ chuẩn xác bao quanh Account Badge `huylam (677994024390)`.
+
+---
+
+## 7. Quản Trị Tài Chính FinOps (0.00 USD Budget Optimization)
+
+Dự án áp dụng chặt chẽ các nguyên tắc quản trị tài chính đám mây FinOps nhằm bảo đảm toàn bộ hệ thống vận hành bền vững trong hạn mức **0.00 USD**:
+1. **Kiến trúc Serverless theo sự kiện (Pay-as-you-go)**: DynamoDB hoạt động ở chế độ On-Demand không tính cước khi nhàn rỗi; Lambda tận dụng 1 triệu lượt gọi miễn phí mỗi tháng của AWS Free Tier.
+2. **Cơ chế bóc tách lai đa tầng**: Tiết kiệm hơn 80% chi phí gọi API mô hình thị giác nhờ xử lý Fast-Path cục bộ bằng PyMuPDF.
+3. **Kế hoạch giải phóng tài nguyên (Teardown Governance)**: Toàn bộ ảnh chụp màn hình minh chứng đã được gắn viền đỏ và lưu trữ đầy đủ phục vụ bảo vệ đồ án tốt nghiệp; sinh viên có đầy đủ kịch bản xóa Application Load Balancer và dừng máy chủ EC2 khi hoàn tất phiên nghiệm thu để loại bỏ hoàn toàn chi phí phát sinh.

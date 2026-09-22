@@ -1,42 +1,47 @@
 ---
-title : "Deploy Application"
-date : 2026-01-01
-weight : 7
-chapter : false
-pre : " <b> 5.7. </b> "
+title: "Deploy Application"
+date: 2026-09-23
+weight: 7
+chapter: false
+pre: " <b> 5.7. </b> "
 ---
 
-### Goal
+### Module Objective
 
-Deploy the Second-Hand Marketplace application to Amazon ECS using AWS Fargate.
-
----
-
-## 1. Overview
-
-In this chapter, you will deploy the containerized application to Amazon Elastic Container Service (Amazon ECS).
-
-Amazon ECS manages the application containers, while AWS Fargate provides a serverless compute environment without requiring you to provision or manage EC2 instances.
-
-The deployment includes creating an ECS cluster, configuring a task definition, creating an ECS service, and verifying that the application is running successfully.
+Deploy the **Serverless Hybrid Document OCR, Parsing & Technical Translation Platform** onto AWS cloud infrastructure according to an enterprise three-tier architecture, combining an Application Load Balancer (ALB) with an Amazon EC2 application host administered securely via AWS Systems Manager Session Manager.
 
 ---
 
-## 2. Detailed Practice Content
+## 1. Deployment Architecture Overview
 
-Complete the following sections in order:
+The Web Studio hosting architecture is designed for fault tolerance, security group chaining, and keyless administration:
 
-- **5.7.1-configure-load-balancer**
-- **5.7.2-deploy-amazon-ecs**
-
+1. **Application Load Balancer (`huylam-ocr-alb`)**:
+   * Accepts incoming HTTP port 80 traffic from global Internet clients.
+   * Balances traffic across multiple Availability Zones (Multi-AZ) while monitoring host health targeting `/login`.
+2. **Target Group (`huylam-ocr-tg`)**:
+   * Routes incoming requests from the load balancer to internal port 5000 on the application host.
+3. **Application Host (Amazon EC2 `huylam-ocr-web-server`)**:
+   * Executes a t2.micro instance running Amazon Linux 2023 inside `huylam-vpc`.
+   * Bound to IAM Instance Profile `huylam-ssm-role`, enabling native S3 and DynamoDB integration without hardcoded credentials.
+   * Administered exclusively through **AWS Systems Manager Session Manager**, eliminating public SSH port 22 exposure.
+   * Operates the Gunicorn WSGI server as a managed **systemd background service** (`huylam-ocr.service`), ensuring automatic process respawning and boot persistence.
 
 ---
 
-## 3. Expected Result
+## 2. Hands-on Execution Steps
 
-After completing this chapter, you will have:
+This module comprises two hands-on sections:
 
-- An Amazon ECS cluster created.
-- A task definition configured.
-- An ECS service running on AWS Fargate.
-- The application successfully deployed and ready to receive traffic.
+- **[5.7.1 Provisioning Target Group & Application Load Balancer](5.7.1-configure-load-balancer/)**: Creating Target Group on port 5000, fine-tuning health checks, and launching Multi-AZ ALB.
+- **[5.7.2 Deploying EC2 Application Server via SSM Session Manager](5.7.2-deploy-application-server/)**: Creating IAM Role, launching EC2, connecting via Session Manager, setting up Python 3.11, and activating the systemd Gunicorn service.
+
+---
+
+## 3. Expected Outcomes
+
+Upon completing this module, you have:
+- An operational Application Load Balancer `huylam-ocr-alb` in **Active** status.
+- Target Group `huylam-ocr-tg` reporting **Healthy 1/1** status.
+- EC2 host executing Web Studio reliably on internal port 5000.
+- Infrastructure primed for global Internet traffic routing.

@@ -1,6 +1,6 @@
 ---
-title: "Proposal"
-date: 2026-09-18
+title: "Project Proposal"
+date: 2026-09-23
 weight: 2
 chapter: false
 pre: " <b> 2. </b> "
@@ -8,109 +8,186 @@ pre: " <b> 2. </b> "
 
 # Serverless Hybrid Document OCR, Parsing & Technical Translation Platform on AWS
 
-## High-Performance Hybrid Document Parsing, Selective OCR & Technical Translation on AWS
+## Capstone Project Proposal: Multi-Tiered Hybrid Document Extraction, Selective Vision OCR & Technical Translation on AWS Cloud
 
 ---
 
-# 1. Executive Summary
+### Student Identity & System Information
 
-**Serverless Hybrid Document OCR, Parsing & Technical Translation Platform on AWS** is an advanced document processing, digitization, and translation platform combining fast native document parsing with selective vision-language AI (Selective Vision OCR) and a format-preserving technical translation engine. The system empowers organizations to automatically parse, recognize, and translate complex multilingual documents (contracts, invoices, financial statements in PDF or scanned image formats) into standardized structured formats such as Markdown (`.md`), Microsoft Word (`.docx`), and searchable PDFs while preserving 100% of the original document layout, headings, and numerical tables.
-
-The platform is engineered with a Serverless and Event-Driven architecture on AWS, supporting multi-tier execution models to minimize operating expenses (approaching $0.00 in testing environments):
-- **Two-Stage Hybrid Parsing Pipeline**:
-  - *Stage 1 (Fast-Path)*: Automatically extracts native digital text streams and table structures directly via native libraries (`PyMuPDF`) at 0.1 - 0.3 seconds per page for standard office PDFs with zero inference cost.
-  - *Stage 2 (Selective Vision OCR)*: Automatically classifies and routes only scanned images or complex rasterized tables to vision AI models.
-- **Format-Preserving Technical Translation Engine**:
-  - Automatically batches and translates extracted text into multiple target languages (Vietnamese, English, Japanese, Korean, Chinese, French, German).
-  - Strictly preserves Markdown table matrices, code snippets, headers, and hyperlinks.
-- **Multi-Mode Extensibility & Enterprise Closed-Loop Option**:
-  - *Cost-Optimized Mode (Default)*: Combines free Kaggle GPU/TPU resources (hosting Qwen2.5-VL via Cloudflare Tunnel) with resilient failover to Google Gemini 3.6 Flash.
-  - *AWS Native Closed-Loop Mode (Optional Secondary)*: Enables organizations with strict data sovereignty rules (Zero Data Outflow) to optionally route OCR and translation internally through **Amazon Bedrock** (Anthropic Claude 3.5 Haiku, Amazon Nova) or **Amazon Textract** / **Amazon Translate**. This option is user-activated to protect student FinOps budgets during routine testing.
-- **Configuration & Credential Security Layer**: Centrally managed via **AWS Systems Manager (SSM) Parameter Store (SecureString)** encrypted with **AWS KMS**, eliminating hardcoded secret risks.
-- **Storage & State Layer**: Raw and parsed artifacts persisted in **Amazon S3**; pipeline metadata and performance telemetry stored in **Amazon DynamoDB**.
-- **Delivery & API Layer**: Ingestion managed via **Amazon API Gateway** (providing S3 Presigned URLs for direct secure uploads) and fronted globally with a Single Page Application (SPA) hosted on **Amazon S3 + Amazon CloudFront** with SSL/TLS certificates provided by **AWS Certificate Manager (ACM)**.
+* **Student Name**: Lam Quang Huy
+* **Student ID (MSSV)**: `0212267`
+* **Specialized Class**: 67CS - Department of Information Technology
+* **Academic Institution**: Hanoi University of Civil Engineering (HUCE)
+* **AWS Account ID**: `677994024390` | **Account Name**: `huylam`
+* **Target AWS Region**: `ap-southeast-1` (Asia Pacific - Singapore)
+* **Live Production URL**: `http://huylam-ocr-alb-1284818160.ap-southeast-1.elb.amazonaws.com`
 
 ---
 
-# 2. Problem Statement & Solution
+## 1. Executive Summary
 
-## 2.1. The Problem
-1. **Limitations of Traditional OCR**: Conventional OCR tools extract flat, unstructured text, destroying table relationships, scrambling multi-column reading orders, and omitting hierarchical headers.
-2. **Computational Bottlenecks of Pure Vision Models**: Feeding entire 50 - 100 page documents into heavy Vision LLMs introduces severe latency and high GPU inference overhead, even though 80-90% of pages already possess digital text streams.
-3. **Technical Translation Formatting Losses**: Standard machine translation engines break table syntax, disrupt numerical formatting, and alter technical terminology.
-4. **Data Sovereignty Requirements**: Enterprise workloads often require an internal closed-loop AI architecture within the cloud provider without external data transfer.
+**Serverless Hybrid Document OCR, Parsing & Technical Translation Platform on AWS** is an enterprise-grade cloud computing system engineered to tackle the complex challenges of document digitization, structural parsing, and multi-language technical translation. It seamlessly processes intricate technical assets (engineering specifications, legal agreements, financial statements, scientific research papers in PDF and scanned images) with ultra-low latency, high fidelity, and strictly managed zero-dollar cloud operational expenditure ($0.00 throughout the internship period).
 
-## 2.2. Proposed Solution
-The **Serverless Hybrid Document OCR, Parsing & Technical Translation Platform** solves these challenges through:
-- **Cost & Speed Optimization via Hybrid Pipeline**: 80-90% of digital pages are parsed instantly in Stage 1 at $0 cost; Stage 2 is selectively invoked for scanned pages only.
-- **100% Layout & Table Preservation**: Reconstructs Markdown tables (`| Col 1 | Col 2 |`), maintains header hierarchies, and exports to `.md`, `.docx`, and standard A4 `.pdf`.
-- **Context-Aware Technical Translation**: Utilizes structured prompting to maintain technical fidelity without distorting Markdown formatting.
-- **Native AWS Closed-Loop Compatibility**: Provides built-in adapters for Amazon Bedrock and AWS native AI services when users require an all-AWS architecture.
+The platform unifies three core technological pillars:
+1. **Two-Stage Hybrid Parsing Engine**:
+   * **Layer 1 (Fast-Path Native)**: Directly extracts raw digital text streams, tabular matrices, and font hierarchies using high-performance C-bindings (`PyMuPDF`) at **0.1s - 0.3s/page** without invoking external AI APIs, eliminating 100% of compute expenses for over 80% of standard digital PDF files.
+   * **Layer 2 (Selective Vision OCR)**: Intelligently identifies scanned image pages or complex graphical forms, selectively routing them to Vision AI models (Kaggle Qwen2.5-VL via Cloudflare Tunnel, Google Gemini 3.6 Flash failover, and optional AWS Native Bedrock Nova).
+2. **Markdown-Preserving Technical Translation Engine**:
+   * Automatically segments and translates technical documentation into Vietnamese and international languages (English, Japanese, Korean, Chinese, French, German).
+   * Guarantees 100% syntactic preservation of Markdown headings, nested bullet lists, code blocks, and complex financial/engineering tables.
+3. **Multi-Format Export Engine**:
+   * Exports processed documents automatically to Markdown (`.md`), Microsoft Word (`.docx` fully compliant with macOS and Windows formatting engines), and print-ready PDF formats.
+
+The cloud architecture integrates an **Enterprise Three-Tier Networking Model** with an **Event-Driven Serverless Pipeline**:
+* **Ingress & Load Distribution Tier**: Internet-facing Multi-AZ Application Load Balancer `huylam-ocr-alb` ingesting HTTP port 80 traffic with intelligent health check routing.
+* **Application Compute Tier**: Amazon EC2 host `huylam-ocr-web-server` (AL2023, t2.micro) shielded by chained security groups, operating a systemd Gunicorn WSGI daemon on internal port 5000, managed securely via AWS Systems Manager Session Manager with zero open SSH ports.
+* **Storage & Database Tier**: Amazon S3 bucket `huylam-ocr-documents-ap-southeast-1` managing `uploads/` and `outputs/`; Amazon DynamoDB NoSQL table `document_processing_jobs` auditing job states and metrics.
+* **Centralized Configuration Management**: AWS Systems Manager Parameter Store `/huylam-ocr/config` (`SecureString` encrypted via AWS KMS), eliminating hardcoded API keys.
+* **Event-Driven Serverless Pipeline**: Real-time asynchronous ingestion triggered via `s3:ObjectCreated:*` into AWS Lambda `huylam-ocr-processor` updating DynamoDB and CloudWatch Logs in 214 ms.
 
 ---
 
-# 3. Architecture Diagram
+## 2. Problem Statement & Proposed Solution
+
+### 2.1. Contemporary Technical Document Parsing Bottlenecks
+1. **Structural and Tabular Degradation**: Traditional OCR engines (e.g., Tesseract) output flat text streams, scrambling multi-column reading flows and obliterating tabular matrix alignments.
+2. **Excessive Latency and Cost of Vision AI Overuse**: Submitting multi-page (50 - 100 pages) documents entirely into massive Vision LLMs incurs severe network bandwidth contention, minute-long turnaround latencies, and high GPU costs, despite most digital documents containing extractable digital text.
+3. **Formatting Loss in Machine Translation**: Off-the-shelf automated translators frequently mangle Markdown syntax, break header hierarchies, and corrupt tabular structures during technical domain translation.
+4. **Cloud Infrastructure Security Exposures**: Publicly exposing SSH port 22 exposes virtual hosts to brute-force intrusion, while static credentials stored on instances risk credentials leakage.
+
+### 2.2. Proposed Technical Solution
+The project delivers an architectural breakthrough solving these limitations:
+* **Hybrid Fast-Path + Selective Vision Routing**: Documents are analyzed page-by-page; 80 - 90% of digital pages are extracted in 0.1s - 0.3s via PyMuPDF at $0.00 cost, triggering Vision OCR only when rasterized scans are detected.
+* **Structure-Preserving Translation Engineering**: Specialized prompt constraints enforce 100% preservation of Markdown table schemas (`| Header 1 | Header 2 |`) and technical lexicon.
+* **Chained Security Group Perimeter**: Total isolation of application hosts from public ingress; internal port 5000 admits traffic exclusively originating from the Application Load Balancer security group.
+* **Zero Static Credentials Model**: EC2 compute instances and Lambda functions interact with S3 and DynamoDB via IAM Instance Profiles and STS temporary sessions; sensitive configuration resides in KMS-encrypted SSM Parameter Store.
+
+---
+
+## 3. Architecture Blueprint
 
 ```text
-[ User / Web Browser (Web Studio SPA) ]
-              │
-              ▼ HTTPS (SSL/TLS)
-[ Amazon CloudFront + Amazon S3 Static Hosting ] (SPA Studio & Preview)
-              │
-              ▼ REST API Request (Request Presigned URL or Poll Status)
-[ Amazon API Gateway ]
-              │
-              ├──> 1. Return secure SigV4 S3 Presigned PUT URL
-              │
-[ Amazon S3 Bucket ]
-      │
-      ├── /uploads/ (Direct binary upload of PDF / Scanned Images)
-      │      │
-      │      ▼ (s3:ObjectCreated automatic trigger)
-      ▼
-[ AWS Lambda / Compute Engine ]
-      │
-      ├── 2. Load Config & Credentials ──> [ AWS SSM Parameter Store (SecureString) ]
-      │
-      ├── 3. Stage 1: Fast-Path Native Parser (PyMuPDF, 0.1s - 0.3s/page)
-      │
-      ├── 4. Stage 2: Selective Vision OCR (Scanned pages only):
-      │      ├── [Default 1: Kaggle GPU/TPU via Cloudflare Tunnel]
-      │      ├── [Default 2: Google Gemini 3.6 Flash Failover]
-      │      └── [Optional Secondary: AWS Native Amazon Bedrock / Textract]
-      │
-      ├── 5. Technical Translation Engine:
-      │      ├── [Default: Gemini Flash Translator]
-      │      └── [Optional Secondary: AWS Native Amazon Bedrock / Translate]
-      │
-      ├── 6. Multi-Format Exporters ─────> [ Amazon S3: /outputs/ ] (.md, .docx, .pdf)
-      │
-      └── 7. Telemetry & Metadata ───────> [ Amazon DynamoDB (document_processing_jobs) ]
-                                          [ Amazon CloudWatch (Logs & Metrics) ]
+                                  [ Internet Web Client / User ]
+                                                │
+                                                ▼ HTTP : 80
+                    ┌───────────────────────────────────────────────────────┐
+                    │       AWS Application Load Balancer (Multi-AZ)        │
+                    │         huylam-ocr-alb (Public DNS Endpoint)          │
+                    │             Security Group: huylam-alb-sg             │
+                    └───────────────────────────┬───────────────────────────┘
+                                                │
+                        Forward to Target Group │ Port 5000
+                        Health Check: /login    │ (HTTP 200 OK)
+                                                ▼
+                    ┌───────────────────────────────────────────────────────┐
+                    │          Amazon EC2 Application Host (AL2023)         │
+                    │         huylam-ocr-web-server (t2.micro / 10.0.8.15)  │
+                    │             Security Group: huylam-web-sg             │
+                    │       (Inbound TCP 5000 only from huylam-alb-sg)      │
+                    │                                                       │
+                    │   ┌───────────────────────────────────────────────┐   │
+                    │   │        Gunicorn WSGI (huylam-ocr.service)     │   │
+                    │   │          Flask Web Studio SPA (Port 5000)     │   │
+                    │   └───────────────────────┬───────────────────────┘   │
+                    │                           │                           │
+                    │       ┌───────────────────┴───────────────────┐       │
+                    │       ▼                                       ▼       │
+                    │   [ Layer 1: Fast-Path ]              [ Layer 2: OCR ]│
+                    │    PyMuPDF (0.1s - 0.3s)               Kaggle GPU     │
+                    │    Cost: $0.00                         Gemini Flash   │
+                    │                                        AWS Bedrock    │
+                    │       │                                       │       │
+                    │       └───────────────────┬───────────────────┘       │
+                    │                           ▼                           │
+                    │             [ Technical Translation Engine ]          │
+                    │             100% Markdown Structure Fidelity          │
+                    │                           │                           │
+                    │             [ Multi-Format Export Engine ]            │
+                    │             Markdown (.md), Word (.docx), PDF         │
+                    └───────────────┬───────────────────────┬───────────────┘
+                                    │ IAM Role              │ IAM Role
+                                    │ huylam-ssm-role       │ huylam-ssm-role
+                                    ▼                       ▼
+                    ┌─────────────────────────────┐  ┌──────────────────────┐
+                    │     Amazon S3 Storage       │  │   Amazon DynamoDB    │
+                    │     huylam-ocr-documents-   │  │   document_          │
+                    │     ap-southeast-1          │  │   processing_jobs    │
+                    │     - uploads/ (Raw Files)  │  │   (PK: job_id,       │
+                    │     - outputs/ (Artifacts)  │  │    SK: created_at)   │
+                    └───────────────┬─────────────┘  └──────────▲───────────┘
+                                    │                           │
+                                    │ Event: s3:ObjectCreated:* │ PutItem
+                                    ▼                           │ (214 ms)
+                    ┌─────────────────────────────┐             │
+                    │    AWS Lambda Function      │─────────────┘
+                    │    huylam-ocr-processor     │
+                    │    (Python 3.11 Serverless) │
+                    └───────────────┬─────────────┘
+                                    │
+                                    ▼ Logs & Telemetry
+                    ┌─────────────────────────────┐
+                    │    Amazon CloudWatch Logs   │
+                    │    /aws/lambda/huylam-ocr-  │
+                    │    processor                │
+                    └─────────────────────────────┘
 ```
 
 ---
 
-# 4. AWS Services Utilized
+## 4. AWS Services & Core Technologies
 
-| AWS Service | Role in Architecture | Selection Rationale |
+| Service / Technology | Role in System | Architectural Rationale |
 | :--- | :--- | :--- |
-| **Amazon S3** | Raw documents (`/uploads/`), output artifacts (`/outputs/`), static hosting | 99.999999999% durability, Presigned URL support, event triggers |
-| **Amazon DynamoDB** | Processing state, metadata, and per-stage latency tracking | Single-digit millisecond latency, NoSQL schema, On-Demand ($0 idle cost) |
-| **AWS Systems Manager** | Secure runtime parameter and API key management (Parameter Store) | KMS encryption, decouples configuration from code deployment |
-| **AWS Lambda** | Asynchronous parsing coordination and Presigned URL generation | Serverless execution, automated S3 event invocation, Free Tier eligible |
-| **Amazon API Gateway** | API request routing and direct upload coordination | Secure REST API, CORS support, SigV4 signed URL generation |
-| **Amazon CloudFront** | Global Content Delivery Network (CDN) | Accelerated frontend delivery, free ACM SSL/TLS certificate |
-| **Amazon CloudWatch** | Monitoring, centralized logging, and performance metrics | Tracks Fast-Path execution times and AI API call durations |
-| **Amazon Bedrock / Textract** | Optional Secondary: Native AWS AI closed-loop processing | Enterprise-grade foundation models available on-demand |
+| **Amazon VPC** (`huylam-vpc`) | Enterprise virtual network isolation | Custom CIDR `10.0.0.0/16`, 2 Multi-AZ Public Subnets (`1a` and `1b`), Internet Gateway `huylam-igw` |
+| **Security Groups** | Chained perimeter firewalls | `huylam-alb-sg` exposes HTTP 80; `huylam-web-sg` restricts port 5000 ingress strictly to ALB SG |
+| **Application Load Balancer** (`huylam-ocr-alb`) | Traffic ingress and DNS resolution | Multi-AZ load distribution, automatic health monitoring targeting `/login` |
+| **Amazon EC2** (`huylam-ocr-web-server`) | Web Studio application host | Amazon Linux 2023, t2.micro (Free Tier), running systemd Gunicorn daemon |
+| **AWS Systems Manager** | Secure administration & secrets storage | Session Manager removes SSH port 22 exposure; Parameter Store manages KMS encrypted JSON configuration |
+| **Amazon S3** (`huylam-ocr-documents-ap-southeast-1`) | Input document & export storage | Prefixes `uploads/`, `outputs/`, configured CORS policy, and real-time Event Notifications |
+| **Amazon DynamoDB** (`document_processing_jobs`) | Processing audit trail & job state | On-Demand NoSQL mode (`PAY_PER_REQUEST`), sub-millisecond retrieval, $0.00 idle cost |
+| **AWS Lambda** (`huylam-ocr-processor`) | Serverless event automation | Autonomous DynamoDB state ingestion on S3 upload events, executing in 214 ms |
+| **Amazon CloudWatch** | Centralized observability & logging | Lambda invocation logs, Target Group health telemetry, and EC2 resource metrics |
+| **PyMuPDF & Python 3.11** | Layer 1 Fast-Path extraction | Zero-cost digital PDF parsing completed in 0.1s - 0.3s per page |
+| **Kaggle GPU & Gemini Flash** | Layer 2 Selective Vision OCR | High-accuracy scanned document OCR with seamless automated failover protection |
+| **Amazon Bedrock (Nova)** | Enclosed enterprise AI option | Independent AWS Native model choice for environments with zero external data transfer policies |
+| **Docker & Amazon ECR** | Containerization & distribution | OCI Container build on `python:3.11-slim`, optimized for cloud deployment |
 
 ---
 
-# 5. Implementation Roadmap (12 Weeks)
+## 5. Empirical Benchmark Metrics
 
-- **Weeks 1 - 4**: Cloud infrastructure foundations (IAM, VPC, EC2, S3, Systems Manager).
-- **Weeks 5 - 8**: Observability, auto-scaling, Infrastructure as Code (CloudFormation), and containers (ECR, ECS Fargate).
-- **Week 9**: Serverless architecture design, DynamoDB schema, and multi-tier pipeline definition.
-- **Week 10**: Deployment of cloud storage (S3), NoSQL database (DynamoDB), and secure configuration (SSM Parameter Store).
-- **Week 11**: End-to-end integration of OCR, technical translation, multi-format export, and performance benchmarking.
-- **Week 12**: FinOps financial audit ($0 cost verification), final video demonstration, and capstone presentation.
+| Benchmark Evaluation | Test Artifact | Execution Engine | Processing Time | Estimated Cost | Quality Assessment |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| **Digital Text Extraction (Fast-Path)** | `cv.pdf` (1 page) | Fast-Path Native (PyMuPDF) | **0.31s** | $0.00 | Instantaneous, high fidelity |
+| **Multi-page Scientific Paper** | `28_Bai_Bao_...pdf` (11 pages) | Fast-Path Native (PyMuPDF) | **3.07s** (~0.28s/page) | $0.00 | Complete document structure retained |
+| **Scanned Form Extraction (OCR)** | Scanned Vietnamese form | Kaggle Qwen2.5-VL / Gemini | **2.54s** | $0.00 (Free Tier) | Full Vietnamese diacritics recognized |
+| **AWS Native Option Extraction** | Scanned document image | Amazon Bedrock (Nova) | **4.61s - 6.99s** | Pay-as-you-go | Precise extraction of tabular data |
+| **Markdown-Preserving Translation** | `cv.pdf` (English -> Vietnamese) | Gemini Flash Translator | **2.80s** | $0.00 (Free Tier) | 100% preservation of Markdown headers/tables |
+| **Microsoft Word (.docx) Export** | `cv.pdf` -> `cv.pdf.docx` | DocxExporter Module | **0.15s** | $0.00 | 38.2 KB file renders cleanly in Word macOS |
+| **Automated S3 -> Lambda Trigger** | Upload to `uploads/` prefix | AWS Lambda (Python 3.11) | **214 - 257 ms** | $0.00 (Free Tier) | Immediate DynamoDB state provisioning |
+| **Live Production ALB Response** | Access to `http://huylam-ocr-alb...` | Application Load Balancer | **15 - 25 ms** | $0.00 (Free Tier) | Seamless 302 redirection to `/login` |
+
+---
+
+## 6. 12-Week Implementation Roadmap & Accomplishments
+
+- **Weeks 1 - 4 (AWS Cloud Infrastructure Foundations)**: IAM governance, VPC networking, EC2 Linux compute, Amazon S3 object storage, and AWS Systems Manager administration.
+- **Weeks 5 - 8 (Observability, Load Balancing & Containerization)**: CloudWatch alarms, CloudFormation infrastructure-as-code, Docker image packaging, and Amazon ECR registry publishing.
+- **Week 9 (Serverless Architecture Blueprinting)**: Formulated Serverless Microservices blueprint, DynamoDB `document_processing_jobs` schema, and S3 Presigned URL security flow.
+- **Week 10 (Storage, Database & Configuration Deployment)**: Provisioned S3 bucket `huylam-ocr-documents-ap-southeast-1`, DynamoDB On-Demand table, and SSM Parameter Store `/huylam-ocr/config`.
+- **Week 11 (Performance Benchmarking & Event-Driven Automation)**: Validated benchmark metrics, finalized OCI Dockerfile, and operationalized S3 Event Notification -> AWS Lambda -> DynamoDB pipeline.
+- **Week 12 (Three-Tier Enterprise Cloud Deployment & Public URL Launch)**:
+  * Deployed Multi-AZ VPC (`huylam-vpc`), subnets, Internet Gateway, and chained security groups (`huylam-alb-sg`, `huylam-web-sg`).
+  * Launched EC2 instance `huylam-ocr-web-server` with IAM Role `huylam-ssm-role`, managed via Session Manager, activating systemd Gunicorn service.
+  * Configured Target Group `huylam-ocr-tg` (Health check `/login`, Healthy 1/1 status) and Internet-facing Multi-AZ Application Load Balancer `huylam-ocr-alb`.
+  * Launched live public DNS endpoint: `http://huylam-ocr-alb-1284818160.ap-southeast-1.elb.amazonaws.com`.
+  * Compiled 10 proof screenshots with red bounding boxes surrounding Account Badge `huylam (677994024390)`.
+
+---
+
+## 7. FinOps Governance ($0.00 Budget Optimization)
+
+The project adheres strictly to FinOps principles, ensuring zero accidental cloud expenditure:
+1. **Serverless On-Demand Compute**: DynamoDB and Lambda scale dynamically to zero when idle, consuming $0.00 outside active invocations.
+2. **Hybrid Multi-Tier Ingestion**: More than 80% of document processing costs are averted via local PyMuPDF Fast-Path execution.
+3. **Teardown Governance**: All validation evidence is captured and documented for capstone defense; clear teardown procedures allow immediate deletion of Application Load Balancers and stopping of EC2 instances when evaluations conclude.

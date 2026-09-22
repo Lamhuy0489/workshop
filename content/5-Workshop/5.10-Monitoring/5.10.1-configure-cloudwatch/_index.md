@@ -1,92 +1,109 @@
 ---
-title : "Configure Amazon CloudWatch"
-date : 2026-01-01
-weight : 1
-chapter : false
-pre : " <b> 5.10.1. </b> "
+title: "Configure Amazon CloudWatch"
+date: 2026-09-23
+weight: 1
+chapter: false
+pre: " <b> 5.10.1. </b> "
 ---
 
-# Configure Amazon CloudWatch
+### Practical Objectives
 
-In this section, you will configure Amazon CloudWatch to monitor the deployed application running on Amazon ECS.
-
-Amazon CloudWatch provides monitoring capabilities by collecting metrics from AWS resources and evaluating them against user-defined thresholds. This enables administrators to detect abnormal resource usage, observe application performance, and respond quickly when issues occur.
-
-In this project, CloudWatch is used to monitor the CPU utilization of the ECS Service by creating a CloudWatch Alarm.
+Explore and implement a unified observability solution using Amazon CloudWatch for the Document OCR & Translation platform: Inspect execution logs in CloudWatch Logs for AWS Lambda, monitor real-time health check status of the Target Group, observe EC2 host compute metrics, and configure a CloudWatch Alarm for high CPU utilization.
 
 ---
 
-## Configure CloudWatch Logging
+## 1. Inspect CloudWatch Logs for AWS Lambda
 
-Amazon ECS supports integration with Amazon CloudWatch through the **awslogs** log driver. The Task Definition specifies the CloudWatch Log Group, AWS Region, and Stream Prefix that are used when the container sends runtime logs to CloudWatch.
+The AWS Lambda function `huylam-ocr-processor` automatically sends standard output and execution diagnostics to CloudWatch Logs through its `AWSLambdaBasicExecutionRole` policy.
 
-The following configuration is defined inside the ECS Task Definition.
+### Verification Steps:
 
-```json
-"logConfiguration": {
-  "logDriver": "awslogs",
-  "options": {
-    "awslogs-group": "/ecs/wed-mbdc-task",
-    "awslogs-create-group": "true",
-    "awslogs-region": "ap-southeast-1",
-    "awslogs-stream-prefix": "ecs"
-  }
-}
-```
+1. Navigate to **AWS Console -> Amazon CloudWatch -> Log groups**.
+2. Locate and select the log group: **`/aws/lambda/huylam-ocr-processor`**.
 
-![CloudWatch Logging Configuration](/images/5-Workshop/5.10-Monitoring/ecs-log-configuration.png)
+![CloudWatch Log Group Overview](/images/week11/14-cloudwatch-log-group-overview.png)
 
----
+3. Under **Log streams**, select the latest stream generated upon document upload to Amazon S3.
+4. Review the detailed log event records:
+   - Event payload detection: `Nhan su kien moi tu Amazon S3 Event Notification`.
+   - Object key resolution: `Phat hien tep moi: s3://huylam-ocr-documents-ap-southeast-1/uploads/...`.
+   - Database item persistence: `Da luu tien trinh vao DynamoDB (job_id: auto-...)`.
+   - Execution report summary (REPORT):
+     - **Duration**: `214.28 ms`
+     - **Billed Duration**: `215 ms`
+     - **Memory Size**: `128 MB`
+     - **Max Memory Used**: `88 MB`
 
-## Create a CloudWatch Alarm
+![CloudWatch Log Events Execution](/images/week11/15-cloudwatch-log-events-execution.png)
 
-To continuously monitor the health of the application, a CloudWatch Alarm is configured for the Amazon ECS Service.
-
-The alarm evaluates the average CPU utilization every five minutes. If the CPU usage exceeds the configured threshold, CloudWatch changes the alarm state from **OK** to **ALARM**, allowing administrators to identify abnormal resource consumption and investigate potential performance issues.
-
-The CloudWatch Alarm is configured using the following settings.
-
-| Property | Value |
-|----------|-------|
-| Alarm name | production-service-cpu-alarm |
-| Namespace | AWS/ECS |
-| Metric | CPUUtilization |
-| Threshold | 80% |
-| Evaluation period | 5 minutes |
-| Cluster | production-cluster |
-| Service | production-service |
-
-![CloudWatch Alarm List](/images/5-Workshop/5.10-Monitoring/cpu-alarm-list.png)
+An execution duration of just 214 ms confirms the responsiveness and cost-efficiency of the serverless event trigger design.
 
 ---
 
-## Verify the Alarm Status
+## 2. Monitor Target Group Health Status (huylam-ocr-tg)
 
-After the alarm is created, Amazon CloudWatch continuously monitors the CPU utilization of the ECS Service.
+The Application Load Balancer issues periodic health check HTTP requests to port 5000 of the EC2 instance using the path `/login`.
 
-The alarm remains in the **OK** state while CPU usage stays below the configured threshold. If the CPU utilization exceeds 80% during the evaluation period, CloudWatch automatically changes the alarm state to **ALARM**.
+1. Navigate to **EC2 Console -> Load Balancing -> Target Groups**.
+2. Select Target Group **`huylam-ocr-tg`**.
+3. Under the **Targets** tab, verify the **Target health** metrics:
+   - **Healthy**: `1`
+   - **Unhealthy**: `0`
+   - **Target ID**: `i-0566e1eedaacea52d:5000`
+   - **Health status details**: `Target is healthy (Received response code: 200/302)`.
 
-The alarm detail page also displays additional monitoring information, including:
+![Target Group Healthy Status](/images/week12/08-target-group-healthy-status.png)
 
-- Current alarm state.
-- CPU utilization graph.
-- Threshold configuration.
-- Evaluation period.
-- Cluster name.
-- ECS Service name.
-- Namespace and monitored metric.
-
-This information helps administrators understand the current operating condition of the deployed application and quickly identify potential performance bottlenecks.
-
-![CloudWatch Alarm Details](/images/5-Workshop/5.10-Monitoring/cpu-alarm-details.png)
+With a Healthy state confirmed, the ALB transparently distributes inbound web requests to the running Gunicorn application server.
 
 ---
 
-## Expected Result
+## 3. Observe EC2 Compute Instance Metrics
 
-After completing this section, you will have:
+1. Navigate to **EC2 Console -> Instances -> huylam-ocr-ec2 (`i-0566e1eedaacea52d`)**.
+2. Open the **Monitoring** tab to review CloudWatch hypervisor metrics:
+   - **CPUUtilization**: Fluctuates below 5% at idle, with brief spikes to 15% - 25% during document rendering and artifact generation.
+   - **NetworkIn / NetworkOut**: Corresponds directly to file upload ingress and HTTP response egress.
+   - **StatusCheckFailed (Instance / System)**: Stays at `0` continuously, indicating hardware and hypervisor operational integrity.
 
-- Amazon ECS configured to use the **awslogs** log driver.
-- A CloudWatch Alarm monitoring CPU utilization for the ECS Service.
-- Real-time visibility into the health of the deployed application.
-- A monitoring mechanism that helps detect abnormal CPU usage and supports application maintenance.
+---
+
+## 4. Configure CloudWatch Alarm for High CPU Utilization
+
+To automatically detect sustained high compute loads or performance bottlenecks on the EC2 host, configure a CloudWatch Alarm.
+
+### Configuration Steps:
+
+1. Navigate to **CloudWatch Console -> Alarms -> All alarms -> Create alarm**.
+2. Click **Select metric -> EC2 -> Per-Instance Metrics**:
+   - Choose metric: **`CPUUtilization`** for Instance ID `i-0566e1eedaacea52d`.
+3. Configure alarm conditions:
+   - **Statistic**: `Average`.
+   - **Period**: `5 minutes`.
+   - **Threshold type**: `Static`.
+   - **Whenever CPUUtilization is**: `Greater/Equal` (`>=`).
+   - **than**: `80`.
+4. Configure notification actions:
+   - Trigger condition: **In alarm**.
+   - Optional: Attach an Amazon SNS topic for email dispatch.
+5. Define alarm metadata:
+   - **Alarm name**: `huylam-ocr-ec2-high-cpu`.
+   - **Alarm description**: `Alert when EC2 instance CPU utilization exceeds 80% for 5 consecutive minutes`.
+6. Review specifications and click **Create alarm**.
+
+![CloudWatch Alarm Created Success](/images/week5/08-cloudwatch-alarm-created-success.png)
+
+7. Once created, the alarm list displays status **OK**, verifying that host CPU utilization is well within expected operational parameters.
+
+![CloudWatch Alarm Status OK](/images/week5/09-cloudwatch-alarm-status-ok.png)
+
+---
+
+## 5. Expected Result
+
+After completing this section, you have successfully:
+
+- Verified serverless execution logging in CloudWatch Logs with detailed latency and memory analytics.
+- Monitored application server availability through continuous ALB Target Group health checks.
+- Created an automated CloudWatch Alarm guarding against compute saturation.
+- Established enterprise-grade observability and proactive operational awareness across your AWS deployment.

@@ -1,67 +1,73 @@
 ---
-title : "Tạo VPC"
-date : 2026-01-01
-weight : 1
-chapter : false
-pre : " <b> 5.4.1. </b> "
+title: "Tạo VPC"
+date: 2026-09-23
+weight: 1
+chapter: false
+pre: " <b> 5.4.1. </b> "
 ---
 
-## Tạo VPC
+### Mục tiêu thực hành
 
-Trong phần này, bạn sẽ tạo một **Virtual Private Cloud (VPC)** để xây dựng môi trường mạng riêng cho ứng dụng trên AWS.
-
-VPC là nền tảng của toàn bộ hạ tầng mạng. Tất cả các tài nguyên như Subnet, Route Table, Internet Gateway, NAT Gateway, Application Load Balancer và Amazon ECS sẽ được triển khai bên trong VPC này.
-
----
-
-## Tạo Virtual Private Cloud
-
-Truy cập:
-
-**AWS Console → VPC → Your VPCs → Create VPC**
-
-Chọn **VPC only**, sau đó cấu hình như sau:
-
-| Thuộc tính | Giá trị |
-|------------|----------|
-| Tài nguyên cần tạo | VPC only |
-| Tên | production-vpc |
-| IPv4 CIDR | 10.0.0.0/16 |
-| IPv6 CIDR | None |
-| Tenancy | Default |
-
-Kiểm tra lại cấu hình và chọn **Create VPC**.
-
-![Create VPC](/images/5-Workshop/5.4-Networking/create-vpc.png)
+Khởi tạo mạng ảo Amazon Virtual Private Cloud (VPC) mang tên `huylam-vpc` tại khu vực `ap-southeast-1` (Singapore) và thiết lập 2 Public Subnet trên 2 Vùng sẵn sàng độc lập (`ap-southeast-1a` và `ap-southeast-1b`) phục vụ cơ chế cân bằng tải sẵn sàng cao Multi-AZ.
 
 ---
 
-## Kiểm tra VPC
+## 1. Khởi tạo Amazon VPC (huylam-vpc)
 
-Truy cập:
+### Các bước thực hiện trên AWS Console:
+1. Đăng nhập vào AWS Management Console tại khu vực **ap-southeast-1 (Singapore)**.
+2. Tìm kiếm và truy cập dịch vụ: **VPC -> Your VPCs -> Create VPC**.
+3. Chọn tùy chọn **VPC only** và nhập các thông số sau:
 
-**AWS Console → VPC → Your VPCs**
+| Thuộc tính (Attribute) | Giá trị cấu hình (Configured Value) | Giải thích kỹ thuật |
+| :--- | :--- | :--- |
+| **Resources to create** | VPC only | Tạo mạng ảo độc lập có thể tùy biến cấu hình chi tiết |
+| **Name tag** | `huylam-vpc` | Tên định danh VPC theo chuẩn đặt tên dự án |
+| **IPv4 CIDR block** | `10.0.0.0/16` | Cung cấp dải mạng riêng tư gồm 65,536 địa chỉ IP |
+| **IPv6 CIDR block** | No IPv6 CIDR block | Chỉ sử dụng ngăn xếp địa chỉ IPv4 |
+| **Tenancy** | Default | Chia sẻ phần cứng máy chủ theo định mức tiết kiệm FinOps |
 
-Chọn **production-vpc** và kiểm tra các thông tin sau:
-
-| Thuộc tính | Giá trị mong đợi |
-|------------|------------------|
-| Trạng thái | Available |
-| IPv4 CIDR | 10.0.0.0/16 |
-| DNS Resolution | Enabled |
-| DNS Hostnames | Enabled |
-
-Xác nhận VPC đã được tạo thành công trước khi chuyển sang bước cấu hình mạng.
-
-![VPC Details](/images/5-Workshop/5.4-Networking/vpc-details.png)
+4. Nhấp nút **Create VPC**.
 
 ---
 
-## Kết quả mong đợi
+## 2. Kích hoạt thuộc tính DNS Hostnames & DNS Resolution
 
-Sau khi hoàn thành phần này, bạn sẽ có:
+Để máy chủ EC2 và Application Load Balancer có thể phân giải tên miền nội bộ và dịch vụ AWS an toàn:
+1. Trong danh sách **Your VPCs**, chọn `huylam-vpc`.
+2. Nhấp menu **Actions -> Edit VPC settings**.
+3. Tại phần **DNS settings**, đánh dấu chọn cả hai mục:
+   * **Enable DNS resolution**: Cho phép phân giải truy vấn DNS nội bộ AWS.
+   * **Enable DNS hostnames**: Tự động gán tên miền công khai cho các instance có IP công khai.
+4. Nhấp **Save changes**.
 
-- Một Virtual Private Cloud tên **production-vpc**.
-- Môi trường mạng riêng với dải địa chỉ **10.0.0.0/16**.
-- DNS Resolution và DNS Hostnames được bật.
-- VPC sẵn sàng để cấu hình Subnet và các tài nguyên mạng ở bước tiếp theo.
+---
+
+## 3. Tạo 2 Public Subnet trên đa vùng sẵn sàng (Multi-AZ)
+
+Application Load Balancer yêu cầu tối thiểu 2 Subnet đặt trên 2 Availability Zone khác nhau để đảm bảo dự phòng lỗi.
+
+### Tạo Subnet 1 (`ap-southeast-1a`):
+* Truy cập **VPC -> Subnets -> Create subnet**.
+* Chọn **VPC ID**: `huylam-vpc`.
+* **Subnet name**: `huylam-subnet-public1-ap-southeast-1a`.
+* **Availability Zone**: `ap-southeast-1a`.
+* **IPv4 CIDR block**: `10.0.8.0/21` (Cung cấp 2,048 địa chỉ IP).
+* Bật tính năng tự động gán IPv4: Chọn subnet -> **Actions -> Edit subnet settings -> Enable auto-assign public IPv4 address**.
+
+### Tạo Subnet 2 (`ap-southeast-1b`):
+* Truy cập **VPC -> Subnets -> Create subnet**.
+* Chọn **VPC ID**: `huylam-vpc`.
+* **Subnet name**: `huylam-subnet-public2-ap-southeast-1b`.
+* **Availability Zone**: `ap-southeast-1b`.
+* **IPv4 CIDR block**: `10.0.16.0/21` (Cung cấp 2,048 địa chỉ IP).
+* Bật tính năng tự động gán IPv4: Chọn subnet -> **Actions -> Edit subnet settings -> Enable auto-assign public IPv4 address**.
+
+---
+
+## 4. Kết quả mong đợi
+
+Sau khi hoàn thành phần này:
+- VPC `huylam-vpc` (`10.0.0.0/16`) đã được tạo thành công ở trạng thái **Available**.
+- DNS Resolution và DNS Hostnames đều được kích hoạt.
+- 2 Public Subnet Multi-AZ (`ap-southeast-1a` và `ap-southeast-1b`) đã sẵn sàng để gắn vào Internet Gateway và Application Load Balancer.

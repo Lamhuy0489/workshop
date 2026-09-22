@@ -1,42 +1,45 @@
 ---
-title : "Application Services"
-date : 2026-01-01
-weight : 5
-chapter : false
-pre : " <b> 5.5. </b> "
+title: "Application Services"
+date: 2026-09-23
+weight: 5
+chapter: false
+pre: " <b> 5.5. </b> "
 ---
 
-### Goal
+### Module Objective
 
-Configure the core application services required for the Second-Hand Marketplace application.
-
----
-
-## 1. Overview
-
-In this chapter, you will configure the core services that support the application running on Amazon ECS.
-
-The application uses MongoDB Atlas as the database, Amazon S3 to store product images, and AWS Secrets Manager to securely manage sensitive information such as database connection strings and application secrets.
-
-After completing this chapter, the application will be ready to access external services securely and reliably.
+Configure core cloud storage and database services on AWS for the **Serverless Hybrid Document OCR, Parsing & Technical Translation Platform**, including Amazon DynamoDB NoSQL database, Amazon S3 object storage, and AWS Systems Manager Parameter Store.
 
 ---
 
-## 2. Detailed Practice Content
+## 1. Storage & Database Architecture Overview
 
-Complete the following sections in order:
+The platform leverages three AWS Cloud-Native services to guarantee secure, high-durability persistence while maintaining a strict $0.00 operational expenditure:
 
-- **5.5.1 Configure MongoDB Atlas**
-- **5.5.2 Configure Amazon S3**
-- **5.5.3 Configure AWS Secrets Manager**
+1. **Amazon DynamoDB (`document_processing_jobs`)**:
+   * Serverless NoSQL table storing document processing states, file metadata (byte size, MIME type, page count), and processing latencies.
+   * Operates in **On-Demand (`PAY_PER_REQUEST`)** billing mode, delivering single-digit millisecond latency with zero idle cost.
+2. **Amazon S3 (`huylam-ocr-documents-ap-southeast-1`)**:
+   * High-durability (99.999999999%) object storage partitioned into `uploads/` for raw user assets and `outputs/` for exported artifacts.
+   * Configured with Cross-Origin Resource Sharing (CORS) rules for direct, secure uploads.
+3. **AWS Systems Manager Parameter Store (`/huylam-ocr/config`)**:
+   * Centralized configuration registry storing system operational modes and API keys as encrypted `SecureString` parameters backed by AWS KMS, eliminating hardcoded credentials.
 
 ---
 
-## 3. Expected Result
+## 2. Hands-on Execution Steps
 
-After completing this chapter, you will have:
+This module comprises three step-by-step sections:
 
-- MongoDB Atlas configured for application data.
-- Amazon S3 configured for storing product images.
-- AWS Secrets Manager configured for secure secret management.
-- All application services ready for deployment on Amazon ECS.
+- **[5.5.1 Provisioning Amazon DynamoDB Table](5.5.1-configure-amazon-dynamodb/)**: Creating table `document_processing_jobs` with Partition Key `job_id` and Sort Key `created_at`.
+- **[5.5.2 Provisioning Amazon S3 Storage Bucket](5.5.2-configure-amazon-s3/)**: Provisioning bucket `huylam-ocr-documents-ap-southeast-1`, establishing folder prefixes `uploads/`, `outputs/`, and applying CORS.
+- **[5.5.3 Secure Parameter Management via AWS SSM Parameter Store](5.5.3-configure-ssm-parameter-store/)**: Storing KMS-encrypted configuration JSON at `/huylam-ocr/config`.
+
+---
+
+## 3. Expected Outcomes
+
+Upon completing this module, you have:
+- An active Amazon DynamoDB table `document_processing_jobs`.
+- An Amazon S3 bucket with structured prefixes and secure CORS policies.
+- A centralized `SecureString` parameter `/huylam-ocr/config` managed in AWS SSM.

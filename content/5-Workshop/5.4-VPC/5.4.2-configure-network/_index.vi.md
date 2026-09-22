@@ -1,181 +1,102 @@
 ---
-title : "Cấu hình mạng"
-date : 2026-01-01
-weight : 2
-chapter : false
-pre : " <b> 5.4.2. </b> "
+title: "Cấu hình mạng"
+date: 2026-09-23
+weight: 2
+chapter: false
+pre: " <b> 5.4.2. </b> "
 ---
 
-## Cấu hình mạng
+### Mục tiêu thực hành
 
-Sau khi tạo Virtual Private Cloud (VPC), bước tiếp theo là cấu hình các thành phần mạng cần thiết cho ứng dụng.
-
-Trong phần này, bạn sẽ tạo các Public Subnet và Private Subnet, cấu hình Internet Gateway, NAT Gateway, Route Table và Security Group. Những thành phần này giúp ứng dụng giao tiếp an toàn giữa Internet, Application Load Balancer, Amazon ECS và các dịch vụ AWS khác.
-
----
-
-## Tạo Public Subnet và Private Subnet
-
-Truy cập:
-
-**AWS Console → VPC → Subnets → Create subnet**
-
-Tạo bốn Subnet với cấu hình sau:
-
-| Name | Availability Zone | IPv4 CIDR |
-|------|-------------------|------------|
-| public-subnet-a | ap-southeast-1a | 10.0.1.0/24 |
-| public-subnet-b | ap-southeast-1b | 10.0.2.0/24 |
-| private-subnet-a | ap-southeast-1a | 10.0.3.0/24 |
-| private-subnet-b | ap-southeast-1b | 10.0.4.0/24 |
-
-Đối với hai Public Subnet, bật tùy chọn **Auto-assign public IPv4 address**.
-
-Sau khi tạo hoàn tất, kiểm tra danh sách Subnet để đảm bảo tất cả các Subnet đã được tạo thành công.
-
-![Subnets](/images/5-Workshop/5.4-Networking/subnets.png)
+Cấu hình Internet Gateway, thiết lập bảng định tuyến Route Table công khai và xây dựng chuỗi bảo mật phân tầng (Security Group Chaining) để bảo vệ máy chủ ứng dụng Web Studio sau Application Load Balancer.
 
 ---
 
-## Cấu hình Internet Gateway
+## 1. Cấu hình Internet Gateway (huylam-igw)
 
-Truy cập:
+Internet Gateway đóng vai trò là cửa ngõ giao tiếp hai chiều giữa các tài nguyên trong VPC với mạng Internet công cộng.
 
-**AWS Console → VPC → Internet Gateways → Create internet gateway**
-
-Cấu hình:
-
-| Thuộc tính | Giá trị |
-|------------|----------|
-| Name | production-igw |
-
-Sau khi tạo:
-
-- Chọn **Attach to VPC**
-- Chọn **production-vpc**
-
-Kiểm tra trạng thái Internet Gateway là **Attached**.
-
-![Internet Gateway](/images/5-Workshop/5.4-Networking/internet-gateway.png)
+### Các bước thực hiện:
+1. Truy cập **VPC Console -> Internet Gateways -> Create internet gateway**.
+2. Đặt tên định danh: `huylam-igw`.
+3. Nhấp **Create internet gateway**.
+4. Sau khi tạo thành công, chọn menu **Actions -> Attach to VPC**.
+5. Chọn VPC đích: `huylam-vpc` và nhấp **Attach internet gateway**.
+6. Kiểm tra trạng thái Internet Gateway chuyển sang **Attached**.
 
 ---
 
-## Cấu hình NAT Gateway
+## 2. Cấu hình Bảng định tuyến công khai (huylam-rtb-public)
 
-Truy cập:
+Bảng định tuyến chịu trách nhiệm điều phối lưu lượng mạng từ các Subnet ra bên ngoài Internet thông qua `huylam-igw`.
 
-**AWS Console → VPC → NAT Gateways → Create NAT gateway**
-
-Cấu hình:
-
-| Thuộc tính | Giá trị |
-|------------|----------|
-| Name | production-nat |
-| Subnet | public-subnet-a |
-| Connectivity type | Public |
-| Elastic IP | Allocate Elastic IP |
-
-Đợi NAT Gateway chuyển sang trạng thái **Available** trước khi tiếp tục.
-
-![NAT Gateway](/images/5-Workshop/5.4-Networking/nat-gateway.png)
+### Các bước thực hiện:
+1. Truy cập **VPC Console -> Route Tables -> Create route table**.
+2. Nhập tên: `huylam-rtb-public`, chọn VPC: `huylam-vpc`.
+3. Nhấp **Create route table**.
+4. Chuyển sang thẻ **Routes -> Edit routes**:
+   * Nhấp **Add route**.
+   * **Destination**: `0.0.0.0/0` (Toàn bộ lưu lượng Internet ngoại vi).
+   * **Target**: Chọn **Internet Gateway** và chọn `huylam-igw`.
+   * Nhấp **Save changes**.
+5. Chuyển sang thẻ **Subnet associations -> Edit subnet associations**:
+   * Đánh dấu chọn cả 2 Subnet: `huylam-subnet-public1-ap-southeast-1a` và `huylam-subnet-public2-ap-southeast-1b`.
+   * Nhấp **Save associations**.
 
 ---
 
-## Cấu hình Route Table
+## 3. Thiết lập chuỗi bảo mật phân tầng (Security Group Chaining)
 
-Truy cập:
+Áp dụng nguyên tắc an ninh tối thiểu (Principle of Least Privilege) của AWS Well-Architected Framework:
 
-**AWS Console → VPC → Route Tables**
+```text
+[ Internet Client ]
+       │
+       ▼ Inbound HTTP: 80 (0.0.0.0/0)
+┌─────────────────────────────────┐
+│     huylam-alb-sg (ALB)         │
+└────────────────┬────────────────┘
+                 │
+                 ▼ Inbound TCP: 5000 (Source: sg-0dca819306a96bfdb)
+┌─────────────────────────────────┐
+│     huylam-web-sg (EC2)         │
+└─────────────────────────────────┘
+```
 
-Tạo hai Route Table:
+### Bước 3.1: Tạo Security Group cho ALB (huylam-alb-sg)
+1. Truy cập **EC2 Console -> Network & Security -> Security Groups -> Create security group**.
+2. **Security group name**: `huylam-alb-sg`.
+3. **Description**: `Security group for Application Load Balancer`.
+4. **VPC**: Chọn `huylam-vpc`.
+5. **Inbound rules**:
+   * Type: **HTTP**, Port: `80`, Source: `Anywhere-IPv4` (`0.0.0.0/0`), Description: `Allow public HTTP access`.
+6. **Outbound rules**:
+   * Giữ mặc định: **All traffic** (`0.0.0.0/0`).
+7. Nhấp **Create security group**.
+8. Ghi lại mã định danh được tạo (ví dụ: `sg-0dca819306a96bfdb`).
 
-| Route Table | Associated Subnets | Default Route |
-|-------------|--------------------|---------------|
-| public-rt | public-subnet-a, public-subnet-b | Internet Gateway |
-| private-rt | private-subnet-a, private-subnet-b | NAT Gateway |
-
-Cấu hình Route:
-
-### Public Route Table
-
-| Destination | Target |
-|-------------|--------|
-| 0.0.0.0/0 | Internet Gateway |
-
-### Private Route Table
-
-| Destination | Target |
-|-------------|--------|
-| 0.0.0.0/0 | NAT Gateway |
-
-Sau khi cấu hình, liên kết (Associate) đúng Route Table với các Subnet tương ứng.
-
-![Route Tables](/images/5-Workshop/5.4-Networking/route-tables.png)
-
----
-
-## Cấu hình Security Group
-
-Truy cập:
-
-**AWS Console → EC2 → Security Groups**
-
-Tạo hai Security Group.
-
-### Application Load Balancer Security Group
-
-| Thuộc tính | Giá trị |
-|------------|----------|
-| Name | production-alb-sg |
-| VPC | production-vpc |
-
-Inbound Rules
-
-| Type | Port | Source |
-|------|------|---------|
-| HTTP | 80 | 0.0.0.0/0 |
-| HTTPS | 443 | 0.0.0.0/0 |
-
-Outbound Rules
-
-| Type | Destination |
-|------|-------------|
-| All Traffic | 0.0.0.0/0 |
+### Bước 3.2: Tạo Security Group cho Web Server (huylam-web-sg)
+1. Nhấp **Create security group**.
+2. **Security group name**: `huylam-web-sg`.
+3. **Description**: `Security group for EC2 Web Studio behind ALB`.
+4. **VPC**: Chọn `huylam-vpc`.
+5. **Inbound rules**:
+   * Quy tắc 1 (Ứng dụng Web Studio):
+     * Type: **Custom TCP**, Port: `5000`.
+     * Source: Chọn **Custom** và nhập mã Security Group của ALB (`huylam-alb-sg` hoặc `sg-0dca819306a96bfdb`).
+     * Description: `Allow traffic only from ALB`.
+   * Quy tắc 2 (Quản trị dự phòng SSH):
+     * Type: **SSH**, Port: `22`, Source: `0.0.0.0/0` (hoặc giới hạn IP của quản trị viên).
+6. **Outbound rules**:
+   * Thêm quy tắc: Type: **All traffic**, Destination: `0.0.0.0/0` (Đảm bảo máy chủ EC2 có thể kết nối Internet để tải các gói Python và kéo kho Git).
+7. Nhấp **Create security group**.
 
 ---
 
-### Amazon ECS Security Group
+## 4. Kết quả mong đợi
 
-| Thuộc tính | Giá trị |
-|------------|----------|
-| Name | production-ecs-sg |
-| VPC | production-vpc |
-
-Inbound Rules
-
-| Type | Port | Source |
-|------|------|---------|
-| Custom TCP | 3000 | production-alb-sg |
-
-Outbound Rules
-
-| Type | Destination |
-|------|-------------|
-| All Traffic | 0.0.0.0/0 |
-
-Sau khi hoàn tất, xác nhận cả hai Security Group đã được tạo thành công.
-
-![Security Groups](/images/5-Workshop/5.4-Networking/security-groups.png)
-
----
-
-## Kết quả mong đợi
-
-Sau khi hoàn thành phần này, bạn sẽ có:
-
-- Hai Public Subnet và hai Private Subnet được tạo.
-- Internet Gateway được gắn vào VPC.
-- NAT Gateway hoạt động ở trạng thái Available.
-- Public Route Table và Private Route Table được cấu hình đúng.
-- Security Group cho Application Load Balancer và Amazon ECS được thiết lập đầy đủ.
-- Hạ tầng mạng sẵn sàng cho việc triển khai ứng dụng ở các chương tiếp theo.
+Sau khi hoàn thành phần này:
+- `huylam-igw` đã liên kết thành công vào `huylam-vpc`.
+- `huylam-rtb-public` chuyển tiếp lưu lượng Internet `0.0.0.0/0` cho cả 2 Subnet Multi-AZ.
+- `huylam-alb-sg` sẵn sàng tiếp nhận lưu lượng HTTP cổng 80 từ toàn cầu.
+- `huylam-web-sg` tạo lập hàng rào cô lập an toàn, chỉ cho phép cổng 5000 tiếp nhận traffic từ ALB.

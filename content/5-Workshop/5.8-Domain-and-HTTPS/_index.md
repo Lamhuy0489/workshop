@@ -1,40 +1,43 @@
 ---
-title : "Domain and HTTPS"
-date : 2026-01-01
-weight : 8
-chapter : false
-pre : " <b> 5.8. </b> "
+title: "Domain & Public URL"
+date: 2026-09-23
+weight: 8
+chapter: false
+pre: " <b> 5.8. </b> "
 ---
 
-### Goal
+### Module Objective
 
-Configure a custom domain and enable HTTPS access for the Second-Hand Marketplace application.
-
----
-
-## 1. Overview
-
-In this chapter, you will configure Amazon Route 53 and AWS Certificate Manager (ACM) to provide secure access to the application.
-
-Amazon Route 53 is used to manage the domain name, while AWS Certificate Manager issues an SSL/TLS certificate that enables HTTPS connections through the Application Load Balancer.
-
-After completing this chapter, users will be able to access the application using a custom domain over HTTPS.
+Verify the public DNS resolution of the Application Load Balancer (ALB), validate end-to-end traffic routing from the public Internet into the **Serverless Hybrid Document OCR, Parsing & Technical Translation Platform**, and explore custom domain integration options.
 
 ---
 
-## 2. Detailed Practice Content
+## 1. Public Traffic Distribution Overview
 
-Complete the following section:
+When an Application Load Balancer is deployed in Internet-facing scheme, AWS dynamically allocates a canonical DNS record (distributed alias A records) conforming to:
 
-- **5.8.1 Configure Route 53 and AWS Certificate Manager**
+```text
+huylam-ocr-alb-1284818160.ap-southeast-1.elb.amazonaws.com
+```
+
+Key technical advantages of ALB DNS resolution:
+- **Dynamic IP Management & Multi-AZ Distribution**: AWS dynamically associates and balances traffic across public IP nodes representing independent Availability Zones (`ap-southeast-1a` and `ap-southeast-1b`).
+- **High Availability & Fault Recovery**: Should an availability zone encounter hardware failure, Route 53 health monitoring drops the impaired IP endpoint within seconds.
+- **Global Ingress Reachability**: Clients across diverse network topologies (broadband, mobile cellular networks, enterprise LANs) connect seamlessly without specialized VPN configurations.
 
 ---
 
-## 3. Expected Result
+## 2. Hands-on Execution Steps
 
-After completing this chapter, you will have:
+This module comprises the following practical section:
 
-- A custom domain configured in Amazon Route 53.
-- An SSL/TLS certificate issued by AWS Certificate Manager.
-- HTTPS enabled through the Application Load Balancer.
-- Secure access to the deployed application.
+- **[5.8.1 DNS Resolution & Public Endpoint Validation](5.8.1-configure-public-dns/)**: Utilizing network diagnostic utilities (`dig`, `nslookup`, `curl`) and web browsers to validate public endpoint availability.
+
+---
+
+## 3. Expected Outcomes
+
+Upon completing this module, you have:
+- Verified active DNS resolution mapping to Multi-AZ load balancer IPs.
+- Validated the complete HTTP request pipeline: Port 80 ingress -> Port 5000 forward -> 302 redirection -> 200 OK rendering on `/login`.
+- Confirmed global accessibility of the Web Studio application.

@@ -1,43 +1,46 @@
 ---
-title : "Networking"
-date : 2026-01-01
-weight : 4
-chapter : false
-pre : " <b> 5.4. </b> "
+title: "Networking Infrastructure"
+date: 2026-09-23
+weight: 4
+chapter: false
+pre: " <b> 5.4. </b> "
 ---
 
-### Goal
+### Module Objective
 
-Build the networking infrastructure required to deploy the Second-Hand Marketplace application securely on AWS.
-
----
-
-## 1. Overview
-
-Networking is the foundation of the cloud infrastructure. In this chapter, you will create a Virtual Private Cloud (VPC) and configure the networking components required to support the application deployment.
-
-The network architecture includes public and private subnets, an Internet Gateway, a NAT Gateway, route tables, and security groups. These components provide secure communication between the Application Load Balancer, Amazon ECS, AWS services, and external resources such as MongoDB Atlas.
+Design and provision an enterprise-grade Virtual Private Cloud (Amazon VPC) architecture supporting Multi-Availability Zone redundancy and defense-in-depth Security Group Chaining to protect the Web Studio application host.
 
 ---
 
+## 1. Networking Architecture Overview
+
+The cloud network infrastructure serves as the architectural foundation ensuring high availability, fault tolerance, and security for the **Serverless Hybrid Document OCR, Parsing & Technical Translation Platform**:
+
+- **Virtual Private Cloud (`huylam-vpc`)**: Dedicated CIDR block `10.0.0.0/16` providing an isolated network boundary in the AWS cloud.
+- **Multi-AZ Availability Partitioning**:
+  - Public Subnet 1: `huylam-subnet-public1-ap-southeast-1a` (`10.0.8.0/21`) in `ap-southeast-1a`.
+  - Public Subnet 2: `huylam-subnet-public2-ap-southeast-1b` (`10.0.16.0/21`) in `ap-southeast-1b`.
+- **Internet Gateway (`huylam-igw`)**: Provides bidirectional Internet connectivity for public subnets.
+- **Route Table (`huylam-rtb-public`)**: Routes outbound default traffic `0.0.0.0/0` via the Internet Gateway.
+- **Security Group Chaining Architecture**:
+  - `huylam-alb-sg`: Ingests HTTP port 80 traffic from global Internet clients.
+  - `huylam-web-sg`: Accepts TCP port 5000 ingress strictly from the ALB Security Group (`huylam-alb-sg`), preventing port scanning from external networks.
+
 ---
 
-## 2. Detailed Practice Content
+## 2. Hands-on Execution Steps
 
-Complete the following sections in order:
+This module is organized into two sequential sections:
 
-- **5.4.1 Create VPC**
-- **5.4.2 Configure Network**
+- **[5.4.1 Provisioning Multi-AZ Amazon VPC](5.4.1-create-vpc/)**: Creating `huylam-vpc` and configuring subnets across multiple Availability Zones.
+- **[5.4.2 Configuring Network Routing & Chained Security Groups](5.4.2-configure-network/)**: Attaching Internet Gateway, defining route tables, and binding layered Inbound/Outbound security rules for ALB and EC2.
 
 ---
 
-## 3. Expected Result
+## 3. Expected Outcomes
 
-After completing this chapter, you will have:
-
-- A Virtual Private Cloud (VPC) created.
-- Public and private subnets configured.
-- Internet Gateway and NAT Gateway configured.
-- Route tables configured correctly.
-- Security Groups configured for the Application Load Balancer and Amazon ECS.
-- A networking environment ready for application deployment.
+Upon completing this networking module, you have:
+- An active Amazon VPC (`huylam-vpc`) operating on `10.0.0.0/16`.
+- 2 Multi-AZ Public Subnets spanning `ap-southeast-1a` and `ap-southeast-1b`.
+- An attached and routed Internet Gateway (`huylam-igw`).
+- Layered Security Groups (`huylam-alb-sg` and `huylam-web-sg`) establishing a defense-in-depth security perimeter.

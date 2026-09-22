@@ -1,86 +1,140 @@
 ---
-title : "Build Docker Image"
-date : 2026-01-01
-weight : 1
-chapter : false
-pre : " <b> 5.6.1. </b> "
+title: "Build Docker Image"
+date: 2026-09-23
+weight: 1
+chapter: false
+pre: " <b> 5.6.1. </b> "
 ---
 
-## Build Docker Image
+### Hands-on Objective
 
-In this section, you will create a Dockerfile and build a Docker image for the Second-Hand Marketplace application.
-
-Docker packages the application and its dependencies into a portable container, ensuring a consistent runtime environment across development and production.
+Author an optimized multi-tier `Dockerfile` on `python:3.11-slim`, build the container image for the **Serverless Hybrid Document OCR, Parsing & Technical Translation Platform**, and validate container execution locally on port 5000.
 
 ---
 
-## Create the Dockerfile
+## 1. Web Studio Dockerfile Specification
 
-Open the project folder and create a file named **Dockerfile** in the root directory.
-
-The Dockerfile used in this project is shown below.
+In the project root directory, `Dockerfile` is structured to leverage build layer caching and minimize artifact footprint:
 
 ```dockerfile
-FROM node:20-alpine
+# Use lightweight Python 3.11 base image
+FROM python:3.11-slim
 
+# Set system environment variables
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1 \
+    PORT=5000 \
+    PYTHONPATH=/app
+
+# Establish container working directory
 WORKDIR /app
 
-COPY package*.json ./
+# Install system compilation packages for PDF and image processing
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    build-essential \
+    curl \
+    libjpeg-dev \
+    zlib1g-dev \
+    && rm -rf /var/lib/apt/lists/*
 
-RUN npm install
+# Copy dependency definition to leverage layer caching
+COPY requirements.txt /app/requirements.txt
 
-COPY . .
+# Install Python package dependencies
+RUN pip install --no-cache-dir --upgrade pip && \
+    pip install --no-cache-dir -r /app/requirements.txt
 
-EXPOSE 3000
+# Copy application source tree
+COPY src/ /app/src/
 
-CMD ["npm", "start"]
+# Initialize local data directories
+RUN mkdir -p /app/data
+
+# Expose internal service port
+EXPOSE 5000
+
+# Start Web Studio entry point
+CMD ["python3", "src/frontend/server.py"]
 ```
-
-Save the Dockerfile after completing the configuration.
-
-![Dockerfile](/images/5-Workshop/5.6-Containerization/dockerfile.png)
 
 ---
 
-## Build the Docker Image
+## 2. Configuring .dockerignore
 
-After creating the Dockerfile, open a terminal in the project root directory and build the Docker image.
-
-Run the following command.
-
-```bash
-docker build -t secondhand-marketplace .
-```
-
-Docker performs the following operations during the build process:
-
-1. Downloads the required Node.js base image if it is not available locally.
-2. Creates the application working directory inside the container.
-3. Copies the project files into the container.
-4. Installs all application dependencies using **npm install**.
-5. Packages the application into a Docker image.
-
-When the build completes successfully, Docker displays a message similar to the following.
+Create `.dockerignore` in the project root to exclude local build artifacts and sensitive assets from the image:
 
 ```text
-Successfully built <IMAGE_ID>
-Successfully tagged secondhand-marketplace:latest
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+.git
+.gitignore
+.env
+.pytest_cache/
+tests/
+raw/
+workshop/
+*.md
 ```
-
-To verify that the image was created successfully, run:
-
-```bash
-docker images
-```
-
-The command displays all Docker images stored on the local machine. Confirm that the newly created image appears in the list with the **latest** tag.
 
 ---
 
-## Expected Result
+## 3. Building the Docker Image
 
-After completing this section, you will have:
+Run the build command from the root directory:
 
-- A Dockerfile created for the application.
-- A Docker image built successfully.
-- A local Docker image ready to be pushed to Amazon ECR.
+```bash
+docker build -t huylam-ocr-web-studio:latest .
+```
+
+During build execution:
+1. Docker pulls `python:3.11-slim`.
+2. Installs OS build tools for compiling `PyMuPDF` and `Pillow`.
+3. Installs Python dependencies from `requirements.txt`.
+4. Copies the `src/` tree and tags `huylam-ocr-web-studio:latest`.
+
+Verify image existence in your local Docker engine:
+
+```bash
+docker images | grep huylam-ocr-web-studio
+```
+
+---
+
+## 4. Local Container Runtime Verification
+
+Instantiate and test the container:
+
+```bash
+docker run -d --name huylam-ocr-app -p 5000:5000 huylam-ocr-web-studio:latest
+```
+
+Check container status:
+
+```bash
+docker ps
+```
+
+Open your browser and navigate to:
+```text
+http://localhost:5000
+```
+
+Verify that the authentication portal renders cleanly. Stop the test container when verification completes:
+
+```bash
+docker stop huylam-ocr-app && docker rm huylam-ocr-app
+```
+
+---
+
+## 5. Expected Outcomes
+
+Upon completing this section:
+- Production `Dockerfile` and `.dockerignore` created for Python 3.11.
+- Docker image `huylam-ocr-web-studio:latest` built successfully.
+- Container runtime verified locally on port 5000.

@@ -1,100 +1,90 @@
 ---
-title : "Configure Load Balancer"
-date : 2026-01-01
-weight : 1
-chapter : false
-pre : " <b> 5.7.1. </b> "
+title: "Configure Load Balancer"
+date: 2026-09-23
+weight: 1
+chapter: false
+pre: " <b> 5.7.1. </b> "
 ---
 
-## Configure Load Balancer
+### Hands-on Objective
 
-In this section, you will configure an Application Load Balancer (ALB) for the Second-Hand Marketplace application.
-
-The Application Load Balancer receives incoming HTTP requests from users and forwards them to the Amazon ECS service through a target group.
-
----
-
-## Create a Target Group
-
-Navigate to:
-
-**AWS Console → EC2 → Target Groups → Create target group**
-
-Configure the target group using the following settings.
-
-| Property | Value |
-|----------|-------|
-| Target type | IP addresses |
-| Protocol | HTTP |
-| Port | 3000 |
-| VPC | production-vpc |
-| Target group name | production-target-group |
-
-Choose **Next**, keep the default health check configuration, and create the target group.
-
-![Create Target Group](/images/5-Workshop/5.7-Deploy-Application/create-target-group.png)
+Provision a Target Group on port 5000 and configure an Internet-facing Application Load Balancer (ALB) distributed across 2 Availability Zones (Multi-AZ) to route incoming traffic for the Web Studio platform.
 
 ---
 
-## Create an Application Load Balancer
+## 1. Provisioning Target Group (huylam-ocr-tg)
 
-Navigate to:
+The Target Group specifies backend destination instances and periodic health evaluation policies.
 
-**AWS Console → EC2 → Load Balancers → Create Load Balancer**
-
-Select **Application Load Balancer** and configure the following settings.
-
-| Property | Value |
-|----------|-------|
-| Load Balancer name | production-alb |
-| Scheme | Internet-facing |
-| IP address type | IPv4 |
-| VPC | production-vpc |
-| Availability Zones | Public Subnets |
-
-Select the security group created for the Application Load Balancer and continue.
-
-![Create Load Balancer](/images/5-Workshop/5.7-Deploy-Application/create-load-balancer.png)
-
----
-
-## Configure the Listener
-
-Configure the default listener for the Application Load Balancer.
-
-| Property | Value |
-|----------|-------|
-| Protocol | HTTP |
-| Port | 80 |
-| Default action | Forward to production-target-group |
-
-Review the configuration and choose **Create Load Balancer**.
-
-![Configure Listener](/images/5-Workshop/5.7-Deploy-Application/configure-listener.png)
+### AWS Management Console Procedure:
+1. Sign in to the AWS Console in region **ap-southeast-1 (Singapore)**.
+2. Navigate to: **EC2 -> Target Groups -> Create target group**.
+3. **Step 1: Specify group details**:
+   * **Target type**: Select **Instances**.
+   * **Target group name**: `huylam-ocr-tg`.
+   * **Protocol**: `HTTP`, **Port**: `5000`.
+   * **IP address type**: `IPv4`.
+   * **VPC**: Ensure you select **`huylam-vpc`** (Critical: Default VPC will prevent instances in custom VPC from displaying).
+   * **Protocol version**: `HTTP1`.
+4. **Health checks**:
+   * **Health check protocol**: `HTTP`.
+   * **Health check path**: Enter **`/login`** (Architectural Rationale: Web Studio redirects 302 from root `/` to `/login` which returns HTTP 200 OK. Targeting `/login` allows the Target Group to transition to Healthy immediately).
+   * Expand **Advanced health check settings**:
+     * **Healthy threshold**: `2`.
+     * **Unhealthy threshold**: `2`.
+     * **Timeout**: `5 seconds`.
+     * **Interval**: `30 seconds`.
+     * **Success codes**: `200` (or `200,302`).
+5. Click **Next**.
+6. On **Step 2: Register targets**, skip for now (we register the EC2 host in the subsequent module).
+7. Click **Create target group**.
 
 ---
 
-## Verify the Load Balancer
+## 2. Provisioning Application Load Balancer (huylam-ocr-alb)
 
-Navigate to:
+The Application Load Balancer operates as the centralized Layer 7 ingress gateway:
 
-**AWS Console → EC2 → Load Balancers**
-
-Open the Application Load Balancer and verify that:
-
-- The load balancer state is **Active**.
-- The listener is configured successfully.
-- The target group is associated with the load balancer.
-
-![Load Balancer Details](/images/5-Workshop/5.7-Deploy-Application/load-balancer-details.png)
+### Step-by-Step Procedure:
+1. Navigate to: **EC2 Console -> Load Balancers -> Create load balancer**.
+2. Under **Application Load Balancer**, click **Create**.
+3. **Basic configuration**:
+   * **Load balancer name**: `huylam-ocr-alb`.
+   * **Scheme**: **Internet-facing**.
+   * **IP address type**: **IPv4**.
+4. **Network mapping**:
+   * **VPC**: Select **`huylam-vpc`**.
+   * **Mappings (Minimum 2 Availability Zones)**:
+     * Check **`ap-southeast-1a`**, select Subnet: `huylam-subnet-public1-ap-southeast-1a`.
+     * Check **`ap-southeast-1b`**, select Subnet: `huylam-subnet-public2-ap-southeast-1b`.
+5. **Security groups**:
+   * Remove the default security group (`default`).
+   * Select the dedicated ALB group: **`huylam-alb-sg`** (`sg-0dca819306a96bfdb`).
+6. **Listeners and routing**:
+   * **Protocol**: `HTTP`, **Port**: `80`.
+   * **Default action**: Select **Forward to** and pick Target Group **`huylam-ocr-tg`**.
+7. Review parameters and click **Create load balancer**.
 
 ---
 
-## Expected Result
+## 3. Verifying Load Balancer Status
 
-After completing this section, you will have:
+1. In the Load Balancers table, select `huylam-ocr-alb`.
+2. Wait 1 to 2 minutes until **Status** transitions from `Provisioning` to **Active**.
+3. Under **Details**, record the allocated Public DNS endpoint:
 
-- A Target Group created.
-- An Application Load Balancer configured.
-- A Listener forwarding requests to the Target Group.
-- A Load Balancer ready to be integrated with Amazon ECS.
+```text
+DNS name: huylam-ocr-alb-1284818160.ap-southeast-1.elb.amazonaws.com
+```
+
+This endpoint allows global Internet users to access Web Studio over standard HTTP port 80.
+
+---
+
+## 4. Expected Outcomes
+
+Upon completing this section:
+- Target Group `huylam-ocr-tg` is created on port 5000 targeting health path `/login`.
+- Application Load Balancer `huylam-ocr-alb` is **Active** across 2 Availability Zones.
+- HTTP:80 Listener forwards traffic into the Target Group.
+- Public DNS endpoint is allocated.

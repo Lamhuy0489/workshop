@@ -1,237 +1,137 @@
-+++
-title = "Dọn dẹp tài nguyên"
-date = 2024-01-01
-weight = 12
-chapter = false
-pre = "<b>5.12. </b>"
-+++
+---
+title: "Dọn dẹp tài nguyên & Quản trị FinOps"
+date: 2026-09-23
+weight: 12
+chapter: false
+pre: " <b> 5.12. </b> "
+---
 
-# 5.12. Dọn dẹp tài nguyên
+### Mục tiêu thực hành
 
-## Tổng quan
+Hướng dẫn quy trình giải phóng tài nguyên điện toán đám mây một cách khoa học, có trật tự và an toàn sau khi hoàn thành nghiệm thu đồ án, giúp bảo toàn ngân sách và đưa chi phí duy trì hàng tháng về mức 0.00 USD theo các nguyên lý quản trị FinOps.
 
-Sau khi triển khai và kiểm thử thành công ứng dụng Second-Hand Marketplace, các tài nguyên AWS đã tạo trong workshop nên được xóa để tránh phát sinh chi phí không cần thiết.
-
-Phần này hướng dẫn bạn xóa toàn bộ hạ tầng đã triển khai theo đúng thứ tự.
+> **LƯU Ý QUAN TRỌNG:**
+> Toàn bộ các bước dọn dẹp dưới đây chỉ thực hiện sau khi hoàn tất việc đánh giá, chấm điểm và báo cáo nghiệm thu đồ án. Nếu hệ thống đang trong giai đoạn trình diễn (Demo) hoặc chấm điểm trực tiếp, vui lòng duy trì trạng thái LIVE của các dịch vụ để ban giám khảo có thể truy cập qua Application Load Balancer.
 
 ---
 
-## Các bước dọn dẹp
+## 1. Trật tự giải phóng tài nguyên khuyến nghị
 
-Các tài nguyên AWS cần được xóa theo trình tự sau:
+Để tránh lỗi phụ thuộc chéo (Dependency Violation), các tài nguyên cần được xóa theo trình tự từ tầng ngoài cùng vào tầng lõi:
 
-1. Amazon ECS Service
-2. Amazon ECS Cluster
-3. Amazon ECR Repository
-4. Amazon S3 Bucket
-5. Application Load Balancer
-6. Target Group
-7. Amazon CloudWatch Alarm
-8. AWS CodeBuild Project
-9. Chứng chỉ AWS Certificate Manager (ACM)
-10. Amazon Route 53 Hosted Zone
-
----
-
-## 1. Xóa Amazon ECS Service
-
-Truy cập:
-
-**Amazon ECS → Clusters → wed-mbdc-cluster → Services**
-
-Chọn:
-
-- wed-mbdc-service
-
-Nhấn:
-
-**Delete Service**
-
-Đợi trạng thái của Service chuyển sang **Inactive**.
-
-![Delete ECS Service](/images/5-Workshop/5.12-Cleanup/delete-ecs-service.png)
+1. **Application Load Balancer & Target Group** (Tầng phân phối lưu lượng - Cần giải phóng trước tiên vì ALB tính phí theo giờ chạy).
+2. **Amazon EC2 Instance** (Tầng tính toán ứng dụng).
+3. **Amazon S3 Bucket & Objects** (Tầng lưu trữ tài liệu).
+4. **Amazon DynamoDB Table** (Tầng cơ sở dữ liệu NoSQL).
+5. **AWS Lambda Function** (Tầng xử lý sự kiện Serverless).
+6. **AWS Systems Manager Parameter Store** (Tầng quản lý cấu hình bí mật).
+7. **Amazon CloudWatch Alarms & Log Groups** (Tầng giám sát).
+8. **IAM Roles & Instance Profiles** (Tầng phân quyền bảo mật).
+9. **Security Groups & VPC** (Tầng mạng cơ sở).
 
 ---
 
-## 2. Xóa Amazon ECS Cluster
+## 2. Các bước thực hiện chi tiết
 
-Truy cập:
+### Bước 2.1: Xóa Application Load Balancer và Target Group
 
-**Amazon ECS → Clusters**
+Application Load Balancer có chi phí cố định khoảng 0.0225 USD/giờ (~16 USD/tháng). Đây là dịch vụ đầu tiên cần giải phóng sau khi kết thúc nghiệm thu:
 
-Chọn:
-
-- wed-mbdc-cluster
-
-Nhấn:
-
-**Delete Cluster**
-
-![Delete ECS Cluster](/images/5-Workshop/5.12-Cleanup/delete-cluster.png)
-
-![Delete ECS Cluster Result](/images/5-Workshop/5.12-Cleanup/delete-ecs-cluster.png)
+1. Truy cập **EC2 Console -> Load Balancing -> Load Balancers**.
+2. Chọn `huylam-ocr-alb`, nhấp **Actions -> Delete load balancer**.
+3. Nhập xác nhận xóa và chọn **Delete**.
+4. Chuyển sang **Target Groups**, chọn `huylam-ocr-tg`, nhấp **Actions -> Delete**.
 
 ---
 
-## 3. Xóa Amazon ECR Repository
+### Bước 2.2: Dừng hoặc Hủy máy chủ Amazon EC2
 
-Truy cập:
-
-**Amazon ECR → Private Repositories**
-
-Chọn:
-
-- wed-mbdc
-
-Nhấn:
-
-**Delete**
-
-Xác nhận xóa Repository.
-
-![Delete Amazon ECR Repository](/images/5-Workshop/5.12-Cleanup/delete-ecr.png)
+1. Truy cập **EC2 Console -> Instances**.
+2. Chọn máy chủ `huylam-ocr-ec2` (`i-0566e1eedaacea52d`).
+3. Nhấp **Instance state**:
+   - Nếu muốn tạm dừng để tái sử dụng sau: Chọn **Stop instance**.
+   - Nếu muốn xóa bỏ vĩnh viễn: Chọn **Terminate instance**.
+4. Xác nhận hành động. Ổ đĩa EBS gắn kèm sẽ tự động được thu hồi.
 
 ---
 
-## 4. Xóa Amazon S3 Bucket
+### Bước 2.3: Làm rỗng và Xóa Amazon S3 Bucket
 
-Truy cập:
-
-**Amazon S3**
-
-Chọn:
-
-- wed-mbdc-uploads
-
-Làm rỗng Bucket.
-
-Sau đó xóa Bucket.
-
-![Delete Amazon S3 Bucket](/images/5-Workshop/5.12-Cleanup/delete-s3-bucket.png)
+1. Truy cập **Amazon S3 -> Buckets**.
+2. Chọn bucket **`huylam-ocr-documents-ap-southeast-1`**.
+3. Nhấp nút **Empty** để xóa toàn bộ tài liệu trong thư mục `uploads/` và `outputs/`.
+4. Nhập chuỗi `permanently delete` để xác nhận.
+5. Sau khi bucket rỗng, nhấp nút **Delete**, nhập lại tên bucket và nhấn **Delete bucket**.
 
 ---
 
-## 5. Xóa Application Load Balancer
+### Bước 2.4: Xóa Amazon DynamoDB Table
 
-Truy cập:
-
-**EC2 → Load Balancers**
-
-Chọn:
-
-- production-alb
-
-Nhấn:
-
-**Delete**
-
-![Delete Load Balancer](/images/5-Workshop/5.12-Cleanup/delete-load-balancer.png)
+1. Truy cập **Amazon DynamoDB -> Tables**.
+2. Chọn bảng **`document_processing_jobs`**.
+3. Nhấp nút **Delete table**.
+4. Bỏ chọn tạo bản sao lưu CloudWatch nếu không cần thiết, nhập `confirm` và nhấp **Delete**.
 
 ---
 
-## 6. Xóa Target Group
+### Bước 2.5: Xóa hàm AWS Lambda
 
-Truy cập:
-
-**EC2 → Target Groups**
-
-Chọn:
-
-- production-tg
-
-Nhấn:
-
-**Delete**
-
-![Delete Target Group](/images/5-Workshop/5.12-Cleanup/delete-target-group.png)
+1. Truy cập **AWS Lambda -> Functions**.
+2. Chọn hàm **`huylam-ocr-processor`**.
+3. Nhấp **Actions -> Delete**.
+4. Nhập xác nhận và nhấn **Delete**.
 
 ---
 
-## 7. Xóa Amazon CloudWatch Alarm
+### Bước 2.6: Xóa cấu hình SSM Parameter Store
 
-Truy cập:
-
-**Amazon CloudWatch → Alarms**
-
-Chọn:
-
-- production-service-cpu-alarm
-
-Nhấn:
-
-**Delete**
-
-![Delete CloudWatch Alarm](/images/5-Workshop/5.12-Cleanup/delete-cloudwatch-alarm.png)
+1. Truy cập **AWS Systems Manager -> Parameter Store**.
+2. Chọn tham số **`/huylam-ocr/config`**.
+3. Nhấp **Delete** và xác nhận thao tác.
 
 ---
 
-## 8. Xóa AWS CodeBuild Project
+### Bước 2.7: Xóa CloudWatch Alarm và Log Groups
 
-Truy cập:
-
-**AWS CodeBuild → Build Projects**
-
-Chọn:
-
-- wed-mbdc-build
-
-Nhấn:
-
-**Delete**
-
-![Delete CodeBuild Project](/images/5-Workshop/5.12-Cleanup/delete-codebuild-project.png)
-
-![Delete CodeBuild Result](/images/5-Workshop/5.12-Cleanup/delete-codebuild.png)
+1. Truy cập **Amazon CloudWatch -> Alarms**:
+   - Chọn `huylam-ocr-ec2-high-cpu`, nhấp **Actions -> Delete**.
+2. Chuyển sang mục **Log groups**:
+   - Chọn `/aws/lambda/huylam-ocr-processor`, nhấp **Actions -> Delete log group(s)**.
 
 ---
 
-## 9. Xóa chứng chỉ ACM
+### Bước 2.8: Xóa IAM Roles và Security Groups
 
-Truy cập:
-
-**AWS Certificate Manager**
-
-Chọn chứng chỉ được sử dụng cho tên miền của ứng dụng.
-
-Nhấn:
-
-**Delete**
-
-![Delete ACM Certificate](/images/5-Workshop/5.12-Cleanup/delete-acm-certificate.png)
+1. Truy cập **IAM Console -> Roles**:
+   - Xóa `huylam-ocr-ec2-role` và `huylam-ocr-lambda-role`.
+2. Truy cập **VPC Console -> Security Groups**:
+   - Xóa `huylam-web-sg` trước, sau đó xóa `huylam-alb-sg`.
 
 ---
 
-## 10. Xóa Amazon Route 53 Hosted Zone
+### Bước 2.9: Xóa Virtual Private Cloud (huylam-vpc)
 
-Truy cập:
-
-**Amazon Route 53 → Hosted Zones**
-
-Chọn:
-
-- techmarketstore.store
-
-Xóa tất cả các bản ghi DNS do người dùng tạo, ngoại trừ hai bản ghi mặc định **NS** và **SOA**.
-
-Sau đó xóa Hosted Zone.
-
-![Delete Route 53 Hosted Zone](/images/5-Workshop/5.12-Cleanup/delete-route53-hosted-zone.png)
+1. Truy cập **VPC Console -> Your VPCs**.
+2. Chọn **`huylam-vpc`**.
+3. Nhấp **Actions -> Delete VPC**.
+4. Bảng điều khiển sẽ tự động hiển thị các thành phần liên kết (Subnets, Internet Gateway, Route Tables) sẽ được giải phóng đồng thời.
+5. Nhập `delete` để hoàn tất thu hồi toàn bộ hạ tầng mạng.
 
 ---
 
-## Kết quả
+## 3. Đo kiểm FinOps và Xác nhận Chi phí 0.00 USD
 
-Sau khi hoàn thành tất cả các bước trên:
+Sau khi hoàn tất thu hồi tài nguyên:
+1. Truy cập **AWS Billing and Cost Management -> Cost Explorer**:
+   - Kiểm tra mức tiêu thụ hàng ngày (Daily Spend) để đảm bảo không còn đường cong chi phí phát sinh.
+2. Kiểm tra **AWS Budgets**:
+   - Xác nhận ngân sách cảnh báo 10.00 USD duy trì mức sử dụng thực tế là 0.00 USD.
 
-- Amazon ECS Service đã được xóa.
-- Amazon ECS Cluster đã được xóa.
-- Amazon ECR Repository đã được xóa.
-- Amazon S3 Bucket đã được xóa.
-- Application Load Balancer đã được xóa.
-- Target Group đã được xóa.
-- Amazon CloudWatch Alarm đã được xóa.
-- AWS CodeBuild Project đã được xóa.
-- Chứng chỉ AWS Certificate Manager (ACM) đã được xóa.
-- Amazon Route 53 Hosted Zone đã được xóa.
+---
 
-Toàn bộ tài nguyên AWS được tạo trong workshop đã được dọn dẹp thành công, giúp tránh phát sinh các chi phí không cần thiết.
+## 4. Kết quả mong đợi
+
+Sau khi hoàn thành quy trình này:
+- Toàn bộ tài nguyên phục vụ thực hành và kiểm thử được giải phóng sạch sẽ.
+- Tránh hoàn toàn việc phát sinh hóa đơn ngoài ý muốn từ các dịch vụ tính phí theo giờ.
+- Nắm vững chu trình vòng đời tài nguyên đám mây (Cloud Lifecycle Management) từ khởi tạo, vận hành, kiểm thử đến dọn dẹp theo chuẩn FinOps.

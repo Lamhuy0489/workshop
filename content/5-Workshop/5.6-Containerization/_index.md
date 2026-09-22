@@ -1,40 +1,39 @@
 ---
-title : "Containerization"
-date : 2026-01-01
-weight : 6
-chapter : false
-pre : " <b> 5.6. </b> "
+title: "Containerization"
+date: 2026-09-23
+weight: 6
+chapter: false
+pre: " <b> 5.6. </b> "
 ---
 
-### Goal
+### Module Objective
 
-Containerize the Second-Hand Marketplace application and prepare the container image for deployment on Amazon ECS.
-
----
-
-## 1. Overview
-
-In this chapter, you will package the Node.js application into a Docker container and upload the container image to Amazon Elastic Container Registry (Amazon ECR).
-
-Docker provides a consistent runtime environment, while Amazon ECR securely stores container images that will later be deployed to Amazon ECS.
+Package the **Serverless Hybrid Document OCR, Parsing & Technical Translation Platform** into a standardized OCI Container using Docker on `python:3.11-slim`, optimize container storage overhead, and publish the artifact to **Amazon Elastic Container Registry (Amazon ECR)**.
 
 ---
 
-## 2. Detailed Practice Content
+## 1. Containerization Architecture Overview
 
-Complete the following sections in order:
-
-- **5.6.1 Create Dockerfile**
-- **5.6.2 Build Docker Image**
-- **5.6.3 Push Image to Amazon ECR**
+Containerizing the Web Studio yields substantial cloud operational benefits:
+- **Environment Parity**: Guarantees identical execution behavior for C-extension parsing bindings (`PyMuPDF`), Word export libraries (`python-docx`), Gunicorn WSGI workers, and AWS Boto3 SDKs across local workstations and cloud hosts.
+- **Security & Storage Optimization**: Employs lightweight base image `python:3.11-slim`, non-root user permissions, and strict `.dockerignore` rules to strip ephemeral caches.
+- **Enterprise Registry on Amazon ECR**: Amazon Elastic Container Registry provides encrypted storage and automated vulnerability assessment governed by AWS IAM.
 
 ---
 
-## 3. Expected Result
+## 2. Hands-on Execution Steps
 
-After completing this chapter, you will have:
+This module comprises two hands-on sections:
 
-- A Dockerfile for the application.
-- A Docker image built successfully.
-- A container image stored in Amazon ECR.
-- A container image ready for deployment on Amazon ECS.
+- **[5.6.1 Building OCI-Compliant Dockerfile](5.6.1-build-docker-image/)**: Drafting `Dockerfile` and `.dockerignore`, building, and testing container runtime locally on port 5000.
+- **[5.6.2 Publishing Docker Image to Amazon ECR](5.6.2-push-image-to-ecr/)**: Provisioning repository `huylam-web-app`, authenticating Docker CLI via AWS STS tokens, and pushing container images.
+
+---
+
+## 3. Expected Outcomes
+
+Upon completing this module, you have:
+- Production-ready `Dockerfile` and `.dockerignore` specifications for Python 3.11.
+- Validated local Docker image `huylam-ocr-web-studio:latest`.
+- Published container artifact in Amazon ECR (`677994024390.dkr.ecr.ap-southeast-1.amazonaws.com/huylam-web-app:latest`).
+- Container assets primed for deployment on EC2 compute or Amazon ECS Fargate.

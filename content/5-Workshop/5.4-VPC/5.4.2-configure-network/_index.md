@@ -1,181 +1,102 @@
 ---
-title : "Configure Network"
-date : 2026-01-01
-weight : 2
-chapter : false
-pre : " <b> 5.4.2. </b> "
+title: "Configure Network"
+date: 2026-09-23
+weight: 2
+chapter: false
+pre: " <b> 5.4.2. </b> "
 ---
 
-## Configure Network
+### Hands-on Objective
 
-After creating the Virtual Private Cloud (VPC), the next step is to configure the networking components required for the application.
-
-In this section, you will create public and private subnets, configure an Internet Gateway, a NAT Gateway, route tables, and security groups. These components provide secure communication between the internet, the Application Load Balancer, Amazon ECS, and other AWS services.
-
----
-
-## Create Public and Private Subnets
-
-Navigate to:
-
-**AWS Console → VPC → Subnets → Create subnet**
-
-Create four subnets using the following configuration:
-
-| Name | Availability Zone | IPv4 CIDR |
-|------|-------------------|------------|
-| public-subnet-a | ap-southeast-1a | 10.0.1.0/24 |
-| public-subnet-b | ap-southeast-1b | 10.0.2.0/24 |
-| private-subnet-a | ap-southeast-1a | 10.0.3.0/24 |
-| private-subnet-b | ap-southeast-1b | 10.0.4.0/24 |
-
-Enable **Auto-assign public IPv4 address** for both public subnets.
-
-After creating the subnets, verify that all four subnets are available.
-
-![Subnets](/images/5-Workshop/5.4-Networking/subnets.png)
+Attach an Internet Gateway, configure public route tables, and construct defense-in-depth Security Group Chaining to protect the Web Studio application host behind the Application Load Balancer.
 
 ---
 
-## Configure Internet Gateway
+## 1. Configuring Internet Gateway (huylam-igw)
 
-Navigate to:
+The Internet Gateway provides bidirectional communication between resources inside the VPC and the public Internet.
 
-**AWS Console → VPC → Internet Gateways → Create internet gateway**
-
-Configure the Internet Gateway using the following settings:
-
-| Property | Value |
-|----------|-------|
-| Name | production-igw |
-
-After creating the Internet Gateway:
-
-- Select **Attach to VPC**
-- Choose **production-vpc**
-
-Verify that the Internet Gateway status is **Attached**.
-
-![Internet Gateway](/images/5-Workshop/5.4-Networking/internet-gateway.png)
+### Step-by-Step Procedure:
+1. Navigate to: **VPC Console -> Internet Gateways -> Create internet gateway**.
+2. Name tag: `huylam-igw`.
+3. Click **Create internet gateway**.
+4. Once created, select **Actions -> Attach to VPC**.
+5. Select target VPC: `huylam-vpc` and click **Attach internet gateway**.
+6. Verify status transitions to **Attached**.
 
 ---
 
-## Configure NAT Gateway
+## 2. Configuring Public Route Table (huylam-rtb-public)
 
-Navigate to:
+The route table governs outbound traffic redirection from subnets toward the Internet via `huylam-igw`.
 
-**AWS Console → VPC → NAT Gateways → Create NAT gateway**
-
-Use the following configuration:
-
-| Property | Value |
-|----------|-------|
-| Name | production-nat |
-| Subnet | public-subnet-a |
-| Connectivity type | Public |
-| Elastic IP | Allocate Elastic IP |
-
-Wait until the NAT Gateway status changes to **Available** before proceeding.
-
-![NAT Gateway](/images/5-Workshop/5.4-Networking/nat-gateway.png)
+### Step-by-Step Procedure:
+1. Navigate to: **VPC Console -> Route Tables -> Create route table**.
+2. Name tag: `huylam-rtb-public`, select VPC: `huylam-vpc`.
+3. Click **Create route table**.
+4. Switch to **Routes -> Edit routes**:
+   * Click **Add route**.
+   * **Destination**: `0.0.0.0/0` (All external IPv4 traffic).
+   * **Target**: Select **Internet Gateway** and select `huylam-igw`.
+   * Click **Save changes**.
+5. Switch to **Subnet associations -> Edit subnet associations**:
+   * Select both subnets: `huylam-subnet-public1-ap-southeast-1a` and `huylam-subnet-public2-ap-southeast-1b`.
+   * Click **Save associations**.
 
 ---
 
-## Configure Route Tables
+## 3. Establishing Defense-in-Depth Security Group Chaining
 
-Navigate to:
+Implementing the AWS Well-Architected Principle of Least Privilege:
 
-**AWS Console → VPC → Route Tables**
+```text
+[ Internet Client ]
+       │
+       ▼ Inbound HTTP: 80 (0.0.0.0/0)
+┌─────────────────────────────────┐
+│     huylam-alb-sg (ALB)         │
+└────────────────┬────────────────┘
+                 │
+                 ▼ Inbound TCP: 5000 (Source: sg-0dca819306a96bfdb)
+┌─────────────────────────────────┐
+│     huylam-web-sg (EC2)         │
+└─────────────────────────────────┘
+```
 
-Create two route tables:
+### Step 3.1: Create ALB Security Group (huylam-alb-sg)
+1. Navigate to: **EC2 Console -> Network & Security -> Security Groups -> Create security group**.
+2. **Security group name**: `huylam-alb-sg`.
+3. **Description**: `Security group for Application Load Balancer`.
+4. **VPC**: Select `huylam-vpc`.
+5. **Inbound rules**:
+   * Type: **HTTP**, Port: `80`, Source: `Anywhere-IPv4` (`0.0.0.0/0`), Description: `Allow public HTTP access`.
+6. **Outbound rules**:
+   * Leave default: **All traffic** (`0.0.0.0/0`).
+7. Click **Create security group**.
+8. Record the generated Group ID (e.g., `sg-0dca819306a96bfdb`).
 
-| Route Table | Associated Subnets | Default Route |
-|-------------|--------------------|---------------|
-| public-rt | public-subnet-a, public-subnet-b | Internet Gateway |
-| private-rt | private-subnet-a, private-subnet-b | NAT Gateway |
-
-Configure the routes as follows.
-
-### Public Route Table
-
-| Destination | Target |
-|-------------|--------|
-| 0.0.0.0/0 | Internet Gateway |
-
-### Private Route Table
-
-| Destination | Target |
-|-------------|--------|
-| 0.0.0.0/0 | NAT Gateway |
-
-Associate each route table with the corresponding subnets.
-
-![Route Tables](/images/5-Workshop/5.4-Networking/route-tables.png)
-
----
-
-## Configure Security Groups
-
-Navigate to:
-
-**AWS Console → EC2 → Security Groups**
-
-Create two security groups.
-
-### Application Load Balancer Security Group
-
-| Property | Value |
-|----------|-------|
-| Name | production-alb-sg |
-| VPC | production-vpc |
-
-Configure the inbound rules:
-
-| Type | Port | Source |
-|------|------|---------|
-| HTTP | 80 | 0.0.0.0/0 |
-| HTTPS | 443 | 0.0.0.0/0 |
-
-Configure the outbound rules:
-
-| Type | Destination |
-|------|-------------|
-| All Traffic | 0.0.0.0/0 |
+### Step 3.2: Create Web Server Security Group (huylam-web-sg)
+1. Click **Create security group**.
+2. **Security group name**: `huylam-web-sg`.
+3. **Description**: `Security group for EC2 Web Studio behind ALB`.
+4. **VPC**: Select `huylam-vpc`.
+5. **Inbound rules**:
+   * Rule 1 (Web Studio application ingress):
+     * Type: **Custom TCP**, Port: `5000`.
+     * Source: Select **Custom** and enter the ALB Security Group ID (`huylam-alb-sg` or `sg-0dca819306a96bfdb`).
+     * Description: `Allow traffic only from ALB`.
+   * Rule 2 (SSH administration fallback):
+     * Type: **SSH**, Port: `22`, Source: `0.0.0.0/0` (or your administrator IP).
+6. **Outbound rules**:
+   * Add rule: Type: **All traffic**, Destination: `0.0.0.0/0` (Enables host to pull dependencies via package managers and GitHub).
+7. Click **Create security group**.
 
 ---
 
-### Amazon ECS Security Group
+## 4. Expected Outcomes
 
-| Property | Value |
-|----------|-------|
-| Name | production-ecs-sg |
-| VPC | production-vpc |
-
-Configure the inbound rules:
-
-| Type | Port | Source |
-|------|------|---------|
-| Custom TCP | 3000 | production-alb-sg |
-
-Configure the outbound rules:
-
-| Type | Destination |
-|------|-------------|
-| All Traffic | 0.0.0.0/0 |
-
-After completing the configuration, verify that both security groups have been created successfully.
-
-![Security Groups](/images/5-Workshop/5.4-Networking/security-groups.png)
-
----
-
-## Expected Result
-
-After completing this section, you will have:
-
-- Two public subnets and two private subnets created.
-- An Internet Gateway attached to the VPC.
-- A NAT Gateway in the **Available** state.
-- Public and private route tables configured correctly.
-- Security Groups configured for the Application Load Balancer and Amazon ECS.
-- A networking environment ready for deploying the application in the following chapters.
+Upon completing this section:
+- `huylam-igw` is attached to `huylam-vpc`.
+- `huylam-rtb-public` handles external routing for both Multi-AZ subnets.
+- `huylam-alb-sg` admits incoming HTTP port 80 traffic.
+- `huylam-web-sg` enforces strict network isolation on internal port 5000.

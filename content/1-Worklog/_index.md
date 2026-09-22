@@ -14,7 +14,7 @@ During the first eight weeks, I focused on learning AWS core services such as IA
 
 From Week 9 onward, I began preparing the internship project by researching technologies, designing the system architecture, developing the application, and finally deploying the complete solution on AWS Cloud.
 
-The internship project, **TechMarket E-Commerce Platform**, was successfully developed and deployed using Amazon ECS Fargate, Amazon ECR, Amazon S3, MongoDB Atlas, Application Load Balancer, Amazon Route 53, AWS Certificate Manager (ACM), Amazon CloudWatch, and AWS CodeBuild.
+The internship project, **Serverless Hybrid Document OCR, Parsing & Technical Translation Platform on AWS**, was successfully developed and deployed using Amazon VPC Multi-AZ, Application Load Balancer, Amazon EC2, Amazon S3, Amazon DynamoDB, AWS Lambda, AWS Systems Manager Parameter Store, and Amazon CloudWatch.
 
 The weekly worklog is organized as follows:
 

@@ -14,7 +14,7 @@ Trong tám tuần đầu, tôi tập trung tìm hiểu và thực hành các d�
 
 Từ tuần 9, tôi bắt đầu chuẩn bị cho đề tài thực tập bằng việc nghiên cứu công nghệ, thiết kế kiến trúc hệ thống, phát triển ứng dụng và triển khai toàn bộ hệ thống lên AWS Cloud.
 
-Đề tài thực tập **TechMarket E-Commerce Platform** đã được xây dựng và triển khai thành công với các dịch vụ Amazon ECS Fargate, Amazon ECR, Amazon S3, MongoDB Atlas, Application Load Balancer, Amazon Route 53, AWS Certificate Manager (ACM), Amazon CloudWatch và AWS CodeBuild.
+Đề tài thực tập **Serverless Hybrid Document OCR, Parsing & Technical Translation Platform on AWS** đã được xây dựng và triển khai thành công với các dịch vụ Amazon VPC Multi-AZ, Application Load Balancer, Amazon EC2, Amazon S3, Amazon DynamoDB, AWS Lambda, AWS Systems Manager Parameter Store và Amazon CloudWatch.
 
 Nội dung công việc của từng tuần được trình bày như sau:
 

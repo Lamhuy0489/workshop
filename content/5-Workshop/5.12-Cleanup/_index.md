@@ -1,237 +1,137 @@
-+++
-title = "Cleanup Resources"
-date = 2024-01-01
-weight = 12
-chapter = false
-pre = "<b>5.12. </b>"
-+++
+---
+title: "Resource Cleanup & FinOps Governance"
+date: 2026-09-23
+weight: 12
+chapter: false
+pre: " <b> 5.12. </b> "
+---
 
-# 5.12. Cleanup
+### Practical Objectives
 
-## Overview
+Provide a methodical, orderly, and secure resource teardown guide following the completion of project evaluation, preserving the cloud budget and maintaining zero recurring operational expense (0.00 USD) in accordance with FinOps principles.
 
-After successfully deploying and testing the Second-Hand Marketplace application, the AWS resources created during this workshop should be removed to avoid unnecessary charges.
-
-This section guides you through deleting the deployed infrastructure in a safe order.
+> **CRITICAL NOTE:**
+> The teardown instructions below should ONLY be executed after academic evaluation, grading, and demonstration are fully finished. If the system is currently undergoing active demonstration or live grading, maintain all services in their LIVE state so evaluators can access the application via the Application Load Balancer.
 
 ---
 
-## Cleanup Steps
+## 1. Recommended Teardown Hierarchy
 
-The following AWS resources should be removed in sequence:
+To avoid dependency violation errors, delete AWS resources starting from the perimeter edge down to the core networking layer:
 
-1. Amazon ECS Service
-2. Amazon ECS Cluster
-3. Amazon ECR Repository
-4. Amazon S3 Bucket
-5. Application Load Balancer
-6. Target Group
-7. Amazon CloudWatch Alarm
-8. AWS CodeBuild Project
-9. AWS Certificate Manager (ACM) Certificate
-10. Amazon Route 53 Hosted Zone
-
----
-
-## 1. Delete ECS Service
-
-Navigate to:
-
-**Amazon ECS → Clusters → wed-mbdc-cluster → Services**
-
-Select:
-
-- wed-mbdc-service
-
-Choose:
-
-**Delete Service**
-
-Wait until the service status becomes **Inactive**.
-
-![Delete ECS Service](/images/5-Workshop/5.12-Cleanup/delete-ecs-service.png)
+1. **Application Load Balancer & Target Group** (Traffic perimeter - Priority deletion because ALBs incur hourly runtime fees).
+2. **Amazon EC2 Instance** (Application compute host).
+3. **Amazon S3 Bucket & Objects** (Document storage layer).
+4. **Amazon DynamoDB Table** (NoSQL metadata layer).
+5. **AWS Lambda Function** (Serverless event handler).
+6. **AWS Systems Manager Parameter Store** (Secret parameter management).
+7. **Amazon CloudWatch Alarms & Log Groups** (Observability artifacts).
+8. **IAM Roles & Instance Profiles** (Security access controls).
+9. **Security Groups & VPC** (Base virtual network).
 
 ---
 
-## 2. Delete ECS Cluster
+## 2. Step-by-Step Cleanup Procedure
 
-Navigate to:
+### Step 2.1: Delete Application Load Balancer and Target Group
 
-**Amazon ECS → Clusters**
+The Application Load Balancer incurs a fixed cost of approximately $0.0225/hour (~$16/month). It should be deleted first after live evaluation:
 
-Select:
-
-- wed-mbdc-cluster
-
-Choose:
-
-**Delete Cluster**
-
-![Delete ECS Cluster](/images/5-Workshop/5.12-Cleanup/delete-cluster.png)
-
-![Delete ECS Cluster Result](/images/5-Workshop/5.12-Cleanup/delete-ecs-cluster.png)
+1. Navigate to **EC2 Console -> Load Balancing -> Load Balancers**.
+2. Select `huylam-ocr-alb`, choose **Actions -> Delete load balancer**.
+3. Type the confirmation phrase and click **Delete**.
+4. Switch to **Target Groups**, select `huylam-ocr-tg`, choose **Actions -> Delete**.
 
 ---
 
-## 3. Delete Amazon ECR Repository
+### Step 2.2: Stop or Terminate the Amazon EC2 Instance
 
-Navigate to:
-
-**Amazon ECR → Private Repositories**
-
-Select:
-
-- wed-mbdc
-
-Choose:
-
-**Delete**
-
-Confirm repository deletion.
-
-![Delete Amazon ECR Repository](/images/5-Workshop/5.12-Cleanup/delete-ecr.png)
+1. Navigate to **EC2 Console -> Instances**.
+2. Select the instance `huylam-ocr-ec2` (`i-0566e1eedaacea52d`).
+3. Click **Instance state**:
+   - To pause without incurring compute charges: Select **Stop instance**.
+   - To remove permanently: Select **Terminate instance**.
+4. Confirm the action. Attached EBS root volumes will be released.
 
 ---
 
-## 4. Delete Amazon S3 Bucket
+### Step 2.3: Empty and Delete the Amazon S3 Bucket
 
-Navigate to:
-
-**Amazon S3**
-
-Select:
-
-- wed-mbdc-uploads
-
-Empty the bucket.
-
-Delete the bucket.
-
-![Delete Amazon S3 Bucket](/images/5-Workshop/5.12-Cleanup/delete-s3-bucket.png)
+1. Navigate to **Amazon S3 -> Buckets**.
+2. Select bucket **`huylam-ocr-documents-ap-southeast-1`**.
+3. Click **Empty** to remove all objects in `uploads/` and `outputs/`.
+4. Enter `permanently delete` to confirm.
+5. Once emptied, click **Delete**, re-enter the bucket name, and confirm deletion.
 
 ---
 
-## 5. Delete Application Load Balancer
+### Step 2.4: Delete the Amazon DynamoDB Table
 
-Navigate to:
-
-**EC2 → Load Balancers**
-
-Select:
-
-- production-alb
-
-Choose:
-
-**Delete**
-
-![Delete Load Balancer](/images/5-Workshop/5.12-Cleanup/delete-load-balancer.png)
+1. Navigate to **Amazon DynamoDB -> Tables**.
+2. Select the table **`document_processing_jobs`**.
+3. Click **Delete table**.
+4. Uncheck CloudWatch alarm backup if not needed, type `confirm`, and click **Delete**.
 
 ---
 
-## 6. Delete Target Group
+### Step 2.5: Delete the AWS Lambda Function
 
-Navigate to:
-
-**EC2 → Target Groups**
-
-Select:
-
-- production-tg
-
-Choose:
-
-**Delete**
-
-![Delete Target Group](/images/5-Workshop/5.12-Cleanup/delete-target-group.png)
+1. Navigate to **AWS Lambda -> Functions**.
+2. Select function **`huylam-ocr-processor`**.
+3. Click **Actions -> Delete**.
+4. Confirm deletion.
 
 ---
 
-## 7. Delete Amazon CloudWatch Alarm
+### Step 2.6: Delete the SSM Parameter Store Entry
 
-Navigate to:
-
-**Amazon CloudWatch → Alarms**
-
-Select:
-
-- production-service-cpu-alarm
-
-Choose:
-
-**Delete**
-
-![Delete CloudWatch Alarm](/images/5-Workshop/5.12-Cleanup/delete-cloudwatch-alarm.png)
+1. Navigate to **AWS Systems Manager -> Parameter Store**.
+2. Select parameter **`/huylam-ocr/config`**.
+3. Click **Delete** and confirm.
 
 ---
 
-## 8. Delete AWS CodeBuild Project
+### Step 2.7: Delete CloudWatch Alarms and Log Groups
 
-Navigate to:
-
-**AWS CodeBuild → Build Projects**
-
-Select:
-
-- wed-mbdc-build
-
-Choose:
-
-**Delete**
-
-![Delete CodeBuild Project](/images/5-Workshop/5.12-Cleanup/delete-codebuild-project.png)
-
-![Delete CodeBuild Result](/images/5-Workshop/5.12-Cleanup/delete-codebuild.png)
+1. Navigate to **Amazon CloudWatch -> Alarms**:
+   - Select `huylam-ocr-ec2-high-cpu`, click **Actions -> Delete**.
+2. Switch to **Log groups**:
+   - Select `/aws/lambda/huylam-ocr-processor`, click **Actions -> Delete log group(s)**.
 
 ---
 
-## 9. Delete ACM Certificate
+### Step 2.8: Delete IAM Roles and Security Groups
 
-Navigate to:
-
-**AWS Certificate Manager**
-
-Select the certificate associated with the application domain.
-
-Choose:
-
-**Delete**
-
-![Delete ACM Certificate](/images/5-Workshop/5.12-Cleanup/delete-acm-certificate.png)
+1. Navigate to **IAM Console -> Roles**:
+   - Delete `huylam-ocr-ec2-role` and `huylam-ocr-lambda-role`.
+2. Navigate to **VPC Console -> Security Groups**:
+   - Delete `huylam-web-sg` first, then delete `huylam-alb-sg`.
 
 ---
 
-## 10. Delete Amazon Route 53 Hosted Zone
+### Step 2.9: Delete the Virtual Private Cloud (huylam-vpc)
 
-Navigate to:
-
-**Amazon Route 53 → Hosted Zones**
-
-Select:
-
-- techmarketstore.store
-
-Delete all custom DNS records except the default **NS** and **SOA** records.
-
-Delete the hosted zone.
-
-![Delete Route 53 Hosted Zone](/images/5-Workshop/5.12-Cleanup/delete-route53-hosted-zone.png)
+1. Navigate to **VPC Console -> Your VPCs**.
+2. Select **`huylam-vpc`**.
+3. Click **Actions -> Delete VPC**.
+4. The console displays all associated subnets, route tables, and internet gateways scheduled for deletion.
+5. Type `delete` to finalize complete network decommissioning.
 
 ---
 
-## Result
+## 3. FinOps Verification and Zero-Spend Audit
 
-After completing all cleanup steps:
+After completing the cleanup:
+1. Navigate to **AWS Billing and Cost Management -> Cost Explorer**:
+   - Check the Daily Spend view to confirm no residual active billing curves.
+2. Check **AWS Budgets**:
+   - Verify that the $10.00 zero-breach budget remains at $0.00 actual cost.
 
-- Amazon ECS Service has been deleted.
-- Amazon ECS Cluster has been deleted.
-- Amazon ECR repository has been removed.
-- Amazon S3 bucket has been removed.
-- Application Load Balancer has been removed.
-- Target Group has been removed.
-- Amazon CloudWatch alarm has been removed.
-- AWS CodeBuild project has been removed.
-- AWS Certificate Manager certificate has been removed.
-- Amazon Route 53 hosted zone has been removed.
+---
 
-All AWS resources created during this workshop have been cleaned up successfully, preventing unnecessary AWS charges.
+## 4. Expected Result
+
+After executing this teardown sequence:
+- All experimental and workshop AWS resources are cleanly terminated.
+- Eliminates any risk of unexpected billing from hourly infrastructure services.
+- Demonstrates mastery of Cloud Lifecycle Management from provisioning to decommissioning following FinOps standards.

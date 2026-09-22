@@ -1,93 +1,85 @@
 ---
-title : "Push Image to Amazon ECR"
-date : 2026-01-01
-weight : 2
-chapter : false
-pre : " <b> 5.6.2. </b> "
+title: "Push Image to Amazon ECR"
+date: 2026-09-23
+weight: 2
+chapter: false
+pre: " <b> 5.6.2. </b> "
 ---
 
-## Push Image to Amazon ECR
+### Hands-on Objective
 
-In this section, you will push the Docker image to Amazon Elastic Container Registry (Amazon ECR).
-
-Amazon ECR is a managed container image registry that securely stores Docker images. Amazon ECS will later pull the image from this repository during deployment.
-
----
-
-## Create an Amazon ECR Repository
-
-Navigate to:
-
-**AWS Console → Amazon ECR → Private repositories → Create repository**
-
-Configure the repository with the following settings.
-
-| Property | Value |
-|----------|-------|
-| Visibility settings | Private |
-| Repository name | secondhand-marketplace |
-
-Choose **Create repository**.
-
-![Create Repository](/images/5-Workshop/5.6-Containerization/create-repository.png)
+Provision an **Amazon Elastic Container Registry (Amazon ECR)** private repository named `huylam-web-app` in region `ap-southeast-1`, authenticate the local Docker CLI using an AWS STS authentication token, and publish the container image artifact to the AWS cloud.
 
 ---
 
-## Authenticate Docker to Amazon ECR
+## 1. Provisioning Amazon ECR Private Repository
 
-Open a terminal and authenticate Docker with Amazon ECR.
+Amazon ECR is a fully managed container registry providing built-in vulnerability scanning and integrated IAM authorization policies.
+
+### AWS Management Console Procedure:
+1. Sign in to the AWS Console in region **ap-southeast-1 (Singapore)**.
+2. Navigate to: **Elastic Container Registry -> Repositories -> Create repository**.
+3. Configure repository settings:
+
+| Property | Configured Value | Architectural Rationale |
+| :--- | :--- | :--- |
+| **Visibility settings** | **Private** | Access restricted to authorized IAM entities |
+| **Repository name** | `huylam-web-app` | Project container image repository identifier |
+| **Tag immutability** | Disabled | Allows updating the `latest` tag across releases |
+| **Scan on push** | Enabled | Automated vulnerability (CVE) scanning upon push |
+| **KMS encryption** | AES-256 | Server-side encryption at rest |
+
+4. Click **Create repository**.
+
+---
+
+## 2. Authenticating Docker CLI with Amazon ECR
+
+Docker requires an ephemeral authorization token granted by AWS STS before pushing images:
 
 ```bash
-aws ecr get-login-password --region ap-southeast-1 | docker login --username AWS --password-stdin <account-id>.dkr.ecr.ap-southeast-1.amazonaws.com
+# Retrieve authentication token and login to Amazon ECR
+aws ecr get-login-password --region ap-southeast-1 | docker login --username AWS --password-stdin 677994024390.dkr.ecr.ap-southeast-1.amazonaws.com
 ```
 
-After successful authentication, Docker displays:
-
+**Expected Confirmation**:
 ```text
 Login Succeeded
 ```
 
 ---
 
-## Tag the Docker Image
+## 3. Tagging and Publishing Docker Image
 
-Tag the local Docker image using the Amazon ECR repository URI.
-
-```bash
-docker tag secondhand-marketplace:latest <account-id>.dkr.ecr.ap-southeast-1.amazonaws.com/secondhand-marketplace:latest
-```
-
----
-
-## Push the Docker Image
-
-Upload the Docker image to Amazon ECR.
+### Step 3.1: Tag Local Image
+Bind the Amazon ECR repository URI to the local image build:
 
 ```bash
-docker push <account-id>.dkr.ecr.ap-southeast-1.amazonaws.com/secondhand-marketplace:latest
+docker tag huylam-ocr-web-studio:latest 677994024390.dkr.ecr.ap-southeast-1.amazonaws.com/huylam-web-app:latest
 ```
 
-Docker uploads each image layer to Amazon ECR. Depending on the image size and network connection, this process may take several minutes.
+### Step 3.2: Push Image to Registry
+Execute the image upload:
+
+```bash
+docker push 677994024390.dkr.ecr.ap-southeast-1.amazonaws.com/huylam-web-app:latest
+```
+
+Docker compresses and streams image layers to Amazon ECR. Due to the lightweight `python:3.11-slim` footprint, upload latency is minimal.
 
 ---
 
-## Verify the Repository
+## 4. Verification on AWS Management Console
 
-Navigate to:
-
-**AWS Console → Amazon ECR → Private repositories**
-
-Open the repository and verify that the image has been uploaded successfully.
-
-![Repository Images](/images/5-Workshop/5.6-Containerization/repository-images.png)
+1. Navigate to **Amazon ECR -> Repositories -> huylam-web-app**.
+2. Confirm the **`latest`** tag appears in the image list alongside its Image URI and compressed size.
+3. Review **Vulnerabilities** report: confirms zero Critical security findings.
 
 ---
 
-## Expected Result
+## 5. Expected Outcomes
 
-After completing this section, you will have:
-
-- An Amazon ECR repository created.
-- Docker authenticated with Amazon ECR.
-- The Docker image uploaded successfully.
-- A container image ready for deployment on Amazon ECS.
+Upon completing this section:
+- Private Amazon ECR repository `huylam-web-app` is operational.
+- Local Docker CLI authenticated successfully.
+- Container image published to Amazon ECR, primed for deployment on Amazon ECS or Amazon EC2 compute instances.

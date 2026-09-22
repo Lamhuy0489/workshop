@@ -1,224 +1,115 @@
 ---
-title : "Testing"
-date : 2024-01-01
-weight : 11
-chapter : false
-pre : " <b> 5.11. </b> "
+title: "Integrated System Testing"
+date: 2026-09-23
+weight: 11
+chapter: false
+pre: " <b> 5.11. </b> "
 ---
 
-# 5.11. Testing
+### Practical Objectives
 
-This section demonstrates the complete deployment of the Second-Hand Marketplace E-Commerce platform on AWS. It showcases the main user interfaces of the application and explains how each feature interacts with the deployed cloud infrastructure, including Amazon ECS Fargate, Amazon S3, MongoDB Atlas, Amazon Route 53, AWS Certificate Manager (ACM), Application Load Balancer, Amazon CloudWatch, Amazon ECR, and AWS CodeBuild.
-
----
-## Demo Video
-
-Watch the complete system demonstration here:
-
-**YouTube:** https://youtu.be/jmZskrHVbGo
-
-# 1. Customer Website
-
-## A. Homepage
-
-The homepage is the primary interface where customers browse products available on the Second-Hand Marketplace platform.
-
-### Infrastructure Integration
-
-The Node.js Express application is deployed on Amazon ECS Fargate and exposed through an Application Load Balancer. Route 53 resolves the custom domain while ACM provides HTTPS encryption. Product information is retrieved from MongoDB Atlas and product images are loaded from Amazon S3.
-
-### Data Flow
-
-Customer visits **https://techmarketstore.store**
-
-↓
-
-Route 53 resolves the domain.
-
-↓
-
-Application Load Balancer forwards the request.
-
-↓
-
-Amazon ECS processes the request.
-
-↓
-
-MongoDB Atlas returns product information.
-
-↓
-
-Amazon S3 returns product images.
-
-↓
-
-Homepage is displayed.
-
-<br>
-
-![Homepage](/images/5-Workshop/5.11-Testing/homepage.png)
+Perform comprehensive End-to-End System Testing for the **Serverless Hybrid Document OCR, Parsing & Technical Translation Platform on AWS**: Measure public traffic handling via Application Load Balancer, validate ultra-low latency document parsing with Fast-Path PyMuPDF and vision models, verify markdown-preserving technical translation, confirm Microsoft Word artifact generation, and evaluate data consistency across Amazon S3, DynamoDB, and AWS Lambda.
 
 ---
 
-## B. User Registration
+## 1. Scenario 1: Access and Authentication via Application Load Balancer
 
-Customers can register a new account before accessing shopping features.
+The system is tested directly from the public internet using the DNS endpoint of the Application Load Balancer:
+`http://huylam-ocr-alb-1284818160.ap-southeast-1.elb.amazonaws.com`
 
-### Infrastructure Integration
+### Testing Workflow:
+1. Issue an HTTP GET request to the ALB URL:
+   - The ALB receives traffic on port 80 and forwards it to Target Group `huylam-ocr-tg`.
+   - The Flask backend issues an HTTP 302 redirect to the authentication portal `/login`.
+2. The browser renders the login interface with HTTP 200 OK:
 
-Registration requests are processed by the Express application running on Amazon ECS. User information is validated before being stored in MongoDB Atlas. Passwords are encrypted before persistence.
+![Login via ALB Public DNS](/images/week12/09-browser-alb-public-dns-login.png)
 
-![Register Type](/images/5-Workshop/5.11-Testing/register-type.jpg)
+3. Authenticate and enter the main Studio workspace:
+   - Session state is securely managed by Flask Session using a secret key retrieved from AWS Systems Manager Parameter Store.
+   - The cloud studio workspace renders seamlessly in the browser:
 
-![Customer Register](/images/5-Workshop/5.11-Testing/customer-register.jpg)
+![Live Studio Interface on ALB](/images/week12/10-browser-alb-studio-live.png)
 
----
+4. Test the Smart Model Selector:
+   - The platform allows dynamic switching between Auto Hybrid (cost-optimized default), AWS Bedrock Titan Multimodal, Google Gemini 2.5 Flash, or Claude 3.5 Sonnet:
 
-## C. Shop Registration
-
-Customers can register their own online store and become sellers on the platform.
-
-### Infrastructure Integration
-
-Shop registration requests are submitted to the Node.js backend running on Amazon ECS. Store information is saved in MongoDB Atlas and awaits administrator approval.
-
-![Shop Register](/images/5-Workshop/5.11-Testing/shop-register.jpg)
-
----
-
-## D. Login
-
-Users authenticate using their email and password before accessing protected resources.
-
-### Infrastructure Integration
-
-Authentication is handled entirely by the Express application deployed on Amazon ECS. User credentials are verified against MongoDB Atlas, and authenticated sessions are managed using Express Session.
-
-![Login](/images/5-Workshop/5.11-Testing/login.jpg)
+![Smart Model Selection](/images/week11/01-studio-model-selection-auto.png)
 
 ---
 
-## E. User Profile
+## 2. Scenario 2: Benchmark Evaluation of Extraction, Translation, and Export
 
-The profile page allows customers to update personal information and upload an avatar.
+A real-world technical document (`cv.pdf`) containing tabular structures, hierarchical headers, and technical domain terminology was processed for benchmarking.
 
-### Infrastructure Integration
+### Empirical Benchmark Results:
 
-Profile information is retrieved from MongoDB Atlas. Avatar images are uploaded to Amazon S3, while image URLs are stored inside MongoDB Atlas.
+| Processing Phase | Engine / Implementation | Measured Latency | Quality Assessment |
+|------------------|-------------------------|------------------|-------------------|
+| Fast-Path Extraction | PyMuPDF (C++ Native Engine) | **0.31 seconds** | 100% text fidelity, exact layout and table retention |
+| Vision OCR Parsing | Vision Multimodal Fallback | **2.54 seconds** | Accurate recognition of scanned graphical regions |
+| Technical Translation | LLM Domain-Specific Translation | **2.80 seconds** | Preserves Markdown syntax, code tokens, and tables |
+| Word Document Export | python-docx Artifact Generator | **0.15 seconds** | Formatted `.docx` document generated (**38.2 KB**) |
 
-![Profile](/images/5-Workshop/5.11-Testing/profile.jpg)
+### Studio Results Workspace:
+The interface displays a side-by-side comparison of the extracted source document and the translated Vietnamese version, alongside download actions for Markdown and Word:
 
----
+![Studio Extraction and Translation View](/images/week11/03-studio-cv-extracted-translated.png)
 
-## F. Product Detail
+### Exported Word Document Verification:
+The generated `.docx` artifact was downloaded and inspected in Microsoft Word, confirming full preservation of tables, bullet points, font styles, and header structures:
 
-The product detail page displays product specifications, descriptions, pricing, inventory status, and purchasing options.
-
-### Infrastructure Integration
-
-Product information is retrieved from MongoDB Atlas while product images are served directly from Amazon S3. All business logic is processed by the Node.js application running on Amazon ECS.
-
-![Product Detail](/images/5-Workshop/5.11-Testing/product-detail.jpg)
-
----
-
-## G. Payment Page
-
-The payment page allows customers to review order information, customer information, payment method, and confirm the order.
-
-### Infrastructure Integration
-
-The payment request is handled by the Node.js Express application running on Amazon ECS. Order details are retrieved from MongoDB Atlas before the payment confirmation is processed.
-
-![Payment Page](/images/5-Workshop/5.11-Testing/payment-page.jpg)
+![Word Artifact Verification](/images/week11/04-word-cv-exported-verification.png)
 
 ---
 
-## H. Order Success
+## 3. Scenario 3: Cloud Storage Synchronization and Serverless Event Pipeline
 
-After payment confirmation, customers receive a successful order notification.
+Every document processing lifecycle simultaneously exercises the cloud persistence and serverless pipeline:
 
-### Infrastructure Integration
+1. **Amazon S3 - uploads/ Prefix**:
+   - Source documents are safely archived with a unique UUID prefix:
 
-The application records the completed order in MongoDB Atlas before returning the confirmation page.
+![S3 Uploads Folder](/images/week11/05-s3-bucket-uploads-folder.png)
 
-![Order Success](/images/5-Workshop/5.11-Testing/order-success.jpg)
+2. **Amazon S3 - outputs/ Prefix**:
+   - Structured Markdown files and translated artifacts are stored independently for on-demand retrieval:
 
----
-# 2. Shop Management
+![S3 Outputs Folder](/images/week11/06-s3-bucket-outputs-folder.png)
 
-## A. Commission Statistics
+![S3 Output Markdown Document](/images/week11/07-s3-output-cv-markdown-file.png)
 
-Shop owners can monitor revenue and commission generated from completed orders.
+3. **S3 Event Notification & AWS Lambda**:
+   - The `s3:ObjectCreated:*` event triggers `huylam-ocr-processor`.
+   - Execution finishes in **214 ms** and automatically inserts job records into DynamoDB.
 
-### Infrastructure Integration
+4. **Amazon DynamoDB**:
+   - The `document_processing_jobs` table logs the job lifecycle metadata:
+     - `job_id`: Unique identifier.
+     - `filename`: `cv.pdf`.
+     - `status`: `RECEIVED_VIA_S3_EVENT`.
+     - `s3_input_uri` and `s3_output_md_uri`.
+     - `processing_time_seconds`: `0.05`.
 
-Revenue reports are calculated dynamically by the backend using data stored in MongoDB Atlas. The results are presented in a statistical dashboard.
-
-![Commission Report](/images/5-Workshop/5.11-Testing/commission-report.jpg)
-
----
-
-# 3. Administrator Dashboard
-
-## A. Admin Dashboard
-
-Administrators can monitor users, stores, and overall platform statistics.
-
-### Infrastructure Integration
-
-The administrator dashboard aggregates information directly from MongoDB Atlas through the Express application running on Amazon ECS.
-
-Displayed information includes:
-
-- Total Users
-- Total Shops
-- Shop Status
-- User Information
-
-![Admin Dashboard](/images/5-Workshop/5.11-Testing/admin-dashboard.jpg)
+![DynamoDB Item Sync](/images/week11/13-dynamodb-items-received-s3-event.png)
 
 ---
 
-## B. Admin Order Management
+## 4. AWS Services Integration Summary
 
-Administrators manage customer orders, monitor order status, and update processing information.
-
-### Infrastructure Integration
-
-Order records are retrieved from MongoDB Atlas through the Node.js backend deployed on Amazon ECS. All order status updates are synchronized with the database immediately after execution.
-
-![Admin Order Management](/images/5-Workshop/5.11-Testing/admin-order-management.jpg)
-
----
-
-## C. Commission Statistics
-
-Administrators can review platform-wide commission, monthly revenue, completed orders, and payment status of commission records.
-
-### Infrastructure Integration
-
-The Node.js backend aggregates commission data from MongoDB Atlas and returns statistical summaries to the administrator dashboard. The calculations are generated dynamically based on completed orders.
-
-![Admin Commission Report](/images/5-Workshop/5.11-Testing/commission-report.jpg)
+| AWS Service | Architectural Role | Verification Status |
+|-------------|--------------------|---------------------|
+| Amazon VPC | Multi-AZ network isolation on 10.0.0.0/16 | Stable, segmented, secure |
+| Application Load Balancer | Public HTTP traffic distribution and health checks | Target Health 1/1 Healthy, smooth routing |
+| Amazon EC2 | Hosts Python Flask application via Gunicorn and systemd | Sub-0.4s response time for web endpoints |
+| Amazon S3 | Document input and output persistence | Fast uploads/downloads, reliable event triggers |
+| AWS Lambda | Serverless event handler for document ingestion | 214 ms execution, 88 MB RAM usage |
+| Amazon DynamoDB | Distributed document job state management | Sub-10ms read/write latency |
+| AWS SSM Parameter Store | Centralized KMS-encrypted configuration store | Secure parameter injection at boot |
+| Amazon CloudWatch | Target Group metrics and Lambda logging | End-to-end operational observability |
 
 ---
 
-# AWS Services Demonstrated
+## 5. Testing Conclusion
 
-During application testing, the deployed platform integrates the following AWS services:
-
-| AWS Service | Purpose |
-|-------------|---------|
-| Amazon ECS Fargate | Hosts the Node.js Express application |
-| Amazon ECR | Stores Docker container images |
-| Amazon S3 | Stores product images and user avatars |
-| MongoDB Atlas | Stores application data |
-| Amazon Route 53 | Provides domain name resolution |
-| AWS Certificate Manager | Enables HTTPS encryption |
-| Application Load Balancer | Distributes incoming traffic |
-| Amazon CloudWatch | Monitors application health |
-| AWS CodeBuild | Automates build and deployment |
-
-The successful execution of all interfaces demonstrates that the Second-Hand Marketplace application has been fully deployed and is operating correctly on AWS Cloud infrastructure.
+Live system testing validates that the **Serverless Hybrid Document OCR, Parsing & Technical Translation Platform** operates reliably on AWS. By combining a cost-effective EC2 compute host with serverless event-driven processing, the platform delivers high throughput, low latency, and zero ongoing operational cost within AWS Free Tier limits.

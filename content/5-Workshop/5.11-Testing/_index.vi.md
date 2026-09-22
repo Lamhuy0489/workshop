@@ -1,224 +1,115 @@
 ---
-title : "Kiểm thử"
-date : 2024-01-01
-weight : 11
-chapter : false
-pre : " <b> 5.11. </b> "
+title: "Kiểm thử tích hợp hệ thống"
+date: 2026-09-23
+weight: 11
+chapter: false
+pre: " <b> 5.11. </b> "
 ---
 
-# 5.11. Kiểm thử
+### Mục tiêu thực hành
 
-Phần này trình bày quá trình triển khai hoàn chỉnh nền tảng thương mại điện tử Second-Hand Marketplace trên AWS. Đồng thời minh họa các giao diện chính của ứng dụng và giải thích cách từng chức năng tương tác với hạ tầng đám mây đã triển khai, bao gồm Amazon ECS Fargate, Amazon S3, MongoDB Atlas, Amazon Route 53, AWS Certificate Manager (ACM), Application Load Balancer, Amazon CloudWatch, Amazon ECR và AWS CodeBuild.
-
----
-## Demo Video
-Xem video trình diễn đầy đủ của hệ thống tại đây:
-
-**YouTube:** https://youtu.be/jmZskrHVbGo
-
-# 1. Trang web khách hàng
-
-## A. Trang chủ
-
-Trang chủ là giao diện chính nơi khách hàng duyệt các sản phẩm có trên nền tảng Second-Hand Marketplace.
-
-### Tích hợp hạ tầng
-
-Ứng dụng Node.js Express được triển khai trên Amazon ECS Fargate và được truy cập thông qua Application Load Balancer. Route 53 phân giải tên miền tùy chỉnh trong khi ACM cung cấp kết nối HTTPS bảo mật. Thông tin sản phẩm được lấy từ MongoDB Atlas và hình ảnh sản phẩm được tải từ Amazon S3.
-
-### Luồng dữ liệu
-
-Khách hàng truy cập **https://techmarketstore.store**
-
-↓
-
-Route 53 phân giải tên miền.
-
-↓
-
-Application Load Balancer chuyển tiếp yêu cầu.
-
-↓
-
-Amazon ECS xử lý yêu cầu.
-
-↓
-
-MongoDB Atlas trả về thông tin sản phẩm.
-
-↓
-
-Amazon S3 trả về hình ảnh sản phẩm.
-
-↓
-
-Trang chủ được hiển thị.
-
-<br>
-
-![Homepage](/images/5-Workshop/5.11-Testing/homepage.png)
+Thực hiện kiểm thử tích hợp toàn trình (End-to-End Testing) cho nền tảng **Serverless Hybrid Document OCR, Parsing & Technical Translation Platform on AWS**: Đo kiểm khả năng phục vụ lưu lượng truy cập qua Application Load Balancer, kiểm chứng hiệu năng bóc tách siêu tốc với Fast-Path PyMuPDF và mô hình đa phương thức, kiểm tra chất lượng dịch thuật kỹ thuật bảo toàn Markdown, xuất bản tệp Microsoft Word chuẩn hóa, và kiểm tra tính nhất quán dữ liệu giữa Amazon S3, DynamoDB và AWS Lambda.
 
 ---
 
-## B. Đăng ký người dùng
+## 1. Kịch bản 1: Truy cập và Xác thực qua Application Load Balancer
 
-Khách hàng có thể đăng ký tài khoản mới trước khi sử dụng các chức năng mua sắm.
+Hệ thống được kiểm thử truy cập trực tiếp từ mạng internet công cộng thông qua tên miền DNS của Application Load Balancer:
+`http://huylam-ocr-alb-1284818160.ap-southeast-1.elb.amazonaws.com`
 
-### Tích hợp hạ tầng
+### Quy trình kiểm thử:
+1. Gửi yêu cầu HTTP GET tới URL của ALB:
+   - ALB tiếp nhận trên cổng 80 và chuyển tiếp tới Target Group `huylam-ocr-tg`.
+   - Ứng dụng Flask phản hồi HTTP 302 chuyển hướng tới giao diện xác thực `/login`.
+2. Trình duyệt tải giao diện đăng nhập bảo mật với mã phản hồi HTTP 200 OK:
 
-Yêu cầu đăng ký được xử lý bởi ứng dụng Express đang chạy trên Amazon ECS. Thông tin người dùng được kiểm tra trước khi lưu vào MongoDB Atlas. Mật khẩu được mã hóa trước khi lưu trữ.
+![Đăng nhập qua ALB Public DNS](/images/week12/09-browser-alb-public-dns-login.png)
 
-![Register Type](/images/5-Workshop/5.11-Testing/register-type.jpg)
+3. Tiến hành đăng nhập vào không gian làm việc Studio:
+   - Phiên đăng nhập được quản lý an toàn qua Flask Session (Secret Key lưu trên SSM Parameter Store).
+   - Giao diện làm việc hiển thị trực tiếp và đầy đủ trên nền tảng đám mây:
 
-![Customer Register](/images/5-Workshop/5.11-Testing/customer-register.jpg)
+![Giao diện Studio trực tiếp trên ALB](/images/week12/10-browser-alb-studio-live.png)
 
----
+4. Lựa chọn mô hình thông minh (Smart Model Selector):
+   - Hệ thống cho phép linh hoạt lựa chọn: Auto Hybrid (Tự động tối ưu chi phí), AWS Bedrock Titan Multimodal, Google Gemini 2.5 Flash, hoặc Claude 3.5 Sonnet:
 
-## C. Đăng ký cửa hàng
-
-Khách hàng có thể đăng ký cửa hàng trực tuyến của riêng mình để trở thành người bán trên nền tảng.
-
-### Tích hợp hạ tầng
-
-Yêu cầu đăng ký cửa hàng được gửi đến backend Node.js chạy trên Amazon ECS. Thông tin cửa hàng được lưu vào MongoDB Atlas và chờ quản trị viên phê duyệt.
-
-![Shop Register](/images/5-Workshop/5.11-Testing/shop-register.jpg)
-
----
-
-## D. Đăng nhập
-
-Người dùng đăng nhập bằng email và mật khẩu trước khi truy cập các chức năng yêu cầu xác thực.
-
-### Tích hợp hạ tầng
-
-Quá trình xác thực được xử lý hoàn toàn bởi ứng dụng Express triển khai trên Amazon ECS. Thông tin đăng nhập được đối chiếu với MongoDB Atlas và phiên đăng nhập được quản lý bằng Express Session.
-
-![Login](/images/5-Workshop/5.11-Testing/login.jpg)
+![Tùy chọn mô hình thông minh](/images/week11/01-studio-model-selection-auto.png)
 
 ---
 
-## E. Hồ sơ người dùng
+## 2. Kịch bản 2: Đo kiểm hiệu năng bóc tách, dịch thuật và xuất bản tài liệu
 
-Trang hồ sơ cho phép khách hàng cập nhật thông tin cá nhân và tải lên ảnh đại diện.
+Tiến hành tải lên tài liệu kiểm thử kỹ thuật thực tế (`cv.pdf`) gồm nhiều trang, chứa bảng thông tin, tiêu đề phân cấp và văn bản chuyên ngành.
 
-### Tích hợp hạ tầng
+### Kết quả đo kiểm hiệu năng:
 
-Thông tin hồ sơ được lấy từ MongoDB Atlas. Ảnh đại diện được tải lên Amazon S3, trong khi đường dẫn ảnh được lưu trong MongoDB Atlas.
+| Công đoạn xử lý | Công nghệ thực thi | Thời gian đo kiểm | Đánh giá chất lượng |
+|-----------------|-------------------|-------------------|---------------------|
+| Bóc tách Fast-Path | PyMuPDF (C++ Native Engine) | **0.31 giây** | Bóc tách 100% ký tự văn bản gốc, giữ nguyên bố cục |
+| Bóc tách thị giác OCR | Vision Multimodal Fallback | **2.54 giây** | Nhận diện chính xác các khối ảnh quét |
+| Dịch thuật kỹ thuật | LLM Domain-Specific Translation | **2.80 giây** | Giữ nguyên cú pháp Markdown, bảng biểu và thuật ngữ CNTT |
+| Xuất bản Microsoft Word | python-docx Artifact Generator | **0.15 giây** | Tạo tệp Word định dạng chuẩn với dung lượng **38.2 KB** |
 
-![Profile](/images/5-Workshop/5.11-Testing/profile.jpg)
+### Giao diện kết quả xử lý trong Studio:
+Giao diện hiển thị trực quan song song giữa bản gốc đã bóc tách và bản dịch thuật tiếng Việt, kèm theo các tùy chọn tải xuống định dạng Markdown hoặc Word:
 
----
+![Bóc tách và dịch thuật hoàn tất trong Studio](/images/week11/03-studio-cv-extracted-translated.png)
 
-## F. Chi tiết sản phẩm
+### Kiểm tra tệp Microsoft Word xuất bản:
+Tệp `.docx` được tải về máy tính và mở trong Microsoft Word, bảo toàn hoàn hảo các bảng, danh sách gạch đầu dòng, màu sắc và kiểu chữ:
 
-Trang chi tiết sản phẩm hiển thị thông số kỹ thuật, mô tả, giá bán, tình trạng tồn kho và các tùy chọn mua hàng.
-
-### Tích hợp hạ tầng
-
-Thông tin sản phẩm được lấy từ MongoDB Atlas trong khi hình ảnh sản phẩm được phục vụ trực tiếp từ Amazon S3. Toàn bộ nghiệp vụ được xử lý bởi ứng dụng Node.js chạy trên Amazon ECS.
-
-![Product Detail](/images/5-Workshop/5.11-Testing/product-detail.jpg)
-
----
-
-## G. Trang thanh toán
-
-Trang thanh toán cho phép khách hàng xem lại thông tin đơn hàng, thông tin khách hàng, phương thức thanh toán và xác nhận đơn hàng.
-
-### Tích hợp hạ tầng
-
-Yêu cầu thanh toán được xử lý bởi ứng dụng Node.js Express chạy trên Amazon ECS. Thông tin đơn hàng được lấy từ MongoDB Atlas trước khi xác nhận thanh toán.
-
-![Payment Page](/images/5-Workshop/5.11-Testing/payment-page.jpg)
+![Kiểm tra tệp Word xuất bản](/images/week11/04-word-cv-exported-verification.png)
 
 ---
 
-## H. Đặt hàng thành công
+## 3. Kịch bản 3: Kiểm tra lưu trữ Amazon S3 và Luồng Event-Driven Serverless
 
-Sau khi xác nhận thanh toán, khách hàng sẽ nhận được thông báo đặt hàng thành công.
+Mỗi chu trình xử lý tài liệu đồng thời kích hoạt các dịch vụ lưu trữ và điều phối phi máy chủ:
 
-### Tích hợp hạ tầng
+1. **Amazon S3 - Thư mục uploads/**:
+   - Tài liệu gốc được lưu trữ an toàn với định danh duy nhất (UUID):
 
-Ứng dụng ghi nhận đơn hàng hoàn tất vào MongoDB Atlas trước khi trả về trang xác nhận.
+![Thư mục uploads trên S3](/images/week11/05-s3-bucket-uploads-folder.png)
 
-![Order Success](/images/5-Workshop/5.11-Testing/order-success.jpg)
+2. **Amazon S3 - Thư mục outputs/**:
+   - Các tệp Markdown và tài liệu đã dịch được lưu trữ độc lập để tải về:
 
----
+![Thư mục outputs trên S3](/images/week11/06-s3-bucket-outputs-folder.png)
 
-# 2. Quản lý cửa hàng
+![Tệp kết quả Markdown trên S3](/images/week11/07-s3-output-cv-markdown-file.png)
 
-## A. Thống kê hoa hồng
+3. **S3 Event Notification & AWS Lambda**:
+   - Sự kiện `s3:ObjectCreated:*` kích hoạt hàm `huylam-ocr-processor`.
+   - Hàm hoàn thành trong **214 ms** và tự động ghi bản ghi mới vào DynamoDB.
 
-Chủ cửa hàng có thể theo dõi doanh thu và hoa hồng được tạo ra từ các đơn hàng đã hoàn thành.
+4. **Amazon DynamoDB**:
+   - Bảng `document_processing_jobs` ghi nhận đầy đủ siêu dữ liệu của tác vụ:
+     - `job_id`: Mã định danh duy nhất.
+     - `filename`: `cv.pdf`.
+     - `status`: `RECEIVED_VIA_S3_EVENT`.
+     - `s3_input_uri` và `s3_output_md_uri`.
+     - `processing_time_seconds`: `0.05`.
 
-### Tích hợp hạ tầng
-
-Báo cáo doanh thu được tính toán động bởi backend dựa trên dữ liệu lưu trong MongoDB Atlas. Kết quả được hiển thị dưới dạng bảng thống kê.
-
-![Commission Report](/images/5-Workshop/5.11-Testing/commission-report.jpg)
-
----
-
-# 3. Trang quản trị
-
-## A. Bảng điều khiển quản trị
-
-Quản trị viên có thể theo dõi người dùng, cửa hàng và các thống kê tổng quan của hệ thống.
-
-### Tích hợp hạ tầng
-
-Bảng điều khiển quản trị tổng hợp dữ liệu trực tiếp từ MongoDB Atlas thông qua ứng dụng Express đang chạy trên Amazon ECS.
-
-Thông tin hiển thị bao gồm:
-
-- Tổng số người dùng
-- Tổng số cửa hàng
-- Trạng thái cửa hàng
-- Thông tin người dùng
-
-![Admin Dashboard](/images/5-Workshop/5.11-Testing/admin-dashboard.jpg)
+![Bản ghi DynamoDB đồng bộ](/images/week11/13-dynamodb-items-received-s3-event.png)
 
 ---
 
-## B. Quản lý đơn hàng
+## 4. Tổng hợp tích hợp các dịch vụ AWS trong kiểm thử
 
-Quản trị viên quản lý các đơn hàng của khách hàng, theo dõi trạng thái đơn hàng và cập nhật quá trình xử lý.
-
-### Tích hợp hạ tầng
-
-Dữ liệu đơn hàng được lấy từ MongoDB Atlas thông qua backend Node.js triển khai trên Amazon ECS. Mọi thay đổi trạng thái đơn hàng được đồng bộ ngay với cơ sở dữ liệu sau khi thực hiện.
-
-![Admin Order Management](/images/5-Workshop/5.11-Testing/admin-order-management.jpg)
-
----
-
-## C. Thống kê hoa hồng
-
-Quản trị viên có thể theo dõi hoa hồng toàn hệ thống, doanh thu theo tháng, số đơn hàng hoàn thành và trạng thái thanh toán hoa hồng.
-
-### Tích hợp hạ tầng
-
-Backend Node.js tổng hợp dữ liệu hoa hồng từ MongoDB Atlas và trả về các thống kê cho bảng điều khiển quản trị. Các phép tính được tạo động dựa trên các đơn hàng đã hoàn thành.
-
-![Admin Commission Report](/images/5-Workshop/5.11-Testing/commission-report.jpg)
+| Dịch vụ AWS | Vai trò trong hệ thống | Kết quả kiểm thử |
+|-------------|------------------------|------------------|
+| Amazon VPC | Cô lập tài nguyên mạng Multi-AZ trên dải mạng 10.0.0.0/16 | Hoạt động ổn định, bảo mật cao |
+| Application Load Balancer | Phân phối lưu lượng HTTP công cộng, kiểm tra sức khỏe Target | Target Health 1/1 Healthy, định tuyến thông suốt |
+| Amazon EC2 | Chạy ứng dụng Python Flask trên nền Gunicorn và systemd | Xử lý yêu cầu với thời gian phản hồi dưới 0.4s |
+| Amazon S3 | Lưu trữ tài liệu gốc và kết quả đầu ra | Tải lên và tải xuống nhanh chóng, kích hoạt sự kiện tự động |
+| AWS Lambda | Xử lý phi máy chủ các sự kiện S3 | Thực thi trong 214 ms, tiêu thụ 88 MB RAM |
+| Amazon DynamoDB | Quản lý trạng thái và tiến trình tài liệu | Ghi và truy vấn trạng thái gần như tức thời (< 10 ms) |
+| AWS SSM Parameter Store | Lưu trữ cấu hình nhạy cảm tập trung mã hóa KMS | Nạp thông tin cấu hình an toàn lúc khởi động |
+| Amazon CloudWatch | Giám sát trạng thái Target Group và thu thập nhật ký Lambda | Quan sát toàn diện mọi luồng dữ liệu |
 
 ---
 
-# Các dịch vụ AWS được sử dụng
+## 5. Kết luận kiểm thử
 
-Trong quá trình kiểm thử ứng dụng, nền tảng đã tích hợp các dịch vụ AWS sau:
-
-| Dịch vụ AWS | Mục đích |
-|-------------|----------|
-| Amazon ECS Fargate | Lưu trữ và chạy ứng dụng Node.js Express |
-| Amazon ECR | Lưu trữ Docker Image |
-| Amazon S3 | Lưu trữ hình ảnh sản phẩm và ảnh đại diện người dùng |
-| MongoDB Atlas | Lưu trữ dữ liệu của ứng dụng |
-| Amazon Route 53 | Phân giải tên miền |
-| AWS Certificate Manager | Cung cấp chứng chỉ HTTPS |
-| Application Load Balancer | Phân phối lưu lượng truy cập |
-| Amazon CloudWatch | Giám sát tình trạng hoạt động của ứng dụng |
-| AWS CodeBuild | Tự động hóa quá trình build và triển khai |
-
-Việc tất cả các giao diện hoạt động thành công chứng minh rằng ứng dụng Second-Hand Marketplace đã được triển khai hoàn chỉnh và vận hành ổn định trên hạ tầng điện toán đám mây AWS.
+Quá trình kiểm thử thực tế chứng minh nền tảng **Serverless Hybrid Document OCR, Parsing & Technical Translation** vận hành hoàn hảo trên hạ tầng đám mây AWS. Kiến trúc kết hợp thành công tính ổn định của máy chủ EC2 với sự linh hoạt, tiết kiệm chi phí của kiến trúc Serverless Event-Driven, đáp ứng trọn vẹn cả tiêu chí về hiệu năng xử lý lẫn tối ưu hóa chi phí vận hành 0.00 USD.

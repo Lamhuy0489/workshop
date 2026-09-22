@@ -1,70 +1,90 @@
 ---
-title : "Configure Amazon S3"
-date : 2026-01-01
-weight : 2
-chapter : false
-pre : " <b> 5.5.2. </b> "
+title: "Configure Amazon S3"
+date: 2026-09-23
+weight: 2
+chapter: false
+pre: " <b> 5.5.2. </b> "
 ---
 
-## Configure Amazon S3
+### Hands-on Objective
 
-In this section, you will configure an Amazon S3 bucket to store product images for the Second-Hand Marketplace application.
-
-Instead of storing image files on the application server, Amazon S3 provides scalable and durable object storage that can be accessed by the application running on Amazon ECS.
-
----
-
-## Create an S3 Bucket
-
-Navigate to:
-
-**AWS Console → Amazon S3 → Buckets → Create bucket**
-
-Configure the bucket using the following settings.
-
-| Property | Value |
-|----------|-------|
-| Bucket name | *your-bucket-name* |
-| AWS Region | ap-southeast-1 |
-| Object Ownership | ACLs disabled |
-| Block Public Access | Enabled |
-
-After reviewing the configuration, choose **Create bucket**.
-
-![Create Bucket](/images/5-Workshop/5.5-Application-Services/create-bucket.png)
+Provision and configure an **Amazon S3 Bucket** named `huylam-ocr-documents-ap-southeast-1` in region `ap-southeast-1`, establish functional prefixes `uploads/` and `outputs/`, and apply secure CORS policies for the Web Studio platform.
 
 ---
 
-## Upload Product Images
+## 1. Provisioning Amazon S3 Bucket
 
-Open the bucket and choose **Upload**.
+Amazon Simple Storage Service (Amazon S3) provides 99.999999999% (11 9's) data durability and virtually unlimited scalability:
 
-Upload one or more product images that will be used by the application.
+### Step-by-Step Procedure:
+1. Navigate to: **Amazon S3 -> Buckets -> Create bucket**.
+2. Configure bucket settings:
 
-After the upload is complete, verify that the objects appear in the bucket.
+| Property | Configured Value | Architectural Rationale |
+| :--- | :--- | :--- |
+| **Bucket name** | `huylam-ocr-documents-ap-southeast-1` | Globally unique bucket identifier |
+| **AWS Region** | `ap-southeast-1` (Singapore) | Synchronized with VPC infrastructure |
+| **Object Ownership** | ACLs disabled (recommended) | Enforces unified IAM policy authorization |
+| **Block Public Access** | **Block all public access = ON** | Complete public ingress blocking to safeguard document privacy |
+| **Bucket Versioning** | Disable | Minimizes storage consumption under FinOps guidelines |
+| **Default encryption** | Server-side encryption with Amazon S3 managed keys (SSE-S3) | Automatic encryption at rest |
 
-![Upload Objects](/images/5-Workshop/5.5-Application-Services/upload-images.png)
-
----
-
-## Verify Bucket Content
-
-Navigate to:
-
-**Amazon S3 → Buckets → Your Bucket**
-
-Confirm that the uploaded images are available in the bucket.
-
-These images will be accessed by the application when displaying product information.
-
-![Bucket Objects](/images/5-Workshop/5.5-Application-Services/bucket-object.png)
+3. Click **Create bucket**.
 
 ---
 
-## Expected Result
+## 2. Provisioning uploads/ and outputs/ Folder Prefixes
 
-After completing this section, you will have:
+1. In the Buckets table, select `huylam-ocr-documents-ap-southeast-1`.
+2. Create `uploads/` prefix:
+   * Click **Create folder**, enter folder name: `uploads`.
+   * Ingests raw input documents (digital PDFs, scanned images) uploaded by users.
+   * Click **Create folder**.
+3. Create `outputs/` prefix:
+   * Click **Create folder**, enter folder name: `outputs`.
+   * Automatically isolates job artifacts organized by job ID (`outputs/<job_id>/filename.md`, `filename.docx`, `filename.pdf`).
+   * Click **Create folder**.
 
-- An Amazon S3 bucket created.
-- Product images uploaded successfully.
-- Image objects stored in Amazon S3 and ready to be accessed by the application.
+---
+
+## 3. Configuring Cross-Origin Resource Sharing (CORS)
+
+To enable client-side browsers running Web Studio to upload files directly via S3 Presigned URLs:
+
+1. Switch to the **Permissions** tab of the bucket.
+2. Scroll down to **Cross-origin resource sharing (CORS)** and click **Edit**.
+3. Insert the JSON policy:
+
+```json
+[
+    {
+        "AllowedHeaders": [
+            "*"
+        ],
+        "AllowedMethods": [
+            "GET",
+            "PUT",
+            "POST",
+            "HEAD"
+        ],
+        "AllowedOrigins": [
+            "*"
+        ],
+        "ExposeHeaders": [
+            "ETag"
+        ],
+        "MaxAgeSeconds": 3000
+    }
+]
+```
+
+4. Click **Save changes**.
+
+---
+
+## 4. Expected Outcomes
+
+Upon completing this section:
+- Bucket `huylam-ocr-documents-ap-southeast-1` is created with **Block all public access = ON**.
+- Prefixes `uploads/` and `outputs/` are established.
+- CORS rules are active, enabling direct browser communication with S3.
