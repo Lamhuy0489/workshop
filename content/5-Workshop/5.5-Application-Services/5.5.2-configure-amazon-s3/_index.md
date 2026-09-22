@@ -31,6 +31,8 @@ Amazon Simple Storage Service (Amazon S3) provides 99.999999999% (11 9's) data d
 
 3. Click **Create bucket**.
 
+![Amazon S3 Bucket Configuration](/images/week10/01-s3-create-bucket-config.png)
+
 ---
 
 ## 2. Provisioning uploads/ and outputs/ Folder Prefixes
@@ -40,10 +42,15 @@ Amazon Simple Storage Service (Amazon S3) provides 99.999999999% (11 9's) data d
    * Click **Create folder**, enter folder name: `uploads`.
    * Ingests raw input documents (digital PDFs, scanned images) uploaded by users.
    * Click **Create folder**.
+
+![S3 Bucket Uploads Folder Prefix](/images/week11/05-s3-bucket-uploads-folder.png)
+
 3. Create `outputs/` prefix:
    * Click **Create folder**, enter folder name: `outputs`.
    * Automatically isolates job artifacts organized by job ID (`outputs/<job_id>/filename.md`, `filename.docx`, `filename.pdf`).
    * Click **Create folder**.
+
+![S3 Bucket Outputs Folder Prefix](/images/week11/06-s3-bucket-outputs-folder.png)
 
 ---
 
@@ -79,6 +86,8 @@ To enable client-side browsers running Web Studio to upload files directly via S
 ```
 
 4. Click **Save changes**.
+
+![Amazon S3 Bucket CORS Configuration Saved](/images/week10/03-s3-cors-configuration-saved.png)
 
 ---
 

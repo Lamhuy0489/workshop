@@ -92,6 +92,13 @@ Vary: Cookie
    * Nút chuyển đổi giao diện Sáng / Tối và bộ chọn ngôn ngữ (VI / EN).
    * Tốc độ tải trang tức thì dưới 50 ms.
 
+![Giao diện đăng nhập qua Public DNS URL của ALB](/images/week12/09-browser-alb-public-dns-login.png)
+
+4. Đăng nhập vào không gian làm việc chính của Web Studio:
+   * Giao diện SPA tải tức thì, tích hợp các tùy chọn tải tài liệu, bộ chọn mô hình AI (Auto Hybrid, Bedrock, Gemini Flash) và màn hình Split-view.
+
+![Giao diện Studio trực tiếp trên ALB](/images/week12/10-browser-alb-studio-live.png)
+
 ---
 
 ## 4. Hướng dẫn mở rộng tên miền riêng và chứng chỉ HTTPS (Tùy chọn)

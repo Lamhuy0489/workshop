@@ -47,6 +47,8 @@ Xây dựng quy trình tự động hóa hoàn toàn phi máy chủ (Serverless 
 
 7. Đặt tên chính sách: `LambdaS3DynamoDBAccess` và nhấp **Create policy**.
 
+![Tạo IAM Role cho Lambda](/images/week11/08-iam-role-lambda-policy-created.png)
+
 ---
 
 ## 2. Khởi tạo và Triển khai AWS Lambda (huylam-ocr-processor)
@@ -58,6 +60,8 @@ Xây dựng quy trình tự động hóa hoàn toàn phi máy chủ (Serverless 
    * **Architecture**: `x86_64`.
    * **Change default execution role**: Chọn **Use an existing role** và chọn `huylam-ocr-lambda-role`.
 3. Nhấp **Create function**.
+
+![Hàm Lambda huylam-ocr-processor được tạo thành công](/images/week11/09-lambda-function-created-active.png)
 
 ---
 
@@ -141,6 +145,8 @@ def lambda_handler(event, context):
 
 4. Nhấp nút **Deploy** để xuất bản phiên bản mã nguồn mới.
 
+![Triển khai mã nguồn Lambda thành công](/images/week11/10-lambda-code-deployed-success.png)
+
 ---
 
 ## 3. Cấu hình Amazon S3 Event Notification (NewDocumentUploadTrigger)
@@ -155,6 +161,8 @@ def lambda_handler(event, context):
    * **Specify Lambda function**: Chọn **`huylam-ocr-processor`**.
 4. Nhấp **Save changes**.
 
+![Cấu hình S3 Event Notification](/images/week11/11-s3-event-notification-created.png)
+
 AWS S3 sẽ tự động cấu hình chính sách quyền hạn (Resource-based Policy) cho phép S3 kích hoạt hàm Lambda.
 
 ---
@@ -162,8 +170,14 @@ AWS S3 sẽ tự động cấu hình chính sách quyền hạn (Resource-based 
 ## 4. Kiểm tra luồng tự động hóa thực tế
 
 1. Tải một tệp PDF bất kỳ vào thư mục `uploads/` trên giao diện S3 Console.
+
+![Tải tệp thử nghiệm lên S3 uploads](/images/week11/12-s3-upload-test-document.png)
+
 2. Kiểm tra **Amazon DynamoDB -> Tables -> document_processing_jobs -> Explore items**:
    * Một bản ghi mới xuất hiện ngay lập tức với trạng thái `RECEIVED_VIA_S3_EVENT`.
+
+![DynamoDB ghi nhận bản ghi từ S3 Event](/images/week11/13-dynamodb-items-received-s3-event.png)
+
 3. Kiểm tra **Amazon CloudWatch -> Log groups -> /aws/lambda/huylam-ocr-processor**:
    * Nhật ký thực thi ghi nhận thời gian chạy chỉ **214 ms** và bộ nhớ tiêu thụ chỉ **88 MB**.
 

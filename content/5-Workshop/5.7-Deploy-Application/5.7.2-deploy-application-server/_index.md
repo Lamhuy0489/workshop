@@ -24,6 +24,8 @@ Enforcing a Zero Hardcoded Credentials operational model:
 4. **Role name**: Enter `huylam-ssm-role`.
 5. Click **Create role**.
 
+![Provision IAM Role for EC2](/images/week12/03-iam-role-ssm-s3-dynamodb.png)
+
 ---
 
 ## 2. Launching Amazon EC2 Host (huylam-ocr-web-server)
@@ -45,6 +47,8 @@ Enforcing a Zero Hardcoded Credentials operational model:
    * **IAM instance profile**: Select **`huylam-ssm-role`**.
 8. Click **Launch instance**.
 9. Record the provisioned Instance ID (e.g., `i-0566e1eedaacea52d`).
+
+![Amazon EC2 Instance Launched Successfully](/images/week12/04-ec2-launch-instance-success.png)
 
 ---
 
@@ -132,6 +136,8 @@ systemctl status huylam-ocr.service
 
 **Checkpoint**: Terminal output displays `Active: active (running)`.
 
+![Source Deployment via SSM Session Manager](/images/week12/07-ssm-session-manager-deployment.png)
+
 ---
 
 ## 5. Validating Healthy Status in Target Group
@@ -140,6 +146,8 @@ systemctl status huylam-ocr.service
 2. Select the **Targets** tab.
 3. Allow 30 to 60 seconds for health check probes targeting `/login` to succeed.
 4. Confirm **Health status** displays in green: **Healthy (1/1)**.
+
+![Target Group Attains Healthy 1/1 Status](/images/week12/08-target-group-healthy-status.png)
 
 ---
 

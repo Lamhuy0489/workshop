@@ -76,6 +76,8 @@ Mỗi khi tài liệu được bóc tách và dịch thuật, một bản ghi ti
 }
 ```
 
+![Bảng DynamoDB document_processing_jobs lưu trữ bản ghi thực tế](/images/week11/13-dynamodb-items-received-s3-event.png)
+
 ---
 
 ## 4. Kết quả mong đợi

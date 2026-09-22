@@ -31,6 +31,8 @@ Amazon Simple Storage Service (Amazon S3) cung cấp độ bền dữ liệu 99.
 
 3. Nhấp **Create bucket**.
 
+![Cấu hình tạo Bucket S3](/images/week10/01-s3-create-bucket-config.png)
+
 ---
 
 ## 2. Tạo cấu trúc thư mục uploads/ và outputs/
@@ -40,10 +42,15 @@ Amazon Simple Storage Service (Amazon S3) cung cấp độ bền dữ liệu 99.
    * Nhấp **Create folder**, nhập tên: `uploads`.
    * Thư mục này tiếp nhận các tệp tài liệu gốc (PDF, ảnh scan PNG/JPG) do người dùng tải lên.
    * Nhấp **Create folder**.
+
+![Cấu trúc thư mục uploads trên S3](/images/week11/05-s3-bucket-uploads-folder.png)
+
 3. Tạo thư mục `outputs/`:
    * Nhấp **Create folder**, nhập tên: `outputs`.
    * Thư mục này tự động lưu trữ các kết quả sau bóc tách và dịch thuật theo từng mã tiến trình (`outputs/<job_id>/filename.md`, `filename.docx`, `filename.pdf`).
    * Nhấp **Create folder**.
+
+![Cấu trúc thư mục outputs trên S3](/images/week11/06-s3-bucket-outputs-folder.png)
 
 ---
 
@@ -79,6 +86,8 @@ Amazon Simple Storage Service (Amazon S3) cung cấp độ bền dữ liệu 99.
 ```
 
 4. Nhấp **Save changes**.
+
+![Lưu cấu hình CORS cho S3 Bucket](/images/week10/03-s3-cors-configuration-saved.png)
 
 ---
 

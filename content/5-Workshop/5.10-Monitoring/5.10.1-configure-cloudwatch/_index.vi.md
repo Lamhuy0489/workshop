@@ -91,11 +91,7 @@ Khi Target ở trạng thái Healthy, ALB sẽ định tuyến 100% lưu lượn
    - **Alarm description**: `Canh bao khi muc su dung CPU cua may chu EC2 huylam-ocr vuot qua 80% trong 5 phut`.
 6. Xem lại thông số và nhấp **Create alarm**.
 
-![CloudWatch Alarm Created Success](/images/week5/08-cloudwatch-alarm-created-success.png)
-
-7. Sau khi khởi tạo, danh sách Alarms hiển thị trạng thái **OK**, xác nhận mức tiêu thụ CPU của máy chủ đang nằm hoàn toàn trong ngưỡng an toàn.
-
-![CloudWatch Alarm Status OK](/images/week5/09-cloudwatch-alarm-status-ok.png)
+7. Sau khi khởi tạo, danh sách Alarms hiển thị trạng thái **OK**, xác nhận mức tiêu thụ CPU của máy chủ `huylam-ocr-ec2` đang nằm hoàn toàn trong ngưỡng an toàn dưới 80%.
 
 ---
 

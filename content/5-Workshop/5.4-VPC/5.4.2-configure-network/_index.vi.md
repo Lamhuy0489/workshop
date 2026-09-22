@@ -75,6 +75,8 @@ Bảng định tuyến chịu trách nhiệm điều phối lưu lượng mạng
 7. Nhấp **Create security group**.
 8. Ghi lại mã định danh được tạo (ví dụ: `sg-0dca819306a96bfdb`).
 
+![Security Group cho Application Load Balancer](/images/week12/01-alb-security-group-created.png)
+
 ### Bước 3.2: Tạo Security Group cho Web Server (huylam-web-sg)
 1. Nhấp **Create security group**.
 2. **Security group name**: `huylam-web-sg`.
@@ -90,6 +92,8 @@ Bảng định tuyến chịu trách nhiệm điều phối lưu lượng mạng
 6. **Outbound rules**:
    * Thêm quy tắc: Type: **All traffic**, Destination: `0.0.0.0/0` (Đảm bảo máy chủ EC2 có thể kết nối Internet để tải các gói Python và kéo kho Git).
 7. Nhấp **Create security group**.
+
+![Security Group cho EC2 Web Server](/images/week12/02-web-security-group-created.png)
 
 ---
 

@@ -75,6 +75,8 @@ Implementing the AWS Well-Architected Principle of Least Privilege:
 7. Click **Create security group**.
 8. Record the generated Group ID (e.g., `sg-0dca819306a96bfdb`).
 
+![Security Group for Application Load Balancer](/images/week12/01-alb-security-group-created.png)
+
 ### Step 3.2: Create Web Server Security Group (huylam-web-sg)
 1. Click **Create security group**.
 2. **Security group name**: `huylam-web-sg`.
@@ -90,6 +92,8 @@ Implementing the AWS Well-Architected Principle of Least Privilege:
 6. **Outbound rules**:
    * Add rule: Type: **All traffic**, Destination: `0.0.0.0/0` (Enables host to pull dependencies via package managers and GitHub).
 7. Click **Create security group**.
+
+![Security Group for EC2 Web Server](/images/week12/02-web-security-group-created.png)
 
 ---
 

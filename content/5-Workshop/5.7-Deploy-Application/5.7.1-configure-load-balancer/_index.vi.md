@@ -39,6 +39,8 @@ Target Group định nghĩa nhóm các máy chủ đích nhận lưu lượng v�
 6. Tại **Step 2: Register targets**, tạm thời bỏ qua (chúng ta sẽ đăng ký máy chủ EC2 ở chuyên đề tiếp theo).
 7. Nhấp nút **Create target group**.
 
+![Khởi tạo Target Group](/images/week12/05-target-group-created.png)
+
 ---
 
 ## 2. Khởi tạo Application Load Balancer (huylam-ocr-alb)
@@ -71,6 +73,9 @@ Application Load Balancer đóng vai trò là tầng tiếp nhận lưu lượng
 
 1. Trong danh sách Load Balancers, chọn `huylam-ocr-alb`.
 2. Đợi khoảng 1 - 2 phút cho đến khi **Status** chuyển từ `Provisioning` sang **Active**.
+
+![Application Load Balancer ở trạng thái Active](/images/week12/06-alb-created-active.png)
+
 3. Tại phần **Details**, ghi lại tên miền DNS công khai của Load Balancer:
 
 ```text

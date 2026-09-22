@@ -76,6 +76,8 @@ When a document is parsed and translated, a state record is written automaticall
 }
 ```
 
+![Amazon DynamoDB document_processing_jobs Table Items](/images/week11/13-dynamodb-items-received-s3-event.png)
+
 ---
 
 ## 4. Expected Outcomes

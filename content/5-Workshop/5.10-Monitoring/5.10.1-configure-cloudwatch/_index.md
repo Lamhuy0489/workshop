@@ -91,11 +91,7 @@ To automatically detect sustained high compute loads or performance bottlenecks 
    - **Alarm description**: `Alert when EC2 instance CPU utilization exceeds 80% for 5 consecutive minutes`.
 6. Review specifications and click **Create alarm**.
 
-![CloudWatch Alarm Created Success](/images/week5/08-cloudwatch-alarm-created-success.png)
-
-7. Once created, the alarm list displays status **OK**, verifying that host CPU utilization is well within expected operational parameters.
-
-![CloudWatch Alarm Status OK](/images/week5/09-cloudwatch-alarm-status-ok.png)
+7. Once created, the alarm list displays status **OK**, verifying that host CPU utilization on instance `huylam-ocr-ec2` is well within expected operational parameters below 80%.
 
 ---
 

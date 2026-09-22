@@ -39,6 +39,8 @@ The Target Group specifies backend destination instances and periodic health eva
 6. On **Step 2: Register targets**, skip for now (we register the EC2 host in the subsequent module).
 7. Click **Create target group**.
 
+![Target Group Created Successfully](/images/week12/05-target-group-created.png)
+
 ---
 
 ## 2. Provisioning Application Load Balancer (huylam-ocr-alb)
@@ -71,6 +73,9 @@ The Application Load Balancer operates as the centralized Layer 7 ingress gatewa
 
 1. In the Load Balancers table, select `huylam-ocr-alb`.
 2. Wait 1 to 2 minutes until **Status** transitions from `Provisioning` to **Active**.
+
+![Application Load Balancer Created and Active](/images/week12/06-alb-created-active.png)
+
 3. Under **Details**, record the allocated Public DNS endpoint:
 
 ```text

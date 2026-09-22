@@ -24,6 +24,8 @@ Khởi chạy máy chủ ảo Amazon EC2 `huylam-ocr-web-server` với cấu hì
 4. **Role name**: Đặt tên `huylam-ssm-role`.
 5. Nhấp **Create role**.
 
+![Khởi tạo IAM Role cho EC2](/images/week12/03-iam-role-ssm-s3-dynamodb.png)
+
 ---
 
 ## 2. Khởi chạy máy chủ ảo Amazon EC2 (huylam-ocr-web-server)
@@ -45,6 +47,8 @@ Khởi chạy máy chủ ảo Amazon EC2 `huylam-ocr-web-server` với cấu hì
    * **IAM instance profile**: Chọn **`huylam-ssm-role`**.
 8. Nhấp nút **Launch instance**.
 9. Ghi nhận mã Instance ID được tạo (ví dụ: `i-0566e1eedaacea52d`).
+
+![Khởi chạy máy chủ EC2 thành công](/images/week12/04-ec2-launch-instance-success.png)
 
 ---
 
@@ -132,6 +136,8 @@ systemctl status huylam-ocr.service
 
 **Checkpoint**: Dòng trạng thái hiển thị `Active: active (running)`.
 
+![Triển khai mã nguồn qua SSM Session Manager](/images/week12/07-ssm-session-manager-deployment.png)
+
 ---
 
 ## 5. Xác nhận trạng thái Healthy trên Target Group
@@ -140,6 +146,8 @@ systemctl status huylam-ocr.service
 2. Chọn thẻ **Targets**.
 3. Đợi khoảng 30 - 60 giây để ALB thực hiện kiểm tra sức khỏe qua đường dẫn `/login`.
 4. Xác nhận cột **Health status** chuyển sang màu xanh: **Healthy (1/1)**.
+
+![Target Group đạt trạng thái Healthy 1/1](/images/week12/08-target-group-healthy-status.png)
 
 ---
 

@@ -47,6 +47,8 @@ To allow the Lambda function to stream execution logs to Amazon CloudWatch and p
 
 7. Name the policy: `LambdaS3DynamoDBAccess` and click **Create policy**.
 
+![Create IAM Role for Lambda](/images/week11/08-iam-role-lambda-policy-created.png)
+
 ---
 
 ## 2. Initialize and Deploy AWS Lambda (huylam-ocr-processor)
@@ -58,6 +60,8 @@ To allow the Lambda function to stream execution logs to Amazon CloudWatch and p
    * **Architecture**: `x86_64`.
    * **Change default execution role**: Select **Use an existing role** and select `huylam-ocr-lambda-role`.
 3. Click **Create function**.
+
+![Lambda Function Created Successfully](/images/week11/09-lambda-function-created-active.png)
 
 ---
 
@@ -141,6 +145,8 @@ def lambda_handler(event, context):
 
 4. Click **Deploy** to publish the revised function code.
 
+![Lambda Code Deployed Successfully](/images/week11/10-lambda-code-deployed-success.png)
+
 ---
 
 ## 3. Configure Amazon S3 Event Notification (NewDocumentUploadTrigger)
@@ -155,6 +161,8 @@ def lambda_handler(event, context):
    * **Specify Lambda function**: Select **`huylam-ocr-processor`**.
 4. Click **Save changes**.
 
+![Amazon S3 Event Notification Created](/images/week11/11-s3-event-notification-created.png)
+
 AWS S3 automatically configures the resource-based invocation policy granting Amazon S3 permission to invoke the Lambda function.
 
 ---
@@ -162,8 +170,14 @@ AWS S3 automatically configures the resource-based invocation policy granting Am
 ## 4. Validate the Automated Pipeline
 
 1. Upload any test PDF document into the `uploads/` prefix via S3 Console or AWS CLI.
+
+![Upload Test Document to S3 uploads](/images/week11/12-s3-upload-test-document.png)
+
 2. Verify in **Amazon DynamoDB -> Tables -> document_processing_jobs -> Explore items**:
    * A new job record appears immediately with status `RECEIVED_VIA_S3_EVENT`.
+
+![DynamoDB Records Created from S3 Event](/images/week11/13-dynamodb-items-received-s3-event.png)
+
 3. Verify in **Amazon CloudWatch -> Log groups -> /aws/lambda/huylam-ocr-processor**:
    * Execution log confirms execution duration of only **214 ms** and memory footprint of **88 MB**.
 

@@ -92,6 +92,13 @@ Vary: Cookie
    * Theme toggle (Light/Dark) and language selectors (VI/EN) are fully operational.
    * Initial page load latency remains under 50 ms.
 
+![Authentication Portal via ALB Public DNS URL](/images/week12/09-browser-alb-public-dns-login.png)
+
+4. Authenticate and enter the main Web Studio application:
+   * Instantaneous SPA loading, featuring document dropzone, model switcher (Auto Hybrid, Bedrock, Gemini Flash), and split-view display.
+
+![Live Studio Interface Operating Behind ALB](/images/week12/10-browser-alb-studio-live.png)
+
 ---
 
 ## 4. Custom Domain & HTTPS Extension Guidelines (Optional)
