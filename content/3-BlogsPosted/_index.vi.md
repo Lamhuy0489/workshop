@@ -1,33 +1,38 @@
-﻿---
+---
 title: "Các bài blogs đã đăng"
-date: 2024-01-01
+date: 2026-09-23
 weight: 3
 chapter: false
 pre: " <b> 3. </b> "
 ---
 
-Trong 15 tuần thực tập, mình đã đăng **3 bài blog kỹ thuật chuyên sâu** trên [AWS Study Group](https://www.facebook.com/groups/awsstudygroupfcj) — phân tích các case study thực tế trên AWS, bao gồm tính năng mới của services, tối ưu chi phí bằng IaC, và sử dụng AI services để giải quyết bài toán doanh nghiệp cụ thể.
+Trong suốt hành trình thực tập tại chương trình **AWS First Cloud AI Journey (FCAJ) Bootcamp 2026**, mình đã biên soạn và công bố **3 bài blog kỹ thuật chuyên sâu** trên mạng xã hội nghề nghiệp **LinkedIn** — chia sẻ những bài học thực chiến, giải pháp kiến trúc và kết quả đo kiểm từ chính đề tài tốt nghiệp: **"Nền tảng bóc tách, nhận dạng ký tự quang học lai và dịch thuật tài liệu kỹ thuật trên đám mây AWS"** (Serverless Hybrid Document OCR, Parsing & Technical Translation Platform on AWS).
 
-| # | Đề tài | Phạm trù (theo yêu cầu FCAJ) | Ngày đăng |
-|---|---|---|---|
-| Blog 1 | **Tự động hóa "thay máu" AWS Storage Gateway từ AL2 sang AL2023 bằng IaC** | Tối ưu vận hành & cost với Terraform + Ansible | 12/04/2026 |
-| Blog 2 | **Tự động hóa số hóa bệnh án với Amazon Bedrock Data Automation + AWS HealthLake** | Sử dụng AI services để giải bài toán ngành y tế | 03/05/2026 |
-| Blog 3 | **Giải bài toán đọc hợp đồng tự động với Doczy.ai™ trên AWS** | Tính năng mới: Textract + Bedrock + Smart Chunking | 07/06/2026 |
+### Bảng tổng hợp các bài viết kỹ thuật trên LinkedIn:
 
----
-
-### [3.1 Blog 1](3.1-Blog1/)
-
-**Amazon Linux 2 (AL2)** sắp tới hạn End-of-Support (06/2026) — và AWS **không hỗ trợ in-place upgrade** cho Storage Gateway. Bài blog này giới thiệu pattern kết hợp **Terraform + Ansible** để di chuyển hàng trăm gateway từ AL2 sang AL2023 mà vẫn giữ nguyên dữ liệu cache, Gateway ID, và giảm downtime từ 1-3 ngày xuống chỉ **~1-2 giờ**. Đây là case study thực tế về **tự động hoá vận hành (IaC)** ở quy mô enterprise, giúp team DevOps tránh phải copy lại hàng TB dữ liệu từ S3.
+| # | Tên bài viết chuyên sâu | Phạm trù kỹ thuật (theo chuẩn FCAJ) | Ngày đăng | Liên kết trực tiếp |
+| :---: | :--- | :--- | :---: | :---: |
+| **Blog 1** | **Thiết kế chuỗi an ninh Security Group Chaining và loại bỏ hoàn toàn cổng SSH 22 trên AWS: Bài học từ dự án thực tế** | An ninh mạng & Quản trị Zero Trust (ALB, Chained SG, SSM Session Manager) | 23/09/2026 | [Xem trên LinkedIn](https://lnkd.in/p/giyjwMkE) |
+| **Blog 2** | **Tối ưu hóa FinOps trong xử lý tài liệu kỹ thuật: Chiến lược bóc tách lai Fast-Path (0.1s/trang) kết hợp Selective OCR với chi phí 0 USD** | Kiến trúc lai & Quản trị chi phí FinOps (Fast-Path PyMuPDF, Kaggle GPU Qwen2.5-VL, Bedrock Failover) | 23/09/2026 | [Xem trên LinkedIn](https://lnkd.in/p/gp_MnmkQ) |
+| **Blog 3** | **Xây dựng quy trình tự động hóa phi máy chủ hướng sự kiện trên AWS: Từ S3 Event đến DynamoDB trong 214 ms** | Tự động hóa phi máy chủ (Event-Driven Serverless, S3, Lambda, DynamoDB, CloudWatch, Docker/ECR) | 23/09/2026 | [Xem trên LinkedIn](https://lnkd.in/p/gBfaVCdj) |
 
 ---
 
-### [3.2 Blog 2](3.2-Blog2/)
+### [3.1 Blog 1: An ninh mạng & Quản trị Zero Trust](3.1-Blog1/)
 
-Hàng triệu hồ sơ bệnh án giấy trong các bệnh viện đang được nhập liệu thủ công với chi phí **hàng triệu USD/năm** và tỉ lệ sai sót 5-15%. Bài blog này phân tích kiến trúc **serverless + event-driven** kết hợp **Amazon Bedrock Data Automation** (trích xuất 50+ trường lâm sàng bằng AI, không cần training data) và **AWS HealthLake** (kho dữ liệu FHIR R4 HIPAA-compliant) để chuyển đổi PDF scan thành dữ liệu y tế chuẩn hóa trong **~30 phút/1000 bệnh án** thay vì 2-3 tuần, với chi phí **<$0.50/bệnh án** và tỉ lệ lỗi **<1%**.
+Phân tích chuyên sâu về mô hình bảo mật phân tầng (Defense-in-Depth) trong môi trường điện toán đám mây doanh nghiệp: Cấu hình chuỗi Security Group Chaining cô lập máy chủ EC2 đằng sau Application Load Balancer (chỉ mở cổng TCP 5000 cho duy nhất định danh `huylam-alb-sg`), đồng thời loại bỏ hoàn toàn cổng SSH 22 và Bastion Host thông qua việc quản trị shell an toàn bằng AWS Systems Manager (SSM Session Manager).
+- **Liên kết bài đăng LinkedIn**: [https://lnkd.in/p/giyjwMkE](https://lnkd.in/p/giyjwMkE)
 
 ---
 
-### [3.3 Blog 3](3.3-Blog3/)
+### [3.2 Blog 2: Động cơ bóc tách lai & Tối ưu chi phí FinOps](3.2-Blog2/)
 
-AArete đã xây dựng **Doczy.ai™** — hệ thống contract intelligence chạy trên AWS xử lý **2,5 triệu hợp đồng (≈50 triệu trang)** trong 22 tháng, đạt **độ chính xác 99%** (so với 55% của hệ thống rules-based cũ), gọi **137 triệu lần API tới Bedrock** và tiết kiệm **~330 triệu USD** cho khách hàng. Bài blog phân tích chi tiết kiến trúc **Textract + Bedrock + Smart Chunking** (sáng chế cốt lõi của AArete) và **dual clustering** (semantic + structural) — pattern mạnh cho tài liệu pháp lý mà bất kỳ team nào xây hệ thống RAG đều có thể học hỏi.
+Chia sẻ giải pháp giải quyết điểm nghẽn chi phí và độ trễ khi lạm dụng Vision AI trong các hệ thống Document AI / RAG: Xây dựng động cơ bóc tách lai hai tầng (Hybrid Processing Engine) với Fast-Path PyMuPDF xử lý hơn 80% tài liệu số hóa chỉ mất 0.1s - 0.3s/trang với chi phí 0 USD, kết hợp cơ chế OCR chọn lọc qua cụm GPU Kaggle 2x NVIDIA T4 và chuyển mạch dự phòng Failover sang Gemini Flash / Amazon Bedrock.
+- **Liên kết bài đăng LinkedIn**: [https://lnkd.in/p/gp_MnmkQ](https://lnkd.in/p/gp_MnmkQ)
+
+---
+
+### [3.3 Blog 3: Tự động hóa phi máy chủ hướng sự kiện (Serverless Event-Driven)](3.3-Blog3/)
+
+Mổ xẻ kiến trúc xử lý tài liệu phi máy chủ tự động hóa toàn diện từ lúc người dùng tải tệp lên Web Studio: Sự kiện `s3:ObjectCreated:*` kích hoạt hàm AWS Lambda `huylam-ocr-processor`, khởi tạo mã tác vụ và lưu trạng thái tiến trình vào bảng Amazon DynamoDB On-Demand chỉ trong 214 ms mà không cần duy trì máy chủ thăm dò (polling), tích hợp thu thập dữ liệu quan sát trên CloudWatch Logs và đóng gói container chuẩn OCI.
+- **Liên kết bài đăng LinkedIn**: [https://lnkd.in/p/gBfaVCdj](https://lnkd.in/p/gBfaVCdj)

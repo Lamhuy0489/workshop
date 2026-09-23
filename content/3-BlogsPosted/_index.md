@@ -1,33 +1,38 @@
-﻿---
+---
 title: "Blogs Posted"
-date: 2024-01-01
+date: 2026-09-23
 weight: 3
 chapter: false
 pre: " <b> 3. </b> "
 ---
 
-During the 15-week internship I published **3 in-depth technical blogs** on [AWS Study Group](https://www.facebook.com/groups/awsstudygroupfcj) — analyzing real-world case studies on AWS, covering new service features, cost optimization with IaC, and using AI services to solve concrete enterprise problems.
+Throughout the **AWS First Cloud AI Journey (FCAJ) Bootcamp 2026**, I authored and published **3 deep-dive technical blogs** on **LinkedIn** — sharing production-grade lessons, architectural patterns, and experimental benchmarks directly derived from my capstone project: **"Serverless Hybrid Document OCR, Parsing & Technical Translation Platform on AWS"**.
 
-| # | Topic | Category (per FCAJ requirement) | Date |
-|---|---|---|---|
-| Blog 1 | **Automate AWS Storage Gateway AL2 → AL2023 migration with IaC** | Operations & cost optimization with Terraform + Ansible | 12/04/2026 |
-| Blog 2 | **Automate medical record digitization with Amazon Bedrock Data Automation + AWS HealthLake** | Using AI services to solve a healthcare industry problem | 03/05/2026 |
-| Blog 3 | **Solving automated contract intelligence with Doczy.ai™ on AWS** | New features: Textract + Bedrock + Smart Chunking | 07/06/2026 |
+### Summary of Published LinkedIn Technical Blogs:
 
----
-
-### [3.1 Blog 1](3.1-Blog1/)
-
-**Amazon Linux 2 (AL2)** is reaching End-of-Support (06/2026) — and AWS does **not support in-place upgrade** for Storage Gateway. This blog introduces a pattern combining **Terraform + Ansible** to migrate hundreds of gateways from AL2 to AL2023 while keeping cache data, Gateway ID intact, and reducing downtime from 1-3 days down to only **~1-2 hours**. It's a real-world case study on **Infrastructure-as-Code automation** at enterprise scale, helping DevOps teams avoid re-copying terabytes of data from S3.
+| # | Technical Article Title | Engineering Domain (FCAJ Framework) | Publication Date | Direct Link |
+| :---: | :--- | :--- | :---: | :---: |
+| **Blog 1** | **Architecting Chained Security Groups & Eliminating SSH Port 22 on AWS** | Cloud Security & Zero Trust Operations (ALB, Chained SG, SSM Session Manager) | 2026-09-23 | [View on LinkedIn](https://lnkd.in/p/giyjwMkE) |
+| **Blog 2** | **FinOps in Document AI: Fast-Path Native Parsing (0.1s/page) & Zero-Cost Selective OCR** | Hybrid Architecture & FinOps Optimization (PyMuPDF, Kaggle GPU Qwen2.5-VL, Bedrock Failover) | 2026-09-23 | [View on LinkedIn](https://lnkd.in/p/gp_MnmkQ) |
+| **Blog 3** | **Engineering an Event-Driven Serverless Pipeline on AWS: S3 to DynamoDB in 214 ms** | Serverless Event-Driven Orchestration (S3, Lambda, DynamoDB, CloudWatch, Docker/ECR) | 2026-09-23 | [View on LinkedIn](https://lnkd.in/p/gBfaVCdj) |
 
 ---
 
-### [3.2 Blog 2](3.2-Blog2/)
+### [3.1 Blog 1: Cloud Security & Zero Trust Architecture](3.1-Blog1/)
 
-Millions of paper medical records in hospitals are still being keyed in manually at a cost of **millions of USD/year** and an error rate of 5-15%. This blog analyzes a **serverless + event-driven** architecture combining **Amazon Bedrock Data Automation** (extracts 50+ clinical fields with AI, no training data needed) and **AWS HealthLake** (a HIPAA-eligible FHIR R4 data store) to convert scanned PDFs into standardized medical data in **~30 minutes per 1,000 records** instead of 2-3 weeks, at a cost of **<$0.50 per record** with an error rate of **<1%**.
+Deep-dive into Defense-in-Depth cloud networking: Implementing Security Group Chaining to completely isolate EC2 application hosts behind Application Load Balancers (restricting TCP port 5000 strictly to `huylam-alb-sg`), while eliminating SSH port 22 and bastion hosts through AWS Systems Manager (SSM Session Manager).
+- **LinkedIn Post URL**: [https://lnkd.in/p/giyjwMkE](https://lnkd.in/p/giyjwMkE)
 
 ---
 
-### [3.3 Blog 3](3.3-Blog3/)
+### [3.2 Blog 2: Hybrid Parsing Engine & FinOps Optimization](3.2-Blog2/)
 
-AArete built **Doczy.ai™** — a contract-intelligence system running on AWS that processed **2.5 million contracts (~50 million pages)** in 22 months, reaching **99% accuracy** (vs. 55% for older rules-based systems), making **137 million Bedrock API calls** and saving customers **~$330M**. This blog walks through the **Textract + Bedrock + Smart Chunking** architecture (AArete's core patent) and **dual clustering** (semantic + structural) — a powerful pattern for legal documents that any team building a RAG system can learn from.
+Overcoming latency and cost bottlenecks caused by excessive Vision AI calls: Building a Two-Tier Hybrid Processing Engine with Fast-Path PyMuPDF parsing 80%+ of digital pages in 0.1s - 0.3s/page at $0.00 cost, paired with selective GPU OCR via Kaggle 2x NVIDIA T4 and automated failover to Gemini Flash / Amazon Bedrock.
+- **LinkedIn Post URL**: [https://lnkd.in/p/gp_MnmkQ](https://lnkd.in/p/gp_MnmkQ)
+
+---
+
+### [3.3 Blog 3: Event-Driven Serverless Pipeline](3.3-Blog3/)
+
+Deconstructing an automated, sub-second ingestion pipeline: Ingesting documents into Amazon S3, triggering AWS Lambda `huylam-ocr-processor` via `s3:ObjectCreated:*`, generating job metadata, and writing tracking records into Amazon DynamoDB in 214 ms without polling servers, integrated with CloudWatch telemetry and OCI containerization.
+- **LinkedIn Post URL**: [https://lnkd.in/p/gBfaVCdj](https://lnkd.in/p/gBfaVCdj)
