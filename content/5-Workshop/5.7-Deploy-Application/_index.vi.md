@@ -31,10 +31,11 @@ Quy trình triển khai máy chủ Web Studio được thiết kế nhằm tối
 
 ## 2. Nội dung các bước thực hành
 
-Chuyên đề này gồm 2 phần thực hành chi tiết:
+Chuyên đề này gồm 3 phần thực hành chi tiết:
 
 - **[5.7.1 Cấu hình Target Group & Application Load Balancer](5.7.1-configure-load-balancer/)**: Tạo Target Group trên cổng 5000, thiết lập Health Check và khởi tạo ALB Multi-AZ.
 - **[5.7.2 Triển khai EC2 Web Server qua SSM Session Manager](5.7.2-deploy-application-server/)**: Tạo IAM Role, khởi chạy EC2, kết nối qua Session Manager, cài đặt môi trường Python 3.11 và kích hoạt dịch vụ systemd Gunicorn.
+- **[5.7.3 Cấu hình Quản trị viên và Kết nối Kaggle GPU OCR](5.7.3-configure-admin-and-kaggle-ocr/)**: Khởi chạy máy chủ bóc tách Qwen2.5-VL trên Kaggle GPU, mở Cloudflare Tunnel và nhập Endpoint vào cụm khóa Web Studio.
 
 ---
 

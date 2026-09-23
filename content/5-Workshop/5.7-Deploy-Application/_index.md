@@ -31,10 +31,11 @@ The Web Studio hosting architecture is designed for fault tolerance, security gr
 
 ## 2. Hands-on Execution Steps
 
-This module comprises two hands-on sections:
+This module comprises three hands-on sections:
 
 - **[5.7.1 Provisioning Target Group & Application Load Balancer](5.7.1-configure-load-balancer/)**: Creating Target Group on port 5000, fine-tuning health checks, and launching Multi-AZ ALB.
 - **[5.7.2 Deploying EC2 Application Server via SSM Session Manager](5.7.2-deploy-application-server/)**: Creating IAM Role, launching EC2, connecting via Session Manager, setting up Python 3.11, and activating the systemd Gunicorn service.
+- **[5.7.3 Configuring Admin & Kaggle GPU OCR](5.7.3-configure-admin-and-kaggle-ocr/)**: Launching Qwen2.5-VL vision inference on Kaggle GPU, establishing Cloudflare Tunnel, and registering the endpoint into Web Studio.
 
 ---
 
