@@ -1,10 +1,13 @@
 ---
 title: "Worklog Tuần 2"
-date: 2026-09-19
+date: 2026-08-16
 weight: 2
 chapter: false
 pre: " <b> 1.2. </b> "
 ---
+
+> [!NOTE] Thời gian thực hiện
+> **Từ ngày 10/08/2026 đến ngày 16/08/2026**
 
 ### Mục tiêu tuần 2:
 * Tìm hiểu kiến trúc lưu trữ đối tượng và cơ chế bảo mật trên Amazon S3.
@@ -19,12 +22,12 @@ pre: " <b> 1.2. </b> "
 
 | Thứ | Công việc | Kết quả đạt được | Nguồn tài liệu |
 | :--- | :--- | :--- | :--- |
-| **Thứ 2** | - Tìm hiểu Amazon S3 & Static Website Hosting.<br>- Tạo S3 Bucket `huylam-static-web-677994024390`.<br>- Tải tệp cổng thông tin `index.html`.<br>- Bật Static website hosting & Cấu hình Bucket Policy. | Bucket hoạt động ở chế độ Public Read; website tĩnh truy cập thành công qua Endpoint toàn cầu với mã phản hồi HTTP 200 OK. | [Lab 000057](https://000057.awsstudygroup.com) |
-| **Thứ 3** | - Tìm hiểu IAM Role cho EC2 compute.<br>- Tạo IAM Role `huylam-ec2-s3-readonly-role` gắn policy `AmazonS3ReadOnlyAccess`.<br>- Gắn IAM Role vào EC2 Instance.<br>- Kiểm tra quyền truy cập S3 từ máy ảo qua AWS CLI bằng EC2 Instance Connect. | Hiểu nguyên lý cấp quyền tự động qua EC2 Instance Metadata Service (IMDS), truy vấn thành công S3 Bucket mà không lưu trữ cứng Access Key trên máy chủ. | [Lab 000048](https://000048.awsstudygroup.com) |
-| **Thứ 4** | - Tìm hiểu EC2 User Data tự động hóa.<br>- Cấu hình Security Group mở cổng HTTP (80) và SSH (22).<br>- Khởi tạo máy chủ ảo EC2 `t3.micro` với bash script User Data tự cài đặt Apache httpd.<br>- Kiểm tra trang web qua Public IPv4. | Máy chủ ảo tự động triển khai dịch vụ Apache ngay khi khởi động; web server phản hồi HTTP 200 OK với thông tin sinh viên Lâm Quang Huy. | [Lab 000004](https://000004.awsstudygroup.com) |
-| **Thứ 5** | - Cấu hình kiểm thử chính sách IAM Deny.<br>- Xác minh thứ tự ưu tiên của chính sách phân quyền AWS IAM. | Nắm rõ nguyên lý Explicit Deny luôn ghi đè Explicit Allow khi kiểm thử qua AWS CLI. | [Lab 000002](https://000002.awsstudygroup.com) |
-| **Thứ 6** | - Khởi tạo Amazon RDS MySQL trong gói Free Tier.<br>- Cấu hình Security Group khép kín chỉ nhận kết nối từ EC2. | Cơ sở dữ liệu RDS đạt trạng thái Available, bảo đảm an toàn dữ liệu nội bộ. | [Lab 000005](https://000005.awsstudygroup.com) |
-| **Thứ 7** | - Kết nối EC2 tới RDS MySQL.<br>- Triển khai ứng dụng đọc/ghi cơ sở dữ liệu.<br>- Dọn dẹp tài nguyên (Clean up) và tổng hợp báo cáo. | Hoàn tất kiến trúc 3 tầng (Web - App - DB), bảo toàn ngân sách Free Tier. | [FCJ Curriculum](file:///Users/huylam/Downloads/aws/raw/labs/fcj-cloud-journey-curriculum.md) |
+| **Thứ 2 (10/08/2026)** | - Tìm hiểu Amazon S3 & Static Website Hosting.<br>- Tạo S3 Bucket `huylam-static-web-677994024390`.<br>- Tải tệp cổng thông tin `index.html`.<br>- Bật Static website hosting & Cấu hình Bucket Policy. | Bucket hoạt động ở chế độ Public Read; website tĩnh truy cập thành công qua Endpoint toàn cầu với mã phản hồi HTTP 200 OK. | [Lab 000057](https://000057.awsstudygroup.com) |
+| **Thứ 3 (11/08/2026)** | - Tìm hiểu IAM Role cho EC2 compute.<br>- Tạo IAM Role `huylam-ec2-s3-readonly-role` gắn policy `AmazonS3ReadOnlyAccess`.<br>- Gắn IAM Role vào EC2 Instance.<br>- Kiểm tra quyền truy cập S3 từ máy ảo qua AWS CLI bằng EC2 Instance Connect. | Hiểu nguyên lý cấp quyền tự động qua EC2 Instance Metadata Service (IMDS), truy vấn thành công S3 Bucket mà không lưu trữ cứng Access Key trên máy chủ. | [Lab 000048](https://000048.awsstudygroup.com) |
+| **Thứ 4 (12/08/2026)** | - Tìm hiểu EC2 User Data tự động hóa.<br>- Cấu hình Security Group mở cổng HTTP (80) và SSH (22).<br>- Khởi tạo máy chủ ảo EC2 `t3.micro` với bash script User Data tự cài đặt Apache httpd.<br>- Kiểm tra trang web qua Public IPv4. | Máy chủ ảo tự động triển khai dịch vụ Apache ngay khi khởi động; web server phản hồi HTTP 200 OK với thông tin sinh viên Lâm Quang Huy. | [Lab 000004](https://000004.awsstudygroup.com) |
+| **Thứ 5 (13/08/2026)** | - Cấu hình kiểm thử chính sách IAM Deny.<br>- Xác minh thứ tự ưu tiên của chính sách phân quyền AWS IAM. | Nắm rõ nguyên lý Explicit Deny luôn ghi đè Explicit Allow khi kiểm thử qua AWS CLI. | [Lab 000002](https://000002.awsstudygroup.com) |
+| **Thứ 6 (14/08/2026)** | - Khởi tạo Amazon RDS MySQL trong gói Free Tier.<br>- Cấu hình Security Group khép kín chỉ nhận kết nối từ EC2. | Cơ sở dữ liệu RDS đạt trạng thái Available, bảo đảm an toàn dữ liệu nội bộ. | [Lab 000005](https://000005.awsstudygroup.com) |
+| **Thứ 7 (15/08/2026)** | - Kết nối EC2 tới RDS MySQL.<br>- Triển khai ứng dụng đọc/ghi cơ sở dữ liệu.<br>- Dọn dẹp tài nguyên (Clean up) và tổng hợp báo cáo. | Hoàn tất kiến trúc 3 tầng (Web - App - DB), bảo toàn ngân sách Free Tier. | [FCJ Curriculum](file:///Users/huylam/Downloads/aws/raw/labs/fcj-cloud-journey-curriculum.md) |
 
 ### Chi tiết các thông số kỹ thuật đã xác thực trên AWS:
 

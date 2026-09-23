@@ -1,10 +1,13 @@
 ---
 title: "Worklog Tuần 4"
-date: 2026-09-20
+date: 2026-08-30
 weight: 4
 chapter: false
 pre: " <b> 1.4. </b> "
 ---
+
+> [!NOTE] Thời gian thực hiện
+> **Từ ngày 24/08/2026 đến ngày 30/08/2026**
 
 ### Mục tiêu tuần 4:
 * Tìm hiểu kiến trúc điện toán có khả năng co giãn linh hoạt và độ sẵn sàng cao (High Availability & Scalability) trên nền tảng AWS.
@@ -21,12 +24,12 @@ pre: " <b> 1.4. </b> "
 
 | Thứ | Công việc | Kết quả đạt được | Nguồn tài liệu |
 | :--- | :--- | :--- | :--- |
-| **Thứ 2** | - Nghiên cứu lý thuyết Elastic Load Balancing (ELB), phân biệt ALB, NLB và GLB.<br>- Tìm hiểu cơ chế định tuyến tầng ứng dụng (Layer 7 Routing), Listeners và Target Groups. | Nắm vững nguyên lý hoạt động của Application Load Balancer và phương thức quản lý đích đến qua Target Group. | [AWS ELB Documentation](https://docs.aws.amazon.com/elasticloadbalancing/) |
-| **Thứ 3** | - Tìm hiểu cơ chế hoạt động của Amazon EC2 Auto Scaling.<br>- Nghiên cứu các thông số quy mô: Desired Capacity, Minimum Capacity, Maximum Capacity.<br>- Khảo sát chu kỳ vòng đời phiên bản (EC2 Instance Lifecycle). | Hiểu rõ cơ chế tự động mở rộng theo nhu cầu tải và khả năng tự phục hồi (Self-healing) khi phát hiện phiên bản lỗi. | [AWS Auto Scaling Guide](https://docs.aws.amazon.com/autoscaling/ec2/userguide/what-is-amazon-ec2-auto-scaling.html) |
-| **Thứ 4** | - Thiết kế kiến trúc bảo mật 2 tầng trên `huylam-vpc`.<br>- Khởi tạo Security Group `huylam-alb-sg` cho phép HTTP (port 80) từ Internet (`0.0.0.0/0`).<br>- Khởi tạo Security Group `huylam-asg-web-sg` chỉ cho phép HTTP từ `huylam-alb-sg`. | Thiết lập nguyên tắc phòng thủ đa lớp (Defense in Depth), ngăn chặn hoàn toàn truy cập trực tiếp từ Internet vào máy chủ backend. | [AWS Security Best Practices](https://docs.aws.amazon.com/whitepapers/latest/architecting-for-the-cloud-aws-best-practices/security.html) |
-| **Thứ 5** | - Khởi tạo Launch Template `huylam-launch-template` (`lt-064a116476cc47e0a`).<br>- Cấu hình AMI Amazon Linux 2023 và phân hạng `t3.micro`.<br>- Viết tập lệnh User Data lấy IMDSv2 token và tự động render thông tin định danh sinh viên. | Chuẩn hóa mẫu triển khai máy chủ web; nhúng động Instance ID, Private IP và Availability Zone vào trang chào mừng. | [Lab 000006](https://000006.awsstudygroup.com) |
-| **Thứ 6** | - Khởi tạo Target Group `huylam-alb-tg` với cổng HTTP 80 và đường dẫn Health Check `/`.<br>- Tạo Application Load Balancer `huylam-alb` gắn trên 2 Public Subnets Multi-AZ.<br>- Cấu hình Listener HTTP:80 chuyển tiếp lưu lượng vào `huylam-alb-tg`. | Hoàn thành hạ tầng cân bằng tải, ALB được cấp phát tên miền DNS công khai và chuyển sang trạng thái Active. | [AWS ALB Getting Started](https://docs.aws.amazon.com/elasticloadbalancing/latest/application/application-load-balancer-getting-started.html) |
-| **Thứ 7** | - Khởi tạo Auto Scaling Group `huylam-asg` với dung lượng chuẩn: Desired 2, Min 1, Max 4.<br>- Gắn kết với Launch Template và Target Group `huylam-alb-tg`.<br>- Kiểm tra tiến trình khởi chạy 2 máy chủ ảo trên 2 Availability Zones. | Hệ thống tự động tạo 2 instances `i-01abe8b9b987aad60` (`ap-southeast-1a`) và `i-0e633e2910dd9ea8f` (`ap-southeast-1b`). | [Lab 000006](https://000006.awsstudygroup.com) |
+| **Thứ 2 (24/08/2026)** | - Nghiên cứu lý thuyết Elastic Load Balancing (ELB), phân biệt ALB, NLB và GLB.<br>- Tìm hiểu cơ chế định tuyến tầng ứng dụng (Layer 7 Routing), Listeners và Target Groups. | Nắm vững nguyên lý hoạt động của Application Load Balancer và phương thức quản lý đích đến qua Target Group. | [AWS ELB Documentation](https://docs.aws.amazon.com/elasticloadbalancing/) |
+| **Thứ 3 (25/08/2026)** | - Tìm hiểu cơ chế hoạt động của Amazon EC2 Auto Scaling.<br>- Nghiên cứu các thông số quy mô: Desired Capacity, Minimum Capacity, Maximum Capacity.<br>- Khảo sát chu kỳ vòng đời phiên bản (EC2 Instance Lifecycle). | Hiểu rõ cơ chế tự động mở rộng theo nhu cầu tải và khả năng tự phục hồi (Self-healing) khi phát hiện phiên bản lỗi. | [AWS Auto Scaling Guide](https://docs.aws.amazon.com/autoscaling/ec2/userguide/what-is-amazon-ec2-auto-scaling.html) |
+| **Thứ 4 (26/08/2026)** | - Thiết kế kiến trúc bảo mật 2 tầng trên `huylam-vpc`.<br>- Khởi tạo Security Group `huylam-alb-sg` cho phép HTTP (port 80) từ Internet (`0.0.0.0/0`).<br>- Khởi tạo Security Group `huylam-asg-web-sg` chỉ cho phép HTTP từ `huylam-alb-sg`. | Thiết lập nguyên tắc phòng thủ đa lớp (Defense in Depth), ngăn chặn hoàn toàn truy cập trực tiếp từ Internet vào máy chủ backend. | [AWS Security Best Practices](https://docs.aws.amazon.com/whitepapers/latest/architecting-for-the-cloud-aws-best-practices/security.html) |
+| **Thứ 5 (27/08/2026)** | - Khởi tạo Launch Template `huylam-launch-template` (`lt-064a116476cc47e0a`).<br>- Cấu hình AMI Amazon Linux 2023 và phân hạng `t3.micro`.<br>- Viết tập lệnh User Data lấy IMDSv2 token và tự động render thông tin định danh sinh viên. | Chuẩn hóa mẫu triển khai máy chủ web; nhúng động Instance ID, Private IP và Availability Zone vào trang chào mừng. | [Lab 000006](https://000006.awsstudygroup.com) |
+| **Thứ 6 (28/08/2026)** | - Khởi tạo Target Group `huylam-alb-tg` với cổng HTTP 80 và đường dẫn Health Check `/`.<br>- Tạo Application Load Balancer `huylam-alb` gắn trên 2 Public Subnets Multi-AZ.<br>- Cấu hình Listener HTTP:80 chuyển tiếp lưu lượng vào `huylam-alb-tg`. | Hoàn thành hạ tầng cân bằng tải, ALB được cấp phát tên miền DNS công khai và chuyển sang trạng thái Active. | [AWS ALB Getting Started](https://docs.aws.amazon.com/elasticloadbalancing/latest/application/application-load-balancer-getting-started.html) |
+| **Thứ 7 (29/08/2026)** | - Khởi tạo Auto Scaling Group `huylam-asg` với dung lượng chuẩn: Desired 2, Min 1, Max 4.<br>- Gắn kết với Launch Template và Target Group `huylam-alb-tg`.<br>- Kiểm tra tiến trình khởi chạy 2 máy chủ ảo trên 2 Availability Zones. | Hệ thống tự động tạo 2 instances `i-01abe8b9b987aad60` (`ap-southeast-1a`) và `i-0e633e2910dd9ea8f` (`ap-southeast-1b`). | [Lab 000006](https://000006.awsstudygroup.com) |
 | **Chủ Nhật**| - Kiểm tra Target Health: Xác nhận 2/2 targets đạt trạng thái Healthy.<br>- Thực hiện kiểm nghiệm phân phối tải Round-Robin trên trình duyệt thực tế.<br>- Thực hiện quy trình FinOps: Xóa ASG, terminate instances, xóa ALB và Target Group.<br>- Tổng hợp báo cáo kỹ thuật và triển khai worklog. | Xác thực khả năng chịu lỗi và cân bằng tải thành công; giải phóng toàn bộ tài nguyên tính toán để đưa chi phí về 0 USD. | [FCJ Curriculum](file:///Users/huylam/Downloads/aws/raw/labs/fcj-cloud-journey-curriculum.md) |
 
 ---

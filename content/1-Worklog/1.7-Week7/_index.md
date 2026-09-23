@@ -1,10 +1,13 @@
 ---
 title: "Week 7 Worklog"
-date: 2026-09-21
+date: 2026-09-20
 weight: 7
 chapter: false
 pre: " <b> 1.7. </b> "
 ---
+
+> [!NOTE] Execution Timeline
+> **From 14/09/2026 to 20/09/2026**
 
 ### Week 7 Objectives:
 * Master **Infrastructure as Code (IaC)** principles on AWS using the **AWS CloudFormation** service.
@@ -24,12 +27,12 @@ pre: " <b> 1.7. </b> "
 
 | Day | Task | Key Outcome | Reference Material |
 | :--- | :--- | :--- | :--- |
-| **Mon** | - Research Infrastructure as Code (IaC) principles.<br>- Compare manual console provisioning with IaC: repeatability, consistency, versioning, and automation.<br>- Explore AWS CloudFormation architecture. | Mastered CloudFormation Engine mechanics and translation of declarative templates into real AWS resources. | [AWS CloudFormation Concepts](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cfn-whatis-concepts.html) |
-| **Tue** | - Research CloudFormation template anatomy (YAML format).<br>- Study intrinsic functions: `!Ref`, `!Sub`, `!GetAtt`.<br>- Configure parameter specifications with constraints, defaults, and AllowedValues. | Mastered template parameterization for cross-environment reusability. | [CloudFormation Template Anatomy](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html) |
-| **Wed** | - Research dynamic SSM Parameter Store integration in CloudFormation.<br>- Configure dynamic AMI resolution for Amazon Linux 2023 avoiding hardcoded AMI IDs.<br>- Author template file `huylam-cfn-week7.yaml`. | Optimized template portability across AWS Regions regardless of AMI ID variations. | [AWS SSM Parameter Types](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/parameters-section-structure.html#aws-ssm-parameter-types) |
-| **Thu** | - Author `UserData` bootstrap script for automated Apache (`httpd`) installation.<br>- Build responsive HTML template with student identification details.<br>- Define Security Group and EC2 Instance resources tagged with `Project = FCJ-Bootcamp-2026`. | Completed production-ready IaC template ready for live cloud deployment. | [EC2 User Data in CloudFormation](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-instance.html#cfn-ec2-instance-userdata) |
-| **Fri** | - Provision CloudFormation Stack `huylam-cfn-stack` in region `ap-southeast-1`.<br>- Supply input parameters: `EnvironmentName`, `InstanceType` (`t3.micro`), `StudentID`, `StudentName`.<br>- Monitor live deployment events via Stack Events stream. | All infrastructure resources successfully provisioned to `CREATE_COMPLETE` within 25 seconds. | [Working with Stacks](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacks.html) |
-| **Sat** | - Inspect Stack details: Stack Info, Events, Resources, Outputs, and Template.<br>- Extract public IP `47.129.129.6` from Outputs tab.<br>- Access website via web browser to verify application functionality and HTTP 200 status. | 100% verified student web server running smoothly on CloudFormation-provisioned infrastructure. | [Viewing Stack Outputs](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cfn-console-view-stack-data-resources.html) |
+| **Monday (14/09/2026)** | - Research Infrastructure as Code (IaC) principles.<br>- Compare manual console provisioning with IaC: repeatability, consistency, versioning, and automation.<br>- Explore AWS CloudFormation architecture. | Mastered CloudFormation Engine mechanics and translation of declarative templates into real AWS resources. | [AWS CloudFormation Concepts](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cfn-whatis-concepts.html) |
+| **Tuesday (15/09/2026)** | - Research CloudFormation template anatomy (YAML format).<br>- Study intrinsic functions: `!Ref`, `!Sub`, `!GetAtt`.<br>- Configure parameter specifications with constraints, defaults, and AllowedValues. | Mastered template parameterization for cross-environment reusability. | [CloudFormation Template Anatomy](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html) |
+| **Wednesday (16/09/2026)** | - Research dynamic SSM Parameter Store integration in CloudFormation.<br>- Configure dynamic AMI resolution for Amazon Linux 2023 avoiding hardcoded AMI IDs.<br>- Author template file `huylam-cfn-week7.yaml`. | Optimized template portability across AWS Regions regardless of AMI ID variations. | [AWS SSM Parameter Types](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/parameters-section-structure.html#aws-ssm-parameter-types) |
+| **Thursday (17/09/2026)** | - Author `UserData` bootstrap script for automated Apache (`httpd`) installation.<br>- Build responsive HTML template with student identification details.<br>- Define Security Group and EC2 Instance resources tagged with `Project = FCJ-Bootcamp-2026`. | Completed production-ready IaC template ready for live cloud deployment. | [EC2 User Data in CloudFormation](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-instance.html#cfn-ec2-instance-userdata) |
+| **Friday (18/09/2026)** | - Provision CloudFormation Stack `huylam-cfn-stack` in region `ap-southeast-1`.<br>- Supply input parameters: `EnvironmentName`, `InstanceType` (`t3.micro`), `StudentID`, `StudentName`.<br>- Monitor live deployment events via Stack Events stream. | All infrastructure resources successfully provisioned to `CREATE_COMPLETE` within 25 seconds. | [Working with Stacks](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacks.html) |
+| **Saturday (19/09/2026)** | - Inspect Stack details: Stack Info, Events, Resources, Outputs, and Template.<br>- Extract public IP `47.129.129.6` from Outputs tab.<br>- Access website via web browser to verify application functionality and HTTP 200 status. | 100% verified student web server running smoothly on CloudFormation-provisioned infrastructure. | [Viewing Stack Outputs](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cfn-console-view-stack-data-resources.html) |
 | **Sun** | - Execute **CloudFormation Drift Detection** on `huylam-cfn-stack`.<br>- Audit FinOps cloud expenditures ensuring AWS Free Tier compliance.<br>- Execute FinOps Teardown by deleting the stack, releasing EC2 and Security Group.<br>- Compile technical lab documentation and update Week 7 Worklog. | Successfully achieved all Week 7 objectives with high precision while maintaining 0 USD incurred cost. | [Detecting Drift on Stacks](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/detect-drift-stack.html) |
 
 ---

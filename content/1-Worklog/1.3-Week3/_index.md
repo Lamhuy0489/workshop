@@ -1,10 +1,13 @@
 ---
 title: "Week 3 Worklog"
-date: 2026-09-20
+date: 2026-08-23
 weight: 3
 chapter: false
 pre: " <b> 1.3. </b> "
 ---
+
+> [!NOTE] Execution Timeline
+> **From 17/08/2026 to 23/08/2026**
 
 ### Week 3 Objectives:
 * Master cloud network isolation architecture with Amazon Virtual Private Cloud (Amazon VPC).
@@ -21,12 +24,12 @@ pre: " <b> 1.3. </b> "
 
 | Day | Task | Key Deliverables & Achievements | Reference Material |
 | :--- | :--- | :--- | :--- |
-| **Monday** | - Theoretical study of Amazon VPC, CIDR blocks, Subnetting, and IPv4 addressing.<br>- Plan Multi-AZ topology for Custom VPC: `10.0.0.0/16`. | Segmented 4 subnets: 2 Public (`/20`) and 2 Private (`/20`) across Availability Zones `ap-southeast-1a` and `ap-southeast-1b`. | [AWS VPC Documentation](https://docs.aws.amazon.com/vpc/) |
-| **Tuesday** | - Provision Custom VPC using "VPC and more" on AWS Management Console.<br>- Create and attach Internet Gateway `huylam-igw`.<br>- Inspect interactive VPC Resource Map. | Successfully provisioned VPC `vpc-0125f4d6db3fbffa6`, attached IGW `igw-0b9db3a6eac29ede9`, with automated subnet and route table wiring. | [Lab 000003](https://000003.awsstudygroup.com) |
-| **Wednesday** | - Enable automated public IPv4 addressing on Public Subnet 1 (`huylam-subnet-public1-ap-southeast-1a`).<br>- Verify public route table routing `0.0.0.0/0` via IGW. | Enabled `MapPublicIpOnLaunch: true` ensuring compute resources launched in public subnet automatically receive public IPv4 addresses. | [Lab 000003](https://000003.awsstudygroup.com) |
-| **Thursday** | - Study stateful virtual firewall mechanisms: Security Groups.<br>- Create Security Group `huylam-vpc-web-sg` (`sg-0dbd6bbde1b366070`) in `huylam-vpc`.<br>- Configure Inbound Rules: TCP 22 (SSH), TCP 80 (HTTP), ICMP IPv4 (Echo Request/Ping). | Security group successfully provisioned, ready to safeguard compute workloads at transport and application layers. | [AWS Security Groups Guide](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html) |
-| **Friday** | - Study stateless subnet packet filtering: Network ACLs (NACL).<br>- Inspect Default NACL `acl-09a50f9e28bc6477d` associated with all 4 subnets.<br>- Compare architectural differences between Security Groups and Network ACLs. | Mastered the defense-in-depth model: NACL acts as perimeter gatekeeper at subnet boundary, while Security Group enforces instance-level rules. | [AWS NACL Documentation](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-network-acls.html) |
-| **Saturday** | - Launch EC2 instance `huylam-vpc-test-server` (`i-02a465d3907141cfb`) inside Custom VPC.<br>- Establish session via EC2 Instance Connect.<br>- Execute outbound ICMP ping to 8.8.8.8 and HTTP header validation with `curl`. | Verification successful: 1.13 ms average RTT to Google Public DNS; HTTP 301 Moved Permanently response received from Amazon.com. | [Lab 000003](https://000003.awsstudygroup.com) |
+| **Monday (17/08/2026)** | - Theoretical study of Amazon VPC, CIDR blocks, Subnetting, and IPv4 addressing.<br>- Plan Multi-AZ topology for Custom VPC: `10.0.0.0/16`. | Segmented 4 subnets: 2 Public (`/20`) and 2 Private (`/20`) across Availability Zones `ap-southeast-1a` and `ap-southeast-1b`. | [AWS VPC Documentation](https://docs.aws.amazon.com/vpc/) |
+| **Tuesday (18/08/2026)** | - Provision Custom VPC using "VPC and more" on AWS Management Console.<br>- Create and attach Internet Gateway `huylam-igw`.<br>- Inspect interactive VPC Resource Map. | Successfully provisioned VPC `vpc-0125f4d6db3fbffa6`, attached IGW `igw-0b9db3a6eac29ede9`, with automated subnet and route table wiring. | [Lab 000003](https://000003.awsstudygroup.com) |
+| **Wednesday (19/08/2026)** | - Enable automated public IPv4 addressing on Public Subnet 1 (`huylam-subnet-public1-ap-southeast-1a`).<br>- Verify public route table routing `0.0.0.0/0` via IGW. | Enabled `MapPublicIpOnLaunch: true` ensuring compute resources launched in public subnet automatically receive public IPv4 addresses. | [Lab 000003](https://000003.awsstudygroup.com) |
+| **Thursday (20/08/2026)** | - Study stateful virtual firewall mechanisms: Security Groups.<br>- Create Security Group `huylam-vpc-web-sg` (`sg-0dbd6bbde1b366070`) in `huylam-vpc`.<br>- Configure Inbound Rules: TCP 22 (SSH), TCP 80 (HTTP), ICMP IPv4 (Echo Request/Ping). | Security group successfully provisioned, ready to safeguard compute workloads at transport and application layers. | [AWS Security Groups Guide](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html) |
+| **Friday (21/08/2026)** | - Study stateless subnet packet filtering: Network ACLs (NACL).<br>- Inspect Default NACL `acl-09a50f9e28bc6477d` associated with all 4 subnets.<br>- Compare architectural differences between Security Groups and Network ACLs. | Mastered the defense-in-depth model: NACL acts as perimeter gatekeeper at subnet boundary, while Security Group enforces instance-level rules. | [AWS NACL Documentation](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-network-acls.html) |
+| **Saturday (22/08/2026)** | - Launch EC2 instance `huylam-vpc-test-server` (`i-02a465d3907141cfb`) inside Custom VPC.<br>- Establish session via EC2 Instance Connect.<br>- Execute outbound ICMP ping to 8.8.8.8 and HTTP header validation with `curl`. | Verification successful: 1.13 ms average RTT to Google Public DNS; HTTP 301 Moved Permanently response received from Amazon.com. | [Lab 000003](https://000003.awsstudygroup.com) |
 | **Sunday** | - Measure inbound network latency from local development machine to EC2 public IPv4.<br>- Execute FinOps cleanup: Terminate EC2 test instance while keeping VPC, Subnets, and IGW active at 0 USD/month.<br>- Finalize technical documentation and deploy worklog. | Achieved 0% packet loss on external ping (~49 ms RTT); safely released compute resources to safeguard AWS Free Tier budget. | [FCJ Curriculum](file:///Users/huylam/Downloads/aws/raw/labs/fcj-cloud-journey-curriculum.md) |
 
 ---

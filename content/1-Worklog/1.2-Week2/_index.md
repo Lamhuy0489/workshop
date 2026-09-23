@@ -1,10 +1,13 @@
 ---
 title: "Week 2 Worklog"
-date: 2026-09-19
+date: 2026-08-16
 weight: 2
 chapter: false
 pre: " <b> 1.2. </b> "
 ---
+
+> [!NOTE] Execution Timeline
+> **From 10/08/2026 to 16/08/2026**
 
 ### Week 2 Objectives:
 * Explore object storage architecture and access security mechanisms on Amazon S3.
@@ -19,12 +22,12 @@ pre: " <b> 1.2. </b> "
 
 | Day | Task Description | Deliverables & Outcomes | Resource Link |
 | :--- | :--- | :--- | :--- |
-| **Mon** | - Study Amazon S3 & Static Website Hosting.<br>- Create S3 Bucket `huylam-static-web-677994024390`.<br>- Upload enterprise portal `index.html`.<br>- Enable Static Website Hosting & Enforce Bucket Policy. | Bucket active in Public Read mode; static website live globally via AWS endpoint with HTTP 200 OK. | [Lab 000057](https://000057.awsstudygroup.com) |
-| **Tue** | - Research IAM Roles for EC2 compute.<br>- Create IAM Role `huylam-ec2-s3-readonly-role` with `AmazonS3ReadOnlyAccess`.<br>- Attach IAM Role to EC2 instance.<br>- Test S3 CLI operations from virtual instance via EC2 Instance Connect. | Understood seamless credential federation via EC2 Instance Metadata Service (IMDS), successfully listing S3 buckets without hardcoded credentials. | [Lab 000048](https://000048.awsstudygroup.com) |
-| **Wed** | - Study EC2 User Data bootstrap automation.<br>- Configure Security Group opening HTTP (80) and SSH (22).<br>- Launch EC2 `t3.micro` instance with automated Apache httpd installation.<br>- Verify web access via Public IPv4. | Automated Apache web server deployment upon initial instance boot sequence; web server responded HTTP 200 OK with student identification card. | [Lab 000004](https://000004.awsstudygroup.com) |
-| **Thu** | - Configure IAM Deny Policy testing.<br>- Evaluate policy precedence logic in AWS IAM. | Verified that Explicit Deny consistently overrides Explicit Allow under AWS CLI testing. | [Lab 000002](https://000002.awsstudygroup.com) |
-| **Fri** | - Provision Amazon RDS MySQL under Free Tier.<br>- Configure isolated Security Groups allowing EC2 ingress only. | Relational database instance achieved Available status inside private network tier. | [Lab 000005](https://000005.awsstudygroup.com) |
-| **Sat** | - Connect EC2 to RDS MySQL.<br>- Deploy dynamic database-backed web application.<br>- Execute resource cleanup and synthesize report. | Successfully completed 3-tier architecture verification while safeguarding Free Tier budgets. | [FCJ Curriculum](file:///Users/huylam/Downloads/aws/raw/labs/fcj-cloud-journey-curriculum.md) |
+| **Monday (10/08/2026)** | - Study Amazon S3 & Static Website Hosting.<br>- Create S3 Bucket `huylam-static-web-677994024390`.<br>- Upload enterprise portal `index.html`.<br>- Enable Static Website Hosting & Enforce Bucket Policy. | Bucket active in Public Read mode; static website live globally via AWS endpoint with HTTP 200 OK. | [Lab 000057](https://000057.awsstudygroup.com) |
+| **Tuesday (11/08/2026)** | - Research IAM Roles for EC2 compute.<br>- Create IAM Role `huylam-ec2-s3-readonly-role` with `AmazonS3ReadOnlyAccess`.<br>- Attach IAM Role to EC2 instance.<br>- Test S3 CLI operations from virtual instance via EC2 Instance Connect. | Understood seamless credential federation via EC2 Instance Metadata Service (IMDS), successfully listing S3 buckets without hardcoded credentials. | [Lab 000048](https://000048.awsstudygroup.com) |
+| **Wednesday (12/08/2026)** | - Study EC2 User Data bootstrap automation.<br>- Configure Security Group opening HTTP (80) and SSH (22).<br>- Launch EC2 `t3.micro` instance with automated Apache httpd installation.<br>- Verify web access via Public IPv4. | Automated Apache web server deployment upon initial instance boot sequence; web server responded HTTP 200 OK with student identification card. | [Lab 000004](https://000004.awsstudygroup.com) |
+| **Thursday (13/08/2026)** | - Configure IAM Deny Policy testing.<br>- Evaluate policy precedence logic in AWS IAM. | Verified that Explicit Deny consistently overrides Explicit Allow under AWS CLI testing. | [Lab 000002](https://000002.awsstudygroup.com) |
+| **Friday (14/08/2026)** | - Provision Amazon RDS MySQL under Free Tier.<br>- Configure isolated Security Groups allowing EC2 ingress only. | Relational database instance achieved Available status inside private network tier. | [Lab 000005](https://000005.awsstudygroup.com) |
+| **Saturday (15/08/2026)** | - Connect EC2 to RDS MySQL.<br>- Deploy dynamic database-backed web application.<br>- Execute resource cleanup and synthesize report. | Successfully completed 3-tier architecture verification while safeguarding Free Tier budgets. | [FCJ Curriculum](file:///Users/huylam/Downloads/aws/raw/labs/fcj-cloud-journey-curriculum.md) |
 
 ### Verified AWS Technical Configuration:
 

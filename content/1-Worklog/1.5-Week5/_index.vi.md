@@ -1,10 +1,13 @@
 ---
 title: "Worklog Tuần 5"
-date: 2026-09-20
+date: 2026-09-06
 weight: 5
 chapter: false
 pre: " <b> 1.5. </b> "
 ---
+
+> [!NOTE] Thời gian thực hiện
+> **Từ ngày 31/08/2026 đến ngày 06/09/2026**
 
 ### Mục tiêu tuần 5:
 * Nghiên cứu và làm chủ ba trụ cột quan sát hệ thống (Three Pillars of Observability: Metrics, Logs, Alarms & Traces) trên nền tảng Amazon Web Services (AWS).
@@ -24,12 +27,12 @@ pre: " <b> 1.5. </b> "
 
 | Thứ | Công việc | Kết quả đạt được | Nguồn tài liệu |
 | :--- | :--- | :--- | :--- |
-| **Thứ 2** | - Nghiên cứu lý thuyết Observability: Phân biệt Metrics, Logs, Traces.<br>- Khảo sát kiến trúc thu thập dữ liệu của Amazon CloudWatch.<br>- Tìm hiểu chu kỳ thu thập dữ liệu mặc định (Basic Monitoring: 5 phút vs Detailed Monitoring: 1 phút). | Nắm vững nguyên lý hoạt động của CloudWatch và cách thức AWS giám sát hạ tầng đám mây. | [AWS CloudWatch Concepts](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html) |
-| **Thứ 3** | - Tìm hiểu CloudWatch Metrics và không gian tên (Namespaces).<br>- Thu thập các thông số vận hành của EC2 (`CPUUtilization`, `NetworkIn`, `NetworkOut`).<br>- Xây dựng biểu thức toán học Metric Math `(m2 + m3) / 1024` tính tổng băng thông mạng theo KB. | Thiết lập biểu đồ trực quan hóa dữ liệu hiệu năng mạng kết hợp từ nhiều luồng chỉ số độc lập. | [CloudWatch Metric Math Guide](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/using-metric-math.html) |
-| **Thứ 4** | - Tìm hiểu cơ chế quản lý nhật ký CloudWatch Logs: Log Groups, Log Streams, Retention Policies.<br>- Khởi tạo Log Groups `/huylam/cloudwatch/system-logs` và `/huylam/cloudwatch/httpd-access`.<br>- Viết câu truy vấn Logs Insights trích xuất thông tin định danh sinh viên. | Trích xuất thành công 8 bản ghi sự kiện hệ thống xác thực danh tính sinh viên Lâm Quang Huy (MSSV: 0212267). | [CloudWatch Logs Insights](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/AnalyzingLogData.html) |
-| **Thứ 5** | - Nghiên cứu dịch vụ phân phối thông báo Amazon SNS.<br>- Khởi tạo SNS Topic `huylam-cw-alarms` và cấu hình Email Subscription tới `huyngu127@gmail.com`.<br>- Xác nhận liên kết đăng ký qua email (Subscription Confirmed). | Thiết lập thành công hạ tầng truyền dẫn cảnh báo tự động từ CloudWatch tới quản trị viên. | [Amazon SNS Developer Guide](https://docs.aws.amazon.com/sns/latest/dg/welcome.html) |
-| **Thứ 6** | - Khởi tạo CloudWatch Alarm `huylam-ec2-high-cpu-alarm` với ngưỡng Static Threshold >= 70%.<br>- Gán hành động gửi thông báo qua SNS Topic `huylam-cw-alarms`.<br>- Thực hiện kiểm tra trạng thái ban đầu của Alarm (trạng thái OK). | Hoàn tất cấu hình luật giám sát tự động bảo vệ máy chủ EC2 trước nguy cơ tràn tải vi xử lý. | [Lab 000008](https://000008.awsstudygroup.com) |
-| **Thứ 7** | - Triển khai bài đo kiểm chịu tải cao (CPU Stress Test) trên máy chủ `i-048fa1b4099b74bb7`.<br>- Ghi nhận vi xử lý tăng vọt lên 93.86%, Alarm chuyển sang trạng thái ALARM.<br>- Xác thực email cảnh báo gửi về Gmail, sau đó theo dõi hệ thống tự phục hồi về OK (6.46%). | Kiểm chứng thực nghiệm thành công 100% vòng đời phát hiện sự cố, gửi thông báo và tự phục hồi. | [AWS Systems Manager Guide](https://docs.aws.amazon.com/systems-manager/latest/userguide/) |
+| **Thứ 2 (31/08/2026)** | - Nghiên cứu lý thuyết Observability: Phân biệt Metrics, Logs, Traces.<br>- Khảo sát kiến trúc thu thập dữ liệu của Amazon CloudWatch.<br>- Tìm hiểu chu kỳ thu thập dữ liệu mặc định (Basic Monitoring: 5 phút vs Detailed Monitoring: 1 phút). | Nắm vững nguyên lý hoạt động của CloudWatch và cách thức AWS giám sát hạ tầng đám mây. | [AWS CloudWatch Concepts](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html) |
+| **Thứ 3 (01/09/2026)** | - Tìm hiểu CloudWatch Metrics và không gian tên (Namespaces).<br>- Thu thập các thông số vận hành của EC2 (`CPUUtilization`, `NetworkIn`, `NetworkOut`).<br>- Xây dựng biểu thức toán học Metric Math `(m2 + m3) / 1024` tính tổng băng thông mạng theo KB. | Thiết lập biểu đồ trực quan hóa dữ liệu hiệu năng mạng kết hợp từ nhiều luồng chỉ số độc lập. | [CloudWatch Metric Math Guide](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/using-metric-math.html) |
+| **Thứ 4 (02/09/2026)** | - Tìm hiểu cơ chế quản lý nhật ký CloudWatch Logs: Log Groups, Log Streams, Retention Policies.<br>- Khởi tạo Log Groups `/huylam/cloudwatch/system-logs` và `/huylam/cloudwatch/httpd-access`.<br>- Viết câu truy vấn Logs Insights trích xuất thông tin định danh sinh viên. | Trích xuất thành công 8 bản ghi sự kiện hệ thống xác thực danh tính sinh viên Lâm Quang Huy (MSSV: 0212267). | [CloudWatch Logs Insights](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/AnalyzingLogData.html) |
+| **Thứ 5 (03/09/2026)** | - Nghiên cứu dịch vụ phân phối thông báo Amazon SNS.<br>- Khởi tạo SNS Topic `huylam-cw-alarms` và cấu hình Email Subscription tới `huyngu127@gmail.com`.<br>- Xác nhận liên kết đăng ký qua email (Subscription Confirmed). | Thiết lập thành công hạ tầng truyền dẫn cảnh báo tự động từ CloudWatch tới quản trị viên. | [Amazon SNS Developer Guide](https://docs.aws.amazon.com/sns/latest/dg/welcome.html) |
+| **Thứ 6 (04/09/2026)** | - Khởi tạo CloudWatch Alarm `huylam-ec2-high-cpu-alarm` với ngưỡng Static Threshold >= 70%.<br>- Gán hành động gửi thông báo qua SNS Topic `huylam-cw-alarms`.<br>- Thực hiện kiểm tra trạng thái ban đầu của Alarm (trạng thái OK). | Hoàn tất cấu hình luật giám sát tự động bảo vệ máy chủ EC2 trước nguy cơ tràn tải vi xử lý. | [Lab 000008](https://000008.awsstudygroup.com) |
+| **Thứ 7 (05/09/2026)** | - Triển khai bài đo kiểm chịu tải cao (CPU Stress Test) trên máy chủ `i-048fa1b4099b74bb7`.<br>- Ghi nhận vi xử lý tăng vọt lên 93.86%, Alarm chuyển sang trạng thái ALARM.<br>- Xác thực email cảnh báo gửi về Gmail, sau đó theo dõi hệ thống tự phục hồi về OK (6.46%). | Kiểm chứng thực nghiệm thành công 100% vòng đời phát hiện sự cố, gửi thông báo và tự phục hồi. | [AWS Systems Manager Guide](https://docs.aws.amazon.com/systems-manager/latest/userguide/) |
 | **Chủ Nhật**| - Xây dựng CloudWatch Dashboard `huylam-monitoring-dashboard` với 4 widgets chuyên sâu.<br>- Kiểm tra báo cáo FinOps: Billing Dashboard ghi nhận MTD 0.10 USD, 2 Budgets đạt trạng thái Healthy.<br>- Thực hiện quy trình FinOps Cleanup: Xóa toàn bộ Alarms, Dashboards, Log Groups, SNS Topics và terminate EC2 instances.<br>- Hoàn thiện hồ sơ minh chứng kỹ thuật và cập nhật tài liệu. | Hoàn thành toàn diện bài thực hành Lab 000008, bảo toàn 100% định mức ngân sách AWS Free Tier. | [FCJ Curriculum](file:///Users/huylam/Downloads/aws/raw/labs/fcj-cloud-journey-curriculum.md) |
 
 ---
@@ -246,14 +249,14 @@ fields @timestamp, @message
 ---------------------------------------------------------------------------------------------------------------------
 | @timestamp               | @message                                                                               |
 +--------------------------+----------------------------------------------------------------------------------------+
-| 2026-09-20T16:04:15.000Z | [SYSTEM_EVENT] Student: Lam Quang Huy (MSSV: 0212267) - Node i-048fa1b4099b74bb7 OK    |
-| 2026-09-20T16:04:10.000Z | [SYSTEM_EVENT] CloudWatch Logs Agent health status verified. System healthy.          |
-| 2026-09-20T16:04:05.000Z | [SYSTEM_EVENT] Student: Lam Quang Huy (MSSV: 0212267) - Monitoring initialized        |
-| 2026-09-20T16:04:00.000Z | [SYSTEM_EVENT] HTTP Server started listening on port 80.                              |
-| 2026-09-20T16:03:55.000Z | [SYSTEM_EVENT] Memory buffer allocation checked: 1024 MB available.                   |
-| 2026-09-20T16:03:50.000Z | [SYSTEM_EVENT] Student: Lam Quang Huy (MSSV: 0212267) - Kernel 6.1 loaded successfully|
-| 2026-09-20T16:03:45.000Z | [SYSTEM_EVENT] Network interface ens5 initialized. DHCP lease acquired.                |
-| 2026-09-20T16:03:40.000Z | [SYSTEM_EVENT] System boot completed for instance i-048fa1b4099b74bb7.                |
+| 2026-09-04T16:04:15.000Z | [SYSTEM_EVENT] Student: Lam Quang Huy (MSSV: 0212267) - Node i-048fa1b4099b74bb7 OK    |
+| 2026-09-04T16:04:10.000Z | [SYSTEM_EVENT] CloudWatch Logs Agent health status verified. System healthy.          |
+| 2026-09-04T16:04:05.000Z | [SYSTEM_EVENT] Student: Lam Quang Huy (MSSV: 0212267) - Monitoring initialized        |
+| 2026-09-04T16:04:00.000Z | [SYSTEM_EVENT] HTTP Server started listening on port 80.                              |
+| 2026-09-04T16:03:55.000Z | [SYSTEM_EVENT] Memory buffer allocation checked: 1024 MB available.                   |
+| 2026-09-04T16:03:50.000Z | [SYSTEM_EVENT] Student: Lam Quang Huy (MSSV: 0212267) - Kernel 6.1 loaded successfully|
+| 2026-09-04T16:03:45.000Z | [SYSTEM_EVENT] Network interface ens5 initialized. DHCP lease acquired.                |
+| 2026-09-04T16:03:40.000Z | [SYSTEM_EVENT] System boot completed for instance i-048fa1b4099b74bb7.                |
 ---------------------------------------------------------------------------------------------------------------------
 ```
 *Đánh giá*: Logs Insights cho phép phân tích hàng triệu dòng log với tốc độ cao, khả năng trích xuất trường dữ liệu linh hoạt giúp việc điều tra nguyên nhân gốc rễ (Root Cause Analysis - RCA) trở nên chuẩn xác và nhanh chóng.

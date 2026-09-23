@@ -1,10 +1,13 @@
 ---
 title: "Worklog Tuần 1"
-date: 2026-09-18
+date: 2026-08-09
 weight: 1
 chapter: false
 pre: " <b> 1.1. </b> "
 ---
+
+> [!NOTE] Thời gian thực hiện
+> **Từ ngày 03/08/2026 đến ngày 09/08/2026**
 
 ### Mục tiêu tuần 1:
 * Đăng ký và thiết lập tài khoản AWS cá nhân mới (Free Tier 12 tháng).
@@ -18,12 +21,12 @@ pre: " <b> 1.1. </b> "
 
 | Thứ | Công việc | Kết quả đạt được | Nguồn tài liệu |
 | :--- | :--- | :--- | :--- |
-| **Thứ 2** | - Tìm hiểu nội quy thực tập FCAJ Bootcamp 2026.<br>- Nghiên cứu khung chương trình The First Cloud Journey (FCJ). | Nắm rõ nội quy tại hn-rules.awsfcaj.com và tiêu chuẩn tốt nghiệp. | https://cloudjourney.awsstudygroup.com |
-| **Thứ 3** | - Đăng ký tài khoản AWS cá nhân.<br>- Cấu hình MFA cho tài khoản Root (Lab 000001). | Kích hoạt thành công Virtual MFA trên điện thoại; Root Account được bảo vệ tuyệt đối. | https://000001.awsstudygroup.com |
-| **Thứ 4** | - Cấu hình AWS Budgets khóa chi phí (Lab 000007). | Tạo thành công 2 ngân sách (100 USD và 200 USD) trạng thái HEALTHY. | https://000007.awsstudygroup.com |
-| **Thứ 5** | - Cấu hình phân quyền IAM (Lab 000002). | Tạo User `dev_admin`, gán quyền AdministratorAccess, tạo Access Key CLI. | https://000002.awsstudygroup.com |
-| **Thứ 6** | - Cài đặt AWS CLI v2 trên máy macOS (Lab 000011).<br>- Cấu hình profile kết nối bằng lệnh `aws configure`. | AWS CLI v2.36.48 hoạt động ổn định; xác thực thành công qua `aws sts get-caller-identity`. | https://000011.awsstudygroup.com |
-| **Thứ 7** | - Thiết lập Hugo Learn Theme và deploy website Báo cáo thực tập lên GitHub Pages.<br>- Soạn thảo đề xuất dự án Capstone: Enterprise Agentic RAG Platform on AWS. | Website báo cáo thực tập hoạt động trực tuyến song ngữ tại lamhuy0489.github.io/workshop. | https://github.com/AWS-First-Cloud-Journey/Workshop-template |
+| **Thứ 2 (03/08/2026)** | - Tìm hiểu nội quy thực tập FCAJ Bootcamp 2026.<br>- Nghiên cứu khung chương trình The First Cloud Journey (FCJ). | Nắm rõ nội quy tại hn-rules.awsfcaj.com và tiêu chuẩn tốt nghiệp. | https://cloudjourney.awsstudygroup.com |
+| **Thứ 3 (04/08/2026)** | - Đăng ký tài khoản AWS cá nhân.<br>- Cấu hình MFA cho tài khoản Root (Lab 000001). | Kích hoạt thành công Virtual MFA trên điện thoại; Root Account được bảo vệ tuyệt đối. | https://000001.awsstudygroup.com |
+| **Thứ 4 (05/08/2026)** | - Cấu hình AWS Budgets khóa chi phí (Lab 000007). | Tạo thành công 2 ngân sách (100 USD và 200 USD) trạng thái HEALTHY. | https://000007.awsstudygroup.com |
+| **Thứ 5 (06/08/2026)** | - Cấu hình phân quyền IAM (Lab 000002). | Tạo User `dev_admin`, gán quyền AdministratorAccess, tạo Access Key CLI. | https://000002.awsstudygroup.com |
+| **Thứ 6 (07/08/2026)** | - Cài đặt AWS CLI v2 trên máy macOS (Lab 000011).<br>- Cấu hình profile kết nối bằng lệnh `aws configure`. | AWS CLI v2.36.48 hoạt động ổn định; xác thực thành công qua `aws sts get-caller-identity`. | https://000011.awsstudygroup.com |
+| **Thứ 7 (08/08/2026)** | - Thiết lập Hugo Learn Theme và deploy website Báo cáo thực tập lên GitHub Pages.<br>- Soạn thảo đề xuất dự án Capstone: Enterprise Agentic RAG Platform on AWS. | Website báo cáo thực tập hoạt động trực tuyến song ngữ tại lamhuy0489.github.io/workshop. | https://github.com/AWS-First-Cloud-Journey/Workshop-template |
 
 ### Chi tiết các thông số kỹ thuật đã xác thực trên AWS:
 - **AWS Account ID**: `677994024390`

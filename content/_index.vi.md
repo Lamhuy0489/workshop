@@ -36,7 +36,7 @@ chapter: false
 | **Số điện thoại liên hệ** | +841277870645 |
 | **Email liên hệ** | `hunggia@amazon.com.vn` |
 | **Vị trí / Chương trình thực tập** | First Cloud AI Journey (FCAJ Workforce Bootcamp 2026) |
-| **Thời gian thực tập** | Từ ngày 03-08-2026 đến ngày 27-09-2026 (8 tuần) |
+| **Thời gian thực tập** | Từ ngày 03-08-2026 đến ngày 25-10-2026 (12 tuần) |
 
 ---
 

@@ -1,10 +1,13 @@
 ---
 title: "Week 5 Worklog"
-date: 2026-09-20
+date: 2026-09-06
 weight: 5
 chapter: false
 pre: " <b> 1.5. </b> "
 ---
+
+> [!NOTE] Execution Timeline
+> **From 31/08/2026 to 06/09/2026**
 
 ### Week 5 Objectives:
 * Research and master the Three Pillars of Observability (Metrics, Logs, Alarms & Traces) on Amazon Web Services (AWS).
@@ -24,12 +27,12 @@ pre: " <b> 1.5. </b> "
 
 | Day | Task | Key Deliverable | Reference Material |
 | :--- | :--- | :--- | :--- |
-| **Mon** | - Study Observability fundamentals: Metrics, Logs, Traces.<br>- Investigate Amazon CloudWatch telemetry architecture.<br>- Compare monitoring intervals (Basic Monitoring: 5-min vs Detailed Monitoring: 1-min). | Mastered CloudWatch operating principles and AWS native monitoring patterns. | [AWS CloudWatch Concepts](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html) |
-| **Tue** | - Research CloudWatch Metrics and Namespaces.<br>- Capture EC2 runtime metrics (`CPUUtilization`, `NetworkIn`, `NetworkOut`).<br>- Construct Metric Math expression `(m2 + m3) / 1024` to compute aggregate network KB. | Implemented combined network throughput visualization from disparate raw byte streams. | [CloudWatch Metric Math Guide](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/using-metric-math.html) |
-| **Wed** | - Explore CloudWatch Logs architecture: Log Groups, Log Streams, Retention.<br>- Provision Log Groups `/huylam/cloudwatch/system-logs` and `/huylam/cloudwatch/httpd-access`.<br>- Run Logs Insights queries filtering student identity events. | Successfully extracted 8 structured log records validating student identity Lam Quang Huy (ID: `0212267`). | [CloudWatch Logs Insights](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/AnalyzingLogData.html) |
-| **Thu** | - Research Amazon SNS pub/sub messaging architecture.<br>- Create SNS Topic `huylam-cw-alarms` and subscribe `huyngu127@gmail.com`.<br>- Confirm email subscription via automated confirmation link. | Established verified notification pipeline connecting CloudWatch alarms to the administrator mailbox. | [Amazon SNS Developer Guide](https://docs.aws.amazon.com/sns/latest/dg/welcome.html) |
-| **Fri** | - Create CloudWatch Alarm `huylam-ec2-high-cpu-alarm` with static threshold >= 70%.<br>- Attach notification trigger forwarding to SNS Topic `huylam-cw-alarms`.<br>- Verify initial baseline status (OK status). | Configured automated threshold rule protecting compute instances against resource exhaustion. | [Lab 000008](https://000008.awsstudygroup.com) |
-| **Sat** | - Execute CPU stress test on EC2 instance `i-048fa1b4099b74bb7`.<br>- Recorded CPU surge to 93.86%, triggering alarm transition from OK to ALARM.<br>- Confirmed SNS email receipt in Gmail, followed by automated return to OK (6.46%). | Empirically validated full incident detection, alerting, and self-recovery lifecycle. | [AWS Systems Manager Guide](https://docs.aws.amazon.com/systems-manager/latest/userguide/) |
+| **Monday (31/08/2026)** | - Study Observability fundamentals: Metrics, Logs, Traces.<br>- Investigate Amazon CloudWatch telemetry architecture.<br>- Compare monitoring intervals (Basic Monitoring: 5-min vs Detailed Monitoring: 1-min). | Mastered CloudWatch operating principles and AWS native monitoring patterns. | [AWS CloudWatch Concepts](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html) |
+| **Tuesday (01/09/2026)** | - Research CloudWatch Metrics and Namespaces.<br>- Capture EC2 runtime metrics (`CPUUtilization`, `NetworkIn`, `NetworkOut`).<br>- Construct Metric Math expression `(m2 + m3) / 1024` to compute aggregate network KB. | Implemented combined network throughput visualization from disparate raw byte streams. | [CloudWatch Metric Math Guide](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/using-metric-math.html) |
+| **Wednesday (02/09/2026)** | - Explore CloudWatch Logs architecture: Log Groups, Log Streams, Retention.<br>- Provision Log Groups `/huylam/cloudwatch/system-logs` and `/huylam/cloudwatch/httpd-access`.<br>- Run Logs Insights queries filtering student identity events. | Successfully extracted 8 structured log records validating student identity Lam Quang Huy (ID: `0212267`). | [CloudWatch Logs Insights](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/AnalyzingLogData.html) |
+| **Thursday (03/09/2026)** | - Research Amazon SNS pub/sub messaging architecture.<br>- Create SNS Topic `huylam-cw-alarms` and subscribe `huyngu127@gmail.com`.<br>- Confirm email subscription via automated confirmation link. | Established verified notification pipeline connecting CloudWatch alarms to the administrator mailbox. | [Amazon SNS Developer Guide](https://docs.aws.amazon.com/sns/latest/dg/welcome.html) |
+| **Friday (04/09/2026)** | - Create CloudWatch Alarm `huylam-ec2-high-cpu-alarm` with static threshold >= 70%.<br>- Attach notification trigger forwarding to SNS Topic `huylam-cw-alarms`.<br>- Verify initial baseline status (OK status). | Configured automated threshold rule protecting compute instances against resource exhaustion. | [Lab 000008](https://000008.awsstudygroup.com) |
+| **Saturday (05/09/2026)** | - Execute CPU stress test on EC2 instance `i-048fa1b4099b74bb7`.<br>- Recorded CPU surge to 93.86%, triggering alarm transition from OK to ALARM.<br>- Confirmed SNS email receipt in Gmail, followed by automated return to OK (6.46%). | Empirically validated full incident detection, alerting, and self-recovery lifecycle. | [AWS Systems Manager Guide](https://docs.aws.amazon.com/systems-manager/latest/userguide/) |
 | **Sun** | - Design comprehensive CloudWatch Dashboard `huylam-monitoring-dashboard` with 4 widgets.<br>- Review FinOps metrics: Month-to-date cost at $0.10, 2 Budgets Healthy.<br>- Execute FinOps teardown: Deleted Alarms, Dashboards, Log Groups, SNS Topics, and terminated EC2 instances.<br>- Finalized technical documentation and published report. | Accomplished Lab 000008 requirements in full while preserving AWS Free Tier eligibility. | [FCJ Curriculum](file:///Users/huylam/Downloads/aws/raw/labs/fcj-cloud-journey-curriculum.md) |
 
 ---
@@ -246,14 +249,14 @@ fields @timestamp, @message
 ---------------------------------------------------------------------------------------------------------------------
 | @timestamp               | @message                                                                               |
 +--------------------------+----------------------------------------------------------------------------------------+
-| 2026-09-20T16:04:15.000Z | [SYSTEM_EVENT] Student: Lam Quang Huy (MSSV: 0212267) - Node i-048fa1b4099b74bb7 OK    |
-| 2026-09-20T16:04:10.000Z | [SYSTEM_EVENT] CloudWatch Logs Agent health status verified. System healthy.          |
-| 2026-09-20T16:04:05.000Z | [SYSTEM_EVENT] Student: Lam Quang Huy (MSSV: 0212267) - Monitoring initialized        |
-| 2026-09-20T16:04:00.000Z | [SYSTEM_EVENT] HTTP Server started listening on port 80.                              |
-| 2026-09-20T16:03:55.000Z | [SYSTEM_EVENT] Memory buffer allocation checked: 1024 MB available.                   |
-| 2026-09-20T16:03:50.000Z | [SYSTEM_EVENT] Student: Lam Quang Huy (MSSV: 0212267) - Kernel 6.1 loaded successfully|
-| 2026-09-20T16:03:45.000Z | [SYSTEM_EVENT] Network interface ens5 initialized. DHCP lease acquired.                |
-| 2026-09-20T16:03:40.000Z | [SYSTEM_EVENT] System boot completed for instance i-048fa1b4099b74bb7.                |
+| 2026-09-04T16:04:15.000Z | [SYSTEM_EVENT] Student: Lam Quang Huy (MSSV: 0212267) - Node i-048fa1b4099b74bb7 OK    |
+| 2026-09-04T16:04:10.000Z | [SYSTEM_EVENT] CloudWatch Logs Agent health status verified. System healthy.          |
+| 2026-09-04T16:04:05.000Z | [SYSTEM_EVENT] Student: Lam Quang Huy (MSSV: 0212267) - Monitoring initialized        |
+| 2026-09-04T16:04:00.000Z | [SYSTEM_EVENT] HTTP Server started listening on port 80.                              |
+| 2026-09-04T16:03:55.000Z | [SYSTEM_EVENT] Memory buffer allocation checked: 1024 MB available.                   |
+| 2026-09-04T16:03:50.000Z | [SYSTEM_EVENT] Student: Lam Quang Huy (MSSV: 0212267) - Kernel 6.1 loaded successfully|
+| 2026-09-04T16:03:45.000Z | [SYSTEM_EVENT] Network interface ens5 initialized. DHCP lease acquired.                |
+| 2026-09-04T16:03:40.000Z | [SYSTEM_EVENT] System boot completed for instance i-048fa1b4099b74bb7.                |
 ---------------------------------------------------------------------------------------------------------------------
 ```
 *Assessment*: Logs Insights delivered sub-second query latency over indexed event streams, proving its efficacy for fast Root Cause Analysis (RCA).

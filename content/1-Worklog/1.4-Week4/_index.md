@@ -1,10 +1,13 @@
 ---
 title: "Week 4 Worklog"
-date: 2026-09-20
+date: 2026-08-30
 weight: 4
 chapter: false
 pre: " <b> 1.4. </b> "
 ---
+
+> [!NOTE] Execution Timeline
+> **From 24/08/2026 to 30/08/2026**
 
 ### Week 4 Objectives:
 * Explore highly available and scalable cloud compute architectures on AWS.
@@ -21,12 +24,12 @@ pre: " <b> 1.4. </b> "
 
 | Day | Task | Key Deliverable | Reference Material |
 | :--- | :--- | :--- | :--- |
-| **Mon** | - Research Elastic Load Balancing (ELB) theory, comparing ALB, NLB, and GLB.<br>- Study Layer 7 routing mechanisms, Listeners, and Target Groups. | Mastered Application Load Balancer operation principles and target registration dynamics. | [AWS ELB Documentation](https://docs.aws.amazon.com/elasticloadbalancing/) |
-| **Tue** | - Study Amazon EC2 Auto Scaling principles.<br>- Understand capacity metrics: Desired, Minimum, and Maximum.<br>- Investigate the EC2 instance lifecycle. | Gained thorough understanding of traffic-driven scaling and self-healing mechanisms upon instance failure. | [AWS Auto Scaling Guide](https://docs.aws.amazon.com/autoscaling/ec2/userguide/what-is-amazon-ec2-auto-scaling.html) |
-| **Wed** | - Design a two-tier network security architecture on `huylam-vpc`.<br>- Create Security Group `huylam-alb-sg` accepting HTTP (port 80) from Internet (`0.0.0.0/0`).<br>- Create Security Group `huylam-asg-web-sg` accepting HTTP only from `huylam-alb-sg`. | Established Defense in Depth, eliminating direct Internet exposure for backend application servers. | [AWS Security Best Practices](https://docs.aws.amazon.com/whitepapers/latest/architecting-for-the-cloud-aws-best-practices/security.html) |
-| **Thu** | - Create Launch Template `huylam-launch-template` (`lt-064a116476cc47e0a`).<br>- Specify Amazon Linux 2023 AMI and `t3.micro` hardware type.<br>- Develop User Data script retrieving IMDSv2 tokens and rendering student identity data. | Standardized web server deployment template; injected dynamic Instance ID, Private IP, and AZ into the web page. | [Lab 000006](https://000006.awsstudygroup.com) |
-| **Fri** | - Create Target Group `huylam-alb-tg` with HTTP port 80 and Health Check path `/`.<br>- Create Internet-facing ALB `huylam-alb` mapped across 2 Multi-AZ Public Subnets.<br>- Configure HTTP:80 Listener forwarding to `huylam-alb-tg`. | Completed load balancing infrastructure; ALB provisioned with public DNS name and reached Active state. | [AWS ALB Getting Started](https://docs.aws.amazon.com/elasticloadbalancing/latest/application/application-load-balancer-getting-started.html) |
-| **Sat** | - Create Auto Scaling Group `huylam-asg` (Desired: 2, Min: 1, Max: 4).<br>- Associate with Launch Template and Target Group `huylam-alb-tg`.<br>- Monitor automated instance provisioning across 2 Availability Zones. | Automated provisioning of 2 instances: `i-01abe8b9b987aad60` (`ap-southeast-1a`) and `i-0e633e2910dd9ea8f` (`ap-southeast-1b`). | [Lab 000006](https://000006.awsstudygroup.com) |
+| **Monday (24/08/2026)** | - Research Elastic Load Balancing (ELB) theory, comparing ALB, NLB, and GLB.<br>- Study Layer 7 routing mechanisms, Listeners, and Target Groups. | Mastered Application Load Balancer operation principles and target registration dynamics. | [AWS ELB Documentation](https://docs.aws.amazon.com/elasticloadbalancing/) |
+| **Tuesday (25/08/2026)** | - Study Amazon EC2 Auto Scaling principles.<br>- Understand capacity metrics: Desired, Minimum, and Maximum.<br>- Investigate the EC2 instance lifecycle. | Gained thorough understanding of traffic-driven scaling and self-healing mechanisms upon instance failure. | [AWS Auto Scaling Guide](https://docs.aws.amazon.com/autoscaling/ec2/userguide/what-is-amazon-ec2-auto-scaling.html) |
+| **Wednesday (26/08/2026)** | - Design a two-tier network security architecture on `huylam-vpc`.<br>- Create Security Group `huylam-alb-sg` accepting HTTP (port 80) from Internet (`0.0.0.0/0`).<br>- Create Security Group `huylam-asg-web-sg` accepting HTTP only from `huylam-alb-sg`. | Established Defense in Depth, eliminating direct Internet exposure for backend application servers. | [AWS Security Best Practices](https://docs.aws.amazon.com/whitepapers/latest/architecting-for-the-cloud-aws-best-practices/security.html) |
+| **Thursday (27/08/2026)** | - Create Launch Template `huylam-launch-template` (`lt-064a116476cc47e0a`).<br>- Specify Amazon Linux 2023 AMI and `t3.micro` hardware type.<br>- Develop User Data script retrieving IMDSv2 tokens and rendering student identity data. | Standardized web server deployment template; injected dynamic Instance ID, Private IP, and AZ into the web page. | [Lab 000006](https://000006.awsstudygroup.com) |
+| **Friday (28/08/2026)** | - Create Target Group `huylam-alb-tg` with HTTP port 80 and Health Check path `/`.<br>- Create Internet-facing ALB `huylam-alb` mapped across 2 Multi-AZ Public Subnets.<br>- Configure HTTP:80 Listener forwarding to `huylam-alb-tg`. | Completed load balancing infrastructure; ALB provisioned with public DNS name and reached Active state. | [AWS ALB Getting Started](https://docs.aws.amazon.com/elasticloadbalancing/latest/application/application-load-balancer-getting-started.html) |
+| **Saturday (29/08/2026)** | - Create Auto Scaling Group `huylam-asg` (Desired: 2, Min: 1, Max: 4).<br>- Associate with Launch Template and Target Group `huylam-alb-tg`.<br>- Monitor automated instance provisioning across 2 Availability Zones. | Automated provisioning of 2 instances: `i-01abe8b9b987aad60` (`ap-southeast-1a`) and `i-0e633e2910dd9ea8f` (`ap-southeast-1b`). | [Lab 000006](https://000006.awsstudygroup.com) |
 | **Sun** | - Target Health check: Verified 2/2 targets reached Healthy status.<br>- Performed browser-based round-robin load distribution tests.<br>- Executed FinOps teardown: Deleted ASG, terminated instances, deleted ALB and Target Group.<br>- Compiled technical report and deployed documentation. | Successfully validated fault tolerance and load balancing; safely decommissioned compute resources to maintain 0 USD cost. | [FCJ Curriculum](file:///Users/huylam/Downloads/aws/raw/labs/fcj-cloud-journey-curriculum.md) |
 
 ---

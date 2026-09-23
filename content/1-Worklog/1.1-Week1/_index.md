@@ -1,10 +1,13 @@
 ---
 title: "Week 1 Worklog"
-date: 2026-09-18
+date: 2026-08-09
 weight: 1
 chapter: false
 pre: " <b> 1.1. </b> "
 ---
+
+> [!NOTE] Execution Timeline
+> **From 03/08/2026 to 09/08/2026**
 
 ### Week 1 Objectives:
 * Register and configure a new AWS personal account with 12-month Free Tier benefits.
@@ -18,12 +21,12 @@ pre: " <b> 1.1. </b> "
 
 | Day | Task Description | Deliverables & Outcomes | Resource Link |
 | :--- | :--- | :--- | :--- |
-| **Mon** | - Review FCAJ Workforce Bootcamp 2026 regulations.<br>- Study The First Cloud Journey (FCJ) curriculum. | Familiarized with bootcamp rules at hn-rules.awsfcaj.com and graduation criteria. | https://cloudjourney.awsstudygroup.com |
-| **Tue** | - Register AWS account.<br>- Configure Root MFA (Lab 000001). | Successfully enabled Virtual MFA device on mobile; Root account secured. | https://000001.awsstudygroup.com |
-| **Wed** | - Configure AWS Budgets (Lab 000007). | Configured two active budgets (100 USD & 200 USD) in HEALTHY state. | https://000007.awsstudygroup.com |
-| **Thu** | - Configure IAM permissions (Lab 000002). | Created `dev_admin` user, attached AdministratorAccess, generated CLI access keys. | https://000002.awsstudygroup.com |
-| **Fri** | - Install AWS CLI v2 on macOS (Lab 000011).<br>- Configure profile credentials via `aws configure`. | AWS CLI v2.36.48 working; authenticated successfully via `aws sts get-caller-identity`. | https://000011.awsstudygroup.com |
-| **Sat** | - Set up Hugo Learn Theme and deploy report site to GitHub Pages.<br>- Draft Capstone Proposal: Enterprise Agentic RAG Platform on AWS. | Bilingual report site live on GitHub Pages at lamhuy0489.github.io/workshop. | https://github.com/AWS-First-Cloud-Journey/Workshop-template |
+| **Monday (03/08/2026)** | - Review FCAJ Workforce Bootcamp 2026 regulations.<br>- Study The First Cloud Journey (FCJ) curriculum. | Familiarized with bootcamp rules at hn-rules.awsfcaj.com and graduation criteria. | https://cloudjourney.awsstudygroup.com |
+| **Tuesday (04/08/2026)** | - Register AWS account.<br>- Configure Root MFA (Lab 000001). | Successfully enabled Virtual MFA device on mobile; Root account secured. | https://000001.awsstudygroup.com |
+| **Wednesday (05/08/2026)** | - Configure AWS Budgets (Lab 000007). | Configured two active budgets (100 USD & 200 USD) in HEALTHY state. | https://000007.awsstudygroup.com |
+| **Thursday (06/08/2026)** | - Configure IAM permissions (Lab 000002). | Created `dev_admin` user, attached AdministratorAccess, generated CLI access keys. | https://000002.awsstudygroup.com |
+| **Friday (07/08/2026)** | - Install AWS CLI v2 on macOS (Lab 000011).<br>- Configure profile credentials via `aws configure`. | AWS CLI v2.36.48 working; authenticated successfully via `aws sts get-caller-identity`. | https://000011.awsstudygroup.com |
+| **Saturday (08/08/2026)** | - Set up Hugo Learn Theme and deploy report site to GitHub Pages.<br>- Draft Capstone Proposal: Enterprise Agentic RAG Platform on AWS. | Bilingual report site live on GitHub Pages at lamhuy0489.github.io/workshop. | https://github.com/AWS-First-Cloud-Journey/Workshop-template |
 
 ### Verified AWS Technical Configuration:
 - **AWS Account ID**: `677994024390`

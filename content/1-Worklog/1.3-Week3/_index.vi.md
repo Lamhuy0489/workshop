@@ -1,10 +1,13 @@
 ---
 title: "Worklog Tuần 3"
-date: 2026-09-20
+date: 2026-08-23
 weight: 3
 chapter: false
 pre: " <b> 1.3. </b> "
 ---
+
+> [!NOTE] Thời gian thực hiện
+> **Từ ngày 17/08/2026 đến ngày 23/08/2026**
 
 ### Mục tiêu tuần 3:
 * Tìm hiểu kiến trúc mạng ảo đám mây cô lập trên Amazon Virtual Private Cloud (Amazon VPC).
@@ -21,12 +24,12 @@ pre: " <b> 1.3. </b> "
 
 | Thứ | Công việc | Kết quả đạt được | Nguồn tài liệu |
 | :--- | :--- | :--- | :--- |
-| **Thứ 2** | - Nghiên cứu lý thuyết Amazon VPC, CIDR block, Subnetting, IPv4 addressing.<br>- Lập kế hoạch phân bổ dải mạng Multi-AZ cho Custom VPC: `10.0.0.0/16`. | Phân chia 4 subnets: 2 Public (`/20`) và 2 Private (`/20`) trải đều trên 2 Availability Zones `ap-southeast-1a` và `ap-southeast-1b`. | [AWS VPC Documentation](https://docs.aws.amazon.com/vpc/) |
-| **Thứ 3** | - Sử dụng tính năng "VPC and more" trên AWS Management Console để khởi tạo đồng bộ `huylam-vpc`.<br>- Tạo Internet Gateway `huylam-igw` và gắn kết vào VPC.<br>- Kiểm tra sơ đồ trực quan tài nguyên (VPC Resource Map). | Khởi tạo thành công VPC `vpc-0125f4d6db3fbffa6`, gắn IGW `igw-0b9db3a6eac29ede9`, hệ thống tự sinh các Subnets và Route Tables tương ứng. | [Lab 000003](https://000003.awsstudygroup.com) |
-| **Thứ 4** | - Bật tính năng gán Public IPv4 tự động (Auto-assign public IP) cho Public Subnet 1 (`huylam-subnet-public1-ap-southeast-1a`).<br>- Xác thực cấu hình Route Table công khai điều hướng `0.0.0.0/0` qua IGW. | Đảm bảo các tài nguyên compute khi khởi tạo trong Public Subnet tự động nhận địa chỉ IPv4 công khai để có thể truy cập từ bên ngoài. | [Lab 000003](https://000003.awsstudygroup.com) |
-| **Thứ 5** | - Tìm hiểu cơ chế tường lửa ảo cấp độ phiên (Stateful): Security Groups.<br>- Khởi tạo Security Group `huylam-vpc-web-sg` (`sg-0dbd6bbde1b366070`) thuộc `huylam-vpc`.<br>- Thiết lập Inbound Rules: TCP 22 (SSH), TCP 80 (HTTP), ICMP IPv4 (Echo Request/Ping). | Security Group được tạo lập thành công; sẵn sàng bảo vệ các máy chủ ảo ở tầng giao vận và tầng ứng dụng. | [AWS Security Groups Guide](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html) |
-| **Thứ 6** | - Nghiên cứu cơ chế tường lửa mạng cấp độ gói tin (Stateless): Network ACLs (NACL).<br>- Khảo sát cấu hình Default NACL `acl-09a50f9e28bc6477d` gắn với cả 4 subnets.<br>- So sánh chi tiết sự khác biệt giữa Security Groups và Network ACLs. | Nắm vững nguyên lý hoạt động song song của hai lớp bảo vệ: NACL chặn ở ranh giới Subnet, Security Group lọc ở cấp độ máy chủ ảo (ENI). | [AWS NACL Documentation](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-network-acls.html) |
-| **Thứ 7** | - Khởi tạo máy chủ ảo EC2 `huylam-vpc-test-server` (`i-02a465d3907141cfb`) trong Custom VPC.<br>- Kết nối qua EC2 Instance Connect.<br>- Thực hiện kiểm thử ICMP ping ra Internet và truy vấn HTTP request qua `curl`. | Kiểm nghiệm thành công: RTT trung bình 1.13 ms tới máy chủ DNS công cộng 8.8.8.8; phản hồi HTTP 301 Moved Permanently từ Amazon.com. | [Lab 000003](https://000003.awsstudygroup.com) |
+| **Thứ 2 (17/08/2026)** | - Nghiên cứu lý thuyết Amazon VPC, CIDR block, Subnetting, IPv4 addressing.<br>- Lập kế hoạch phân bổ dải mạng Multi-AZ cho Custom VPC: `10.0.0.0/16`. | Phân chia 4 subnets: 2 Public (`/20`) và 2 Private (`/20`) trải đều trên 2 Availability Zones `ap-southeast-1a` và `ap-southeast-1b`. | [AWS VPC Documentation](https://docs.aws.amazon.com/vpc/) |
+| **Thứ 3 (18/08/2026)** | - Sử dụng tính năng "VPC and more" trên AWS Management Console để khởi tạo đồng bộ `huylam-vpc`.<br>- Tạo Internet Gateway `huylam-igw` và gắn kết vào VPC.<br>- Kiểm tra sơ đồ trực quan tài nguyên (VPC Resource Map). | Khởi tạo thành công VPC `vpc-0125f4d6db3fbffa6`, gắn IGW `igw-0b9db3a6eac29ede9`, hệ thống tự sinh các Subnets và Route Tables tương ứng. | [Lab 000003](https://000003.awsstudygroup.com) |
+| **Thứ 4 (19/08/2026)** | - Bật tính năng gán Public IPv4 tự động (Auto-assign public IP) cho Public Subnet 1 (`huylam-subnet-public1-ap-southeast-1a`).<br>- Xác thực cấu hình Route Table công khai điều hướng `0.0.0.0/0` qua IGW. | Đảm bảo các tài nguyên compute khi khởi tạo trong Public Subnet tự động nhận địa chỉ IPv4 công khai để có thể truy cập từ bên ngoài. | [Lab 000003](https://000003.awsstudygroup.com) |
+| **Thứ 5 (20/08/2026)** | - Tìm hiểu cơ chế tường lửa ảo cấp độ phiên (Stateful): Security Groups.<br>- Khởi tạo Security Group `huylam-vpc-web-sg` (`sg-0dbd6bbde1b366070`) thuộc `huylam-vpc`.<br>- Thiết lập Inbound Rules: TCP 22 (SSH), TCP 80 (HTTP), ICMP IPv4 (Echo Request/Ping). | Security Group được tạo lập thành công; sẵn sàng bảo vệ các máy chủ ảo ở tầng giao vận và tầng ứng dụng. | [AWS Security Groups Guide](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html) |
+| **Thứ 6 (21/08/2026)** | - Nghiên cứu cơ chế tường lửa mạng cấp độ gói tin (Stateless): Network ACLs (NACL).<br>- Khảo sát cấu hình Default NACL `acl-09a50f9e28bc6477d` gắn với cả 4 subnets.<br>- So sánh chi tiết sự khác biệt giữa Security Groups và Network ACLs. | Nắm vững nguyên lý hoạt động song song của hai lớp bảo vệ: NACL chặn ở ranh giới Subnet, Security Group lọc ở cấp độ máy chủ ảo (ENI). | [AWS NACL Documentation](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-network-acls.html) |
+| **Thứ 7 (22/08/2026)** | - Khởi tạo máy chủ ảo EC2 `huylam-vpc-test-server` (`i-02a465d3907141cfb`) trong Custom VPC.<br>- Kết nối qua EC2 Instance Connect.<br>- Thực hiện kiểm thử ICMP ping ra Internet và truy vấn HTTP request qua `curl`. | Kiểm nghiệm thành công: RTT trung bình 1.13 ms tới máy chủ DNS công cộng 8.8.8.8; phản hồi HTTP 301 Moved Permanently từ Amazon.com. | [Lab 000003](https://000003.awsstudygroup.com) |
 | **Chủ Nhật**| - Đo kiểm độ trễ kết nối từ môi trường phát triển cục bộ tới Public IP máy chủ ảo.<br>- Thực hiện quy trình FinOps: Terminate máy chủ EC2 kiểm nghiệm, duy trì VPC/Subnet/IGW với chi phí 0 USD/tháng.<br>- Tổng hợp báo cáo kỹ thuật và triển khai worklog. | Đạt 0% packet loss khi ping từ ngoài vào máy chủ ảo; dọn dẹp an toàn tài nguyên tính toán để bảo toàn hạn mức Free Tier. | [FCJ Curriculum](file:///Users/huylam/Downloads/aws/raw/labs/fcj-cloud-journey-curriculum.md) |
 
 ---

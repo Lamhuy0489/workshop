@@ -1,10 +1,13 @@
 ---
 title: "Week 8 Worklog"
-date: 2026-09-21
+date: 2026-09-27
 weight: 8
 chapter: false
 pre: " <b> 1.8. </b> "
 ---
+
+> [!NOTE] Execution Timeline
+> **From 21/09/2026 to 27/09/2026**
 
 ### Week 8 Objectives:
 * Research and master application-level virtualization (**Containerization**) and container management (**Container Orchestration**) on AWS using **Amazon Elastic Container Registry (ECR)** and **Amazon Elastic Container Service (ECS)**.
@@ -23,12 +26,12 @@ pre: " <b> 1.8. </b> "
 
 | Day | Task | Key Outcome | References |
 | :--- | :--- | :--- | :--- |
-| **Monday** | - Study containerization concepts and Docker technology.<br>- Compare containers with traditional virtual machines: kernel sharing, lightweight footprint, instantaneous startup.<br>- Explore container image storage on Amazon ECR. | Mastered OCI image architecture, registries, repositories, and IAM permission policies for ECR. | [Amazon ECR Concepts](https://docs.aws.amazon.com/AmazonECR/latest/userguide/what-is-ecr.html) |
-| **Tuesday** | - Create private Amazon ECR repository `huylam-web-app` in region `ap-southeast-1`.<br>- Analyze docker push workflow: authentication via AWS CLI ECR Get-Login-Password, tagging, and pushing images. | Completed repository setup, prepared for application Docker image storage. | [Creating ECR Repository](https://docs.aws.amazon.com/AmazonECR/latest/userguide/repository-create.html) |
-| **Wednesday** | - Study Amazon Elastic Container Service (ECS) architecture.<br>- Compare EC2 launch type versus serverless AWS Fargate.<br>- Verify activation of IAM service-linked role `AWSServiceRoleForECS`. | Selected AWS Fargate architecture to eliminate infrastructure management and minimize operational costs. | [Amazon ECS Launch Types](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_types.html) |
-| **Thursday** | - Provision Amazon ECS Cluster `huylam-ecs-cluster` supporting Fargate and Fargate Spot.<br>- Author ECS Task Definition `huylam-web-task` (0.25 vCPU, 0.5 GB RAM).<br>- Configure container `web-app` with Apache image `httpd:latest` from AWS Public ECR, opening port 80. | Successfully registered Task Definition revision `huylam-web-task:1` in Active state. | [ECS Task Definitions](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definitions.html) |
-| **Friday** | - Create ECS Service `huylam-web-service` within cluster `huylam-ecs-cluster`.<br>- Network setup: Default VPC, 3 public subnets, auto-assigned Public IP, Security Group opening HTTP 80.<br>- Configure desired tasks = 1 using Replica strategy. | ECS service successfully provisioned and launched a Fargate container in under 15 seconds. | [Creating ECS Services](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs_services.html) |
-| **Saturday** | - Monitor task lifecycle (Created -> Provisioning -> Pending -> Running).<br>- Extract Elastic Network Interface `eni-0dcbf8076c9d39691` and Public IPv4 `18.138.22.86`.<br>- Access web server via browser to verify `It works!` message and HTTP 200 OK status. | Successfully verified 100% web application functionality running on serverless Fargate. | [Verifying ECS Tasks](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-lifecycle.html) |
+| **Monday (21/09/2026)** | - Study containerization concepts and Docker technology.<br>- Compare containers with traditional virtual machines: kernel sharing, lightweight footprint, instantaneous startup.<br>- Explore container image storage on Amazon ECR. | Mastered OCI image architecture, registries, repositories, and IAM permission policies for ECR. | [Amazon ECR Concepts](https://docs.aws.amazon.com/AmazonECR/latest/userguide/what-is-ecr.html) |
+| **Tuesday (22/09/2026)** | - Create private Amazon ECR repository `huylam-web-app` in region `ap-southeast-1`.<br>- Analyze docker push workflow: authentication via AWS CLI ECR Get-Login-Password, tagging, and pushing images. | Completed repository setup, prepared for application Docker image storage. | [Creating ECR Repository](https://docs.aws.amazon.com/AmazonECR/latest/userguide/repository-create.html) |
+| **Wednesday (23/09/2026)** | - Study Amazon Elastic Container Service (ECS) architecture.<br>- Compare EC2 launch type versus serverless AWS Fargate.<br>- Verify activation of IAM service-linked role `AWSServiceRoleForECS`. | Selected AWS Fargate architecture to eliminate infrastructure management and minimize operational costs. | [Amazon ECS Launch Types](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_types.html) |
+| **Thursday (24/09/2026)** | - Provision Amazon ECS Cluster `huylam-ecs-cluster` supporting Fargate and Fargate Spot.<br>- Author ECS Task Definition `huylam-web-task` (0.25 vCPU, 0.5 GB RAM).<br>- Configure container `web-app` with Apache image `httpd:latest` from AWS Public ECR, opening port 80. | Successfully registered Task Definition revision `huylam-web-task:1` in Active state. | [ECS Task Definitions](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definitions.html) |
+| **Friday (25/09/2026)** | - Create ECS Service `huylam-web-service` within cluster `huylam-ecs-cluster`.<br>- Network setup: Default VPC, 3 public subnets, auto-assigned Public IP, Security Group opening HTTP 80.<br>- Configure desired tasks = 1 using Replica strategy. | ECS service successfully provisioned and launched a Fargate container in under 15 seconds. | [Creating ECS Services](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs_services.html) |
+| **Saturday (26/09/2026)** | - Monitor task lifecycle (Created -> Provisioning -> Pending -> Running).<br>- Extract Elastic Network Interface `eni-0dcbf8076c9d39691` and Public IPv4 `18.138.22.86`.<br>- Access web server via browser to verify `It works!` message and HTTP 200 OK status. | Successfully verified 100% web application functionality running on serverless Fargate. | [Verifying ECS Tasks](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-lifecycle.html) |
 | **Sunday** | - Study CI/CD principles: Continuous Integration, Continuous Delivery, and AWS CodePipeline architecture.<br>- Perform FinOps Teardown procedure, deleting all ECS services, tasks, clusters, and ECR repositories.<br>- Compile technical report Lab 000016 and complete Week 8 documentation. | Completed all weekly milestones while maintaining $0.00 USD Free Tier expenditure. | [AWS CodePipeline User Guide](https://docs.aws.amazon.com/codepipeline/latest/userguide/welcome.html) |
 
 ---
