@@ -10,6 +10,11 @@ pre: " <b> 5.1. </b> "
 
 This module delivers a comprehensive technical overview of the real-world engineering challenge, system architecture, and operational workflows for the **Serverless Hybrid Document OCR, Parsing & Technical Translation Platform** on AWS. Upon completion, you will thoroughly understand the principles of the enterprise three-tier networking model integrated with event-driven serverless computing, ready for hands-on infrastructure implementation.
 
+> [!TIP] Repository & Live Production Endpoints
+> * **Application & Infrastructure Code (GitHub Repo)**: [https://github.com/Lamhuy0489/aws](https://github.com/Lamhuy0489/aws)
+> * **Workshop Documentation (GitHub Docs Repo)**: [https://github.com/Lamhuy0489/workshop](https://github.com/Lamhuy0489/workshop)
+> * **Live Web Studio Production (AWS ALB Endpoint)**: [http://huylam-ocr-alb-1284818160.ap-southeast-1.elb.amazonaws.com](http://huylam-ocr-alb-1284818160.ap-southeast-1.elb.amazonaws.com)
+
 ---
 
 ## 1. Problem Statement & Architectural Solution
@@ -33,6 +38,15 @@ The platform resolves these bottlenecks via:
 ---
 
 ## 2. System Architecture Blueprint
+
+The platform adheres to AWS Well-Architected Framework best practices:
+
+![System Architecture Blueprint](/images/architecture/aws-system-architecture.png?width=100%&classes=border,shadow)
+
+> [!NOTE] Architecture Diagram File Formats
+> * **High-Resolution Render**: `/images/architecture/aws-system-architecture.png` (Retina 1400x920)
+> * **Scalable Vector Graphic**: `/images/architecture/aws-system-architecture.svg`
+> * **Editable Source Diagram**: `/images/architecture/aws-system-architecture.drawio` (Directly importable into [diagrams.net](https://app.diagrams.net/) with official AWS 2024 stencils).
 
 ```text
                                   [ Internet Web Client / User ]

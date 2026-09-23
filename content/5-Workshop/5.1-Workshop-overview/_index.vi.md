@@ -10,6 +10,11 @@ pre: " <b> 5.1. </b> "
 
 Chuyên đề này cung cấp cái nhìn toàn diện về bài toán thực tế, giải pháp kiến trúc và quy trình vận hành của nền tảng **Serverless Hybrid Document OCR, Parsing & Technical Translation Platform** trên nền tảng AWS. Sau khi hoàn thành, bạn sẽ nắm vững nguyên lý hoạt động của kiến trúc mạng 3 tầng kết hợp với xử lý phi máy chủ hướng sự kiện, sẵn sàng bắt tay vào các bước cấu hình thực tế.
 
+> [!TIP] Thông tin kho mã nguồn và hệ thống Live
+> * **Kho mã nguồn ứng dụng (GitHub Repo)**: [https://github.com/Lamhuy0489/aws](https://github.com/Lamhuy0489/aws)
+> * **Kho tài liệu hướng dẫn (GitHub Docs Repo)**: [https://github.com/Lamhuy0489/workshop](https://github.com/Lamhuy0489/workshop)
+> * **Hệ thống Web Studio Live (AWS ALB Endpoint)**: [http://huylam-ocr-alb-1284818160.ap-southeast-1.elb.amazonaws.com](http://huylam-ocr-alb-1284818160.ap-southeast-1.elb.amazonaws.com)
+
 ---
 
 ## 1. Giới thiệu bài toán và giải pháp kiến trúc
@@ -35,6 +40,13 @@ Hệ thống **Serverless Hybrid Document OCR, Parsing & Technical Translation P
 ## 2. Kiến trúc giải pháp tổng thể trên AWS
 
 Hệ thống được thiết kế theo các tiêu chuẩn cao nhất của AWS Well-Architected Framework:
+
+![Sơ đồ kiến trúc tổng thể AWS Serverless Hybrid OCR Platform](/images/architecture/aws-system-architecture.png?width=100%&classes=border,shadow)
+
+> [!NOTE] Định dạng tệp sơ đồ kiến trúc
+> * **Ảnh kết xuất độ nét cao**: `/images/architecture/aws-system-architecture.png` (Chuẩn Retina 1400x920)
+> * **Sơ đồ đồ họa Vector SVG**: `/images/architecture/aws-system-architecture.svg`
+> * **Tệp thiết kế nguồn Draw.io**: `/images/architecture/aws-system-architecture.drawio` (Có thể nhập trực tiếp vào [diagrams.net](https://app.diagrams.net/) để tùy biến kéo thả theo các stencil biểu tượng AWS chính thức).
 
 ```text
                                 [ Internet Client / Trình Duyệt ]

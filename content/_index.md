@@ -40,14 +40,17 @@ chapter: false
 
 ---
 
-### Môi trường Cloud và Đề tài Capstone Project
+### Cloud Environment & Capstone Project Specifications
 
-| Tiêu chí | Thông tin chi tiết |
+| Specification | Details |
 | :--- | :--- |
-| **Tên tài khoản AWS (Account Name)** | `huylam` |
+| **AWS Account Name** | `huylam` |
 | **AWS Account ID** | `677994024390` |
-| **Khu vực triển khai (Default Region)** | `ap-southeast-1` (Singapore) |
-| **Đề tài Capstone Project** | **Enterprise Agentic RAG Platform on AWS** (Hệ thống Trợ lý Tri thức Thông minh và Tự động hóa Nghiệp vụ trên AWS) |
+| **Primary Region** | `ap-southeast-1` (Singapore) |
+| **Capstone Project Title** | **Serverless Hybrid Document OCR, Parsing & Technical Translation Platform on AWS** |
+| **Live Web Studio Production (ALB)** | [http://huylam-ocr-alb-1284818160.ap-southeast-1.elb.amazonaws.com](http://huylam-ocr-alb-1284818160.ap-southeast-1.elb.amazonaws.com) |
+| **Application & Infrastructure Repo (GitHub)** | [https://github.com/Lamhuy0489/aws](https://github.com/Lamhuy0489/aws) |
+| **Internship Report & Workshop Repo (GitHub)** | [https://github.com/Lamhuy0489/workshop](https://github.com/Lamhuy0489/workshop) |
 
 ---
 

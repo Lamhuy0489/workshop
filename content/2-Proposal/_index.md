@@ -20,7 +20,9 @@ pre: " <b> 2. </b> "
 * **Academic Institution**: Hanoi University of Civil Engineering (HUCE)
 * **AWS Account ID**: `677994024390` | **Account Name**: `huylam`
 * **Target AWS Region**: `ap-southeast-1` (Asia Pacific - Singapore)
-* **Live Production URL**: `http://huylam-ocr-alb-1284818160.ap-southeast-1.elb.amazonaws.com`
+* **Live Production URL**: [http://huylam-ocr-alb-1284818160.ap-southeast-1.elb.amazonaws.com](http://huylam-ocr-alb-1284818160.ap-southeast-1.elb.amazonaws.com)
+* **Application GitHub Repository**: [https://github.com/Lamhuy0489/aws](https://github.com/Lamhuy0489/aws)
+* **Workshop Documentation GitHub Repository**: [https://github.com/Lamhuy0489/workshop](https://github.com/Lamhuy0489/workshop)
 
 ---
 
@@ -65,6 +67,15 @@ The project delivers an architectural breakthrough solving these limitations:
 ---
 
 ## 3. Architecture Blueprint
+
+The platform adheres strictly to the **AWS Well-Architected Framework**, synthesizing an **Enterprise Three-Tier Cloud Networking Model** with an **Event-Driven Serverless Pipeline**:
+
+![System Architecture Blueprint](/images/architecture/aws-system-architecture.png?width=100%&classes=border,shadow)
+
+> [!NOTE] Architecture Diagram File Formats
+> * **High-Resolution Render**: `/images/architecture/aws-system-architecture.png` (Retina 1400x920)
+> * **Scalable Vector Graphic**: `/images/architecture/aws-system-architecture.svg`
+> * **Editable Source Diagram**: `/images/architecture/aws-system-architecture.drawio` (Directly importable into [diagrams.net](https://app.diagrams.net/) with official AWS 2024 stencils).
 
 ```text
                                   [ Internet Web Client / User ]

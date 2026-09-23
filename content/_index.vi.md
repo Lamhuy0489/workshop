@@ -47,7 +47,10 @@ chapter: false
 | **Tên tài khoản AWS (Account Name)** | `huylam` |
 | **AWS Account ID** | `677994024390` |
 | **Khu vực triển khai (Default Region)** | `ap-southeast-1` (Singapore) |
-| **Đề tài Capstone Project** | **Enterprise Agentic RAG Platform on AWS** (Hệ thống Trợ lý Tri thức Thông minh và Tự động hóa Nghiệp vụ trên AWS) |
+| **Đề tài Capstone Project** | **Serverless Hybrid Document OCR, Parsing & Technical Translation Platform on AWS** |
+| **Hệ thống Web Studio Live (ALB)** | [http://huylam-ocr-alb-1284818160.ap-southeast-1.elb.amazonaws.com](http://huylam-ocr-alb-1284818160.ap-southeast-1.elb.amazonaws.com) |
+| **Mã nguồn ứng dụng & Hạ tầng AWS (GitHub)** | [https://github.com/Lamhuy0489/aws](https://github.com/Lamhuy0489/aws) |
+| **Báo cáo thực tập & Workshop Docs (GitHub)** | [https://github.com/Lamhuy0489/workshop](https://github.com/Lamhuy0489/workshop) |
 
 ---
 

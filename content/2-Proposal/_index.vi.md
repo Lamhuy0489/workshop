@@ -20,7 +20,9 @@ pre: " <b> 2. </b> "
 * **Cơ sở đào tạo**: Trường Đại học Xây dựng Hà Nội (HUCE)
 * **Tài khoản AWS (Account ID)**: `677994024390` | **Account Name**: `huylam`
 * **Khu vực triển khai (AWS Region)**: `ap-southeast-1` (Asia Pacific - Singapore)
-* **Đường link hệ thống thực tế (Live Production URL)**: `http://huylam-ocr-alb-1284818160.ap-southeast-1.elb.amazonaws.com`
+* **Đường link hệ thống thực tế (Live Production URL)**: [http://huylam-ocr-alb-1284818160.ap-southeast-1.elb.amazonaws.com](http://huylam-ocr-alb-1284818160.ap-southeast-1.elb.amazonaws.com)
+* **Kho mã nguồn ứng dụng & hạ tầng (GitHub Application Repo)**: [https://github.com/Lamhuy0489/aws](https://github.com/Lamhuy0489/aws)
+* **Kho tài liệu báo cáo & Workshop (GitHub Docs Repo)**: [https://github.com/Lamhuy0489/workshop](https://github.com/Lamhuy0489/workshop)
 
 ---
 
@@ -65,6 +67,15 @@ Nền tảng của đồ án giải quyết trọn vẹn các bài toán trên t
 ---
 
 ## 3. Sơ Đồ Kiến Trúc Hệ Thống (Architecture Blueprint)
+
+Hệ thống được thiết kế theo chuẩn **AWS Well-Architected Framework**, phối hợp giữa mô hình phân tầng **Three-Tier Enterprise Cloud Networking** và đường ống xử lý **Event-Driven Serverless**:
+
+![Sơ đồ kiến trúc tổng thể AWS Serverless Hybrid OCR Platform](/images/architecture/aws-system-architecture.png?width=100%&classes=border,shadow)
+
+> [!NOTE] Định dạng tệp sơ đồ kiến trúc
+> * **Ảnh kết xuất độ nét cao**: `/images/architecture/aws-system-architecture.png` (Độ phân giải chuẩn Retina 1400x920)
+> * **Sơ đồ đồ họa Vector SVG**: `/images/architecture/aws-system-architecture.svg`
+> * **Tệp thiết kế nguồn Draw.io**: `/images/architecture/aws-system-architecture.drawio` (Có thể nhập trực tiếp vào [diagrams.net](https://app.diagrams.net/) để tùy biến kéo thả theo các stencil biểu tượng AWS chính thức).
 
 ```text
                                 [ Người Dùng / Internet Client ]
