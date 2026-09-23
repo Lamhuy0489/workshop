@@ -49,19 +49,12 @@ The route table governs outbound traffic redirection from subnets toward the Int
 
 Implementing the AWS Well-Architected Principle of Least Privilege:
 
-```text
-[ Internet Client ]
-       │
-       ▼ Inbound HTTP: 80 (0.0.0.0/0)
-┌─────────────────────────────────┐
-│     huylam-alb-sg (ALB)         │
-└────────────────┬────────────────┘
-                 │
-                 ▼ Inbound TCP: 5000 (Source: sg-0dca819306a96bfdb)
-┌─────────────────────────────────┐
-│     huylam-web-sg (EC2)         │
-└─────────────────────────────────┘
-```
+![Chained Security Groups Defense-in-Depth Architecture Blueprint](/images/architecture/aws-security-group-chaining.png?width=100%&classes=border,shadow)
+
+> [!NOTE] Security Group Chaining Diagram File Formats
+> * **High-Resolution Render**: `/images/architecture/aws-security-group-chaining.png` (Retina 1180x560)
+> * **Scalable Vector Graphic**: `/images/architecture/aws-security-group-chaining.svg`
+> * **Editable Source Diagram**: `/images/architecture/aws-security-group-chaining.drawio` (Directly importable into [diagrams.net](https://app.diagrams.net/) with official AWS4 stencils).
 
 ### Step 3.1: Create ALB Security Group (huylam-alb-sg)
 1. Navigate to: **EC2 Console -> Network & Security -> Security Groups -> Create security group**.

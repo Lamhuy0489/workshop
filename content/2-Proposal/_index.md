@@ -77,71 +77,20 @@ The platform adheres strictly to the **AWS Well-Architected Framework**, synthes
 > * **Scalable Vector Graphic**: `/images/architecture/aws-system-architecture.svg`
 > * **Editable Source Diagram**: `/images/architecture/aws-system-architecture.drawio` (Directly importable into [diagrams.net](https://app.diagrams.net/) with official AWS 2024 stencils).
 
-```text
-                                  [ Internet Web Client / User ]
-                                                │
-                                                ▼ HTTP : 80
-                    ┌───────────────────────────────────────────────────────┐
-                    │       AWS Application Load Balancer (Multi-AZ)        │
-                    │         huylam-ocr-alb (Public DNS Endpoint)          │
-                    │             Security Group: huylam-alb-sg             │
-                    └───────────────────────────┬───────────────────────────┘
-                                                │
-                        Forward to Target Group │ Port 5000
-                        Health Check: /login    │ (HTTP 200 OK)
-                                                ▼
-                    ┌───────────────────────────────────────────────────────┐
-                    │          Amazon EC2 Application Host (AL2023)         │
-                    │         huylam-ocr-web-server (t2.micro / 10.0.8.15)  │
-                    │             Security Group: huylam-web-sg             │
-                    │       (Inbound TCP 5000 only from huylam-alb-sg)      │
-                    │                                                       │
-                    │   ┌───────────────────────────────────────────────┐   │
-                    │   │        Gunicorn WSGI (huylam-ocr.service)     │   │
-                    │   │          Flask Web Studio SPA (Port 5000)     │   │
-                    │   └───────────────────────┬───────────────────────┘   │
-                    │                           │                           │
-                    │       ┌───────────────────┴───────────────────┐       │
-                    │       ▼                                       ▼       │
-                    │   [ Layer 1: Fast-Path ]              [ Layer 2: OCR ]│
-                    │    PyMuPDF (0.1s - 0.3s)               Kaggle GPU     │
-                    │    Cost: $0.00                         Gemini Flash   │
-                    │                                        AWS Bedrock    │
-                    │       │                                       │       │
-                    │       └───────────────────┬───────────────────┘       │
-                    │                           ▼                           │
-                    │             [ Technical Translation Engine ]          │
-                    │             100% Markdown Structure Fidelity          │
-                    │                           │                           │
-                    │             [ Multi-Format Export Engine ]            │
-                    │             Markdown (.md), Word (.docx), PDF         │
-                    └───────────────┬───────────────────────┬───────────────┘
-                                    │ IAM Role              │ IAM Role
-                                    │ huylam-ssm-role       │ huylam-ssm-role
-                                    ▼                       ▼
-                    ┌─────────────────────────────┐  ┌──────────────────────┐
-                    │     Amazon S3 Storage       │  │   Amazon DynamoDB    │
-                    │     huylam-ocr-documents-   │  │   document_          │
-                    │     ap-southeast-1          │  │   processing_jobs    │
-                    │     - uploads/ (Raw Files)  │  │   (PK: job_id,       │
-                    │     - outputs/ (Artifacts)  │  │    SK: created_at)   │
-                    └───────────────┬─────────────┘  └──────────▲───────────┘
-                                    │                           │
-                                    │ Event: s3:ObjectCreated:* │ PutItem
-                                    ▼                           │ (214 ms)
-                    ┌─────────────────────────────┐             │
-                    │    AWS Lambda Function      │─────────────┘
-                    │    huylam-ocr-processor     │
-                    │    (Python 3.11 Serverless) │
-                    └───────────────┬─────────────┘
-                                    │
-                                    ▼ Logs & Telemetry
-                    ┌─────────────────────────────┐
-                    │    Amazon CloudWatch Logs   │
-                    │    /aws/lambda/huylam-ocr-  │
-                    │    processor                │
-                    └─────────────────────────────┘
-```
+### Architectural Component Breakdown:
+
+| Architectural Tier | Services & Technologies | Resource Identifier | Core Functional Responsibility |
+| :--- | :--- | :--- | :--- |
+| **Networking & Ingress** | AWS Application Load Balancer (ALB) | `huylam-ocr-alb` | Ingests HTTP port 80 traffic from global clients, load balances across Multi-AZ subnets, and forwards to Target Group `huylam-ocr-tg`. |
+| **Chained Security Perimeter** | AWS Security Groups | `huylam-alb-sg` &rarr; `huylam-web-sg` | `huylam-alb-sg` opens port 80; `huylam-web-sg` accepts port 5000 ingress strictly from the ALB, eliminating direct public exposure. |
+| **Application Host Tier** | Amazon EC2 (Amazon Linux 2023) | `huylam-ocr-web-server` | t2.micro instance (`10.0.8.15`) running systemd Gunicorn WSGI serving the Single-Page Application (SPA) Web Studio. |
+| **Fast-Path Extraction (T1)** | Fast-Path Native Parser | `src/backend/parsers/fast_parser.py` | PyMuPDF vector extraction parses native digital PDFs in 0.1s - 0.3s/page at $0.00 cost (handling 80%+ of office documents). |
+| **Selective OCR Engine (T2)** | Selective OCR Dispatcher | `src/backend/parsers/ocr_dispatcher.py` | Invoked strictly for scanned pages/images: routes to Kaggle GPU Qwen2.5-VL ($0) or Amazon Bedrock (Nova / Claude). |
+| **Technical Translation** | Technical Translation Engine | `src/backend/llm/translator.py` | Preserves 100% Markdown syntax and LaTeX math equations; features automated Round-Robin API key failover. |
+| **Document Object Lake** | Amazon Simple Storage Service (S3) | `huylam-ocr-documents-ap-southeast-1` | Stores raw uploads under `uploads/` and processed artifacts (.md, .docx, .pdf) under `outputs/{job_id}/` with SSE-S3 encryption. |
+| **Event-Driven Serverless** | AWS Lambda | `huylam-ocr-processor` | Ingests S3 Event `s3:ObjectCreated:*` in 214 ms, allocates UUID `job_id`, and initiates asynchronous document workflows. |
+| **State & Metadata Store** | Amazon DynamoDB | `document_processing_jobs` | On-Demand NoSQL table persisting lifecycle status `RECEIVED_VIA_S3_EVENT`, execution telemetry, and download paths. |
+| **Security & Observability** | CloudWatch & Systems Manager | SSM Session Manager & CloudWatch Logs | Zero Trust remote terminal administration without SSH port 22; streams centralized application telemetry and logs. |
 
 ---
 

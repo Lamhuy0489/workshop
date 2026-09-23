@@ -48,71 +48,21 @@ Hệ thống được thiết kế theo các tiêu chuẩn cao nhất của AWS 
 > * **Sơ đồ đồ họa Vector SVG**: `/images/architecture/aws-system-architecture.svg`
 > * **Tệp thiết kế nguồn Draw.io**: `/images/architecture/aws-system-architecture.drawio` (Có thể nhập trực tiếp vào [diagrams.net](https://app.diagrams.net/) để tùy biến kéo thả theo các stencil biểu tượng AWS chính thức).
 
-```text
-                                [ Internet Client / Trình Duyệt ]
-                                                │
-                                                ▼ HTTP : 80
-                    ┌───────────────────────────────────────────────────────┐
-                    │      AWS Application Load Balancer (Multi-AZ)         │
-                    │        huylam-ocr-alb (Public DNS Endpoint)           │
-                    │            Security Group: huylam-alb-sg              │
-                    └───────────────────────────┬───────────────────────────┘
-                                                │
-                        Forward to Target Group │ Port 5000
-                        Health Check: /login    │ (HTTP 200 OK)
-                                                ▼
-                    ┌───────────────────────────────────────────────────────┐
-                    │          Amazon EC2 Application Host (AL2023)         │
-                    │        huylam-ocr-web-server (t2.micro / 10.0.8.15)   │
-                    │            Security Group: huylam-web-sg              │
-                    │      (Chỉ cho phép TCP 5000 từ huylam-alb-sg)         │
-                    │                                                       │
-                    │   ┌───────────────────────────────────────────────┐   │
-                    │   │        Gunicorn WSGI (huylam-ocr.service)     │   │
-                    │   │          Flask Web Studio SPA (Port 5000)     │   │
-                    │   └───────────────────────┬───────────────────────┘   │
-                    │                           │                           │
-                    │       ┌───────────────────┴───────────────────┐       │
-                    │       ▼                                       ▼       │
-                    │   [ Tầng 1: Fast-Path ]               [ Tầng 2: OCR ] │
-                    │    PyMuPDF (0.1s - 0.3s)               Kaggle GPU     │
-                    │    Chi phí: 0.00 USD                   Gemini Flash   │
-                    │                                        AWS Bedrock    │
-                    │       │                                       │       │
-                    │       └───────────────────┬───────────────────┘       │
-                    │                           ▼                           │
-                    │             [ Động cơ Dịch thuật Kỹ thuật ]           │
-                    │             Bảo toàn 100% Markdown syntax             │
-                    │                           │                           │
-                    │             [ Bộ Xuất bản Đa định dạng ]              │
-                    │             Markdown (.md), Word (.docx), PDF         │
-                    └───────────────┬───────────────────────┬───────────────┘
-                                    │ IAM Role              │ IAM Role
-                                    │ huylam-ssm-role       │ huylam-ssm-role
-                                    ▼                       ▼
-                    ┌─────────────────────────────┐  ┌──────────────────────┐
-                    │     Amazon S3 Storage       │  │   Amazon DynamoDB    │
-                    │     huylam-ocr-documents-   │  │   document_          │
-                    │     ap-southeast-1          │  │   processing_jobs    │
-                    │     - uploads/ (Tệp gốc)    │  │   (PK: job_id,       │
-                    │     - outputs/ (Kết quả)    │  │    SK: created_at)   │
-                    └───────────────┬─────────────┘  └──────────▲───────────┘
-                                    │                           │
-                                    │ Event: s3:ObjectCreated:* │ PutItem
-                                    ▼                           │ (214 ms)
-                    ┌─────────────────────────────┐             │
-                    │    AWS Lambda Function      │─────────────┘
-                    │    huylam-ocr-processor     │
-                    │    (Python 3.11 Serverless) │
-                    └───────────────┬─────────────┘
-                                    │
-                                    ▼ Logs & Metrics
-                    ┌─────────────────────────────┐
-                    │    Amazon CloudWatch Logs   │
-                    │    /aws/lambda/huylam-ocr-  │
-                    │    processor                │
-                    └─────────────────────────────┘
-```
+### Bảng phân rã các tầng thành phần trong kiến trúc giải pháp:
+
+| Tầng kiến trúc | Dịch vụ & Công nghệ | Định danh tài nguyên | Vai trò và chức năng cốt lõi |
+| :--- | :--- | :--- | :--- |
+| **Tầng mạng & Cân bằng tải** | AWS Application Load Balancer (ALB) | `huylam-ocr-alb` | Tiếp nhận lưu lượng HTTP cổng 80 từ Internet, cân bằng tải Multi-AZ và chuyển tiếp vào Target Group `huylam-ocr-tg`. |
+| **Chuỗi an ninh phân tầng** | AWS Security Groups Chaining | `huylam-alb-sg` &rarr; `huylam-web-sg` | `huylam-alb-sg` mở cổng 80 cho Internet; `huylam-web-sg` chỉ cho phép cổng TCP 5000 bắt nguồn từ `huylam-alb-sg`. |
+| **Tầng máy chủ ứng dụng** | Amazon EC2 (Amazon Linux 2023) | `huylam-ocr-web-server` | Máy chủ t2.micro (`10.0.8.15`) chạy daemon systemd Gunicorn WSGI phục vụ giao diện Web Studio đơn trang (SPA). |
+| **Tầng bóc tách siêu tốc (T1)** | Fast-Path Native Parser | `src/backend/parsers/fast_parser.py` | Bóc tách văn bản số hóa chỉ mất 0.1s - 0.3s/trang với chi phí 0.00 USD bằng PyMuPDF (đáp ứng 80%+ tài liệu kỹ thuật). |
+| **Tầng OCR chọn lọc (T2)** | Selective OCR Dispatcher | `src/backend/parsers/ocr_dispatcher.py` | Chỉ kích hoạt khi phát hiện trang scan/ảnh: điều phối tới cụm Kaggle GPU Qwen2.5-VL ($0) hoặc Amazon Bedrock (Nova / Claude). |
+| **Động cơ chuyển ngữ kỹ thuật** | Technical Translation Engine | `src/backend/llm/translator.py` | Dịch thuật bảo toàn 100% cú pháp Markdown, bảng biểu và công thức LaTeX; tự động xoay vòng API Keys (Key Tour Manager). |
+| **Tầng lưu trữ tài liệu** | Amazon Simple Storage Service (S3) | `huylam-ocr-documents-ap-southeast-1` | Lưu trữ tệp gốc tại `uploads/` và tệp kết quả (.md, .docx, .pdf) tại `outputs/{job_id}/` với mã hóa SSE-S3. |
+| **Tự động hóa phi máy chủ** | AWS Lambda | `huylam-ocr-processor` | Tiếp nhận sự kiện S3 Event `s3:ObjectCreated:*` trong 214 ms, sinh mã `job_id` và kích hoạt luồng xử lý phi máy chủ. |
+| **Cơ sở dữ liệu trạng thái** | Amazon DynamoDB | `document_processing_jobs` | Bảng NoSQL chế độ On-Demand lưu trữ trạng thái tiến trình `RECEIVED_VIA_S3_EVENT`, nhật ký và đường dẫn tải tệp. |
+| **Giám sát & Quản trị an toàn** | CloudWatch & Systems Manager | SSM Session Manager & CloudWatch Logs | Quản trị shell từ xa không cần SSH cổng 22; thu thập số liệu vận hành và nhật ký thực thi tập trung. |
+
 
 ---
 

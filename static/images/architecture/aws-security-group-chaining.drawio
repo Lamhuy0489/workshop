@@ -1,0 +1,47 @@
+<mxfile host="app.diagrams.net" modified="2026-09-23T08:50:00.000Z" agent="Antigravity" version="24.0.0" type="device">
+  <diagram id="aws-sg-chaining" name="AWS Chained Security Groups">
+    <mxGraphModel dx="1400" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <mxCell id="title" value="&lt;b style=&quot;font-size: 15px;&quot;&gt;AWS DEFENSE-IN-DEPTH: CHAINED SECURITY GROUPS ARCHITECTURE&lt;/b&gt;&lt;br&gt;&lt;font color=&quot;#94a3b8&quot; style=&quot;font-size: 11px;&quot;&gt;Principle of Least Privilege Network Isolation (huylam-alb-sg -&amp;gt; huylam-web-sg)&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0f172a;strokeColor=none;fontColor=#ffffff;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="50" y="30" width="1070" height="50" as="geometry" />
+        </mxCell>
+
+        <!-- Internet Client -->
+        <mxCell id="users_icon" value="" style="outlineConnect=0;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;shape=mxgraph.aws4.users;fillColor=#0284C7;gradientColor=none;" vertex="1" parent="1">
+          <mxGeometry x="110" y="140" width="48" height="48" as="geometry" />
+        </mxCell>
+        <mxCell id="client_box" value="&lt;b&gt;Internet Client&lt;/b&gt;&lt;br&gt;&lt;font color=&quot;#64748b&quot; style=&quot;font-size: 10px;&quot;&gt;Public Users / Browser&lt;br&gt;Source: 0.0.0.0/0&lt;br&gt;Protocol: HTTP:80&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#0284c7;strokeWidth=1.5;fillColor=#ffffff;fontSize=11;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="60" y="200" width="150" height="80" as="geometry" />
+        </mxCell>
+
+        <!-- ALB Security Group -->
+        <mxCell id="alb_icon" value="" style="outlineConnect=0;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;shape=mxgraph.aws4.application_load_balancer;fillColor=#8C4FFF;gradientColor=none;" vertex="1" parent="1">
+          <mxGeometry x="460" y="140" width="48" height="48" as="geometry" />
+        </mxCell>
+        <mxCell id="alb_sg_box" value="&lt;b&gt;huylam-alb-sg (ALB)&lt;/b&gt;&lt;br&gt;&lt;font color=&quot;#6b21a8&quot; style=&quot;font-size: 10px;&quot;&gt;Security Group ID: sg-0dca819306a96bfdb&lt;br&gt;&lt;b&gt;Inbound:&lt;/b&gt; HTTP 80 from 0.0.0.0/0&lt;br&gt;&lt;b&gt;Outbound:&lt;/b&gt; All Traffic (0.0.0.0/0)&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#8c4fff;strokeWidth=2;fillColor=#FAF5FF;fontSize=11;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="360" y="200" width="250" height="90" as="geometry" />
+        </mxCell>
+
+        <!-- EC2 Security Group -->
+        <mxCell id="ec2_icon" value="" style="outlineConnect=0;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;shape=mxgraph.aws4.ec2;fillColor=#ED7100;gradientColor=none;" vertex="1" parent="1">
+          <mxGeometry x="840" y="140" width="48" height="48" as="geometry" />
+        </mxCell>
+        <mxCell id="web_sg_box" value="&lt;b&gt;huylam-web-sg (EC2 Host)&lt;/b&gt;&lt;br&gt;&lt;font color=&quot;#991b1b&quot; style=&quot;font-size: 10px;&quot;&gt;Host: huylam-ocr-web-server (10.0.8.15)&lt;br&gt;&lt;b&gt;Inbound:&lt;/b&gt; TCP 5000 from huylam-alb-sg ONLY&lt;br&gt;&lt;b&gt;Port 5000 from 0.0.0.0/0:&lt;/b&gt; BLOCKED&lt;br&gt;&lt;b&gt;SSH Port 22:&lt;/b&gt; CLOSED (Zero Trust SSM)&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#dc2626;strokeWidth=2;fillColor=#FEF2F2;fontSize=11;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="720" y="200" width="290" height="100" as="geometry" />
+        </mxCell>
+
+        <!-- Edges -->
+        <mxCell id="e1" value="HTTP: 80" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#2563EB;strokeWidth=2;fontColor=#1E40AF;fontSize=10;fontStyle=1;" edge="1" parent="1" source="client_box" target="alb_sg_box">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e2" value="TCP: 5000 (Source = huylam-alb-sg)" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#8C4FFF;strokeWidth=2;fontColor=#6B21A8;fontSize=10;fontStyle=1;" edge="1" parent="1" source="alb_sg_box" target="web_sg_box">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

@@ -49,19 +49,12 @@ Bảng định tuyến chịu trách nhiệm điều phối lưu lượng mạng
 
 Áp dụng nguyên tắc an ninh tối thiểu (Principle of Least Privilege) của AWS Well-Architected Framework:
 
-```text
-[ Internet Client ]
-       │
-       ▼ Inbound HTTP: 80 (0.0.0.0/0)
-┌─────────────────────────────────┐
-│     huylam-alb-sg (ALB)         │
-└────────────────┬────────────────┘
-                 │
-                 ▼ Inbound TCP: 5000 (Source: sg-0dca819306a96bfdb)
-┌─────────────────────────────────┐
-│     huylam-web-sg (EC2)         │
-└─────────────────────────────────┘
-```
+![Sơ đồ nguyên lý chuỗi bảo mật phân tầng Security Group Chaining](/images/architecture/aws-security-group-chaining.png?width=100%&classes=border,shadow)
+
+> [!NOTE] Định dạng tệp sơ đồ chuỗi bảo mật phân tầng
+> * **Ảnh kết xuất độ nét cao**: `/images/architecture/aws-security-group-chaining.png` (Chuẩn Retina 1180x560)
+> * **Sơ đồ đồ họa Vector SVG**: `/images/architecture/aws-security-group-chaining.svg`
+> * **Tệp thiết kế nguồn Draw.io**: `/images/architecture/aws-security-group-chaining.drawio` (Hỗ trợ mở và tùy biến trực tiếp trên [diagrams.net](https://app.diagrams.net/) với stencil AWS4 chính thức).
 
 ### Bước 3.1: Tạo Security Group cho ALB (huylam-alb-sg)
 1. Truy cập **EC2 Console -> Network & Security -> Security Groups -> Create security group**.
