@@ -29,11 +29,12 @@ Hệ thống bóc tách và dịch thuật tài liệu sử dụng ba dịch v�
 
 ## 2. Nội dung các bước thực hành
 
-Chuyên đề này gồm 3 phần thực hành chi tiết:
+Chuyên đề này gồm 4 phần thực hành chi tiết:
 
 - **[5.5.1 Cấu hình cơ sở dữ liệu Amazon DynamoDB](5.5.1-configure-amazon-dynamodb/)**: Hướng dẫn tạo bảng `document_processing_jobs` với Partition Key `job_id` và Sort Key `created_at`.
 - **[5.5.2 Cấu hình kho lưu trữ đối tượng Amazon S3](5.5.2-configure-amazon-s3/)**: Khởi tạo S3 bucket `huylam-ocr-documents-ap-southeast-1`, tạo thư mục `uploads/`, `outputs/` và cấu hình CORS.
 - **[5.5.3 Quản trị tham số bảo mật với AWS SSM Parameter Store](5.5.3-configure-ssm-parameter-store/)**: Tạo tham số `/huylam-ocr/config` kiểu `SecureString` mã hóa KMS.
+- **[5.5.4 Cấu hình Amazon Cognito & Google OAuth 2.0](5.5.4-configure-amazon-cognito/)**: Khởi tạo User Pool `huylam-ocr-user-pool`, tích hợp Google làm Identity Provider liên kết và kiểm thử đăng nhập SSO trên Web Studio.
 
 ---
 
@@ -43,3 +44,4 @@ Sau khi hoàn thành chuyên đề này, bạn sẽ có:
 - Bảng Amazon DynamoDB `document_processing_jobs` sẵn sàng ghi nhận tiến trình.
 - Kho lưu trữ Amazon S3 với cấu trúc thư mục chuẩn và chính sách CORS an toàn.
 - Tham số `/huylam-ocr/config` lưu trữ tập trung cấu hình hệ thống trên AWS SSM Parameter Store.
+- Hệ thống xác thực Amazon Cognito User Pool liên kết Google OAuth 2.0 vận hành bảo mật với chi phí 0.00 USD.
