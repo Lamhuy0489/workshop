@@ -80,6 +80,8 @@ Nhấp vào nút **Run All** trên thanh công cụ phía trên (hoặc nhấn t
    ```
    *(Kiểm tra nhanh trên trình duyệt qua link `/health` sẽ trả về `{"status": "healthy", "device": "cuda"}`).*
 
+![Màn hình thực thi Notebook trên Kaggle và URL Cloudflare Tunnel](/images/week12/11-kaggle-gpu-notebook-run.png?width=100%&classes=border,shadow)
+
 ---
 
 ### Bước 2.5: Dán link vào Web Studio và Kích hoạt Khóa
@@ -97,6 +99,8 @@ Nhấp vào nút **Run All** trên thanh công cụ phía trên (hoặc nhấn t
    - **Độ ưu tiên (Priority)**: Đặt là `1` (ưu tiên cao nhất để tận dụng tài nguyên GPU miễn phí).
 5. Nhấp nút **Lưu Khóa API**.
 6. Khóa mới xuất hiện trong bảng danh sách **Cụm Khóa Kết Nối API** với trạng thái **ACTIVE**.
+
+![Màn hình quản trị Web Studio kết nối thành công Kaggle GPU OCR](/images/week12/12-web-studio-admin-gpu-connected.png?width=100%&classes=border,shadow)
 
 ---
 

@@ -135,6 +135,18 @@ End-to-end document OCR and translation platform operational on live AWS infrast
 
 ---
 
+#### 11. Launching Vision OCR Server on Kaggle GPU (Qwen2.5-VL-7B):
+Executing deep multimodal OCR pipeline on Kaggle 2x NVIDIA T4 GPU accelerator, exposing secure HTTPS ingress via Cloudflare Tunnel:
+![Kaggle Notebook Execution and Cloudflare Tunnel Endpoint](/images/week12/11-kaggle-gpu-notebook-run.png)
+
+---
+
+#### 12. Administrator Connecting Kaggle Endpoint into Web Studio:
+Signing into System Admin (`/admin`), registering the Cloudflare Tunnel endpoint in the API Key pool, and confirming active status ($0.00 compute expense):
+![Web Studio Admin Panel Connected to Kaggle GPU OCR](/images/week12/12-web-studio-admin-gpu-connected.png)
+
+---
+
 ### Week 12 Summary & FinOps Governance:
 * Successfully achieved 100% completion of Three-Tier Enterprise Cloud Architecture deployment on AWS using Application Load Balancer (ALB) and EC2 Web Studio.
 * Strictly enforced Principle of Least Privilege and Security Group chaining, fully isolating compute instances from unauthenticated direct Internet ingress.

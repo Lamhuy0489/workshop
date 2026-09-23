@@ -135,6 +135,18 @@ Giao diện ứng dụng bóc tách tài liệu và dịch thuật kỹ thuật 
 
 ---
 
+#### 11. Khởi chạy máy chủ thị giác OCR trên Kaggle GPU (Qwen2.5-VL-7B):
+Khởi chạy tiến trình nhận diện hình ảnh chuyên sâu trên máy ảo GPU T4 x 2 của Kaggle, mở đường hầm Cloudflare Tunnel công khai HTTPS kết nối ra ngoài Internet:
+![Màn hình thực thi Notebook trên Kaggle và URL Cloudflare Tunnel](/images/week12/11-kaggle-gpu-notebook-run.png)
+
+---
+
+#### 12. Quản trị viên tích hợp Endpoint Kaggle vào Web Studio:
+Đăng nhập vào Bảng điều khiển Quản trị (`/admin`), nạp URL Cloudflare Tunnel vào cụm khóa API Pool và xác nhận trạng thái **ACTIVE (Connected)** với chi phí 0.00 USD:
+![Màn hình quản trị Web Studio kết nối thành công Kaggle GPU OCR](/images/week12/12-web-studio-admin-gpu-connected.png)
+
+---
+
 ### Tổng kết Tuần 12 & Quản trị tài chính FinOps:
 * Đã triển khai thành công 100% mô hình kiến trúc mạng 3 tầng (Three-Tier Enterprise Cloud Architecture) trên AWS với Application Load Balancer (ALB) và máy chủ EC2 Web Studio.
 * Áp dụng triệt để nguyên tắc an ninh tối thiểu (Principle of Least Privilege) và chuỗi liên kết Security Groups, cô lập an toàn máy chủ ứng dụng khỏi Internet.

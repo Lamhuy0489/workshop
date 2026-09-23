@@ -79,6 +79,8 @@ Click **Run All** in the top navigation bar (or press `Ctrl + F9`):
    https://random-subdomain.trycloudflare.com/ocr
    ```
 
+![Kaggle Notebook Execution and Cloudflare Tunnel Endpoint](/images/week12/11-kaggle-gpu-notebook-run.png?width=100%&classes=border,shadow)
+
 ---
 
 ### Step 2.5: Ingest Endpoint into Web Studio Admin Panel
@@ -96,6 +98,8 @@ Click **Run All** in the top navigation bar (or press `Ctrl + F9`):
    - **Priority**: Set to `1`.
 5. Click **Save API Key**.
 6. The key transitions to **ACTIVE** status in the Round-Robin Key Tour registry.
+
+![Web Studio Admin Panel Connected to Kaggle GPU OCR](/images/week12/12-web-studio-admin-gpu-connected.png?width=100%&classes=border,shadow)
 
 ---
 
