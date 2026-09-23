@@ -121,41 +121,26 @@ pre: " <b> 1.8. </b> "
 
 ### Sơ đồ kiến trúc triển khai Amazon ECS Fargate:
 
-```mermaid
-flowchart TD
-    subgraph Client ["Người Dùng & Trình Duyệt Web"]
-        User["Client Browser"]
-    end
+![Sơ đồ kiến trúc triển khai Amazon ECS Fargate](/images/architecture/aws-ecs-fargate-architecture.png?width=100%&classes=border,shadow)
 
-    subgraph AWS ["Nền Tảng Đám Mây AWS (Region: ap-southeast-1)"]
-        subgraph ECR ["Amazon ECR"]
-            Repo["Repository: huylam-web-app<br/>(Private Registry)"]
-            PublicECR["Public ECR Registry<br/>(httpd:latest)"]
-        end
+> [!NOTE] Định dạng tệp sơ đồ kiến trúc Amazon ECS Fargate
+> * **Ảnh kết xuất độ nét cao**: `/images/architecture/aws-ecs-fargate-architecture.png` (Chuẩn Retina 1260x720)
+> * **Sơ đồ đồ họa Vector SVG**: `/images/architecture/aws-ecs-fargate-architecture.svg`
+> * **Tệp thiết kế nguồn Draw.io**: `/images/architecture/aws-ecs-fargate-architecture.drawio` (Có thể nhập trực tiếp vào [diagrams.net](https://app.diagrams.net/) với stencil AWS4 chính thức).
 
-        subgraph VPC ["Default VPC (172.31.0.0/16)"]
-            subgraph Subnet ["Public Subnet (ap-southeast-1c)"]
-                SG["Security Group: sg-023c42b5bc2e5111b<br/>Inbound: HTTP Port 80 (0.0.0.0/0)"]
-                ENI["Elastic Network Interface<br/>Private IP: 172.31.1.147<br/>Public IP: 18.138.22.86"]
+### Bảng phân rã thành phần kiến trúc Amazon ECS Fargate:
 
-                subgraph ECS ["Amazon ECS Cluster: huylam-ecs-cluster"]
-                    subgraph Service ["ECS Service: huylam-web-service (Replica = 1)"]
-                        subgraph Task ["Fargate Task: 4f4a7210f06f... (0.25 vCPU, 0.5 GB RAM)"]
-                            Container["Container: web-app<br/>Apache HTTP Server (Port 80)"]
-                        end
-                    end
-                end
-            end
-            IGW["Internet Gateway"]
-        end
-    end
+| Tầng kiến trúc | Thành phần / Dịch vụ | Định danh tài nguyên | Thông số kỹ thuật & Vai trò |
+| :--- | :--- | :--- | :--- |
+| **Cửa ngõ Internet** | Internet Gateway | `igw-0b9db3a6eac29ede9` | Điều phối lưu lượng hai chiều giữa Internet công cộng và Default VPC `172.31.0.0/16`. |
+| **Mạng & Bảo mật** | Public Subnet & Security Group | `subnet-0bba3228d80514181` / `sg-023c42b5bc2e5111b` | Mạng con tại AZ `ap-southeast-1c`; SG mở duy nhất cổng HTTP:80 từ `0.0.0.0/0`. |
+| **Giao diện mạng ENI** | Elastic Network Interface | `eni-0dcbf8076c9d39691` | Gắn trực tiếp vào Fargate Task: Public IP `18.138.22.86`, Private IP `172.31.1.147`. |
+| **Cụm điều phối** | Amazon ECS Cluster | `huylam-ecs-cluster` | Cụm phi máy chủ quản lý năng lực tính toán theo chiến lược `FARGATE` / `FARGATE_SPOT`. |
+| **Dịch vụ duy trì** | Amazon ECS Service | `huylam-web-service` | Chế độ REPLICA (Desired = 1), nền tảng Fargate 1.4.0 (LATEST), tự động khôi phục lỗi. |
+| **Tác vụ thực thi** | Fargate Task Instance | `4f4a7210f06f...` (`huylam-web-task:1`) | Cấp phát 0.25 vCPU (256 units), 512 MiB RAM, chế độ mạng `awsvpc`, trạng thái RUNNING. |
+| **Ứng dụng Container** | Web App Container | `web-app` (`httpd:latest`) | Chạy Apache HTTP Server port 80, xác thực kiểm thử HTTP 200 OK ("It works!"). |
+| **Kho lưu trữ ảnh** | Amazon ECR | `huylam-web-app` (Private) & Public ECR Gallery | Lưu trữ Docker image tối ưu hóa, cung cấp base image triển khai cho task Fargate. |
 
-    User -->|"HTTP GET Port 80"| IGW
-    IGW --> ENI
-    ENI --> SG
-    SG --> Container
-    Task -.->|"Pull Image"| PublicECR
-```
 
 ---
 

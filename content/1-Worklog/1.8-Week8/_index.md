@@ -121,41 +121,25 @@ pre: " <b> 1.8. </b> "
 
 ### Architecture Diagram: Amazon ECS on AWS Fargate:
 
-```mermaid
-flowchart TD
-    subgraph Client ["Client Browser"]
-        User["Client Browser"]
-    end
+![Architecture Diagram: Amazon ECS on AWS Fargate](/images/architecture/aws-ecs-fargate-architecture.png?width=100%&classes=border,shadow)
 
-    subgraph AWS ["AWS Cloud Platform (Region: ap-southeast-1)"]
-        subgraph ECR ["Amazon ECR"]
-            Repo["Repository: huylam-web-app<br/>(Private Registry)"]
-            PublicECR["Public ECR Registry<br/>(httpd:latest)"]
-        end
+> [!NOTE] Amazon ECS Fargate Architecture Diagram Formats
+> * **High-Resolution PNG Render**: `/images/architecture/aws-ecs-fargate-architecture.png` (Retina 1260x720)
+> * **Scalable Vector Graphic (SVG)**: `/images/architecture/aws-ecs-fargate-architecture.svg`
+> * **Editable Draw.io Source**: `/images/architecture/aws-ecs-fargate-architecture.drawio` (Directly importable into [diagrams.net](https://app.diagrams.net/) with AWS4 stencils).
 
-        subgraph VPC ["Default VPC (172.31.0.0/16)"]
-            subgraph Subnet ["Public Subnet (ap-southeast-1c)"]
-                SG["Security Group: sg-023c42b5bc2e5111b<br/>Inbound: HTTP Port 80 (0.0.0.0/0)"]
-                ENI["Elastic Network Interface<br/>Private IP: 172.31.1.147<br/>Public IP: 18.138.22.86"]
+### Architectural Breakdown: Amazon ECS Fargate
 
-                subgraph ECS ["Amazon ECS Cluster: huylam-ecs-cluster"]
-                    subgraph Service ["ECS Service: huylam-web-service (Replica = 1)"]
-                        subgraph Task ["Fargate Task: 4f4a7210f06f... (0.25 vCPU, 0.5 GB RAM)"]
-                            Container["Container: web-app<br/>Apache HTTP Server (Port 80)"]
-                        end
-                    end
-                end
-            end
-            IGW["Internet Gateway"]
-        end
-    end
-
-    User -->|"HTTP GET Port 80"| IGW
-    IGW --> ENI
-    ENI --> SG
-    SG --> Container
-    Task -.->|"Pull Image"| PublicECR
-```
+| Layer / Domain | Component / Service | Resource Identifier | Specifications & Role |
+| :--- | :--- | :--- | :--- |
+| **Edge & Connectivity** | Internet Gateway | `igw-0b9db3a6eac29ede9` | Routes bidirectional traffic between public Internet and Default VPC `172.31.0.0/16`. |
+| **Network & Security** | Public Subnet & Security Group | `subnet-0bba3228d80514181` / `sg-023c42b5bc2e5111b` | Subnet in AZ `ap-southeast-1c`; Security Group opening inbound HTTP:80 from `0.0.0.0/0`. |
+| **Network Interface** | Elastic Network Interface (ENI) | `eni-0dcbf8076c9d39691` | Direct attachment to Fargate Task: Public IP `18.138.22.86`, Private IP `172.31.1.147`. |
+| **Orchestration Cluster** | Amazon ECS Cluster | `huylam-ecs-cluster` | Serverless cluster managing capacity via `FARGATE` / `FARGATE_SPOT` capacity providers. |
+| **Service Manager** | Amazon ECS Service | `huylam-web-service` | REPLICA mode (Desired count = 1), Fargate 1.4.0 (LATEST), auto self-healing. |
+| **Task Instance** | Fargate Task Instance | `4f4a7210f06f...` (`huylam-web-task:1`) | Allocated 0.25 vCPU (256 units), 512 MiB RAM, `awsvpc` network mode, RUNNING state. |
+| **Container Engine** | Web App Container | `web-app` (`httpd:latest`) | Runs Apache HTTP Server port 80, validated via HTTP 200 OK ("It works!"). |
+| **Image Registry** | Amazon ECR | `huylam-web-app` (Private) & Public ECR Gallery | Manages optimized Docker container images for task deployments. |
 
 ---
 

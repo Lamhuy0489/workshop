@@ -58,17 +58,11 @@ Nhiều giải pháp triển khai cơ bản trên đám mây hiện nay vẫn m�
 
 Hệ thống loại bỏ hoàn toàn việc duy trì cổng SSH 22 và xóa bỏ sự phụ thuộc vào máy chủ trung chuyển (Bastion Host):
 
-```mermaid
-flowchart LR
-  Admin([Kỹ sư quản trị]) -->|SSM Session Manager<br>TLS 1.3 / Port 443| SSM[AWS Systems Manager]
-  SSM -->|IAM Auth / No Port 22| EC2[EC2 huylam-ocr-web-server<br>Amazon Linux 2023]
-  EC2 -.->|Không mở Inbound 22| Deny[Internet Scanning Denied]
-
-  style Admin fill:#e1f5ff
-  style SSM fill:#fff4e1
-  style EC2 fill:#e8f5e9
-  style Deny fill:#fee
-```
+| Bước điều phối | Chủ thể & Thành phần | Kênh giao tiếp | Cơ chế bảo mật |
+| :--- | :--- | :--- | :--- |
+| **1. Khởi tạo phiên** | Kỹ sư quản trị &rarr; AWS Systems Manager | HTTPS (Port 443 / TLS 1.3) | Xác thực danh tính qua AWS IAM / MFA, không cần mở Public IP. |
+| **2. Kết nối an toàn** | AWS Systems Manager &rarr; Amazon EC2 | Kênh ngầm SSM Agent nội bộ | Giao tiếp thông qua IAM Instance Profile `huylam-ssm-role`, không mở cổng Inbound 22. |
+| **3. Ngăn chặn xâm nhập** | Internet Scanning &rarr; Amazon EC2 | Bị từ chối tự động (DENY) | Đóng hoàn toàn cổng SSH 22, loại bỏ 100% rủi ro tấn công brute-force từ Internet. |
 
 1. **Quản trị an toàn qua Session Manager**: Kỹ sư kết nối trực tiếp vào console của máy chủ thông qua AWS Management Console hoặc AWS CLI bằng Session Manager qua kênh truyền HTTPS/TLS 1.3.
 2. **Cơ chế xác thực không dùng khóa tĩnh (Zero Static Credentials)**: Máy chủ EC2 được gắn IAM Instance Profile mang tên `huylam-ssm-role`. Mọi tương tác tới S3, DynamoDB hay Parameter Store đều được cấp phát token tạm thời qua AWS STS (Security Token Service). Không tồn tại bất kỳ Access Key tĩnh nào trong tệp cấu hình hay mã nguồn.

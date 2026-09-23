@@ -47,110 +47,28 @@ pre: " <b> 1.9. </b> "
 
 The system is designed following a fully decoupled, Event-Driven Serverless architecture on AWS:
 
-```text
-+-----------------------------------------------------------------------------------+
-|                                 USER / BROWSER                                    |
-|                       (Web Studio Upload & Preview Interface)                     |
-+-----------------------------------------+-----------------------------------------+
-                                          |
-                         +----------------+----------------+
-                         | 1. Fetch Web   | 2. Request     | 3. Direct Binary Upload
-                         |    Assets      |    Upload URL  |    (Presigned PUT URL)
-                         v                v                v
-+-----------------------------+  +--------------------+  +--------------------------+
-|      AMAZON CLOUDFRONT      |  | AMAZON API GATEWAY |  |     AMAZON S3 BUCKET     |
-|         (Global CDN)        |  |    (REST API)      |  |     (Document Storage)   |
-+--------------+--------------+  +---------+----------+  +------------+-------------+
-               |                           |                          |
-               v                           v                          v
-+-----------------------------+  +--------------------+               |
-|      AMAZON S3 BUCKET       |  |     AWS LAMBDA     |               | (S3 Event Trigger)
-|   (Static Website Hosting)  |  | (Presigned Handler)|               | s3:ObjectCreated
-+-----------------------------+  +---------+----------+               v
-                                           |             +--------------------------+
-                                           +------------>|        AWS LAMBDA        |
-                                                         |  (Hybrid Document Engine)|
-                                                         +------------+-------------+
-                                                                      |
-                     +------------------------------------------------+-----------------------------------+
-                     |                                                |                                   |
-                     v                                                v                                   v
-+---------------------------------------+  +---------------------------------------+  +---------------------------------------+
-|          AWS SYSTEMS MANAGER          |  |          STAGE 1: FAST-PATH           |  |          STAGE 2: SELECTIVE OCR       |
-|            Parameter Store            |  |      (Native Structure Extraction)    |  |          (Multimodal Vision AI)       |
-|    (SecureString API Keys & Config)   |  |   PyMuPDF / pdfplumber (0.1s - 0.3s)  |  |   Kaggle GPU Tunnel or Gemini API     |
-+---------------------------------------+  +---------------------------------------+  +---------------------------------------+
-                                                                      |
-                                           +--------------------------+---------------------------+
-                                           |                                                      |
-                                           v                                                      v
-                        +---------------------------------------+              +---------------------------------------+
-                        |           AMAZON S3 BUCKET            |              |            AMAZON DYNAMODB            |
-                        |          (/outputs/ Directory)        |              |     (document_processing_jobs table)  |
-                        |      Stores: .md, .docx, .pdf         |              | Tracks status, page counts, latency   |
-                        +---------------------------------------+              +---------------------------------------+
-                                                                                                  |
-                                                                                                  v
-                                                                               +---------------------------------------+
-                                                                               |           AMAZON CLOUDWATCH           |
-                                                                               |      (Logs, Metrics, Alarms)          |
-                                                                               +---------------------------------------+
-```
+![Solution Architecture Diagram: AWS Serverless Hybrid OCR Platform](/images/architecture/aws-system-architecture.png?width=100%&classes=border,shadow)
 
-```mermaid
-flowchart TD
-    subgraph ClientLayer ["Client Application Layer"]
-        User["End User / Web Browser"]
-    end
+> [!NOTE] Architecture Diagram Formats & Resources
+> * **High-Resolution PNG Render**: `/images/architecture/aws-system-architecture.png` (Retina 1400x920)
+> * **Scalable Vector Graphic (SVG)**: `/images/architecture/aws-system-architecture.svg`
+> * **Editable Draw.io Source**: `/images/architecture/aws-system-architecture.drawio` (Directly importable into [diagrams.net](https://app.diagrams.net/) with official AWS4 stencils).
+> * **Dedicated Event Flow Diagram**: See also `/images/architecture/aws-serverless-event-pipeline.png` (Covers the asynchronous S3 Event Trigger to AWS Lambda and DynamoDB pipeline).
 
-    subgraph PresentationLayer ["Ingestion & Edge Distribution Layer"]
-        CF["Amazon CloudFront (Global CDN)"]
-        S3Web["Amazon S3 (Static Web Hosting)"]
-        APIGW["Amazon API Gateway (REST API)"]
-    end
+### Architectural Breakdown: Serverless Solution
 
-    subgraph StorageLayer ["Object Storage Layer"]
-        S3Raw["Amazon S3: /uploads/ (Raw Documents)"]
-        S3Out["Amazon S3: /outputs/ (Markdown, Docx)"]
-    end
-
-    subgraph ComputeLayer ["Serverless Compute Layer (AWS Lambda)"]
-        LambdaAPI["AWS Lambda: Presigned URL Generator"]
-        LambdaEngine["AWS Lambda: Hybrid Document Engine"]
-        FastParser["Stage 1: Fast-Path Native Parser\n(PyMuPDF 0.1s - 0.3s/page)"]
-        SelectiveOCR["Stage 2: Selective Vision OCR\n(Page Classification & Dispatching)"]
-    end
-
-    subgraph ExternalAILayer ["External Accelerated AI Compute"]
-        Kaggle["Kaggle GPU/TPU (Qwen2.5-VL / GOT-OCR)\nvia Cloudflare Tunnel"]
-        Gemini["Google Gemini 1.5 Flash Vision API\n(Automatic Resilient Fallback)"]
-    end
-
-    subgraph StateAndSecurityLayer ["State Tracking & Security Layer"]
-        DynamoDB[("Amazon DynamoDB\nTable: document_processing_jobs")]
-        SSM["AWS Systems Manager\nParameter Store (KMS Encrypted)"]
-        CW["Amazon CloudWatch Logs & Metrics"]
-    end
-
-    User -->|1. Fetch Web UI| CF
-    CF --> S3Web
-    User -->|2. Request Upload URL| APIGW
-    APIGW --> LambdaAPI
-    LambdaAPI -->|Return SigV4 Presigned PUT URL| User
-    User -->|3. Direct Binary Upload| S3Raw
-
-    S3Raw -->|4. Trigger s3:ObjectCreated| LambdaEngine
-    LambdaEngine -->|Load Config & API Keys| SSM
-    LambdaEngine --> FastParser
-    FastParser -->|Digital Text Stream| S3Out
-    FastParser -->|Scanned Page Detected| SelectiveOCR
-    SelectiveOCR -->|Primary Route| Kaggle
-    SelectiveOCR -->|Fallback on Error| Gemini
-    SelectiveOCR --> S3Out
-
-    LambdaEngine -->|Update Status & Metrics| DynamoDB
-    LambdaEngine -->|Execution Logs| CW
-```
+| Architecture Layer | Component / Service | Resource Identifier | Core Role & Technical Responsibility |
+| :--- | :--- | :--- | :--- |
+| **Edge Distribution** | Amazon CloudFront & S3 Web | Global Edge Ingestion | Distributes the Web Studio Upload & Preview SPA with low latency and HTTPS termination. |
+| **API Entry Point** | Amazon API Gateway | REST API Gateway | Provides RESTful endpoints for clients to request SigV4 presigned upload URLs. |
+| **Secure Ingestion** | AWS Lambda (Presigned Generator) | `huylam-presigned-url-gen` | Generates short-lived (15-min TTL) S3 Presigned PUT URLs without burdening backend compute. |
+| **Object Storage** | Amazon S3 Bucket | `huylam-ocr-documents-ap-southeast-1` | Stores raw uploaded files in `uploads/` and generated outputs (`.md`, `.docx`, `.pdf`) in `outputs/{job_id}/`. |
+| **Event Orchestration** | S3 Event Notification | `s3:ObjectCreated:*` | Automatically publishes events on upload completion, asynchronously invoking the Lambda processing engine. |
+| **Serverless Compute** | AWS Lambda (Hybrid Engine) | `huylam-ocr-processor` | Executes document extraction pipelines with instant concurrency scaling and zero idle cost (Scale-to-Zero). |
+| **Fast-Path Parser (Stage 1)** | Fast-Path Native Parser | PyMuPDF / pdfplumber | Directly parses digital PDFs in memory at 0.1s - 0.3s/page with zero API cost. |
+| **Vision AI (Stage 2)** | Selective Vision OCR | Kaggle GPU / Google Gemini API | Activated selectively on scanned pages, combining high precision with automated fallback resilience. |
+| **State Tracking** | Amazon DynamoDB | `document_processing_jobs` | NoSQL table tracking job lifecycle, page metrics, elapsed latency, and output artifact paths. |
+| **Security & Observability** | AWS SSM & CloudWatch | Parameter Store & CloudWatch Logs | Secures configurations/API keys with KMS encryption; centralizes execution logs and runtime alarms. |
 
 ---
 

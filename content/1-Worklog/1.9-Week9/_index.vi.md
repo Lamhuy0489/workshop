@@ -47,110 +47,28 @@ pre: " <b> 1.9. </b> "
 
 Hệ thống được thiết kế theo mô hình điện toán phi máy chủ (Serverless) và hướng sự kiện (Event-Driven) khép kín, phân tách độc lập giữa tầng lưu trữ, tầng tính toán và tầng cơ sở dữ liệu:
 
-```text
-+-----------------------------------------------------------------------------------+
-|                            NGƯỜI DÙNG / TRÌNH DUYỆT                              |
-|                    (Giao diện Web Studio Upload & Preview)                        |
-+-----------------------------------------+-----------------------------------------+
-                                          |
-                         +----------------+----------------+
-                         | 1. Lấy mã Web  | 2. Xin Upload  | 3. Tải tệp trực tiếp
-                         |                |    URL         |    (Presigned PUT)
-                         v                v                v
-+-----------------------------+  +--------------------+  +--------------------------+
-|      AMAZON CLOUDFRONT      |  | AMAZON API GATEWAY |  |     AMAZON S3 BUCKET     |
-|   (Phân phối CDN toàn cầu)  |  |    (REST API)      |  | (Lưu trữ tệp tài liệu)   |
-+--------------+--------------+  +---------+----------+  +------------+-------------+
-               |                           |                          |
-               v                           v                          v
-+-----------------------------+  +--------------------+               |
-|      AMAZON S3 BUCKET       |  |     AWS LAMBDA     |               | (Sự kiện S3)
-|   (Static Website Hosting)  |  | (Presigned Handler)|               | s3:ObjectCreated
-+-----------------------------+  +---------+----------+               v
-                                           |             +--------------------------+
-                                           +------------>|        AWS LAMBDA        |
-                                                         |  (Hybrid Document Engine)|
-                                                         +------------+-------------+
-                                                                      |
-                     +------------------------------------------------+-----------------------------------+
-                     |                                                |                                   |
-                     v                                                v                                   v
-+---------------------------------------+  +---------------------------------------+  +---------------------------------------+
-|          AWS SYSTEMS MANAGER          |  |         TẦNG 1: FAST-PATH             |  |         TẦNG 2: SELECTIVE OCR         |
-|            Parameter Store            |  |      (Trích xuất cấu trúc số)         |  |         (Mô hình thị giác AI)         |
-|   (Lưu khóa bảo mật & Cấu hình)       |  |   PyMuPDF / pdfplumber (0.1s - 0.3s)  |  |   Kaggle GPU Tunnel hoặc Gemini API   |
-+---------------------------------------+  +---------------------------------------+  +---------------------------------------+
-                                                                      |
-                                           +--------------------------+---------------------------+
-                                           |                                                      |
-                                           v                                                      v
-                        +---------------------------------------+              +---------------------------------------+
-                        |           AMAZON S3 BUCKET            |              |            AMAZON DYNAMODB            |
-                        |      (Thư mục xuất /outputs/)         |              |     (Bảng document_processing_jobs)   |
-                        |  Lưu trữ tệp: .md, .docx, .pdf        |              | Lưu trạng thái, số trang, thời gian   |
-                        +---------------------------------------+              +---------------------------------------+
-                                                                                                  |
-                                                                                                  v
-                                                                               +---------------------------------------+
-                                                                               |           AMAZON CLOUDWATCH           |
-                                                                               |      (Logs, Metrics, Alarms)          |
-                                                                               +---------------------------------------+
-```
+![Sơ đồ kiến trúc giải pháp Serverless](/images/architecture/aws-system-architecture.png?width=100%&classes=border,shadow)
 
-```mermaid
-flowchart TD
-    subgraph ClientLayer ["Tầng Giao Diện Người Dùng"]
-        User["Người dùng / Trình duyệt Web"]
-    end
+> [!NOTE] Định dạng tệp sơ đồ kiến trúc giải pháp Serverless
+> * **Ảnh kết xuất độ nét cao**: `/images/architecture/aws-system-architecture.png` (Độ phân giải chuẩn Retina 1400x920)
+> * **Sơ đồ đồ họa Vector SVG**: `/images/architecture/aws-system-architecture.svg`
+> * **Tệp thiết kế nguồn Draw.io**: `/images/architecture/aws-system-architecture.drawio` (Có thể nhập trực tiếp vào [diagrams.net](https://app.diagrams.net/) với stencil AWS4 chính thức).
+> * **Sơ đồ luồng kích hoạt phi máy chủ chuyên biệt**: Tham khảo thêm `/images/architecture/aws-serverless-event-pipeline.png` (Mô tả quy trình S3 Event Trigger đến hàm AWS Lambda và DynamoDB).
 
-    subgraph PresentationLayer ["Tầng Phân Phối & Tiếp Nhận"]
-        CF["Amazon CloudFront (CDN)"]
-        S3Web["Amazon S3 (Static Web Hosting)"]
-        APIGW["Amazon API Gateway (REST API)"]
-    end
+### Bảng phân rã thành phần kiến trúc giải pháp Serverless:
 
-    subgraph StorageLayer ["Tầng Lưu Trữ Đối Tượng"]
-        S3Raw["Amazon S3: /uploads/ (Tệp gốc)"]
-        S3Out["Amazon S3: /outputs/ (Markdown, Docx)"]
-    end
-
-    subgraph ComputeLayer ["Tầng Xử Lý Phi Máy Chủ (AWS Lambda)"]
-        LambdaAPI["AWS Lambda: Presigned URL Generator"]
-        LambdaEngine["AWS Lambda: Hybrid Document Engine"]
-        FastParser["Tầng 1: Fast-Path Native Parser\n(PyMuPDF 0.1s - 0.3s/trang)"]
-        SelectiveOCR["Tầng 2: Selective Vision OCR\n(Phân loại & Điều phối trang scan)"]
-    end
-
-    subgraph ExternalAILayer ["Tầng Trí Tuệ Nhân Tạo Ngoại Vi"]
-        Kaggle["Kaggle GPU/TPU (Qwen2.5-VL / GOT-OCR)\nqua Cloudflare Tunnel"]
-        Gemini["Google Gemini 1.5 Flash Vision API\n(Cơ chế Dự phòng tự động)"]
-    end
-
-    subgraph StateAndSecurityLayer ["Tầng Dữ Liệu Trạng Thái & Bảo Mật"]
-        DynamoDB[("Amazon DynamoDB\nBảng: document_processing_jobs")]
-        SSM["AWS Systems Manager\nParameter Store (KMS Encrypted)"]
-        CW["Amazon CloudWatch Logs & Metrics"]
-    end
-
-    User -->|1. Truy cập giao diện| CF
-    CF --> S3Web
-    User -->|2. Yêu cầu tải tệp| APIGW
-    APIGW --> LambdaAPI
-    LambdaAPI -->|Trả về S3 Presigned URL| User
-    User -->|3. Tải tệp trực tiếp HTTPS| S3Raw
-
-    S3Raw -->|4. Kích hoạt s3:ObjectCreated| LambdaEngine
-    LambdaEngine -->|Đọc cấu hình & API Keys| SSM
-    LambdaEngine --> FastParser
-    FastParser -->|Trang văn bản số| S3Out
-    FastParser -->|Phát hiện trang scan| SelectiveOCR
-    SelectiveOCR -->|Ưu tiên 1| Kaggle
-    SelectiveOCR -->|Dự phòng khi lỗi| Gemini
-    SelectiveOCR --> S3Out
-
-    LambdaEngine -->|Ghi nhận tiến trình & độ trễ| DynamoDB
-    LambdaEngine -->|Ghi nhật ký thực thi| CW
-```
+| Tầng kiến trúc | Thành phần / Dịch vụ | Định danh tài nguyên | Vai trò và chức năng cốt lõi |
+| :--- | :--- | :--- | :--- |
+| **Giao diện & Cạnh mạng** | Amazon CloudFront & S3 Web | Phân phối tĩnh toàn cầu | Phân phối giao diện Web Studio Upload & Preview với độ trễ thấp, bảo mật qua HTTPS. |
+| **Cổng giao tiếp API** | Amazon API Gateway | REST API Gateway | Cung cấp endpoint RESTful cho máy khách gửi yêu cầu lấy SigV4 Presigned URL tải tệp lên S3. |
+| **Cấp quyền tải tệp** | AWS Lambda (Presigned Generator) | `huylam-presigned-url-gen` | Sinh URL tải tệp trực tiếp lên S3 bucket có giới hạn thời gian (TTL 15 phút), không chiếm dụng băng thông máy chủ. |
+| **Lưu trữ đối tượng** | Amazon S3 Bucket | `huylam-ocr-documents-ap-southeast-1` | Nhận tệp tải lên trực tiếp tại `uploads/` và lưu trữ tệp kết quả (`.md`, `.docx`, `.pdf`) tại `outputs/{job_id}/`. |
+| **Kích hoạt sự kiện** | S3 Event Notification | `s3:ObjectCreated:*` | Phát sinh sự kiện không đồng bộ ngay khi tệp được đẩy lên hoàn tất, kích hoạt trực tiếp hàm Lambda xử lý. |
+| **Động cơ tính toán Serverless** | AWS Lambda (Hybrid Engine) | `huylam-ocr-processor` | Hàm phi máy chủ thực thi logic bóc tách văn bản, tự động co giãn theo từng tệp và tắt hoàn toàn khi rảnh (Scale-to-Zero). |
+| **Bóc tách siêu tốc (Tầng 1)** | Fast-Path Native Parser | PyMuPDF / pdfplumber | Trích xuất văn bản số hóa trực tiếp trong bộ nhớ với tốc độ 0.1s - 0.3s/trang, chi phí 0.00 USD. |
+| **Thị giác AI (Tầng 2)** | Selective Vision OCR | Kaggle GPU / Google Gemini API | Chỉ kích hoạt khi phát hiện trang scan/ảnh, bảo đảm độ chính xác tối đa và tối ưu chi phí qua cơ chế failover. |
+| **Quản trị trạng thái** | Amazon DynamoDB | `document_processing_jobs` | Bảng NoSQL theo dõi trạng thái tiến trình, số trang xử lý, dung lượng, độ trễ và đường dẫn kết quả. |
+| **Bảo mật & Giám sát** | AWS SSM & CloudWatch | Parameter Store & CloudWatch Logs | Lưu trữ cấu hình/khóa bí mật bảo vệ bằng AWS KMS; ghi nhật ký và giám sát hiệu năng theo thời gian thực. |
 
 ---
 

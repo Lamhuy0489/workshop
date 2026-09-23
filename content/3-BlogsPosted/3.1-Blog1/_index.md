@@ -58,17 +58,11 @@ To systematically eliminate these vulnerabilities adhering to the **AWS Well-Arc
 
 The architecture entirely deprecates SSH port 22 and eliminates bastion jump hosts:
 
-```mermaid
-flowchart LR
-  Admin([Cloud Engineer]) -->|SSM Session Manager<br>TLS 1.3 / Port 443| SSM[AWS Systems Manager]
-  SSM -->|IAM Auth / No Port 22| EC2[EC2 huylam-ocr-web-server<br>Amazon Linux 2023]
-  EC2 -.->|No Port 22 Ingress| Deny[Internet Scanning Denied]
-
-  style Admin fill:#e1f5ff
-  style SSM fill:#fff4e1
-  style EC2 fill:#e8f5e9
-  style Deny fill:#fee
-```
+| Orchestration Step | Actors & Components | Communication Channel | Security Control & Mechanism |
+| :--- | :--- | :--- | :--- |
+| **1. Session Initiation** | Cloud Engineer &rarr; AWS Systems Manager | HTTPS (Port 443 / TLS 1.3) | Identity authenticated via AWS IAM / MFA without public IP exposure. |
+| **2. Secure Tunneling** | AWS Systems Manager &rarr; Amazon EC2 | Outbound SSM Agent Channel | Governed by IAM Instance Profile `huylam-ssm-role`; zero inbound ports required. |
+| **3. Automated Defense** | Internet Scanning &rarr; Amazon EC2 | Explicit Inbound Dropped | SSH port 22 completely closed, neutralizing 100% of Internet brute-force attacks. |
 
 1. **Secure Shell Access via Session Manager**: Engineers establish interactive terminal sessions over encrypted HTTPS/TLS 1.3 channels authenticated via IAM.
 2. **Zero Static Credentials**: EC2 operates under IAM Instance Profile `huylam-ssm-role`. AWS STS automatically issues ephemeral tokens for S3, DynamoDB, and Parameter Store interactions.
