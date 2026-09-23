@@ -26,6 +26,15 @@ Hạ tầng mạng là nền móng cốt lõi đảm bảo khả năng mở rộ
   - `huylam-alb-sg`: Tiếp nhận lưu lượng HTTP cổng 80 từ toàn cầu.
   - `huylam-web-sg`: Chỉ chấp nhận kết nối TCP cổng 5000 bắt nguồn từ chính Security Group của ALB (`huylam-alb-sg`), ngăn chặn triệt để nguy cơ quét cổng hoặc tấn công trực tiếp vào máy chủ EC2 từ Internet.
 
+### Sơ đồ kiến trúc mạng Multi-AZ & Chuỗi Security Groups (VPC Architecture Blueprint):
+
+![Sơ đồ kiến trúc mạng Amazon VPC Multi-AZ và Chuỗi Security Groups](/images/architecture/aws-vpc-network-architecture.png?width=100%&classes=border,shadow)
+
+> [!NOTE] Định dạng tệp sơ đồ mạng
+> * **Ảnh kết xuất độ nét cao**: `/images/architecture/aws-vpc-network-architecture.png` (Chuẩn Retina 1380x820)
+> * **Sơ đồ đồ họa Vector SVG**: `/images/architecture/aws-vpc-network-architecture.svg`
+> * **Tệp thiết kế nguồn Draw.io**: `/images/architecture/aws-vpc-network-architecture.drawio` (Hỗ trợ mở và chỉnh sửa trực tiếp trên [diagrams.net](https://app.diagrams.net/) với các stencil AWS4 chính thức).
+
 ---
 
 ## 2. Nội dung các bước thực hành

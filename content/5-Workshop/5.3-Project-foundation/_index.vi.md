@@ -44,8 +44,16 @@ aws/
 ├── tests/                         # Bộ kiểm thử tự động hóa toàn diện
 ├── Dockerfile                     # Tệp đóng gói container chuẩn OCI Container
 ├── requirements.txt               # Danh mục thư viện phụ thuộc Python
-└── .env.example                   # Tệp mẫu cấu hình biến môi trường
 ```
+
+### Sơ đồ kiến trúc động cơ xử lý bóc tách & dịch thuật (Hybrid Processing Engine Architecture):
+
+![Sơ đồ kiến trúc động cơ bóc tách lai và dịch thuật tài liệu kỹ thuật trên AWS](/images/architecture/aws-hybrid-ocr-engine-architecture.png?width=100%&classes=border,shadow)
+
+> [!NOTE] Định dạng tệp sơ đồ Hybrid Engine
+> * **Ảnh kết xuất độ nét cao**: `/images/architecture/aws-hybrid-ocr-engine-architecture.png` (Chuẩn Retina 1380x840)
+> * **Sơ đồ đồ họa Vector SVG**: `/images/architecture/aws-hybrid-ocr-engine-architecture.svg`
+> * **Tệp thiết kế nguồn Draw.io**: `/images/architecture/aws-hybrid-ocr-engine-architecture.drawio` (Hỗ trợ mở và chỉnh sửa trực tiếp trên [diagrams.net](https://app.diagrams.net/) với các stencil AWS4 chính thức).
 
 ---
 

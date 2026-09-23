@@ -26,6 +26,15 @@ The cloud network infrastructure serves as the architectural foundation ensuring
   - `huylam-alb-sg`: Ingests HTTP port 80 traffic from global Internet clients.
   - `huylam-web-sg`: Accepts TCP port 5000 ingress strictly from the ALB Security Group (`huylam-alb-sg`), preventing port scanning from external networks.
 
+### Multi-AZ Networking & Chained Security Groups Blueprint:
+
+![Amazon VPC Multi-AZ & Chained Security Groups Blueprint](/images/architecture/aws-vpc-network-architecture.png?width=100%&classes=border,shadow)
+
+> [!NOTE] Networking Diagram File Formats
+> * **High-Resolution Render**: `/images/architecture/aws-vpc-network-architecture.png` (Retina 1380x820)
+> * **Scalable Vector Graphic**: `/images/architecture/aws-vpc-network-architecture.svg`
+> * **Editable Source Diagram**: `/images/architecture/aws-vpc-network-architecture.drawio` (Directly importable into [diagrams.net](https://app.diagrams.net/) with official AWS4 stencils).
+
 ---
 
 ## 2. Hands-on Execution Steps

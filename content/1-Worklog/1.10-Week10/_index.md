@@ -91,46 +91,12 @@ pre: " <b> 1.10. </b> "
 
 ### Cloud Infrastructure Architecture Diagram (Week 10):
 
-```mermaid
-flowchart TD
-    subgraph ClientEnv ["User Environment"]
-        Browser["Web Studio Browser Client"]
-    end
+![Cloud Infrastructure Architecture Diagram (Week 10)](/images/architecture/aws-hybrid-ocr-engine-architecture.png?width=100%&classes=border,shadow)
 
-    subgraph AWSCloudStorage ["Storage & Data Layer (AWS Cloud)"]
-        S3Bucket["Amazon S3: huylam-ocr-documents-ap-southeast-1\n- uploads/ (Raw Files)\n- outputs/ (MD, DOCX, PDF Artifacts)"]
-        DynamoDB[("Amazon DynamoDB\nTable: document_processing_jobs\nMode: On-Demand")]
-        SSM["AWS Systems Manager\nParameter: /huylam-ocr/config\nType: SecureString (KMS Encrypted)"]
-    end
-
-    subgraph AppEngine ["Parsing & Translation Engine"]
-        Parser["Fast-Path Native Parser\n(PyMuPDF 0.1s - 0.3s/page)"]
-        Translator["Technical Translator\n(Format-Preserving Markdown)"]
-        Exporters["Multi-Format Exporters\n(MD, DOCX, Standard A4 PDF)"]
-    end
-
-    subgraph AIProviders ["AI Model Providers"]
-        direction TB
-        subgraph FreeTierGroup ["Default: Cost-Optimized FinOps ($0)"]
-            Kaggle["Kaggle GPU/TPU (Qwen2.5-VL)"]
-            Gemini["Google Gemini 3.6 Flash"]
-        end
-        subgraph NativeAWSGroup ["Optional Secondary: AWS Native Closed-Loop"]
-            Bedrock["Amazon Bedrock / Textract / Translate\n(Invoked only upon explicit user request)"]
-        end
-    end
-
-    Browser -->|1. Direct HTTPS upload| S3Bucket
-    AppEngine -->|2. Fetch secure config & credentials| SSM
-    S3Bucket -->|3. Stream PDF / Image bytes| AppEngine
-    AppEngine --> Parser
-    Parser -->|Scanned page or translation| FreeTierGroup
-    Parser -.->|When AWS Native mode active| NativeAWSGroup
-    AppEngine --> Translator
-    Translator --> Exporters
-    Exporters -->|4. Persist output artifacts| S3Bucket
-    AppEngine -->|5. Telemetry & job state update| DynamoDB
-```
+> [!NOTE] Week 10 Architecture Diagram File Formats
+> * **High-Resolution Render**: `/images/architecture/aws-hybrid-ocr-engine-architecture.png` (Retina 1380x840)
+> * **Scalable Vector Graphic**: `/images/architecture/aws-hybrid-ocr-engine-architecture.svg`
+> * **Editable Source Diagram**: `/images/architecture/aws-hybrid-ocr-engine-architecture.drawio` (Directly importable into [diagrams.net](https://app.diagrams.net/) with official AWS4 stencils).
 
 ### Visual Verification Screenshots on AWS Management Console:
 

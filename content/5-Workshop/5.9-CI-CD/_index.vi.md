@@ -16,13 +16,12 @@ Thiết lập quy trình tự động hóa phi máy chủ hướng sự kiện (
 
 Thay vì bắt máy chủ ứng dụng phải liên tục thăm dò (polling) kho lưu trữ S3 gây lãng phí tài nguyên và độ trễ cao, hệ thống áp dụng mô hình hướng sự kiện thời gian thực (Real-time Event-Driven):
 
-```text
-[ Tải tệp lên S3 uploads/ ] ──> [ Sự kiện s3:ObjectCreated:* ] ──> [ AWS Lambda (huylam-ocr-processor) ]
-                                                                             │
-                                                                             ├──> [ Ghi bản ghi vào DynamoDB ]
-                                                                             │
-                                                                             └──> [ Ghi nhật ký CloudWatch Logs ]
-```
+![Sơ đồ kiến trúc luồng xử lý phi máy chủ hướng sự kiện trên AWS](/images/architecture/aws-serverless-event-pipeline.png?width=100%&classes=border,shadow)
+
+> [!NOTE] Định dạng tệp sơ đồ Serverless Pipeline
+> * **Ảnh kết xuất độ nét cao**: `/images/architecture/aws-serverless-event-pipeline.png` (Chuẩn Retina 1380x720)
+> * **Sơ đồ đồ họa Vector SVG**: `/images/architecture/aws-serverless-event-pipeline.svg`
+> * **Tệp thiết kế nguồn Draw.io**: `/images/architecture/aws-serverless-event-pipeline.drawio` (Hỗ trợ mở và chỉnh sửa trực tiếp trên [diagrams.net](https://app.diagrams.net/) với các stencil AWS4 chính thức).
 
 Ưu điểm nổi bật:
 - **Phản hồi tức thì (Sub-second Ingestion)**: Thời gian từ khi tệp tải lên hoàn tất đến khi Lambda tiếp nhận và tạo bản ghi tiến trình chỉ từ **214 ms đến 257 ms**.

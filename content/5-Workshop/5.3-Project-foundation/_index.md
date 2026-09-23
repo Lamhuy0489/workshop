@@ -44,8 +44,16 @@ aws/
 ├── tests/                         # Comprehensive pytest test suite
 ├── Dockerfile                     # Standard OCI Container specification
 ├── requirements.txt               # Python package dependencies
-└── .env.example                   # Environment configuration template
 ```
+
+### Hybrid Processing Engine Architecture Blueprint:
+
+![Hybrid Document OCR & Technical Translation Processing Engine Blueprint](/images/architecture/aws-hybrid-ocr-engine-architecture.png?width=100%&classes=border,shadow)
+
+> [!NOTE] Hybrid Engine Diagram File Formats
+> * **High-Resolution Render**: `/images/architecture/aws-hybrid-ocr-engine-architecture.png` (Retina 1380x840)
+> * **Scalable Vector Graphic**: `/images/architecture/aws-hybrid-ocr-engine-architecture.svg`
+> * **Editable Source Diagram**: `/images/architecture/aws-hybrid-ocr-engine-architecture.drawio` (Directly importable into [diagrams.net](https://app.diagrams.net/) with official AWS4 stencils).
 
 ---
 

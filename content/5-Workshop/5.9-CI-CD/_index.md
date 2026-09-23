@@ -16,13 +16,12 @@ Establish an Event-Driven Serverless Pipeline on AWS by connecting **Amazon S3 E
 
 Rather than requiring host servers to perform periodic polling loops against S3 buckets, the system employs an asynchronous real-time event pipeline:
 
-```text
-[ Document Upload to S3 uploads/ ] ──> [ Event s3:ObjectCreated:* ] ──> [ AWS Lambda (huylam-ocr-processor) ]
-                                                                                   │
-                                                                                   ├──> [ Persist Item to DynamoDB ]
-                                                                                   │
-                                                                                   └──> [ Telemetry to CloudWatch ]
-```
+![Serverless Event-Driven Document Processing Pipeline Blueprint](/images/architecture/aws-serverless-event-pipeline.png?width=100%&classes=border,shadow)
+
+> [!NOTE] Serverless Pipeline Diagram File Formats
+> * **High-Resolution Render**: `/images/architecture/aws-serverless-event-pipeline.png` (Retina 1380x720)
+> * **Scalable Vector Graphic**: `/images/architecture/aws-serverless-event-pipeline.svg`
+> * **Editable Source Diagram**: `/images/architecture/aws-serverless-event-pipeline.drawio` (Directly importable into [diagrams.net](https://app.diagrams.net/) with official AWS4 stencils).
 
 Architectural Benefits:
 - **Instantaneous Sub-Second Ingestion**: Elapsed duration from S3 upload completion to DynamoDB item persistence measures between **214 ms and 257 ms**.

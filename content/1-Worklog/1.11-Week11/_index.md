@@ -56,6 +56,13 @@ The automated event-driven processing workflow operates seamlessly through the f
 4. **DynamoDB State Ingestion**: Lambda inserts an audit item into Amazon DynamoDB table `document_processing_jobs` with status `RECEIVED_VIA_S3_EVENT`, recording `s3_input_uri` and computed `s3_output_md_uri`.
 5. **CloudWatch Monitoring**: Full execution telemetry, including `RequestId`, Duration (214 ms), and Memory allocation (88 MB / 128 MB), is streamed to Amazon CloudWatch Logs `/aws/lambda/huylam-ocr-processor`.
 
+![Event-Driven Serverless Pipeline Architecture (Week 11)](/images/architecture/aws-serverless-event-pipeline.png?width=100%&classes=border,shadow)
+
+> [!NOTE] Week 11 Serverless Pipeline File Formats
+> * **High-Resolution Render**: `/images/architecture/aws-serverless-event-pipeline.png` (Retina 1380x720)
+> * **Scalable Vector Graphic**: `/images/architecture/aws-serverless-event-pipeline.svg`
+> * **Editable Source Diagram**: `/images/architecture/aws-serverless-event-pipeline.drawio` (Directly importable into [diagrams.net](https://app.diagrams.net/) with official AWS4 stencils).
+
 ---
 
 ### Empirical Proofs with Red Bounding Boxes (AWS Console & Web Studio):

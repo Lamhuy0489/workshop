@@ -56,6 +56,13 @@ Luồng xử lý tự động hóa hướng sự kiện hoàn toàn Serverless v
 4. **DynamoDB State Ingestion**: Lambda tạo bản ghi mới trong bảng Amazon DynamoDB `document_processing_jobs` với trạng thái `RECEIVED_VIA_S3_EVENT`, lưu trữ đường dẫn `s3_input_uri` và dự kiến `s3_output_md_uri`.
 5. **CloudWatch Monitoring**: Toàn bộ tiến trình thực thi, định danh `RequestId`, thời gian chạy (Duration), và lượng RAM sử dụng được ghi nhận chi tiết tại Amazon CloudWatch Logs `/aws/lambda/huylam-ocr-processor`.
 
+![Sơ đồ kiến trúc tự động hóa hướng sự kiện Tuần 11](/images/architecture/aws-serverless-event-pipeline.png?width=100%&classes=border,shadow)
+
+> [!NOTE] Định dạng tệp sơ đồ Serverless Pipeline Tuần 11
+> * **Ảnh kết xuất độ nét cao**: `/images/architecture/aws-serverless-event-pipeline.png` (Chuẩn Retina 1380x720)
+> * **Sơ đồ đồ họa Vector SVG**: `/images/architecture/aws-serverless-event-pipeline.svg`
+> * **Tệp thiết kế nguồn Draw.io**: `/images/architecture/aws-serverless-event-pipeline.drawio` (Hỗ trợ mở và chỉnh sửa trực tiếp trên [diagrams.net](https://app.diagrams.net/) với các stencil AWS4 chính thức).
+
 ---
 
 ### Minh chứng thực tế có khung viền đỏ kiểm tra trên AWS Console & Web Studio:

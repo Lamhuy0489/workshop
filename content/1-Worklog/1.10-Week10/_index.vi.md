@@ -91,46 +91,12 @@ pre: " <b> 1.10. </b> "
 
 ### Sơ đồ kiến trúc kết nối hạ tầng đám mây Tuần 10:
 
-```mermaid
-flowchart TD
-    subgraph ClientEnv ["Môi Trường Người Dùng"]
-        Browser["Trình duyệt Web Studio"]
-    end
+![Sơ đồ kiến trúc kết nối hạ tầng đám mây Tuần 10](/images/architecture/aws-hybrid-ocr-engine-architecture.png?width=100%&classes=border,shadow)
 
-    subgraph AWSCloudStorage ["Lưu Trữ & Dữ Liệu (AWS Cloud)"]
-        S3Bucket["Amazon S3: huylam-ocr-documents-ap-southeast-1\n- uploads/ (Tệp gốc)\n- outputs/ (Kết quả MD, DOCX, PDF)"]
-        DynamoDB[("Amazon DynamoDB\nBảng: document_processing_jobs\nChế độ: On-Demand")]
-        SSM["AWS Systems Manager\nTham số: /huylam-ocr/config\nKiểu: SecureString (KMS Encrypted)"]
-    end
-
-    subgraph AppEngine ["Động Cơ Bóc Tách & Dịch Thuật"]
-        Parser["Fast-Path Native Parser\n(PyMuPDF 0.1s - 0.3s/trang)"]
-        Translator["Technical Translator\n(Dịch thuật bảo toàn Markdown)"]
-        Exporters["Multi-Format Exporters\n(MD, DOCX, PDF chuẩn in ấn A4)"]
-    end
-
-    subgraph AIProviders ["Nhà Cung Cấp Mô Hình AI"]
-        direction TB
-        subgraph FreeTierGroup ["Mặc Định: FinOps Tiết Kiệm (0 VND)"]
-            Kaggle["Kaggle GPU/TPU (Qwen2.5-VL)"]
-            Gemini["Google Gemini 3.6 Flash"]
-        end
-        subgraph NativeAWSGroup ["Tùy Chọn Phụ: AWS Native Khép Kín"]
-            Bedrock["Amazon Bedrock / Textract / Translate\n(Chỉ chạy khi người dùng chủ động chọn)"]
-        end
-    end
-
-    Browser -->|1. Tải tệp trực tiếp HTTPS| S3Bucket
-    AppEngine -->|2. Đọc cấu hình & API Keys an toàn| SSM
-    S3Bucket -->|3. Nạp tệp PDF/ảnh| AppEngine
-    AppEngine --> Parser
-    Parser -->|Trang scan hoặc dịch thuật| FreeTierGroup
-    Parser -.->|Khi bật tùy chọn AWS Native| NativeAWSGroup
-    AppEngine --> Translator
-    Translator --> Exporters
-    Exporters -->|4. Lưu kết quả xuất bản| S3Bucket
-    AppEngine -->|5. Ghi nhận trạng thái & tiến trình| DynamoDB
-```
+> [!NOTE] Định dạng tệp sơ đồ kiến trúc Tuần 10
+> * **Ảnh kết xuất độ nét cao**: `/images/architecture/aws-hybrid-ocr-engine-architecture.png` (Chuẩn Retina 1380x840)
+> * **Sơ đồ đồ họa Vector SVG**: `/images/architecture/aws-hybrid-ocr-engine-architecture.svg`
+> * **Tệp thiết kế nguồn Draw.io**: `/images/architecture/aws-hybrid-ocr-engine-architecture.drawio` (Hỗ trợ mở và chỉnh sửa trực tiếp trên [diagrams.net](https://app.diagrams.net/) với các stencil AWS4 chính thức).
 
 ### Hình ảnh minh chứng triển khai thực tế trên AWS Console:
 
