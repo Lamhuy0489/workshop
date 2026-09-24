@@ -1,0 +1,63 @@
+<mxfile host="app.diagrams.net" modified="2026-09-23T08:35:00.000Z" agent="Antigravity" version="24.0.0" type="device">
+  <diagram id="aws-serverless-pipeline" name="AWS Event-Driven Serverless Pipeline">
+    <mxGraphModel dx="1600" dy="1000" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1654" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <mxCell id="title" value="&lt;b style=&quot;font-size: 16px;&quot;&gt;EVENT-DRIVEN SERVERLESS DOCUMENT PROCESSING PIPELINE&lt;/b&gt;&lt;br&gt;&lt;font color=&quot;#94a3b8&quot; style=&quot;font-size: 11px;&quot;&gt;Sub-Second Ingestion, Scale-to-Zero &amp;amp; Real-Time State Ingestion on AWS&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0f172a;strokeColor=none;fontColor=#ffffff;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="60" y="30" width="1380" height="50" as="geometry" />
+        </mxCell>
+
+        <mxCell id="aws_cloud" value="AWS Cloud (Region: ap-southeast-1 | Event-Driven Serverless Architecture)" style="points=[[0,0],[0.25,0],[0.5,0],[0.75,0],[1,0],[1,0.25],[1,0.5],[1,0.75],[1,1],[0.75,1],[0.5,1],[0.25,1],[0,1],[0,0.75],[0,0.5],[0,0.25]];outlineConnect=0;gradientColor=none;html=1;whiteSpace=wrap;fontSize=12;fontStyle=1;container=1;pointerEvents=0;collapsible=0;recursiveResize=0;shape=mxgraph.aws4.groupCenter;grIcon=mxgraph.aws4.group_aws_cloud;strokeColor=#232F3E;fillColor=none;verticalAlign=top;align=left;spacingLeft=30;fontColor=#232F3E;" vertex="1" parent="1">
+          <mxGeometry x="240" y="100" width="1200" height="680" as="geometry" />
+        </mxCell>
+
+        <!-- S3 Bucket -->
+        <mxCell id="s3_icon" value="" style="outlineConnect=0;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;shape=mxgraph.aws4.simple_storage_service_s3;fillColor=#16A34A;gradientColor=none;" vertex="1" parent="aws_cloud">
+          <mxGeometry x="40" y="80" width="48" height="48" as="geometry" />
+        </mxCell>
+        <mxCell id="s3_box" value="&lt;b&gt;Amazon S3 Bucket&lt;/b&gt;&lt;br&gt;&lt;font color=&quot;#15803d&quot; style=&quot;font-size: 11px;&quot;&gt;&lt;b&gt;huylam-ocr-documents-ap-southeast-1&lt;/b&gt;&lt;/font&gt;&lt;br&gt;&lt;font color=&quot;#475569&quot; style=&quot;font-size: 10px;&quot;&gt;Prefix: uploads/ (Client upload destination)&lt;br&gt;Event: s3:ObjectCreated:*&lt;br&gt;Trigger: NewDocumentUploadTrigger&lt;br&gt;Prefix: outputs/{job_id}/ (Processed artifacts)&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#16a34a;strokeWidth=1.5;fillColor=#ffffff;align=left;spacingLeft=10;verticalAlign=middle;" vertex="1" parent="aws_cloud">
+          <mxGeometry x="100" y="55" width="280" height="110" as="geometry" />
+        </mxCell>
+
+        <!-- AWS Lambda -->
+        <mxCell id="lambda_icon" value="" style="outlineConnect=0;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;shape=mxgraph.aws4.lambda;fillColor=#EA580C;gradientColor=none;" vertex="1" parent="aws_cloud">
+          <mxGeometry x="450" y="80" width="48" height="48" as="geometry" />
+        </mxCell>
+        <mxCell id="lambda_box" value="&lt;b&gt;AWS Lambda Processor&lt;/b&gt;&lt;br&gt;&lt;font color=&quot;#c2410c&quot; style=&quot;font-size: 11px;&quot;&gt;&lt;b&gt;huylam-ocr-processor (Python 3.11)&lt;/b&gt;&lt;/font&gt;&lt;br&gt;&lt;font color=&quot;#475569&quot; style=&quot;font-size: 10px;&quot;&gt;Execution: 214 ms - 257 ms | Memory: 83 MB&lt;br&gt;Generates job_id UUID4, reads S3 metadata&lt;br&gt;IAM Role: huylam-ocr-lambda-role&lt;br&gt;Scale-to-Zero ($0.00 within Free Tier)&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#ea580c;strokeWidth=1.5;fillColor=#ffffff;align=left;spacingLeft=10;verticalAlign=middle;" vertex="1" parent="aws_cloud">
+          <mxGeometry x="510" y="55" width="290" height="110" as="geometry" />
+        </mxCell>
+
+        <!-- DynamoDB -->
+        <mxCell id="ddb_icon" value="" style="outlineConnect=0;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;shape=mxgraph.aws4.dynamodb;fillColor=#2563EB;gradientColor=none;" vertex="1" parent="aws_cloud">
+          <mxGeometry x="870" y="50" width="48" height="48" as="geometry" />
+        </mxCell>
+        <mxCell id="ddb_box" value="&lt;b&gt;Amazon DynamoDB State Store&lt;/b&gt;&lt;br&gt;&lt;font color=&quot;#1d4ed8&quot; style=&quot;font-size: 11px;&quot;&gt;&lt;b&gt;document_processing_jobs&lt;/b&gt;&lt;/font&gt;&lt;br&gt;&lt;font color=&quot;#475569&quot; style=&quot;font-size: 10px;&quot;&gt;Billing: PAY_PER_REQUEST (On-Demand)&lt;br&gt;State: RECEIVED_VIA_S3_EVENT&lt;br&gt;Attributes: s3_input_uri, created_at, status&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#2563eb;strokeWidth=1.5;fillColor=#ffffff;align=left;spacingLeft=10;verticalAlign=middle;" vertex="1" parent="aws_cloud">
+          <mxGeometry x="930" y="30" width="250" height="95" as="geometry" />
+        </mxCell>
+
+        <!-- CloudWatch Logs -->
+        <mxCell id="cw_icon" value="" style="outlineConnect=0;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;shape=mxgraph.aws4.cloudwatch;fillColor=#E11D48;gradientColor=none;" vertex="1" parent="aws_cloud">
+          <mxGeometry x="870" y="180" width="48" height="48" as="geometry" />
+        </mxCell>
+        <mxCell id="cw_box" value="&lt;b&gt;Amazon CloudWatch Logs&lt;/b&gt;&lt;br&gt;&lt;font color=&quot;#9f1239&quot; style=&quot;font-size: 10px;&quot;&gt;/aws/lambda/huylam-ocr-processor&lt;/font&gt;&lt;br&gt;&lt;font color=&quot;#475569&quot; style=&quot;font-size: 10px;&quot;&gt;Logs RequestId, Duration, MemoryUsed&lt;br&gt;Alarms: ErrorCount == 0 (SNS Alert)&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#e11d48;strokeWidth=1.5;fillColor=#ffffff;align=left;spacingLeft=10;verticalAlign=middle;" vertex="1" parent="aws_cloud">
+          <mxGeometry x="930" y="160" width="250" height="90" as="geometry" />
+        </mxCell>
+
+        <!-- Flow Edges -->
+        <mxCell id="edge1" value="s3:ObjectCreated:*" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#EA580C;strokeWidth=2;fontColor=#C2410C;fontSize=10;fontStyle=1;" edge="1" parent="aws_cloud" source="s3_box" target="lambda_box">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="edge2" value="PutItem" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#2563EB;strokeWidth=2;fontColor=#1E40AF;fontSize=10;fontStyle=1;" edge="1" parent="aws_cloud" source="lambda_box" target="ddb_box">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="edge3" value="Logs" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#E11D48;strokeWidth=2;fontColor=#9F1239;fontSize=10;fontStyle=1;" edge="1" parent="aws_cloud" source="lambda_box" target="cw_box">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
