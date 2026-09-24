@@ -1,0 +1,13 @@
+<!-- Open Graph / Facebook / Zalo / Telegram Metadata -->
+<meta property="og:type" content="website" />
+<meta property="og:title" content="{{ if .IsHome }}Báo cáo thực tập tốt nghiệp - Lâm Quang Huy | Serverless Hybrid Document OCR Platform on AWS{{ else }}{{ .Title }} :: {{ .Site.Title }}{{ end }}" />
+<meta property="og:description" content="{{ with .Description }}{{ . }}{{ else }}{{ with .Site.Params.description }}{{ . }}{{ end }}{{ end }}" />
+<meta property="og:url" content="{{ .Permalink }}" />
+<meta property="og:site_name" content="Báo cáo thực tập tốt nghiệp - Lâm Quang Huy" />
+<meta property="og:image" content="{{ "images/architecture/aws-system-architecture.png" | absURL }}" />
+
+<!-- Twitter Card Metadata -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="{{ if .IsHome }}Báo cáo thực tập tốt nghiệp - Lâm Quang Huy | Serverless Hybrid Document OCR Platform on AWS{{ else }}{{ .Title }} :: {{ .Site.Title }}{{ end }}" />
+<meta name="twitter:description" content="{{ with .Description }}{{ . }}{{ else }}{{ with .Site.Params.description }}{{ . }}{{ end }}{{ end }}" />
+<meta name="twitter:image" content="{{ "images/architecture/aws-system-architecture.png" | absURL }}" />

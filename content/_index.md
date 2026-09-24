@@ -1,5 +1,5 @@
 ---
-title: "Báo cáo thực tập"
+title: "Báo cáo thực tập tốt nghiệp"
 date: 2026-09-18
 weight: 1
 chapter: false
