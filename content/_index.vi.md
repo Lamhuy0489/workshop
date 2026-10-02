@@ -54,6 +54,18 @@ chapter: false
 
 ---
 
+### Hồ sơ Báo cáo Thực tập Tốt nghiệp (HUCE Graduation Report)
+
+Tài liệu báo cáo thực tập tốt nghiệp chính thức được biên soạn theo đúng quy chuẩn Biểu mẫu **TTTN-06** của **Trường Đại học Xây dựng Hà Nội (HUCE)**, bao gồm 43 trang in chuẩn A4, 12 bảng biểu số liệu, 16 sơ đồ kiến trúc kỹ thuật độ phân giải cao và 12 nguồn tài liệu tham khảo khoa học có liên kết trực tiếp.
+
+| Định dạng tài liệu | Tên tệp lưu trữ | Dung lượng | Tải về trực tiếp |
+| :--- | :--- | :--- | :--- |
+| **Microsoft Word (.docx)** | `Baocao.docx` | ~6.9 MB | [Tải về bản Word (Baocao.docx)](downloads/Baocao.docx) |
+| **Adobe PDF (.pdf)** | `Baocao.pdf` | ~8.2 MB | [Tải về bản PDF (Baocao.pdf)](downloads/Baocao.pdf) |
+| **Bản xem trực tuyến đầy đủ** | Báo cáo 8 chương | Chi tiết | [Xem chi tiết tại Mục 8](8-graduationreport/) |
+
+---
+
 ### Mục lục nội dung báo cáo thực tập
 
 1. [Nhật ký công việc (Worklog)](1-worklog/)
@@ -63,3 +75,4 @@ chapter: false
 5. [Dự án kỹ thuật chính (Workshop)](5-workshop/)
 6. [Tự đánh giá năng lực (Self-evaluation)](6-self-evaluation/)
 7. [Chia sẻ và phản hồi (Feedback)](7-feedback/)
+8. [Báo cáo thực tập tốt nghiệp HUCE (Graduation Report)](8-graduationreport/)

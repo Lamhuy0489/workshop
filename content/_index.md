@@ -54,12 +54,25 @@ chapter: false
 
 ---
 
-### Mục lục nội dung báo cáo thực tập
+### HUCE Graduation Internship Report (Form TTTN-06)
 
-1. [Nhật ký công việc (Worklog)](1-worklog/)
-2. [Đề xuất dự án (Proposal)](2-proposal/)
-3. [Các bài blog chuyên môn (Blogs Posted)](3-blogsposted/)
-4. [Các sự kiện đã tham gia (Events Participated)](4-eventparticipated/)
-5. [Dự án kỹ thuật chính (Workshop)](5-workshop/)
-6. [Tự đánh giá năng lực (Self-evaluation)](6-self-evaluation/)
-7. [Chia sẻ và phản hồi (Feedback)](7-feedback/)
+The official graduation internship report was compiled in strict compliance with the **TTTN-06** regulatory guidelines of Hanoi University of Civil Engineering (**HUCE**). The document consists of 43 A4 print pages, 12 data tables, 16 high-definition technical architecture diagrams, and 12 cited academic references with direct hyperlinks.
+
+| Document Format | File Name | Size | Direct Download Link |
+| :--- | :--- | :--- | :--- |
+| **Microsoft Word (.docx)** | `Baocao.docx` | ~6.9 MB | [Download Word Document (Baocao.docx)](downloads/Baocao.docx) |
+| **Adobe PDF (.pdf)** | `Baocao.pdf` | ~8.2 MB | [Download PDF Document (Baocao.pdf)](downloads/Baocao.pdf) |
+| **Online Report Viewer** | Full 8-Chapter Report | Detailed | [Read Online in Chapter 8](8-graduationreport/) |
+
+---
+
+### Internship Report Table of Contents
+
+1. [Worklog](1-worklog/)
+2. [Proposal](2-proposal/)
+3. [Blogs Posted](3-blogsposted/)
+4. [Events Participated](4-eventparticipated/)
+5. [Technical Capstone Workshop](5-workshop/)
+6. [Self-evaluation](6-self-evaluation/)
+7. [Feedback](7-feedback/)
+8. [HUCE Graduation Internship Report](8-graduationreport/)
