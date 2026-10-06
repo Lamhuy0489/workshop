@@ -1,0 +1,13 @@
+<mxfile host="app.diagrams.net" modified="2026-10-06T14:40:00.000Z" agent="Antigravity" version="21.0.0">
+  <diagram id="aws-ecs-fargate-architecture" name="aws-ecs-fargate-architecture">
+    <mxGraphModel dx="1400" dy="820" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1400" pageHeight="820">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        <mxCell id="svg_embed" value="" style="shape=image;verticalLabelPosition=bottom;labelBackgroundColor=default;verticalAlign=top;aspect=fixed;imageAspect=0;image=/Users/huylam/Downloads/aws/workshop/static/images/architecture/aws-ecs-fargate-architecture.svg;" vertex="1" parent="1">
+          <mxGeometry x="0" y="0" width="1400" height="820" as="geometry"/>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
