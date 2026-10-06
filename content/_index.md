@@ -61,7 +61,7 @@ The official graduation internship report was compiled in strict compliance with
 | Document Format | File Name | Size | Direct Download Link |
 | :--- | :--- | :--- | :--- |
 | **Microsoft Word (.docx)** | `Baocao.docx` | ~8.7 MB | [Download Word Document (Baocao.docx)](downloads/Baocao.docx) |
-| **Adobe PDF (.pdf)** | `Baocao.pdf` | ~10.0 MB | [Download PDF Document (Baocao.pdf)](downloads/Baocao.pdf) |
+| **Adobe PDF (.pdf)** | `Baocao.pdf` | ~5.1 MB (< 10 MB) | [Download PDF Document (Baocao.pdf)](downloads/Baocao.pdf) |
 | **Online Report Viewer** | Full 8-Chapter Report | Detailed | [Read Online in Chapter 8](8-graduationreport/) |
 
 ---
