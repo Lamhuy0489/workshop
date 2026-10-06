@@ -18,10 +18,10 @@ Quý Thầy/Cô, Cán bộ hướng dẫn và độc giả có thể tải về 
 
 | Định dạng tài liệu | Tên tệp | Kích thước | Liên kết tải về trực tiếp |
 | :--- | :--- | :--- | :--- |
-| **Microsoft Word (.docx)** | `Baocao.docx` | ~6.9 MB | [Tải về bản Word (Baocao.docx)](/downloads/Baocao.docx) |
-| **Adobe PDF (.pdf)** | `Baocao.pdf` | ~8.2 MB | [Tải về bản PDF (Baocao.pdf)](/downloads/Baocao.pdf) |
-| **Bản lưu trữ định danh đầy đủ (.docx)** | `Bao_Cao_Thuc_Tap_Tot_Nghiep_HUCE_0212267_Lam_Quang_Huy.docx` | ~6.9 MB | [Tải về bản Word lưu trữ](/downloads/Bao_Cao_Thuc_Tap_Tot_Nghiep_HUCE_0212267_Lam_Quang_Huy.docx) |
-| **Bản lưu trữ định danh đầy đủ (.pdf)** | `Bao_Cao_Thuc_Tap_Tot_Nghiep_HUCE_0212267_Lam_Quang_Huy.pdf` | ~8.2 MB | [Tải về bản PDF lưu trữ](/downloads/Bao_Cao_Thuc_Tap_Tot_Nghiep_HUCE_0212267_Lam_Quang_Huy.pdf) |
+| **Microsoft Word (.docx)** | `Baocao.docx` | ~8.7 MB | [Tải về bản Word (Baocao.docx)](/downloads/Baocao.docx) |
+| **Adobe PDF (.pdf)** | `Baocao.pdf` | ~13.0 MB | [Tải về bản PDF (Baocao.pdf)](/downloads/Baocao.pdf) |
+| **Bản lưu trữ định danh đầy đủ (.docx)** | `Bao_Cao_Thuc_Tap_Tot_Nghiep_HUCE_0212267_Lam_Quang_Huy.docx` | ~8.7 MB | [Tải về bản Word lưu trữ](/downloads/Bao_Cao_Thuc_Tap_Tot_Nghiep_HUCE_0212267_Lam_Quang_Huy.docx) |
+| **Bản lưu trữ định danh đầy đủ (.pdf)** | `Bao_Cao_Thuc_Tap_Tot_Nghiep_HUCE_0212267_Lam_Quang_Huy.pdf` | ~13.0 MB | [Tải về bản PDF lưu trữ](/downloads/Bao_Cao_Thuc_Tap_Tot_Nghiep_HUCE_0212267_Lam_Quang_Huy.pdf) |
 
 ---
 

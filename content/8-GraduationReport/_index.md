@@ -18,10 +18,10 @@ Mentors, faculty advisors, and readers can download the complete report directly
 
 | Document Format | File Name | Size | Direct Download Link |
 | :--- | :--- | :--- | :--- |
-| **Microsoft Word (.docx)** | `Baocao.docx` | ~6.9 MB | [Download Word Document (Baocao.docx)](/downloads/Baocao.docx) |
-| **Adobe PDF (.pdf)** | `Baocao.pdf` | ~8.2 MB | [Download PDF Document (Baocao.pdf)](/downloads/Baocao.pdf) |
-| **Archival Named Version (.docx)** | `Bao_Cao_Thuc_Tap_Tot_Nghiep_HUCE_0212267_Lam_Quang_Huy.docx` | ~6.9 MB | [Download Archival Word File](/downloads/Bao_Cao_Thuc_Tap_Tot_Nghiep_HUCE_0212267_Lam_Quang_Huy.docx) |
-| **Archival Named Version (.pdf)** | `Bao_Cao_Thuc_Tap_Tot_Nghiep_HUCE_0212267_Lam_Quang_Huy.pdf` | ~8.2 MB | [Download Archival PDF File](/downloads/Bao_Cao_Thuc_Tap_Tot_Nghiep_HUCE_0212267_Lam_Quang_Huy.pdf) |
+| **Microsoft Word (.docx)** | `Baocao.docx` | ~8.7 MB | [Download Word Document (Baocao.docx)](/downloads/Baocao.docx) |
+| **Adobe PDF (.pdf)** | `Baocao.pdf` | ~13.0 MB | [Download PDF Document (Baocao.pdf)](/downloads/Baocao.pdf) |
+| **Archival Named Version (.docx)** | `Bao_Cao_Thuc_Tap_Tot_Nghiep_HUCE_0212267_Lam_Quang_Huy.docx` | ~8.7 MB | [Download Archival Word File](/downloads/Bao_Cao_Thuc_Tap_Tot_Nghiep_HUCE_0212267_Lam_Quang_Huy.docx) |
+| **Archival Named Version (.pdf)** | `Bao_Cao_Thuc_Tap_Tot_Nghiep_HUCE_0212267_Lam_Quang_Huy.pdf` | ~13.0 MB | [Download Archival PDF File](/downloads/Bao_Cao_Thuc_Tap_Tot_Nghiep_HUCE_0212267_Lam_Quang_Huy.pdf) |
 
 ---
 

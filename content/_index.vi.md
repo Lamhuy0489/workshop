@@ -60,8 +60,8 @@ Tài liệu báo cáo thực tập tốt nghiệp chính thức được biên s
 
 | Định dạng tài liệu | Tên tệp lưu trữ | Dung lượng | Tải về trực tiếp |
 | :--- | :--- | :--- | :--- |
-| **Microsoft Word (.docx)** | `Baocao.docx` | ~6.9 MB | [Tải về bản Word (Baocao.docx)](downloads/Baocao.docx) |
-| **Adobe PDF (.pdf)** | `Baocao.pdf` | ~8.2 MB | [Tải về bản PDF (Baocao.pdf)](downloads/Baocao.pdf) |
+| **Microsoft Word (.docx)** | `Baocao.docx` | ~8.7 MB | [Tải về bản Word (Baocao.docx)](downloads/Baocao.docx) |
+| **Adobe PDF (.pdf)** | `Baocao.pdf` | ~13.0 MB | [Tải về bản PDF (Baocao.pdf)](downloads/Baocao.pdf) |
 | **Bản xem trực tuyến đầy đủ** | Báo cáo 8 chương | Chi tiết | [Xem chi tiết tại Mục 8](8-graduationreport/) |
 
 ---
