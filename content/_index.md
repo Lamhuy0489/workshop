@@ -56,12 +56,12 @@ chapter: false
 
 ### HUCE Graduation Internship Report (Form TTTN-06)
 
-The official graduation internship report was compiled in strict compliance with the **TTTN-06** regulatory guidelines of Hanoi University of Civil Engineering (**HUCE**). The document consists of 43 A4 print pages, 12 data tables, 16 high-definition technical architecture diagrams, and 12 cited academic references with direct hyperlinks.
+The official graduation internship report was compiled in strict compliance with the **TTTN-06** regulatory guidelines of Hanoi University of Civil Engineering (**HUCE**). The document consists of 42 A4 print pages, 11 data tables, 16 high-definition technical architecture diagrams, and 12 cited academic references with direct hyperlinks.
 
 | Document Format | File Name | Size | Direct Download Link |
 | :--- | :--- | :--- | :--- |
 | **Microsoft Word (.docx)** | `Baocao.docx` | ~8.7 MB | [Download Word Document (Baocao.docx)](downloads/Baocao.docx) |
-| **Adobe PDF (.pdf)** | `Baocao.pdf` | ~13.0 MB | [Download PDF Document (Baocao.pdf)](downloads/Baocao.pdf) |
+| **Adobe PDF (.pdf)** | `Baocao.pdf` | ~10.0 MB | [Download PDF Document (Baocao.pdf)](downloads/Baocao.pdf) |
 | **Online Report Viewer** | Full 8-Chapter Report | Detailed | [Read Online in Chapter 8](8-graduationreport/) |
 
 ---
