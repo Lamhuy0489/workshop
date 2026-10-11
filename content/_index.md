@@ -62,7 +62,10 @@ The official graduation internship report was compiled in strict compliance with
 | :--- | :--- | :--- | :--- |
 | **Microsoft Word (.docx)** | `Baocao.docx` | ~8.7 MB | [Download Word Document (Baocao.docx)](downloads/Baocao.docx) |
 | **Adobe PDF (.pdf)** | `Baocao.pdf` | ~5.1 MB (< 10 MB) | [Download PDF Document (Baocao.pdf)](downloads/Baocao.pdf) |
-| **Presentation Slide Deck (.pptx)** | `Slide_Bao_Cao_Tot_Nghiep_HUCE_Lam_Quang_Huy.pptx` | ~4.5 MB | [Download Defense Slides (.pptx)](downloads/Slide_Bao_Cao_Tot_Nghiep_HUCE_Lam_Quang_Huy.pptx) |
+| **Presentation Slide Deck (.pptx)** | `Slide_Bao_Cao_Tot_Nghiep_HUCE_Lam_Quang_Huy.pptx` | ~5.9 MB | [Download Defense Slides (.pptx)](downloads/Slide_Bao_Cao_Tot_Nghiep_HUCE_Lam_Quang_Huy.pptx) |
+| **Presentation Slide Deck (.pdf)** | `Slide_Bao_Cao_Tot_Nghiep_HUCE_Lam_Quang_Huy.pdf` | ~6.4 MB (< 10 MB) | [Download Defense Slides (.pdf)](downloads/Slide_Bao_Cao_Tot_Nghiep_HUCE_Lam_Quang_Huy.pdf) |
+| **Student Feedback Form TTTN-08b (.docx)** | `TTTN-08b-lam-quang-huy.docx` | ~32 KB | [Download Student Form TTTN-08b (.docx)](downloads/TTTN-08b-lam-quang-huy.docx) |
+| **Student Feedback Form TTTN-08b (.pdf)** | `TTTN-08b-lam-quang-huy.pdf` | ~502 KB | [Download Student Form TTTN-08b (.pdf)](downloads/TTTN-08b-lam-quang-huy.pdf) |
 | **Online Report Viewer** | Full 8-Chapter Report | Detailed | [Read Online in Chapter 8](8-graduationreport/) |
 
 ---
