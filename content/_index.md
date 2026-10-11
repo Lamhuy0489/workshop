@@ -62,6 +62,7 @@ The official graduation internship report was compiled in strict compliance with
 | :--- | :--- | :--- | :--- |
 | **Microsoft Word (.docx)** | `Baocao.docx` | ~8.7 MB | [Download Word Document (Baocao.docx)](downloads/Baocao.docx) |
 | **Adobe PDF (.pdf)** | `Baocao.pdf` | ~5.1 MB (< 10 MB) | [Download PDF Document (Baocao.pdf)](downloads/Baocao.pdf) |
+| **Presentation Slide Deck (.pptx)** | `Slide_Bao_Cao_Tot_Nghiep_HUCE_Lam_Quang_Huy.pptx` | ~4.5 MB | [Download Defense Slides (.pptx)](downloads/Slide_Bao_Cao_Tot_Nghiep_HUCE_Lam_Quang_Huy.pptx) |
 | **Online Report Viewer** | Full 8-Chapter Report | Detailed | [Read Online in Chapter 8](8-graduationreport/) |
 
 ---

@@ -20,6 +20,7 @@ Quý Thầy/Cô, Cán bộ hướng dẫn và độc giả có thể tải về 
 | :--- | :--- | :--- | :--- |
 | **Microsoft Word (.docx)** | `Baocao.docx` | ~8.7 MB | [Tải về bản Word (Baocao.docx)](/downloads/Baocao.docx) |
 | **Adobe PDF (.pdf)** | `Baocao.pdf` | ~5.1 MB (< 10 MB) | [Tải về bản PDF (Baocao.pdf)](/downloads/Baocao.pdf) |
+| **Slide Thuyết trình (.pptx)** | `Slide_Bao_Cao_Tot_Nghiep_HUCE_Lam_Quang_Huy.pptx` | ~4.5 MB | [Tải về Slide bảo vệ (.pptx)](/downloads/Slide_Bao_Cao_Tot_Nghiep_HUCE_Lam_Quang_Huy.pptx) |
 | **Bản lưu trữ định danh đầy đủ (.docx)** | `Bao_Cao_Thuc_Tap_Tot_Nghiep_HUCE_0212267_Lam_Quang_Huy.docx` | ~8.7 MB | [Tải về bản Word lưu trữ](/downloads/Bao_Cao_Thuc_Tap_Tot_Nghiep_HUCE_0212267_Lam_Quang_Huy.docx) |
 | **Bản lưu trữ định danh đầy đủ (.pdf)** | `Bao_Cao_Thuc_Tap_Tot_Nghiep_HUCE_0212267_Lam_Quang_Huy.pdf` | ~5.1 MB (< 10 MB) | [Tải về bản PDF lưu trữ](/downloads/Bao_Cao_Thuc_Tap_Tot_Nghiep_HUCE_0212267_Lam_Quang_Huy.pdf) |
 

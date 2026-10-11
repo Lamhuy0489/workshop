@@ -20,6 +20,7 @@ Mentors, faculty advisors, and readers can download the complete report directly
 | :--- | :--- | :--- | :--- |
 | **Microsoft Word (.docx)** | `Baocao.docx` | ~8.7 MB | [Download Word Document (Baocao.docx)](/downloads/Baocao.docx) |
 | **Adobe PDF (.pdf)** | `Baocao.pdf` | ~5.1 MB (< 10 MB) | [Download PDF Document (Baocao.pdf)](/downloads/Baocao.pdf) |
+| **Presentation Slide Deck (.pptx)** | `Slide_Bao_Cao_Tot_Nghiep_HUCE_Lam_Quang_Huy.pptx` | ~4.5 MB | [Download Defense Slides (.pptx)](/downloads/Slide_Bao_Cao_Tot_Nghiep_HUCE_Lam_Quang_Huy.pptx) |
 | **Archival Named Version (.docx)** | `Bao_Cao_Thuc_Tap_Tot_Nghiep_HUCE_0212267_Lam_Quang_Huy.docx` | ~8.7 MB | [Download Archival Word File](/downloads/Bao_Cao_Thuc_Tap_Tot_Nghiep_HUCE_0212267_Lam_Quang_Huy.docx) |
 | **Archival Named Version (.pdf)** | `Bao_Cao_Thuc_Tap_Tot_Nghiep_HUCE_0212267_Lam_Quang_Huy.pdf` | ~5.1 MB (< 10 MB) | [Download Archival PDF File](/downloads/Bao_Cao_Thuc_Tap_Tot_Nghiep_HUCE_0212267_Lam_Quang_Huy.pdf) |
 

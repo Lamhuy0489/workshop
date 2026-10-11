@@ -62,6 +62,7 @@ Tài liệu báo cáo thực tập tốt nghiệp chính thức được biên s
 | :--- | :--- | :--- | :--- |
 | **Microsoft Word (.docx)** | `Baocao.docx` | ~8.7 MB | [Tải về bản Word (Baocao.docx)](downloads/Baocao.docx) |
 | **Adobe PDF (.pdf)** | `Baocao.pdf` | ~5.1 MB (< 10 MB) | [Tải về bản PDF (Baocao.pdf)](downloads/Baocao.pdf) |
+| **Slide Thuyết trình (.pptx)** | `Slide_Bao_Cao_Tot_Nghiep_HUCE_Lam_Quang_Huy.pptx` | ~4.5 MB | [Tải về Slide bảo vệ (.pptx)](downloads/Slide_Bao_Cao_Tot_Nghiep_HUCE_Lam_Quang_Huy.pptx) |
 | **Bản xem trực tuyến đầy đủ** | Báo cáo 8 chương | Chi tiết | [Xem chi tiết tại Mục 8](8-graduationreport/) |
 
 ---
