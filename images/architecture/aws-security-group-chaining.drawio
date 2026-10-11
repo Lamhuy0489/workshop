@@ -1,0 +1,13 @@
+<mxfile host="app.diagrams.net" modified="2026-10-06T14:40:00.000Z" agent="Antigravity" version="21.0.0">
+  <diagram id="aws-security-group-chaining" name="aws-security-group-chaining">
+    <mxGraphModel dx="1360" dy="690" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1360" pageHeight="690">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        <mxCell id="svg_embed" value="" style="shape=image;verticalLabelPosition=bottom;labelBackgroundColor=default;verticalAlign=top;aspect=fixed;imageAspect=0;image=/Users/huylam/Downloads/aws/workshop/static/images/architecture/aws-security-group-chaining.svg;" vertex="1" parent="1">
+          <mxGeometry x="0" y="0" width="1360" height="690" as="geometry"/>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

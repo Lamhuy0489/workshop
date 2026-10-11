@@ -1,0 +1,206 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1520 920" width="1520" height="920" style="background:#FFFFFF; font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;">
+  
+  <defs>
+    <marker id="arr-dark" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#1E293B"/>
+    </marker>
+    <marker id="arr-blue" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#0284C7"/>
+    </marker>
+    <marker id="arr-green" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#16A34A"/>
+    </marker>
+    <marker id="arr-orange" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#D97706"/>
+    </marker>
+    <marker id="arr-purple" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#8C4FFF"/>
+    </marker>
+    <filter id="card-shadow" x="-3%" y="-3%" width="106%" height="106%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#0F172A" flood-opacity="0.04"/>
+    </filter>
+  </defs>
+
+
+  <!-- Header -->
+  <text x="35" y="40" fill="#0F172A" font-size="20" font-weight="800" letter-spacing="-0.5">POLYGLOT PERSISTENCE ARCHITECTURE &amp; DATABASE ERD MODEL</text>
+  <text x="1485" y="40" fill="#64748B" font-size="12" font-weight="600" text-anchor="end">Amazon DynamoDB NoSQL | Amazon S3 Storage Hierarchy | Relational SQLite Schema</text>
+  <line x1="35" y1="55" x2="1485" y2="55" stroke="#E2E8F0" stroke-width="1.5"/>
+
+  <!-- Left: Relational Database Schema Container -->
+  <rect x="35" y="75" width="715" height="800" rx="10" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="1.2"/>
+  <rect x="35" y="75" width="715" height="38" rx="10" fill="#0F172A"/>
+  <text x="392" y="99" fill="#FFFFFF" font-size="13" font-weight="700" text-anchor="middle">RELATIONAL SQL SCHEMA (USERS, DOCUMENTS, SETTINGS &amp; API KEYS)</text>
+
+  <!-- Table 1: USERS -->
+  <g transform="translate(60, 130)">
+    <rect x="0" y="0" width="300" height="155" rx="6" fill="#FFFFFF" stroke="#0284C7" stroke-width="1.5" filter="url(#card-shadow)"/>
+    <rect x="0" y="0" width="300" height="28" rx="6" fill="#0284C7"/>
+    <text x="150" y="19" fill="#FFFFFF" font-size="12" font-weight="700" text-anchor="middle">TABLE: users</text>
+    <text x="12" y="46" fill="#0F172A" font-size="11" font-weight="700">PK  id</text><text x="180" y="46" fill="#64748B" font-size="11">TEXT (UUID)</text>
+    <text x="12" y="68" fill="#0F172A" font-size="11">UK  username</text><text x="180" y="68" fill="#64748B" font-size="11">TEXT NOT NULL</text>
+    <text x="12" y="90" fill="#0F172A" font-size="11">UK  email</text><text x="180" y="90" fill="#64748B" font-size="11">TEXT NOT NULL</text>
+    <text x="12" y="112" fill="#0F172A" font-size="11">    password_hash</text><text x="180" y="112" fill="#64748B" font-size="11">TEXT NOT NULL</text>
+    <text x="12" y="134" fill="#0F172A" font-size="11">    role</text><text x="180" y="134" fill="#64748B" font-size="11">TEXT ('user'|'admin')</text>
+    <text x="12" y="148" fill="#64748B" font-size="9.5">    created_at TIMESTAMP</text>
+  </g>
+
+  <!-- Table 2: USER_SETTINGS -->
+  <g transform="translate(425, 130)">
+    <rect x="0" y="0" width="300" height="155" rx="6" fill="#FFFFFF" stroke="#64748B" stroke-width="1.2" filter="url(#card-shadow)"/>
+    <rect x="0" y="0" width="300" height="28" rx="6" fill="#475569"/>
+    <text x="150" y="19" fill="#FFFFFF" font-size="12" font-weight="700" text-anchor="middle">TABLE: user_settings (1:1 with users)</text>
+    <text x="12" y="46" fill="#0F172A" font-size="11" font-weight="700">PK,FK user_id</text><text x="180" y="46" fill="#64748B" font-size="11">TEXT (users.id)</text>
+    <text x="12" y="68" fill="#0F172A" font-size="11">      theme</text><text x="180" y="68" fill="#64748B" font-size="11">TEXT ('light'|'dark')</text>
+    <text x="12" y="90" fill="#0F172A" font-size="11">      language</text><text x="180" y="90" fill="#64748B" font-size="11">TEXT ('vi'|'en')</text>
+    <text x="12" y="112" fill="#0F172A" font-size="11">      default_model</text><text x="180" y="112" fill="#64748B" font-size="11">TEXT ('auto'|'qwen')</text>
+    <text x="12" y="134" fill="#0F172A" font-size="11">      fast_path_def</text><text x="180" y="134" fill="#64748B" font-size="11">INTEGER (1|0)</text>
+  </g>
+
+  <!-- Table 3: DOCUMENTS (1:N with users) -->
+  <g transform="translate(60, 320)">
+    <rect x="0" y="0" width="665" height="260" rx="6" fill="#FFFFFF" stroke="#16A34A" stroke-width="1.5" filter="url(#card-shadow)"/>
+    <rect x="0" y="0" width="665" height="28" rx="6" fill="#16A34A"/>
+    <text x="332" y="19" fill="#FFFFFF" font-size="12" font-weight="700" text-anchor="middle">TABLE: documents (Historical Processed Artifacts)</text>
+    
+    <text x="15" y="50" fill="#0F172A" font-size="11" font-weight="700">PK  id</text><text x="170" y="50" fill="#64748B" font-size="11">TEXT (UUID)</text>
+    <text x="15" y="74" fill="#0F172A" font-size="11" font-weight="700">FK  user_id</text><text x="170" y="74" fill="#64748B" font-size="11">TEXT REFERENCES users(id)</text>
+    <text x="15" y="98" fill="#0F172A" font-size="11">    filename</text><text x="170" y="98" fill="#64748B" font-size="11">TEXT NOT NULL</text>
+    <text x="15" y="122" fill="#0F172A" font-size="11">    file_size</text><text x="170" y="122" fill="#64748B" font-size="11">INTEGER (Bytes)</text>
+    <text x="15" y="146" fill="#0F172A" font-size="11">    total_pages</text><text x="170" y="146" fill="#64748B" font-size="11">INTEGER DEFAULT 1</text>
+    <text x="15" y="170" fill="#0F172A" font-size="11">    digital_pages</text><text x="170" y="170" fill="#64748B" font-size="11">INTEGER (Fast-Path pages)</text>
+    <text x="15" y="194" fill="#0F172A" font-size="11">    scanned_pages</text><text x="170" y="194" fill="#64748B" font-size="11">INTEGER (Vision OCR pages)</text>
+    
+    <text x="360" y="50" fill="#0F172A" font-size="11">model_used</text><text x="500" y="50" fill="#64748B" font-size="11">TEXT ('Fast-Path'|'Qwen')</text>
+    <text x="360" y="74" fill="#0F172A" font-size="11">language</text><text x="500" y="74" fill="#64748B" font-size="11">TEXT ('vi'|'en')</text>
+    <text x="360" y="98" fill="#0F172A" font-size="11">status</text><text x="500" y="98" fill="#64748B" font-size="11">TEXT ('COMPLETED')</text>
+    <text x="360" y="122" fill="#0F172A" font-size="11">full_markdown</text><text x="500" y="122" fill="#64748B" font-size="11">TEXT NOT NULL</text>
+    <text x="360" y="146" fill="#0F172A" font-size="11">translated_markdown</text><text x="500" y="146" fill="#64748B" font-size="11">TEXT (Vietnamese output)</text>
+    <text x="360" y="170" fill="#0F172A" font-size="11">processing_time</text><text x="500" y="170" fill="#64748B" font-size="11">REAL (Seconds, e.g. 0.28)</text>
+    <text x="360" y="194" fill="#0F172A" font-size="11">created_at</text><text x="500" y="194" fill="#64748B" font-size="11">TIMESTAMP DEFAULT NOW</text>
+
+    <line x1="15" y1="218" x2="650" y2="218" stroke="#E2E8F0" stroke-width="1"/>
+    <text x="15" y="240" fill="#16A34A" font-size="10.5" font-weight="600">Integrity Rule: ON DELETE CASCADE from users | Index: (user_id, created_at DESC)</text>
+  </g>
+
+  <!-- Table 4: API_KEYS -->
+  <g transform="translate(60, 610)">
+    <rect x="0" y="0" width="315" height="230" rx="6" fill="#FFFFFF" stroke="#D97706" stroke-width="1.2" filter="url(#card-shadow)"/>
+    <rect x="0" y="0" width="315" height="28" rx="6" fill="#D97706"/>
+    <text x="157" y="19" fill="#FFFFFF" font-size="12" font-weight="700" text-anchor="middle">TABLE: api_keys (Key Tour Manager)</text>
+    <text x="12" y="48" fill="#0F172A" font-size="11" font-weight="700">PK  id</text><text x="180" y="48" fill="#64748B" font-size="11">TEXT (UUID)</text>
+    <text x="12" y="70" fill="#0F172A" font-size="11">    provider</text><text x="180" y="70" fill="#64748B" font-size="11">TEXT ('kaggle'|'gemini')</text>
+    <text x="12" y="92" fill="#0F172A" font-size="11">    key_alias</text><text x="180" y="92" fill="#64748B" font-size="11">TEXT ('Kaggle GPU 1')</text>
+    <text x="12" y="114" fill="#0F172A" font-size="11">    key_value</text><text x="180" y="114" fill="#64748B" font-size="11">TEXT (Encrypted)</text>
+    <text x="12" y="136" fill="#0F172A" font-size="11">    model_name</text><text x="180" y="136" fill="#64748B" font-size="11">TEXT ('Qwen2.5-VL-7B')</text>
+    <text x="12" y="158" fill="#0F172A" font-size="11">    is_active</text><text x="180" y="158" fill="#64748B" font-size="11">INTEGER (1|0)</text>
+    <text x="12" y="180" fill="#0F172A" font-size="11">    usage_count</text><text x="180" y="180" fill="#64748B" font-size="11">INTEGER (Tour count)</text>
+    <text x="12" y="202" fill="#0F172A" font-size="11">    last_used_at</text><text x="180" y="202" fill="#64748B" font-size="11">TIMESTAMP</text>
+  </g>
+
+  <!-- Table 5: USER_DAILY_USAGE -->
+  <g transform="translate(410, 610)">
+    <rect x="0" y="0" width="315" height="230" rx="6" fill="#FFFFFF" stroke="#8C4FFF" stroke-width="1.2" filter="url(#card-shadow)"/>
+    <rect x="0" y="0" width="315" height="28" rx="6" fill="#8C4FFF"/>
+    <text x="157" y="19" fill="#FFFFFF" font-size="12" font-weight="700" text-anchor="middle">TABLE: user_daily_usage (FinOps Guard)</text>
+    <text x="12" y="48" fill="#0F172A" font-size="11" font-weight="700">PK,FK user_id</text><text x="180" y="48" fill="#64748B" font-size="11">TEXT (users.id)</text>
+    <text x="12" y="70" fill="#0F172A" font-size="11" font-weight="700">PK    usage_date</text><text x="180" y="70" fill="#64748B" font-size="11">TEXT ('YYYY-MM-DD')</text>
+    <text x="12" y="94" fill="#0F172A" font-size="11">      aws_req_count</text><text x="180" y="94" fill="#64748B" font-size="11">INTEGER (Daily limit)</text>
+    <text x="12" y="118" fill="#0F172A" font-size="11">      updated_at</text><text x="180" y="118" fill="#64748B" font-size="11">TIMESTAMP</text>
+    
+    <rect x="15" y="145" width="285" height="65" rx="4" fill="#F3E8FF" stroke="#C084FC" stroke-width="1"/>
+    <text x="25" y="168" fill="#7E22CE" font-size="10.5" font-weight="700">FinOps Protection Rule:</text>
+    <text x="25" y="188" fill="#6B21A8" font-size="10">Hard-limit calls to commercial APIs</text>
+    <text x="25" y="200" fill="#6B21A8" font-size="10">Guarantees zero billing exceedance.</text>
+  </g>
+
+  <!-- ERD Relationships: Completely routed around borders with ZERO text intersection -->
+  <!-- Users to user_settings (1:1) -->
+  <line x1="360" y1="180" x2="425" y2="180" stroke="#0284C7" stroke-width="1.8" marker-end="url(#arr-blue)"/>
+  <!-- Users to documents (1:N) -->
+  <path d="M 210 285 L 210 320" stroke="#0284C7" stroke-width="1.8" fill="none" marker-end="url(#arr-blue)"/>
+  
+  <!-- Users to user_daily_usage (1:N): Routed along the outside right gutter of the schema container -->
+  <path d="M 360 210 L 390 210 L 390 305 L 735 305 L 735 635 L 725 635" stroke="#8C4FFF" stroke-width="1.8" stroke-dasharray="4,4" fill="none" marker-end="url(#arr-purple)"/>
+
+  <!-- Right: Cloud Polyglot Models Container -->
+  <!-- Top Right: Amazon DynamoDB NoSQL Model -->
+  <g transform="translate(775, 75)">
+    <rect x="0" y="0" width="710" height="385" rx="10" fill="#F8FAFC" stroke="#0284C7" stroke-width="1.5"/>
+    <rect x="0" y="0" width="710" height="38" rx="10" fill="#0284C7"/>
+    <text x="355" y="24" fill="#FFFFFF" font-size="13" font-weight="700" text-anchor="middle">AMAZON DYNAMODB NOSQL MODEL (TABLE: huylam-ocr-jobs)</text>
+    
+    <g transform="translate(25, 55)">
+      <rect x="0" y="0" width="660" height="75" rx="6" fill="#EFF6FF" stroke="#BFDBFE" stroke-width="1"/>
+      <text x="15" y="22" fill="#1E40AF" font-size="11.5" font-weight="700">Capacity &amp; Scaling: On-Demand (PAY_PER_REQUEST) | Region: ap-southeast-1 | SLA: 99.99%</text>
+      <text x="15" y="44" fill="#1E3A8A" font-size="11">Partition Key (PK): <tspan font-weight="700">job_id (String / UUID)</tspan>  — Even hash distribution across partitions</text>
+      <text x="15" y="64" fill="#1E3A8A" font-size="11">Sort Key (SK): <tspan font-weight="700">created_at (String / ISO 8601)</tspan> — Chronological range querying &amp; audit</text>
+    </g>
+
+    <g transform="translate(25, 145)">
+      <rect x="0" y="0" width="660" height="215" rx="6" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1"/>
+      <text x="15" y="24" fill="#0F172A" font-size="11.5" font-weight="700">Document Job Schema Attributes:</text>
+      
+      <text x="15" y="50" fill="#0284C7" font-size="11" font-weight="700">filename</text><text x="170" y="50" fill="#64748B" font-size="11">String (e.g. "cv.pdf", "sample_contract.pdf")</text>
+      <text x="15" y="74" fill="#0284C7" font-size="11" font-weight="700">status</text><text x="170" y="74" fill="#64748B" font-size="11">String ("RECEIVED_VIA_S3_EVENT" | "PROCESSING" | "COMPLETED")</text>
+      <text x="15" y="98" fill="#0284C7" font-size="11" font-weight="700">total_pages</text><text x="170" y="98" fill="#64748B" font-size="11">Number (1 .. N pages)</text>
+      <text x="15" y="122" fill="#0284C7" font-size="11" font-weight="700">processing_time_s</text><text x="170" y="122" fill="#64748B" font-size="11">Number (Execution duration, e.g. 0.28s, 2.54s)</text>
+      <text x="15" y="146" fill="#0284C7" font-size="11" font-weight="700">s3_input_uri</text><text x="170" y="146" fill="#64748B" font-size="11">String ("s3://huylam-ocr-documents-ap-southeast-1/uploads/...")</text>
+      <text x="15" y="170" fill="#0284C7" font-size="11" font-weight="700">s3_output_uris</text><text x="170" y="170" fill="#64748B" font-size="11">Map of (md_uri, docx_uri, pdf_uri) — Direct download artifacts</text>
+      <text x="15" y="194" fill="#0284C7" font-size="11" font-weight="700">model_used</text><text x="170" y="194" fill="#64748B" font-size="11">String ("Fast-Path" | "Qwen2.5-VL-72B" | "Gemini-Flash")</text>
+    </g>
+  </g>
+
+  <!-- Bottom Right: Amazon S3 Storage Hierarchy -->
+  <g transform="translate(775, 485)">
+    <rect x="0" y="0" width="710" height="390" rx="10" fill="#F8FAFC" stroke="#D97706" stroke-width="1.5"/>
+    <rect x="0" y="0" width="710" height="38" rx="10" fill="#D97706"/>
+    <text x="355" y="24" fill="#FFFFFF" font-size="13" font-weight="700" text-anchor="middle">AMAZON S3 OBJECT STORAGE HIERARCHY (BUCKET: huylam-ocr-documents)</text>
+
+    <g transform="translate(25, 55)">
+      <rect x="0" y="0" width="660" height="310" rx="6" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1"/>
+      <text x="20" y="30" fill="#0F172A" font-size="13" font-weight="700">s3://huylam-ocr-documents-ap-southeast-1/</text>
+      <text x="460" y="30" fill="#D97706" font-size="11" font-weight="600">SSE-S3 AES-256 Encrypted</text>
+      
+      <line x1="35" y1="45" x2="35" y2="155" stroke="#94A3B8" stroke-width="1.5"/>
+      <line x1="35" y1="65" x2="60" y2="65" stroke="#94A3B8" stroke-width="1.5"/>
+      <rect x="65" y="50" width="120" height="26" rx="4" fill="#FEF3C7" stroke="#F59E0B" stroke-width="1"/>
+      <text x="125" y="67" fill="#B45309" font-size="11" font-weight="700" text-anchor="middle">uploads/ (Ingest)</text>
+      
+      <line x1="85" y1="76" x2="85" y2="125" stroke="#CBD5E1" stroke-width="1.2"/>
+      <line x1="85" y1="95" x2="110" y2="95" stroke="#CBD5E1" stroke-width="1.2"/>
+      <text x="115" y="99" fill="#0F172A" font-size="11">&lt;job_id&gt;/</text>
+      <text x="210" y="99" fill="#64748B" font-size="10.5">input_document.pdf  (Uploaded directly via Presigned PUT URL)</text>
+      
+      <line x1="85" y1="120" x2="110" y2="120" stroke="#CBD5E1" stroke-width="1.2"/>
+      <text x="115" y="124" fill="#0F172A" font-size="11">&lt;job_id&gt;/</text>
+      <text x="210" y="124" fill="#64748B" font-size="10.5">scanned_invoice.png (Raw uploaded images awaiting OCR)</text>
+
+      <line x1="35" y1="165" x2="60" y2="165" stroke="#94A3B8" stroke-width="1.5"/>
+      <rect x="65" y="150" width="135" height="26" rx="4" fill="#DCFCE7" stroke="#10B981" stroke-width="1"/>
+      <text x="132" y="167" fill="#047857" font-size="11" font-weight="700" text-anchor="middle">outputs/ (Artifacts)</text>
+      
+      <line x1="85" y1="176" x2="85" y2="285" stroke="#CBD5E1" stroke-width="1.2"/>
+      
+      <line x1="85" y1="195" x2="110" y2="195" stroke="#CBD5E1" stroke-width="1.2"/>
+      <text x="115" y="199" fill="#0F172A" font-size="11">&lt;job_id&gt;/</text>
+      <text x="210" y="199" fill="#047857" font-size="11" font-weight="600">output.md</text>
+      <text x="320" y="199" fill="#64748B" font-size="10.5">— Clean extracted GitHub Flavored Markdown</text>
+
+      <line x1="85" y1="225" x2="110" y2="225" stroke="#CBD5E1" stroke-width="1.2"/>
+      <text x="115" y="229" fill="#0F172A" font-size="11">&lt;job_id&gt;/</text>
+      <text x="210" y="229" fill="#047857" font-size="11" font-weight="600">output.translated.md</text>
+      <text x="360" y="229" fill="#64748B" font-size="10.5">— Specialized Vietnamese translation</text>
+
+      <line x1="85" y1="255" x2="110" y2="255" stroke="#CBD5E1" stroke-width="1.2"/>
+      <text x="115" y="259" fill="#0F172A" font-size="11">&lt;job_id&gt;/</text>
+      <text x="210" y="259" fill="#047857" font-size="11" font-weight="600">document.docx</text>
+      <text x="330" y="259" fill="#64748B" font-size="10.5">— Monochrome Academic Word export</text>
+
+      <line x1="85" y1="285" x2="110" y2="285" stroke="#CBD5E1" stroke-width="1.2"/>
+      <text x="115" y="289" fill="#0F172A" font-size="11">&lt;job_id&gt;/</text>
+      <text x="210" y="289" fill="#047857" font-size="11" font-weight="600">report_archive.pdf</text>
+      <text x="360" y="289" fill="#64748B" font-size="10.5">— Recompressed PDF (&lt; 10 MB, 180 DPI)</text>
+    </g>
+  </g>
+</svg>
