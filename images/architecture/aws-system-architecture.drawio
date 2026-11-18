@@ -1,0 +1,13 @@
+<mxfile host="app.diagrams.net" modified="2026-10-04T15:40:00.000Z" agent="Antigravity" version="21.0.0">
+  <diagram id="aws-architecture" name="AWS Reference Architecture">
+    <mxGraphModel dx="1780" dy="1020" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1780" pageHeight="1020">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        <mxCell id="svg_embed" value="" style="shape=image;verticalLabelPosition=bottom;labelBackgroundColor=default;verticalAlign=top;aspect=fixed;imageAspect=0;image=/Users/huylam/Downloads/aws/workshop/static/images/architecture/aws-system-architecture.svg;" vertex="1" parent="1">
+          <mxGeometry x="0" y="0" width="1780" height="1020" as="geometry"/>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

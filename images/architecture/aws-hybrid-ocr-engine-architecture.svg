@@ -1,0 +1,251 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1500 900" width="1500" height="900" style="background:#FFFFFF; font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;">
+  
+  <defs>
+    <marker id="arr-dark" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#1E293B"/>
+    </marker>
+    <marker id="arr-blue" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#0284C7"/>
+    </marker>
+    <marker id="arr-green" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#16A34A"/>
+    </marker>
+    <marker id="arr-orange" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#EA580C"/>
+    </marker>
+    <marker id="arr-purple" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#8C4FFF"/>
+    </marker>
+  </defs>
+
+
+  <!-- Header -->
+  <text x="30" y="38" fill="#0F172A" font-size="18" font-weight="800" letter-spacing="-0.5">HYBRID MULTI-TIER DOCUMENT OCR &amp; TECHNICAL TRANSLATION ENGINE</text>
+  <text x="1470" y="38" fill="#64748B" font-size="11" font-weight="600" text-anchor="end">Intelligent Routing &amp; FinOps Dual-AI Architecture | AL2023 EC2 Gunicorn Core</text>
+  <line x1="30" y1="50" x2="1470" y2="50" stroke="#CBD5E1" stroke-width="1.2"/>
+
+  <!-- Left: Web Studio Frontend -->
+  <rect x="30" y="70" width="220" height="790" rx="6" fill="#FFFFFF" stroke="#94A3B8" stroke-width="1.2"/>
+  <rect x="30" y="70" width="220" height="28" rx="6" fill="#F8FAFC"/>
+  <text x="140" y="89" fill="#0F172A" font-size="12" font-weight="700" text-anchor="middle">Web Studio Frontend</text>
+
+  <!-- User Icon & Info -->
+  <circle cx="140" cy="150" r="26" fill="#F1F5F9" stroke="#CBD5E1" stroke-width="1.2"/>
+  <path d="M140 144 a8 8 0 1 0 0 -16 a8 8 0 0 0 0 16 z M126 164 a14 14 0 0 1 28 0 z" fill="#475569"/>
+  <text x="140" y="192" fill="#0F172A" font-size="13" font-weight="700" text-anchor="middle">Single Page App (SPA)</text>
+  <text x="140" y="208" fill="#64748B" font-size="10.5" text-anchor="middle">HTML5 / Modern JS Client</text>
+
+  <!-- Client Features Box -->
+  <rect x="45" y="230" width="190" height="240" rx="4" fill="#F8FAFC" stroke="#E2E8F0" stroke-width="1"/>
+  <text x="55" y="252" fill="#0F172A" font-size="11" font-weight="700">Client Capabilities:</text>
+  <text x="55" y="276" fill="#334155" font-size="10.5">• Drag &amp; Drop Documents</text>
+  <text x="65" y="292" fill="#64748B" font-size="9.5">(PDF, Scan Bitmaps, TIFF)</text>
+  <text x="55" y="314" fill="#334155" font-size="10.5">• Dual-Engine Mode Toggle</text>
+  <text x="65" y="330" fill="#64748B" font-size="9.5">(FinOps $0.00 / AWS Native)</text>
+  <text x="55" y="352" fill="#334155" font-size="10.5">• Real-time Split Preview</text>
+  <text x="65" y="368" fill="#64748B" font-size="9.5">(Bilingual Side-by-Side)</text>
+  <text x="55" y="390" fill="#334155" font-size="10.5">• Multi-Format Exports</text>
+  <text x="65" y="406" fill="#64748B" font-size="9.5">(Clean .md, .docx, .pdf)</text>
+  <text x="55" y="428" fill="#334155" font-size="10.5">• Presigned Direct Download</text>
+
+  <!-- Live Endpoint Details -->
+  <rect x="45" y="490" width="190" height="150" rx="4" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1"/>
+  <text x="55" y="512" fill="#0284C7" font-size="11" font-weight="700">Public Live Ingress:</text>
+  <text x="55" y="532" fill="#334155" font-size="10" font-weight="600">Application Load Balancer</text>
+  <text x="55" y="550" fill="#64748B" font-size="9" font-family="monospace">huylam-ocr-alb</text>
+  <text x="55" y="566" fill="#64748B" font-size="9" font-family="monospace">.ap-southeast-1.elb</text>
+  <text x="55" y="582" fill="#64748B" font-size="9" font-family="monospace">.amazonaws.com</text>
+  <line x1="55" y1="594" x2="225" y2="594" stroke="#E2E8F0" stroke-width="1"/>
+  <text x="55" y="612" fill="#16A34A" font-size="10" font-weight="700">Protocol: HTTP Port 80</text>
+  <text x="55" y="628" fill="#475569" font-size="9.5">Strict SG Chaining Protected</text>
+
+  <!-- Bottom FinOps Tag -->
+  <rect x="45" y="660" width="190" height="80" rx="4" fill="#F8FAFC" stroke="#E2E8F0" stroke-width="1"/>
+  <text x="55" y="682" fill="#0F172A" font-size="10.5" font-weight="700">FinOps Excellence:</text>
+  <text x="55" y="700" fill="#16A34A" font-size="10" font-weight="600">Cost: $0.00 / 0 VND</text>
+  <text x="55" y="718" fill="#64748B" font-size="9.5">Client-side caching &amp; stream</text>
+
+  <!-- Center Top: Backend Processing Core Container -->
+  <rect x="280" y="70" width="1190" height="560" rx="6" fill="#FFFFFF" stroke="#475569" stroke-width="1.2"/>
+  <rect x="280" y="70" width="1190" height="28" rx="6" fill="#F8FAFC"/>
+  <image href="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyB3aWR0aD0iODBweCIgaGVpZ2h0PSI4MHB4IiB2aWV3Qm94PSIwIDAgODAgODAiIHZlcnNpb249IjEuMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayI+CiAgICA8IS0tIEdlbmVyYXRvcjogU2tldGNoIDY0ICg5MzUzNykgLSBodHRwczovL3NrZXRjaC5jb20gLS0+CiAgICA8dGl0bGU+SWNvbi1BcmNoaXRlY3R1cmUvNjQvQXJjaF9BbWF6b24tRUMyXzY0PC90aXRsZT4KICAgIDxkZXNjPkNyZWF0ZWQgd2l0aCBTa2V0Y2guPC9kZXNjPgogICAgPGRlZnM+CiAgICAgICAgPGxpbmVhckdyYWRpZW50IHgxPSIwJSIgeTE9IjEwMCUiIHgyPSIxMDAlIiB5Mj0iMCUiIGlkPSJsaW5lYXJHcmFkaWVudC0xIj4KICAgICAgICAgICAgPHN0b3Agc3RvcC1jb2xvcj0iI0M4NTExQiIgb2Zmc2V0PSIwJSI+PC9zdG9wPgogICAgICAgICAgICA8c3RvcCBzdG9wLWNvbG9yPSIjRkY5OTAwIiBvZmZzZXQ9IjEwMCUiPjwvc3RvcD4KICAgICAgICA8L2xpbmVhckdyYWRpZW50PgogICAgPC9kZWZzPgogICAgPGcgaWQ9Ikljb24tQXJjaGl0ZWN0dXJlLzY0L0FyY2hfQW1hem9uLUVDMl82NCIgc3Ryb2tlPSJub25lIiBzdHJva2Utd2lkdGg9IjEiIGZpbGw9Im5vbmUiIGZpbGwtcnVsZT0iZXZlbm9kZCI+CiAgICAgICAgPGcgaWQ9Ikljb24tQXJjaGl0ZWN0dXJlLUJHLzY0L0NvbXB1dGUiIGZpbGw9InVybCgjbGluZWFyR3JhZGllbnQtMSkiPgogICAgICAgICAgICA8cmVjdCBpZD0iUmVjdGFuZ2xlIiB4PSIwIiB5PSIwIiB3aWR0aD0iODAiIGhlaWdodD0iODAiPjwvcmVjdD4KICAgICAgICA8L2c+CiAgICAgICAgPHBhdGggZD0iTTI3LDUzIEw1Miw1MyBMNTIsMjggTDI3LDI4IEwyNyw1MyBaIE01NCwyOCBMNTgsMjggTDU4LDMwIEw1NCwzMCBMNTQsMzQgTDU4LDM0IEw1OCwzNiBMNTQsMzYgTDU0LDM5IEw1OCwzOSBMNTgsNDEgTDU0LDQxIEw1NCw0NSBMNTgsNDUgTDU4LDQ3IEw1NCw0NyBMNTQsNTEgTDU4LDUxIEw1OCw1MyBMNTQsNTMgTDU0LDUzLjEzNiBDNTQsNTQuMTY0IDUzLjE2NCw1NSA1Mi4xMzYsNTUgTDUyLDU1IEw1Miw1OSBMNTAsNTkgTDUwLDU1IEw0Niw1NSBMNDYsNTkgTDQ0LDU5IEw0NCw1NSBMNDEsNTUgTDQxLDU5IEwzOSw1OSBMMzksNTUgTDM1LDU1IEwzNSw1OSBMMzMsNTkgTDMzLDU1IEwyOSw1NSBMMjksNTkgTDI3LDU5IEwyNyw1NSBMMjYuODY0LDU1IEMyNS44MzYsNTUgMjUsNTQuMTY0IDI1LDUzLjEzNiBMMjUsNTMgTDIyLDUzIEwyMiw1MSBMMjUsNTEgTDI1LDQ3IEwyMiw0NyBMMjIsNDUgTDI1LDQ1IEwyNSw0MSBMMjIsNDEgTDIyLDM5IEwyNSwzOSBMMjUsMzYgTDIyLDM2IEwyMiwzNCBMMjUsMzQgTDI1LDMwIEwyMiwzMCBMMjIsMjggTDI1LDI4IEwyNSwyNy44NjQgQzI1LDI2LjgzNiAyNS44MzYsMjYgMjYuODY0LDI2IEwyNywyNiBMMjcsMjIgTDI5LDIyIEwyOSwyNiBMMzMsMjYgTDMzLDIyIEwzNSwyMiBMMzUsMjYgTDM5LDI2IEwzOSwyMiBMNDEsMjIgTDQxLDI2IEw0NCwyNiBMNDQsMjIgTDQ2LDIyIEw0NiwyNiBMNTAsMjYgTDUwLDIyIEw1MiwyMiBMNTIsMjYgTDUyLjEzNiwyNiBDNTMuMTY0LDI2IDU0LDI2LjgzNiA1NCwyNy44NjQgTDU0LDI4IFogTTQxLDY1Ljg3NiBDNDEsNjUuOTQ0IDQwLjk0NCw2NiA0MC44NzYsNjYgTDE0LjEyNCw2NiBDMTQuMDU2LDY2IDE0LDY1Ljk0NCAxNCw2NS44NzYgTDE0LDM5LjEyNCBDMTQsMzkuMDU2IDE0LjA1NiwzOSAxNC4xMjQsMzkgTDIwLDM5IEwyMCwzNyBMMTQuMTI0LDM3IEMxMi45NTMsMzcgMTIsMzcuOTUzIDEyLDM5LjEyNCBMMTIsNjUuODc2IEMxMiw2Ny4wNDcgMTIuOTUzLDY4IDE0LjEyNCw2OCBMNDAuODc2LDY4IEM0Mi4wNDcsNjggNDMsNjcuMDQ3IDQzLDY1Ljg3NiBMNDMsNjEgTDQxLDYxIEw0MSw2NS44NzYgWiBNNjgsMTQuMTI0IEw2OCw0MC44NzYgQzY4LDQyLjA0NyA2Ny4wNDcsNDMgNjUuODc2LDQzIEw2MCw0MyBMNjAsNDEgTDY1Ljg3Niw0MSBDNjUuOTQ0LDQxIDY2LDQwLjk0NCA2Niw0MC44NzYgTDY2LDE0LjEyNCBDNjYsMTQuMDU2IDY1Ljk0NCwxNCA2NS44NzYsMTQgTDM5LjEyNCwxNCBDMzkuMDU2LDE0IDM5LDE0LjA1NiAzOSwxNC4xMjQgTDM5LDIwIEwzNywyMCBMMzcsMTQuMTI0IEMzNywxMi45NTMgMzcuOTUzLDEyIDM5LjEyNCwxMiBMNjUuODc2LDEyIEM2Ny4wNDcsMTIgNjgsMTIuOTUzIDY4LDE0LjEyNCBMNjgsMTQuMTI0IFoiIGlkPSJBbWF6b24tRUMyX0ljb25fNjRfU3F1aWQiIGZpbGw9IiNGRkZGRkYiPjwvcGF0aD4KICAgIDwvZz4KPC9zdmc+" x="290" y="74" width="20" height="20"/>
+  <text x="320" y="89" fill="#0F172A" font-size="12" font-weight="700">Backend Processing Core: hybrid_engine.py | EC2 AL2023 Host (10.0.8.15:5000)</text>
+  <text x="1455" y="89" fill="#64748B" font-size="10.5" font-weight="600" text-anchor="end">Systemd Gunicorn WSGI Daemon | Scale-to-Zero Architecture</text>
+
+  <!-- Tier 1: Fast-Path Native Vector Parser -->
+  <rect x="300" y="115" width="410" height="225" rx="4" fill="#FFFFFF" stroke="#16A34A" stroke-width="1.2"/>
+  <rect x="300" y="115" width="410" height="34" rx="4" fill="#F0FDF4"/>
+  <text x="312" y="131" fill="#15803D" font-size="11" font-weight="700">Tier 1: Fast-Path Native Vector Parser (PyMuPDF)</text>
+  <text x="312" y="145" fill="#16A34A" font-size="9.5" font-weight="600">Module: src/backend/parsers/fast_parser.py</text>
+
+  <text x="315" y="172" fill="#334155" font-size="10.5">• Direct vector extraction of digital text, font trees &amp; styling</text>
+  <text x="315" y="190" fill="#334155" font-size="10.5">• Native table structure preservation without bitmap rasterization</text>
+  <text x="315" y="208" fill="#334155" font-size="10.5">• Blazing Execution Speed: <tspan font-weight="700" fill="#16A34A">0.1s - 0.3s per page</tspan></text>
+  <text x="315" y="226" fill="#334155" font-size="10.5">• AI Ingestion Cost: <tspan font-weight="700" fill="#16A34A">$0.00</tspan> (Zero LLM overhead for 80%+ documents)</text>
+
+  <rect x="312" y="242" width="386" height="85" rx="4" fill="#F8FAFC" stroke="#E2E8F0" stroke-width="1"/>
+  <text x="322" y="260" fill="#0F172A" font-size="10.5" font-weight="700">Routing Decision Criteria:</text>
+  <text x="322" y="278" fill="#16A34A" font-size="10" font-weight="600">✓ If text density &gt; threshold: Emit clean Markdown -&gt; Tier 3 Translator</text>
+  <text x="322" y="296" fill="#EA580C" font-size="10" font-weight="600">✗ If scanned image or zero text: Escalate to Tier 2 OCR Dispatcher</text>
+  <text x="322" y="313" fill="#64748B" font-size="9">Eliminates unnecessary Vision AI calls for native digital PDFs</text>
+
+  <!-- Tier 2: Selective Multimodal OCR Dispatcher -->
+  <rect x="300" y="360" width="410" height="250" rx="4" fill="#FFFFFF" stroke="#EA580C" stroke-width="1.2"/>
+  <rect x="300" y="360" width="410" height="34" rx="4" fill="#FFF7ED"/>
+  <text x="312" y="376" fill="#C2410C" font-size="11" font-weight="700">Tier 2: Selective Multimodal OCR Dispatcher</text>
+  <text x="312" y="390" fill="#EA580C" font-size="9.5" font-weight="600">Module: src/backend/parsers/ocr_dispatcher.py</text>
+
+  <text x="315" y="415" fill="#334155" font-size="10.5">• High-resolution PDF page rendering (300 DPI image bitmaps)</text>
+  <text x="315" y="432" fill="#334155" font-size="10.5">• Dual-Engine Dispatching: User toggle between FinOps and Enterprise</text>
+
+  <!-- Branch A -->
+  <rect x="312" y="445" width="188" height="152" rx="4" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="1"/>
+  <text x="320" y="463" fill="#0284C7" font-size="10" font-weight="700">Branch A: FinOps ($0.00)</text>
+  <text x="320" y="481" fill="#334155" font-size="9.5">• Primary: Kaggle GPU 2x T4</text>
+  <text x="328" y="497" fill="#64748B" font-size="9">Qwen2.5-VL 7B Vision Model</text>
+  <text x="320" y="515" fill="#334155" font-size="9.5">• Failover: Google Gemini 1.5</text>
+  <text x="328" y="531" fill="#64748B" font-size="9">Sub-second Flash API</text>
+  <text x="320" y="549" fill="#334155" font-size="9.5">• Key Tour Manager Rotation</text>
+  <text x="320" y="572" fill="#16A34A" font-size="10" font-weight="700">Cost: $0.00 / 0 VND</text>
+
+  <!-- Branch B -->
+  <rect x="510" y="445" width="188" height="152" rx="4" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="1"/>
+  <text x="518" y="463" fill="#8C4FFF" font-size="10" font-weight="700">Branch B: AWS Native Mode</text>
+  <text x="518" y="481" fill="#334155" font-size="9.5">• Amazon Bedrock Multimodal</text>
+  <text x="526" y="497" fill="#64748B" font-size="9">Nova Micro / Claude 3.5 Sonnet</text>
+  <text x="518" y="515" fill="#334155" font-size="9.5">• Amazon Textract Tables</text>
+  <text x="526" y="531" fill="#64748B" font-size="9">Document Analysis API</text>
+  <text x="518" y="549" fill="#334155" font-size="9.5">• Enterprise Compliance</text>
+  <text x="518" y="572" fill="#475569" font-size="10" font-weight="700">Data Sovereignty Guaranteed</text>
+
+  <!-- Center Top Right: External AI Model Endpoints -->
+  <rect x="740" y="115" width="340" height="495" rx="4" fill="#FFFFFF" stroke="#0284C7" stroke-width="1.2"/>
+  <rect x="740" y="115" width="340" height="26" rx="4" fill="#F0F9FF"/>
+  <text x="752" y="133" fill="#0369A1" font-size="11" font-weight="700">External Model Endpoints (Dispatched via HTTPS)</text>
+
+  <!-- Kaggle GPU Box -->
+  <rect x="755" y="155" width="310" height="135" rx="4" fill="#F8FAFC" stroke="#BAE6FD" stroke-width="1"/>
+  <text x="765" y="176" fill="#0284C7" font-size="11" font-weight="700">Kaggle GPU Cluster (Dedicated Vision AI)</text>
+  <text x="765" y="196" fill="#334155" font-size="10.5">• Hardware: 2x NVIDIA T4 (32GB VRAM)</text>
+  <text x="765" y="214" fill="#334155" font-size="10.5">• Model: Qwen2.5-VL-7B-Instruct (Vision LLM)</text>
+  <text x="765" y="232" fill="#334155" font-size="10.5">• Public Gateway: Cloudflare Tunnel (trycloudflare)</text>
+  <text x="765" y="250" fill="#334155" font-size="10.5">• Inference Speed: ~1.2s - 2.8s per page</text>
+  <text x="765" y="272" fill="#16A34A" font-size="10.5" font-weight="700">Active Status: Running ($0.00 Compute)</text>
+
+  <!-- Bedrock & Textract Box -->
+  <rect x="755" y="305" width="310" height="135" rx="4" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="1"/>
+  <image href="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyB3aWR0aD0iODBweCIgaGVpZ2h0PSI4MHB4IiB2aWV3Qm94PSIwIDAgODAgODAiIHZlcnNpb249IjEuMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayI+CiAgICA8IS0tIEdlbmVyYXRvcjogU2tldGNoIDY0ICg5MzUzNykgLSBodHRwczovL3NrZXRjaC5jb20gLS0+CiAgICA8dGl0bGU+SWNvbi1BcmNoaXRlY3R1cmUvNjQvQXJjaF9BV1MtU2FnZU1ha2VyXzY0PC90aXRsZT4KICAgIDxkZXNjPkNyZWF0ZWQgd2l0aCBTa2V0Y2guPC9kZXNjPgogICAgPGRlZnM+CiAgICAgICAgPGxpbmVhckdyYWRpZW50IHgxPSIwJSIgeTE9IjEwMCUiIHgyPSIxMDAlIiB5Mj0iMCUiIGlkPSJsaW5lYXJHcmFkaWVudC0xIj4KICAgICAgICAgICAgPHN0b3Agc3RvcC1jb2xvcj0iIzA1NUY0RSIgb2Zmc2V0PSIwJSI+PC9zdG9wPgogICAgICAgICAgICA8c3RvcCBzdG9wLWNvbG9yPSIjNTZDMEE3IiBvZmZzZXQ9IjEwMCUiPjwvc3RvcD4KICAgICAgICA8L2xpbmVhckdyYWRpZW50PgogICAgPC9kZWZzPgogICAgPGcgaWQ9Ikljb24tQXJjaGl0ZWN0dXJlLzY0L0FyY2hfQVdTLVNhZ2VNYWtlcl82NCIgc3Ryb2tlPSJub25lIiBzdHJva2Utd2lkdGg9IjEiIGZpbGw9Im5vbmUiIGZpbGwtcnVsZT0iZXZlbm9kZCI+CiAgICAgICAgPGcgaWQ9Ikljb24tQXJjaGl0ZWN0dXJlLUJHLzY0L01hY2hpbmUtTGVhcm5pbmciIGZpbGw9InVybCgjbGluZWFyR3JhZGllbnQtMSkiPgogICAgICAgICAgICA8cmVjdCBpZD0iUmVjdGFuZ2xlIiB4PSIwIiB5PSIwIiB3aWR0aD0iODAiIGhlaWdodD0iODAiPjwvcmVjdD4KICAgICAgICA8L2c+CiAgICAgICAgPHBhdGggZD0iTTU0LjAzNCwyNi4wMzM1NzMxIEM1NC4wMzQsMjYuNTkzNTY1NCA1My41NzgsMjcuMDQ5NTU5MiA1My4wMTcsMjcuMDQ5NTU5MiBDNTIuNDU4LDI3LjA0OTU1OTIgNTIuMDAyLDI2LjU5MzU2NTQgNTIuMDAyLDI2LjAzMzU3MzEgQzUyLjAwMiwyNS40NzM1ODA3IDUyLjQ1OCwyNS4wMTc1ODY5IDUzLjAxNywyNS4wMTc1ODY5IEM1My41NzgsMjUuMDE3NTg2OSA1NC4wMzQsMjUuNDczNTgwNyA1NC4wMzQsMjYuMDMzNTczMSBMNTQuMDM0LDI2LjAzMzU3MzEgWiBNNDguMDAyLDM2LjAwMDQzNyBDNDguMDAyLDM1LjQ0OTQ0NDUgNDguNDUsMzUuMDAwNDUwNiA0OS4wMDIsMzUuMDAwNDUwNiBDNDkuNTU0LDM1LjAwMDQ1MDYgNTAuMDAyLDM1LjQ0OTQ0NDUgNTAuMDAyLDM2LjAwMDQzNyBDNTAuMDAyLDM2LjU1MTQyOTQgNDkuNTU0LDM3LjAwMDQyMzMgNDkuMDAyLDM3LjAwMDQyMzMgQzQ4LjQ1LDM3LjAwMDQyMzMgNDguMDAyLDM2LjU1MTQyOTQgNDguMDAyLDM2LjAwMDQzNyBMNDguMDAyLDM2LjAwMDQzNyBaIE00OC4wMDIsNTUuMDAwMTc3NSBDNDguMDAyLDU0LjQ0OTE4NSA0OC40NSw1NC4wMDAxOTEyIDQ5LjAwMiw1NC4wMDAxOTEyIEM0OS41NTQsNTQuMDAwMTkxMiA1MC4wMDIsNTQuNDQ5MTg1IDUwLjAwMiw1NS4wMDAxNzc1IEM1MC4wMDIsNTUuNTUxMTcgNDkuNTU0LDU2LjAwMDE2MzkgNDkuMDAyLDU2LjAwMDE2MzkgQzQ4LjQ1LDU2LjAwMDE2MzkgNDguMDAyLDU1LjU1MTE3IDQ4LjAwMiw1NS4wMDAxNzc1IEw0OC4wMDIsNTUuMDAwMTc3NSBaIE01OC4wMDIsNDIuMDAwMzU1IEM1OC4wMDIsNDIuNTUxMzQ3NSA1Ny41NTQsNDMuMDAwMzQxNCA1Ny4wMDIsNDMuMDAwMzQxNCBDNTYuNDUsNDMuMDAwMzQxNCA1Ni4wMDIsNDIuNTUxMzQ3NSA1Ni4wMDIsNDIuMDAwMzU1IEM1Ni4wMDIsNDEuNDQ5MzYyNiA1Ni40NSw0MS4wMDAzNjg3IDU3LjAwMiw0MS4wMDAzNjg3IEM1Ny41NTQsNDEuMDAwMzY4NyA1OC4wMDIsNDEuNDQ5MzYyNiA1OC4wMDIsNDIuMDAwMzU1IEw1OC4wMDIsNDIuMDAwMzU1IFogTTY1LDQ1LjI3MjMxMDQgTDU5Ljk2Myw0Mi4zODIzNDk4IEM1OS45NzksNDIuMjU2MzUxNSA2MC4wMDIsNDIuMTMxMzUzMiA2MC4wMDIsNDIuMDAwMzU1IEM2MC4wMDIsNDAuMzQ2Mzc3NiA1OC42NTYsMzkuMDAwMzk2IDU3LjAwMiwzOS4wMDAzOTYgQzU1LjM0NywzOS4wMDAzOTYgNTQuMDAyLDQwLjM0NjM3NzYgNTQuMDAyLDQyLjAwMDM1NSBDNTQuMDAyLDQzLjY1NDMzMjQgNTUuMzQ3LDQ1LjAwMDMxNDEgNTcuMDAyLDQ1LjAwMDMxNDEgQzU3LjgwMSw0NS4wMDAzMTQxIDU4LjUyMyw0NC42ODEzMTg0IDU5LjA2MSw0NC4xNzEzMjU0IEw2My44ODYsNDYuOTM5Mjg3NiBMNTkuNTU1LDQ5LjEwNTI1OCBDNTkuMjE2LDQ5LjI3NTI1NTcgNTkuMDAyLDQ5LjYyMTI1MSA1OS4wMDIsNTAuMDAwMjQ1OCBMNTkuMDAyLDU4LjQ0MTEzMDUgTDQ2Ljk4Myw2NS44MzcwMjk1IEw0MS4wMDMsNjIuNDIwMDc2MiBMNDEuMDAzLDU2LjAwMDE2MzkgTDQ2LjE4Niw1Ni4wMDAxNjM5IEM0Ni42LDU3LjE2MTE0OCA0Ny43LDU4LjAwMDEzNjYgNDkuMDAyLDU4LjAwMDEzNjYgQzUwLjY1Niw1OC4wMDAxMzY2IDUyLjAwMiw1Ni42NTQxNTQ5IDUyLjAwMiw1NS4wMDAxNzc1IEM1Mi4wMDIsNTMuMzQ1MjAwMSA1MC42NTYsNTIuMDAwMjE4NSA0OS4wMDIsNTIuMDAwMjE4NSBDNDcuNyw1Mi4wMDAyMTg1IDQ2LjYsNTIuODM4MjA3IDQ2LjE4Niw1NC4wMDAxOTEyIEw0MS4wMDMsNTQuMDAwMTkxMiBMNDEuMDAzLDQwLjAwMDM4MjMgQzQxLjAwMywzOS42NDkzODcxIDQwLjgxOCwzOS4zMjMzOTE2IDQwLjUxNywzOS4xNDIzOTQxIEwzNS41MTYsMzYuMTQyNDM1IEwzNC40ODcsMzcuODU3NDExNiBMMzkuMDAzLDQwLjU2NjM3NDYgTDM5LjAwMyw0My41MDczMzQ1IEwzMy4wMDIsNDguMTIzMjcxNCBMMzMuMDAyLDQ0LjAwMDMyNzcgQzMzLjAwMiw0My42OTYzMzE5IDMyLjg2NCw0My40MDgzMzU4IDMyLjYyNyw0My4yMTkzMzg0IEwyOC4wMDIsMzkuNTE5Mzg4OSBMMjguMDAyLDM0LjUzNTQ1NyBMMzMuNTU2LDMwLjgzMjUwNzUgQzMzLjgzNSwzMC42NDY1MTAxIDM0LjAwMiwzMC4zMzQ1MTQzIDM0LjAwMiwzMC4wMDA1MTg5IEwzNC4wMDIsMjQuMDAwNjAwOCBMMzIuMDAyLDI0LjAwMDYwMDggTDMyLjAwMiwyOS40NjU1MjYyIEwyNy4wMTMsMzIuNzkwNDgwOCBMMjIuMDAyLDI5LjQ2MzUyNjIgTDIyLjAwMiwyMS41NzQ2MzM5IEwyNy4wMDIsMTguNjU4NjczOCBMMjcuMDAyLDI3LjAwMDU1OTkgTDI5LjAwMiwyNy4wMDA1NTk5IEwyOS4wMDIsMTcuNDkxNjg5NyBMMzMuMDA1LDE1LjE1NjcyMTYgTDM5LjAwMSwxOC42MTU2NzQ0IEwzOS4wMDIsMzEuMDAwNTA1MiBDMzkuMDAyLDMxLjM1OTUwMDMgMzkuMTk0LDMxLjY5MDQ5NTggMzkuNTA2LDMxLjg2ODQ5MzQgTDQ2LjA0MiwzNS42MDM0NDI0IEM0Ni4wMjQsMzUuNzM0NDQwNiA0Ni4wMDIsMzUuODY0NDM4OCA0Ni4wMDIsMzYuMDAwNDM3IEM0Ni4wMDIsMzcuNjU0NDE0NCA0Ny4zNDcsMzkuMDAwMzk2IDQ5LjAwMiwzOS4wMDAzOTYgQzUwLjY1NiwzOS4wMDAzOTYgNTIuMDAyLDM3LjY1NDQxNDQgNTIuMDAyLDM2LjAwMDQzNyBDNTIuMDAyLDM0LjM0NjQ1OTUgNTAuNjU2LDMzLjAwMDQ3NzkgNDkuMDAyLDMzLjAwMDQ3NzkgQzQ4LjIwOCwzMy4wMDA0Nzc5IDQ3LjQ5LDMzLjMxNTQ3MzYgNDYuOTUzLDMzLjgyMDQ2NjcgTDQxLjAwMiwzMC40MTk1MTMyIEw0MS4wMDEsMTguNjE3Njc0MyBMNDYuOTY0LDE1LjE3NjcyMTMgTDU4LjAwMiwyMi41MzU2MjA4IEw1OC4wMDIsMjUuMDAwNTg3MiBMNTUuODUxLDI1LjAwMDU4NzIgQzU1LjQyOSwyMy44NDQ2MDMgNTQuMzE4LDIzLjAxNzYxNDIgNTMuMDE3LDIzLjAxNzYxNDIgQzUxLjM1NCwyMy4wMTc2MTQyIDUwLjAwMiwyNC4zNzA1OTU4IDUwLjAwMiwyNi4wMzM1NzMxIEM1MC4wMDIsMjcuNjk2NTUwNCA1MS4zNTQsMjkuMDQ5NTMxOSA1My4wMTcsMjkuMDQ5NTMxOSBDNTQuMzQzLDI5LjA0OTUzMTkgNTUuNDcxLDI4LjE5MDU0MzYgNTUuODc1LDI3LjAwMDU1OTkgTDU4LjAwMiwyNy4wMDA1NTk5IEw1OC4wMDIsMzAuMDAwNTE4OSBDNTguMDAyLDMwLjM1OTUxNCA1OC4xOTQsMzAuNjkwNTA5NSA1OC41MDYsMzAuODY4NTA3IEw2NSwzNC41ODA0NTY0IEw2NSw0NS4yNzIzMTA0IFogTTMzLjAyLDY1LjgzNzAyOTUgTDI5Ljg2Nyw2My44OTcwNTYgTDM1LjU4Myw1OS44MTQxMTE4IEwzNC40MjEsNTguMTg2MTM0IEwyOC4wMTgsNjIuNzU5MDcxNiBMMjEuMDAyLDU4LjQ0MTEzMDUgTDIxLjAwMiw1MC41NjYyMzgxIEwyNS41MTYsNDcuODU3Mjc1MSBMMjQuNDg3LDQ2LjE0MjI5ODUgTDE5Ljk1OCw0OC44NjAyNjE0IEwxNS4wMDIsNDYuMzgyMjk1MiBMMTUuMDAxLDQwLjYxNzM3MzkgTDIwLjQ0OSwzNy44OTQ0MTExIEwxOS41NTUsMzYuMTA1NDM1NSBMMTUuMDAxLDM4LjM4MTQwNDQgTDE1LjAwMiwzNC41ODA0NTY0IEwyMC45NjMsMzEuMTc0NTAyOSBMMjYuMDAyLDM0LjUxOTQ1NzIgTDI2LjAwMiwzOS40ODAzODk0IEwyMC40NDksNDMuMTY3MzM5MSBMMjEuNTU1LDQ0LjgzMzMxNjMgTDI2Ljk1OCw0MS4yNDUzNjUzIEwzMS4wMDIsNDQuNDgwMzIxMiBMMzEuMDAyLDQ5LjY2MjI1MDQgTDI2LjM5Miw1My4yMDcyMDIgTDI3LjYxMSw1NC43OTIxODA0IEwzOS4wMDMsNDYuMDMwMyBMMzkuMDAzLDYyLjQxOTA3NjIgTDMzLjAyLDY1LjgzNzAyOTUgWiBNNjYuNDk2LDMzLjEzMjQ3NjEgTDYwLjAwMiwyOS40MjA1MjY4IEw2MC4wMDIsMjIuMDAwNjI4MSBDNjAuMDAyLDIxLjY2NTYzMjcgNTkuODM1LDIxLjM1MzYzNyA1OS41NTYsMjEuMTY4NjM5NSBMNDcuNTU2LDEzLjE2ODc0ODcgQzQ3LjI0LDEyLjk1ODc1MTYgNDYuODMyLDEyLjk0NDc1MTggNDYuNTAyLDEzLjEzNDc0OTIgTDQwLjAwNCwxNi44ODQ2OTggTDMzLjUwMiwxMy4xMzQ3NDkyIEMzMy4xOSwxMi45NTQ3NTE3IDMyLjgwNywxMi45NTQ3NTE3IDMyLjQ5OCwxMy4xMzY3NDkyIEwyMC40OTgsMjAuMTM2NjUzNiBDMjAuMTksMjAuMzE1NjUxMSAyMC4wMDIsMjAuNjQ0NjQ2NiAyMC4wMDIsMjEuMDAwNjQxOCBMMjAuMDAyLDI5LjQyMDUyNjggTDEzLjUwNiwzMy4xMzI0NzYxIEMxMy4xOTQsMzMuMzA5NDczNyAxMy4wMDIsMzMuNjQxNDY5MiAxMy4wMDIsMzQuMDAwNDY0MyBMMTMuMDAyLDM0LjQxNzQ1ODYgQzEzLjAwMSwzNC40Mzg0NTgzIDEzLDM0LjQ1ODQ1OCAxMywzNC40Nzk0NTc3IEwxMyw0NS4zNjMzMDkxIEMxMyw0NS4zODMzMDg4IDEzLjAwMSw0NS40MDMzMDg2IDEzLjAwMiw0NS40MjIzMDgzIEwxMy4wMDIsNDcuMDAwMjg2OCBDMTMuMDAyLDQ3LjM3OTI4MTYgMTMuMjE2LDQ3LjcyNTI3NjkgMTMuNTU1LDQ3Ljg5NDI3NDUgTDE5LjAwMiw1MC42MTgyMzc0IEwxOS4wMDIsNTkuMDAwMTIyOSBDMTkuMDAyLDU5LjM0NzExODIgMTkuMTgxLDU5LjY2OTExMzggMTkuNDc3LDU5Ljg1MTExMTMgTDMyLjQ3Nyw2Ny44NTEwMDIgQzMyLjYzOCw2Ny45NTAwMDA3IDMyLjgyLDY4IDMzLjAwMiw2OCBDMzMuMTczLDY4IDMzLjM0NCw2Ny45NTYwMDA2IDMzLjQ5OCw2Ny44NjgwMDE4IEw0MC4wMDMsNjQuMTUyMDUyNSBMNDYuNTA2LDY3Ljg2ODAwMTggQzQ2LjgyMSw2OC4wNDg5OTkzIDQ3LjIxMyw2OC4wNDE5OTk0IDQ3LjUyNiw2Ny44NTEwMDIgTDYwLjUyNiw1OS44NTExMTEzIEM2MC44MjIsNTkuNjY5MTEzOCA2MS4wMDIsNTkuMzQ3MTE4MiA2MS4wMDIsNTkuMDAwMTIyOSBMNjEuMDAyLDUwLjYxODIzNzQgTDY2LjQ0Nyw0Ny44OTQyNzQ1IEM2Ni43ODYsNDcuNzI1Mjc2OSA2Nyw0Ny4zNzkyODE2IDY3LDQ3LjAwMDI4NjggTDY3LDM0LjAwMDQ2NDMgQzY3LDMzLjY0MTQ2OTIgNjYuODA3LDMzLjMxMDQ3MzcgNjYuNDk2LDMzLjEzMjQ3NjEgTDY2LjQ5NiwzMy4xMzI0NzYxIFoiIGlkPSJBV1MtU2FnZU1ha2VyX0ljb25fNjRfU3F1aWQiIGZpbGw9IiNGRkZGRkYiPjwvcGF0aD4KICAgIDwvZz4KPC9zdmc+" x="765" y="315" width="20" height="20"/>
+  <text x="792" y="330" fill="#0F172A" font-size="11" font-weight="700">Amazon Bedrock &amp; Amazon Textract</text>
+  <text x="765" y="352" fill="#334155" font-size="10.5">• Nova Micro &amp; Claude 3.5 Sonnet Multimodal</text>
+  <text x="765" y="370" fill="#334155" font-size="10.5">• Textract Document Analysis (Forms &amp; Tables)</text>
+  <text x="765" y="388" fill="#334155" font-size="10.5">• IAM Boto3 Converse API Integration</text>
+  <text x="765" y="406" fill="#334155" font-size="10.5">• Zero Data Outflow Guarantee (In-VPC Endpoint)</text>
+  <text x="765" y="426" fill="#475569" font-size="10.5" font-weight="600">On-Demand Enterprise Fallback</text>
+
+  <!-- Gemini API Box -->
+  <rect x="755" y="455" width="310" height="135" rx="4" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="1"/>
+  <text x="765" y="476" fill="#0F172A" font-size="11" font-weight="700">Google Gemini API (Failover Endpoint)</text>
+  <text x="765" y="496" fill="#334155" font-size="10.5">• Gemini 1.5 Flash (Vision Multimodal)</text>
+  <text x="765" y="514" fill="#334155" font-size="10.5">• Sub-second latency for scanned fallback</text>
+  <text x="765" y="532" fill="#334155" font-size="10.5">• High-throughput batch document queue</text>
+  <text x="765" y="550" fill="#334155" font-size="10.5">• Integrated with Key Tour Manager</text>
+  <text x="765" y="572" fill="#16A34A" font-size="10.5" font-weight="700">Automatic Failover Mechanism</text>
+
+  <!-- Center Far Right: Tier 3 Translation & Exporters -->
+  <rect x="1110" y="115" width="340" height="495" rx="4" fill="#FFFFFF" stroke="#8C4FFF" stroke-width="1.2"/>
+  <rect x="1110" y="115" width="340" height="26" rx="4" fill="#FAF5FF"/>
+  <text x="1122" y="133" fill="#6B21A8" font-size="11.5" font-weight="700">Tier 3: Translation Engine &amp; Key Tour Manager</text>
+
+  <rect x="1125" y="155" width="310" height="175" rx="4" fill="#F8FAFC" stroke="#E9D5FF" stroke-width="1"/>
+  <text x="1135" y="176" fill="#6B21A8" font-size="11" font-weight="700">Technical Translation Orchestrator</text>
+  <text x="1135" y="196" fill="#334155" font-size="10.5">• Modules: translator.py &amp; key_tour_manager.py</text>
+  <text x="1135" y="214" fill="#334155" font-size="10.5">• Strict preservation of 100% Markdown syntax:</text>
+  <text x="1145" y="230" fill="#64748B" font-size="9.5">Code blocks, KaTeX math, tables, headings</text>
+  <text x="1135" y="250" fill="#334155" font-size="10.5">• Cloud/DevOps Specialized Engineering Glossary</text>
+  <text x="1135" y="268" fill="#334155" font-size="10.5">• Key Tour Manager:</text>
+  <text x="1145" y="284" fill="#64748B" font-size="9.5">Round-Robin API key pool rotation</text>
+  <text x="1145" y="300" fill="#64748B" font-size="9.5">Exponential backoff on rate limits (429)</text>
+  <text x="1135" y="320" fill="#16A34A" font-size="10" font-weight="700">Zero Translation Failure Guarantee</text>
+
+  <!-- Multi-Format Document Exporters Box -->
+  <rect x="1125" y="345" width="310" height="245" rx="4" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="1"/>
+  <text x="1135" y="366" fill="#0F172A" font-size="11" font-weight="700">Multi-Format Document Exporters</text>
+  <text x="1135" y="384" fill="#64748B" font-size="10">Module: src/backend/exporters/</text>
+
+  <text x="1135" y="410" fill="#0284C7" font-size="10.5" font-weight="700">1. Microsoft Word Exporter (docx_exporter.py)</text>
+  <text x="1145" y="426" fill="#334155" font-size="10">• Academic style, perfect table border rendering</text>
+  <text x="1145" y="442" fill="#334155" font-size="10">• Bold, italics, hyperlinks, heading hierarchy</text>
+
+  <text x="1135" y="468" fill="#EA580C" font-size="10.5" font-weight="700">2. Print-Ready PDF Exporter (pdf_exporter.py)</text>
+  <text x="1145" y="484" fill="#334155" font-size="10">• Standard A4 margins, pure black-and-white grid</text>
+  <text x="1145" y="500" fill="#334155" font-size="10">• Auto page-break handling, header &amp; footer</text>
+
+  <text x="1135" y="526" fill="#16A34A" font-size="10.5" font-weight="700">3. Clean Markdown Exporter (markdown_exporter.py)</text>
+  <text x="1145" y="542" fill="#334155" font-size="10">• Standard GitHub-Flavored Markdown (.md)</text>
+  <text x="1145" y="558" fill="#334155" font-size="10">• KaTeX math formula syntax ($...$, $$...$$)</text>
+  <text x="1135" y="580" fill="#475569" font-size="10" font-weight="600">Simultaneous 3-Format Emission Pipeline</text>
+
+  <!-- Bottom: AWS Cloud Persistence & Storage Integration -->
+  <rect x="280" y="650" width="1190" height="210" rx="6" fill="#FFFFFF" stroke="#475569" stroke-width="1.2"/>
+  <rect x="280" y="650" width="1190" height="28" rx="6" fill="#F8FAFC"/>
+  <text x="295" y="669" fill="#0F172A" font-size="12" font-weight="700">AWS Cloud Persistence &amp; Storage Integration (src/backend/aws/storage_service.py)</text>
+  <text x="1455" y="669" fill="#64748B" font-size="10.5" font-weight="600" text-anchor="end">Region: ap-southeast-1 | Encryption: SSE-S3 AES-256</text>
+
+  <!-- S3 Box -->
+  <rect x="300" y="690" width="560" height="155" rx="4" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="1"/>
+  <image href="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyB3aWR0aD0iODBweCIgaGVpZ2h0PSI4MHB4IiB2aWV3Qm94PSIwIDAgODAgODAiIHZlcnNpb249IjEuMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayI+CiAgICA8dGl0bGU+SWNvbi1BcmNoaXRlY3R1cmUvNjQvQXJjaF9BbWF6b24tU2ltcGxlLVN0b3JhZ2UtU2VydmljZV82NDwvdGl0bGU+CiAgICA8ZGVmcz4KICAgICAgICA8bGluZWFyR3JhZGllbnQgeDE9IjAlIiB5MT0iMTAwJSIgeDI9IjEwMCUiIHkyPSIwJSIgaWQ9ImxpbmVhckdyYWRpZW50LTEiPgogICAgICAgICAgICA8c3RvcCBzdG9wLWNvbG9yPSIjMUI2NjBGIiBvZmZzZXQ9IjAlIj48L3N0b3A+CiAgICAgICAgICAgIDxzdG9wIHN0b3AtY29sb3I9IiM2Q0FFM0UiIG9mZnNldD0iMTAwJSI+PC9zdG9wPgogICAgICAgIDwvbGluZWFyR3JhZGllbnQ+CiAgICA8L2RlZnM+CiAgICA8ZyBpZD0iSWNvbi1BcmNoaXRlY3R1cmUvNjQvQXJjaF9BbWF6b24tU2ltcGxlLVN0b3JhZ2UtU2VydmljZV82NCIgc3Ryb2tlPSJub25lIiBzdHJva2Utd2lkdGg9IjEiIGZpbGw9Im5vbmUiIGZpbGwtcnVsZT0iZXZlbm9kZCI+CiAgICAgICAgPGcgaWQ9IlJlY3RhbmdsZSIgZmlsbD0idXJsKCNsaW5lYXJHcmFkaWVudC0xKSI+CiAgICAgICAgICAgIDxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCI+PC9yZWN0PgogICAgICAgIDwvZz4KICAgICAgICA8ZyBpZD0iSWNvbi1TZXJ2aWNlLzY0L0FtYXpvbi1TaW1wbGUtU3RvcmFnZS1TZXJ2aWNlXzY0IiB0cmFuc2Zvcm09InRyYW5zbGF0ZSg4LjAwMDAwMCwgOC4wMDAwMDApIiBmaWxsPSIjRkZGRkZGIj4KICAgICAgICAgICAgPHBhdGggZD0iTTUyLjgzNTksMzQuODkyNiBMNTMuMjE5OSwzMi4xODg2IEM1Ni43NjA5LDM0LjMwOTYgNTYuODA2OSwzNS4xODU2IDU2LjgwNTkxMzIsMzUuMjA5NiBDNTYuNzk5OSwzNS4yMTQ2IDU2LjE5NTksMzUuNzE4NiA1Mi44MzU5LDM0Ljg5MjYgTDUyLjgzNTksMzQuODkyNiBaIE01MC44OTI5LDM0LjM1MjYgQzQ0Ljc3MjksMzIuNTAwNiAzNi4yNDk5LDI4LjU5MDYgMzIuODAwOSwyNi45NjA2IEMzMi44MDA5LDI2Ljk0NjYgMzIuODA0OSwyNi45MzM2IDMyLjgwNDksMjYuOTE5NiBDMzIuODA0OSwyNS41OTQ2IDMxLjcyNjksMjQuNTE2NiAzMC40MDA5LDI0LjUxNjYgQzI5LjA3NjksMjQuNTE2NiAyNy45OTg5LDI1LjU5NDYgMjcuOTk4OSwyNi45MTk2IEMyNy45OTg5LDI4LjI0NDYgMjkuMDc2OSwyOS4zMjI2IDMwLjQwMDksMjkuMzIyNiBDMzAuOTgyOSwyOS4zMjI2IDMxLjUxMDksMjkuMTA1NiAzMS45Mjc5LDI4Ljc2MDYgQzM1Ljk4NTksMzAuNjgxNiA0NC40NDI5LDM0LjUzNDYgNTAuNjA3OSwzNi4zNTQ2IEw0OC4xNjk5LDUzLjU2MDYgQzQ4LjE2MjksNTMuNjA3NiA0OC4xNTk5LDUzLjY1NDYgNDguMTU5OSw1My43MDE2IEM0OC4xNTk5LDU1LjIxNjYgNDEuNDUyOSw1Ny45OTk2IDMwLjQ5MzksNTcuOTk5NiBDMTkuNDE4OSw1Ny45OTk2IDEyLjY0MDksNTUuMjE2NiAxMi42NDA5LDUzLjcwMTYgQzEyLjY0MDksNTMuNjU1NiAxMi42Mzc5LDUzLjYxMDYgMTIuNjMxOSw1My41NjU2IEw3LjUzNzksMTYuMzU4NiBDMTEuOTQ2OSwxOS4zOTM2IDIxLjQyOTksMjAuOTk5NiAzMC40OTk5LDIwLjk5OTYgQzM5LjU1NTksMjAuOTk5NiA0OS4wMjI5LDE5LjM5OTYgNTMuNDQwOSwxNi4zNzM2IEw1MC44OTI5LDM0LjM1MjYgWiBNNi45OTk5LDEyLjQ3NzYgQzcuMDcxOSwxMS4xNjE2IDE0LjYzMzksNS45OTk2IDMwLjQ5OTksNS45OTk2IEM0Ni4zNjM5LDUuOTk5NiA1My45MjY5LDExLjE2MDYgNTMuOTk5OSwxMi40Nzc2IEw1My45OTk5LDEyLjkyNjYgQzUzLjEyOTksMTUuODc3NiA0My4zMjk5LDE4Ljk5OTYgMzAuNDk5OSwxOC45OTk2IEMxNy42NDc5LDE4Ljk5OTYgNy44NDI5LDE1Ljg2NzYgNi45OTk5LDEyLjkxMjYgTDYuOTk5OSwxMi40Nzc2IFogTTU1Ljk5OTksMTIuNDk5NiBDNTUuOTk5OSw5LjAzNDYgNDYuMDY1OSwzLjk5OTYgMzAuNDk5OSwzLjk5OTYgQzE0LjkzMzksMy45OTk2IDQuOTk5OSw5LjAzNDYgNC45OTk5LDEyLjQ5OTYgTDUuMDkzOSwxMy4yNTM2IEwxMC42NDE5LDUzLjc3NzYgQzEwLjc3NDksNTguMzA5NiAyMi44NjA5LDU5Ljk5OTYgMzAuNDkzOSw1OS45OTk2IEMzOS45NjU5LDU5Ljk5OTYgNTAuMDI4OSw1Ny44MjE2IDUwLjE1ODksNTMuNzgwNiBMNTIuNTU0OSwzNi44ODM2IEM1My44ODc5LDM3LjIwMjYgNTQuOTg0OSwzNy4zNjU2IDU1Ljg2NTksMzcuMzY1NiBDNTcuMDQ4OSwzNy4zNjU2IDU3Ljg0ODksMzcuMDc2NiA1OC4zMzM5LDM2LjQ5ODYgQzU4LjczMTksMzYuMDI0NiA1OC44ODM5LDM1LjQ1MDYgNTguNzY5OSwzNC44Mzk2IEM1OC41MTA5LDMzLjQ1NTYgNTYuODY3OSwzMS45NjM2IDUzLjUyMTksMzAuMDU0NiBMNTUuODk3OSwxMy4yOTI2IEw1NS45OTk5LDEyLjQ5OTYgWiIgaWQ9IkFtYXpvbi1TaW1wbGUtU3RvcmFnZS1TZXJ2aWNlLUljb25fNjRfU3F1aWQiPjwvcGF0aD4KICAgICAgICA8L2c+CiAgICA8L2c+Cjwvc3ZnPg==" x="312" y="700" width="30" height="30"/>
+  <text x="350" y="718" fill="#16A34A" font-size="11.5" font-weight="700">Amazon S3 Document Lake</text>
+  <text x="350" y="734" fill="#64748B" font-size="10">Bucket: huylam-ocr-documents-ap-southeast-1</text>
+
+  <text x="315" y="760" fill="#334155" font-size="10.5">• Prefix: <tspan font-family="monospace">uploads/{job_id}/</tspan> - Raw input PDFs, images, uploaded docs</text>
+  <text x="315" y="780" fill="#334155" font-size="10.5">• Prefix: <tspan font-family="monospace">outputs/{job_id}/</tspan> - Generated cv.pdf.md, cv.pdf.docx, cv.pdf.pdf</text>
+  <text x="315" y="800" fill="#334155" font-size="10.5">• Presigned URLs: Secure time-limited browser download without public bucket access</text>
+  <text x="315" y="820" fill="#16A34A" font-size="10" font-weight="700">• Security: SSE-S3 AES-256 Server-Side Encryption enabled on all objects</text>
+
+  <!-- DynamoDB Box -->
+  <rect x="890" y="690" width="560" height="155" rx="4" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="1"/>
+  <image href="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyB3aWR0aD0iODBweCIgaGVpZ2h0PSI4MHB4IiB2aWV3Qm94PSIwIDAgODAgODAiIHZlcnNpb249IjEuMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayI+CiAgICA8IS0tIEdlbmVyYXRvcjogU2tldGNoIDY0ICg5MzUzNykgLSBodHRwczovL3NrZXRjaC5jb20gLS0+CiAgICA8dGl0bGU+SWNvbi1BcmNoaXRlY3R1cmUvNjQvQXJjaF9BbWF6b24tRHluYW1vREJfNjQ8L3RpdGxlPgogICAgPGRlc2M+Q3JlYXRlZCB3aXRoIFNrZXRjaC48L2Rlc2M+CiAgICA8ZGVmcz4KICAgICAgICA8bGluZWFyR3JhZGllbnQgeDE9IjAlIiB5MT0iMTAwJSIgeDI9IjEwMCUiIHkyPSIwJSIgaWQ9ImxpbmVhckdyYWRpZW50LTEiPgogICAgICAgICAgICA8c3RvcCBzdG9wLWNvbG9yPSIjMkUyN0FEIiBvZmZzZXQ9IjAlIj48L3N0b3A+CiAgICAgICAgICAgIDxzdG9wIHN0b3AtY29sb3I9IiM1MjdGRkYiIG9mZnNldD0iMTAwJSI+PC9zdG9wPgogICAgICAgIDwvbGluZWFyR3JhZGllbnQ+CiAgICA8L2RlZnM+CiAgICA8ZyBpZD0iSWNvbi1BcmNoaXRlY3R1cmUvNjQvQXJjaF9BbWF6b24tRHluYW1vREJfNjQiIHN0cm9rZT0ibm9uZSIgc3Ryb2tlLXdpZHRoPSIxIiBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPgogICAgICAgIDxnIGlkPSJJY29uLUFyY2hpdGVjdHVyZS1CRy82NC9EYXRhYmFzZSIgZmlsbD0idXJsKCNsaW5lYXJHcmFkaWVudC0xKSI+CiAgICAgICAgICAgIDxyZWN0IGlkPSJSZWN0YW5nbGUiIHg9IjAiIHk9IjAiIHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCI+PC9yZWN0PgogICAgICAgIDwvZz4KICAgICAgICA8cGF0aCBkPSJNNTIuMDg1OTUyNSw1NC44NTAyNTA2IEM0OC43NDc5NTY5LDU3LjU0OTAzMzggNDEuNzQ0OTY2MSw1OC45NzUyOTI3IDM1LjA0Mzk3NDksNTguOTc1MjkyNyBDMjguMzQxOTgzOCw1OC45NzUyOTI3IDIxLjMzNjk5Myw1Ny41NDgwNDIgMTcuOTk5OTk3NCw1NC44NDkyNTg4IEwxNy45OTk5OTc0LDYwLjI4NDUxNSBMMTguMDAwOTk3NCw2MC4yODQ1MTUgQzE4LjAwMDk5NzQsNjIuOTk1MjAwMiAyNC45OTk5OTc0LDY2LjAxNjMyOTkgMzUuMDQzOTc0OSw2Ni4wMTYzMjk5IEM0NS4wNzk5NjE3LDY2LjAxNjMyOTkgNTIuMDc0OTUyNSw2Mi45OTkxNjc2IDUyLjA4NTk1MjUsNjAuMjkwNDY2IEw1Mi4wODU5NTI1LDU0Ljg1MDI1MDYgWiBNNTIuMDg2OTUyNSw0NC41MjIyNzIgTDU0LjA4Njk0OTksNDQuNTExMzYxOCBMNTQuMDg2OTQ5OSw0NC41MjIyNzIgQzU0LjA4Njk0OTksNDUuNzMwMzI3MSA1My40ODE5NTA3LDQ2Ljg1ODA0MzYgNTIuMzAzOTUyMiw0Ny44OTA1NDM5IEM1My43MzE5NTAzLDQ5LjE0NzE5OSA1NC4wODY5NDk5LDUwLjM4MDA0OTkgNTQuMDg2OTQ5OSw1MS4yNTc4MjQgQzU0LjA4Njk0OTksNTEuMjYzNzc1IDU0LjA4NTk0OTksNTEuMjY4NzM0MiA1NC4wODU5NDk5LDUxLjI3NDY4NTIgTDU0LjA4NTk0OTksNjAuMjg0NTE1IEw1NC4wODY5NDk5LDYwLjI4NDUxNSBDNTQuMDg2OTQ5OSw2NS4yOTUyNjU4IDQ0LjI3NDk2MjgsNjggMzUuMDQzOTc0OSw2OCBDMjUuODM0OTg3MSw2OCAxNi4wNDk5OTk5LDY1LjMwNzE2NzggMTYuMDAzLDYwLjMxOTIyOTIgQzE2LjAwMyw2MC4zMTQyNyAxNiw2MC4zMDkzMTA5IDE2LDYwLjMwNDM1MTcgTDE2LDUxLjI1NDg0ODUgQzE2LDUxLjI1Mjg2NDggMTYuMDAyLDUxLjI0OTg4OTMgMTYuMDAyLDUxLjI0NjkxMzggQzE2LjAwNSw1MC4zNjkxMzk4IDE2LjM2MDk5OTUsNDkuMTQxMjQ3OSAxNy43ODY5OTc2LDQ3Ljg4NzU2ODQgQzE2LjM2OTk5OTUsNDYuNjM1ODcyNSAxNi4wMSw0NS40MTQ5MjM2IDE2LjAwMSw0NC41NDQwOTI0IEwxNi4wMDIsNDQuNTQ0MDkyNCBDMTYuMDAyLDQ0LjU0MDEyNSAxNiw0NC41MzcxNDk1IDE2LDQ0LjUzMzE4MjIgTDE2LDM1LjQ4MzY3OSBDMTYsMzUuNDgwNzAzNSAxNi4wMDIsMzUuNDc3NzI4IDE2LjAwMiwzNS40NzQ3NTI1IEMxNi4wMDUsMzQuNTk2OTc4NCAxNi4zNjE5OTk1LDMzLjM2OTA4NjYgMTcuNzg3OTk3NiwzMi4xMTczOTA4IEMxNi4zNjk5OTk1LDMwLjg2NDcwMzEgMTYuMDEsMjkuNjQyNzYyMyAxNi4wMDEsMjguNzcyOTIyOSBMMTYuMDAyLDI4Ljc3MjkyMjkgQzE2LjAwMiwyOC43Njg5NTU2IDE2LDI4Ljc2NDk4ODIgMTYsMjguNzYxMDIwOSBMMTYsMTkuNzEyNTA5NSBDMTYsMTkuNzA5NTM0IDE2LjAwMiwxOS43MDY1NTg1IDE2LjAwMiwxOS43MDM1ODMgQzE2LjAxOSwxNC42OTk3NzUxIDI1LjgxOTk4NzEsMTIgMzUuMDQzOTc0OSwxMiBDNDAuMjU0OTY4MSwxMiA0NS4yNjA5NjE1LDEyLjgyODE4MjMgNDguNzc3OTU2OSwxNC4yNzIyOTQxIEw0OC4wMTI5NTc5LDE2LjEwNTIwNTQgQzQ0LjcyOTk2MjIsMTQuNzU3MzAxNSA0MC4wMDI5Njg0LDEzLjk4MzY3MDEgMzUuMDQzOTc0OSwxMy45ODM2NzAxIEMyNC45OTk5ODgyLDEzLjk4MzY3MDEgMTguMDAwOTk3NCwxNy4wMDQ3OTk4IDE4LjAwMDk5NzQsMTkuNzE3NDY4NyBDMTguMDAwOTk3NCwyMi40MjkxNDU4IDI0Ljk5OTk4ODIsMjUuNDUwMjc1NCAzNS4wNDM5NzQ5LDI1LjQ1MDI3NTQgQzM1LjMxNDk3NDYsMjUuNDUzMjUwOSAzNS41Nzk5NzQyLDI1LjQ1MDI3NTQgMzUuODQ3OTczOSwyNS40NDAzNTcxIEwzNS45MzE5NzM4LDI3LjQyMjA0MzUgQzM1LjYzNTk3NDIsMjcuNDMzOTQ1NiAzNS4zMzk5NzQ1LDI3LjQzMzk0NTYgMzUuMDQzOTc0OSwyNy40MzM5NDU2IEMyOC4zNDE5ODM4LDI3LjQzMzk0NTYgMjEuMzM2OTkzLDI2LjAwNjY5NDkgMTgsMjMuMzA3OTExNyBMMTgsMjguNzQwMTkyMyBMMTguMDAwOTk3NCwyOC43NDAxOTIzIEwxOC4wMDA5OTc0LDI4Ljc2MzAwNDYgQzE4LjAxMDk5NzQsMjkuODAzNDM5NSAxOS4wNzc5OTU5LDMwLjcxMTk2MDUgMTkuOTcxOTk0OCwzMS4yODkyMDg1IEMyMi42NjE5OTEyLDMzLjAwNDA5MTMgMjcuNDgxOTg0OSwzNC4xNzU0NDg1IDMyLjg1Njk3NzgsMzQuNDE4NDQ4MSBMMzIuNzY1OTc3OSwzNi40MDAxMzQ2IEMyNy4zMjA5ODUxLDM2LjE1MzE2NzcgMjIuNTUyOTkxNCwzNS4wMjM0Njc1IDE5LjQ4Mzk5NTQsMzMuMjkxNzIzNSBDMTguNzI3OTk2NCwzMy44NTcwNjk1IDE4LjAwMDk5NzQsMzQuNjIxNzc0MyAxOC4wMDA5OTc0LDM1LjQ4ODYzODIgQzE4LjAwMDk5NzQsMzguMjAwMzE1MyAyNC45OTk5ODgyLDQxLjIyMTQ0NDkgMzUuMDQzOTc0OSw0MS4yMjE0NDQ5IEMzNi4wMjg5NzM2LDQxLjIyMTQ0NDkgMzcuMDA2OTcyMyw0MS4xODg3MTQzIDM3Ljk1MTk3MTEsNDEuMTIzMjUzMiBMMzguMDkwOTcwOSw0My4xMDE5NjQyIEMzNy4xMDA5NzIyLDQzLjE3MDQwMDggMzYuMDc0OTczNiw0My4yMDUxMTUgMzUuMDQzOTc0OSw0My4yMDUxMTUgQzI4LjM0MTk4MzgsNDMuMjA1MTE1IDIxLjMzNjk5Myw0MS43Nzc4NjQ0IDE4LDM5LjA3OTA4MTEgTDE4LDQ0LjUxMTM2MTggTDE4LjAwMDk5NzQsNDQuNTExMzYxOCBDMTguMDEwOTk3NCw0NS41NzQ2MDkgMTkuMDc3OTk1OSw0Ni40ODIxMzgxIDE5Ljk3MTk5NDgsNDcuMDYwMzc4IEMyMy4wNDc5OTA3LDQ5LjAyMzIxOTYgMjguODIzOTgzMSw1MC4yNDUxNjA0IDM1LjA0Mzk3NDksNTAuMjQ1MTYwNCBMMzUuNDgzOTc0NCw1MC4yNDUxNjA0IEwzNS40ODM5NzQ0LDUyLjIyODgzMDUgTDM1LjA0Mzk3NDksNTIuMjI4ODMwNSBDMjguNzI0OTgzMiw1Mi4yMjg4MzA1IDIyLjk4MTk5MDgsNTEuMDU1NDg5NiAxOS40Njk5OTU0LDQ5LjA3MjgxMTMgQzE4LjcxNzk5NjQsNDkuNjM3MTY1NSAxOC4wMDA5OTc0LDUwLjM5NzkwMyAxOC4wMDA5OTc0LDUxLjI1NzgyNCBDMTguMDAwOTk3NCw1My45Njk1MDExIDI0Ljk5OTk4ODIsNTYuOTkxNjIyNSAzNS4wNDM5NzQ5LDU2Ljk5MTYyMjUgQzQ1LjA3OTk2MTcsNTYuOTkxNjIyNSA1Mi4wNzQ5NTI1LDUzLjk3NDQ2MDIgNTIuMDg1OTUyNSw1MS4yNjQ3NjY4IEw1Mi4wODU5NTI1LDUxLjI1NDg0ODUgTDUyLjA4NTk1MjUsNTEuMjUzODU2NiBDNTIuMDgzOTUyNSw1MC4zOTE5NTIgNTEuMzYzOTUzNCw0OS42MzEyMTQ1IDUwLjYwOTk1NDQsNDkuMDY2ODYwMyBDNTAuMTIxOTU1MSw0OS4zNDM1ODIzIDQ5LjU5ODk1NTgsNDkuNjEwMzg1OSA0OS4wMDM5NTY2LDQ5Ljg1NTM2OTIgTDQ4LjIzNzk1NzYsNDguMDIyNDU4IEM0OC45NjM5NTY2LDQ3LjcyMzkxNTYgNDkuNTkzOTU1OCw0Ny40MDE1NjkyIDUwLjExMDk1NTEsNDcuMDYyMzYxNiBDNTEuMDEyOTUzOSw0Ni40NzQyMDM0IDUyLjA4Njk1MjUsNDUuNTU0NzcyMyA1Mi4wODY5NTI1LDQ0LjUyMjI3MiBMNTIuMDg2OTUyNSw0NC41MjIyNzIgWiBNNjAuNjUyOTQxMiwzMC4wMTY2ODQxIEw1NS4wNDg5NDg2LDMwLjAxNjY4NDEgQzU0LjcxNzk0OSwzMC4wMTY2ODQxIDU0LjQwNjk0OTQsMjkuODU0MDIzMSA1NC4yMjE5NDk3LDI5LjU4MjI2MDMgQzU0LjAzNDk0OTksMjkuMzEwNDk3NSA1My45OTY5NSwyOC45NjQzNDcxIDU0LjExODk0OTgsMjguNjU5ODUzNyBMNTcuNTI3OTQ1MywyMC4xMzgwMDY4IEw0NC42MTg5NzAyLDIwLjEzODAwNjggTDM4LjYxODk3MDIsMzIuMDQwMDI3NiBMNDUuMDAwOTYxOCwzMi4wNDAwMjc2IEM0NS4zMTk5NjE0LDMyLjA0MDAyNzYgNDUuNjE5OTYxLDMyLjE5MTc3ODQgNDUuODA4OTYwOCwzMi40NDY2OCBDNDUuOTk1OTYwNSwzMi43MDI1NzM1IDQ2LjA1MDk2MDQsMzMuMDMwODcwOSA0NS45NTM5NjA2LDMzLjMzMzM4MDYgTDQwLjI1Nzk2ODEsNTEuMDg5MjEyIEw2MC42NTI5NDEyLDMwLjAxNjY4NDEgWiBNNjMuNzIxOTM3MiwyOS43MTIxOTA3IEwzOC43MjI5NzAxLDU1LjUzOTU3NiBDMzguNTI3OTcwMyw1NS43Mzk5MjY3IDM4LjI2NTk3MDcsNTUuODQ0MDY5NCAzOC4wMDA5NzEsNTUuODQ0MDY5NCBDMzcuODI0OTcxMyw1NS44NDQwNjk0IDM3LjY0Nzk3MTUsNTUuNzk5NDM2OCAzNy40ODk5NzE3LDU1LjcwNTIxMjQgQzM3LjA4OTk3MjIsNTUuNDY5MTU1NyAzNi45MDY5NzI1LDU0Ljk5MjA4MyAzNy4wNDc5NzIzLDU0LjU1MTcwODMgTDQzLjYzMzk2MzYsMzQuMDIzNjk3OCBMMzcuMDAwOTcyNCwzNC4wMjM2OTc4IEMzNi42NTM5NzI4LDM0LjAyMzY5NzggMzYuMzMyOTczMiwzMy44NDYxNTkzIDM2LjE0OTk3MzUsMzMuNTUzNTY3OSBDMzUuOTY3OTczNywzMy4yNjA5NzY2IDM1Ljk1MDk3MzcsMzIuODk1OTgxMyAzNi4xMDY5NzM1LDMyLjU4ODUxMjQgTDQzLjEwNjk2NDMsMTguNzAyODIxNCBDNDMuMjc1OTY0MSwxOC4zNjY1ODkzIDQzLjYyMTk2MzYsMTguMTU0MzM2NiA0NC4wMDA5NjMxLDE4LjE1NDMzNjYgTDU5LjAwMDk0MzQsMTguMTU0MzM2NiBDNTkuMzMxOTQzLDE4LjE1NDMzNjYgNTkuNjQyOTQyNSwxOC4zMTc5ODk0IDU5LjgyNzk0MjMsMTguNTg4NzYwNCBDNjAuMDE0OTQyMSwxOC44NjE1MTUgNjAuMDUyOTQyLDE5LjIwNjY3MzYgNTkuOTMwOTQyMiwxOS41MTIxNTg4IEw1Ni41MjE5NDY3LDI4LjAzMzAxMzkgTDYyLjk5OTkzODEsMjguMDMzMDEzOSBDNjMuMzk5OTM3NiwyOC4wMzMwMTM5IDYzLjc2MjkzNzEsMjguMjcxMDU0NCA2My45MTk5MzY5LDI4LjYzNjA0OTcgQzY0LjA3NjkzNjcsMjkuMDAyMDM2OCA2My45OTg5MzY4LDI5LjQyNTU1MDQgNjMuNzIxOTM3MiwyOS43MTIxOTA3IEw2My43MjE5MzcyLDI5LjcxMjE5MDcgWiBNMTkuNDU0OTk1NSw2MC42NzQzMDYyIEMyMC44NzE5OTM2LDYxLjQ3MjczMzQgMjIuNjU1OTkxMiw2Mi4xNDQyMDU3IDI0Ljc1Njk4ODUsNjIuNjY3ODk0NyBMMjUuMjQ0OTg3OCw2MC43NDM3MzQ2IEMyMy4zNDU5OTAzLDYwLjI3MDYyOTMgMjEuNjg1OTkyNSw1OS42NDk3NDA1IDIwLjQ0Mjk5NDIsNTguOTQ5NTA1IEwxOS40NTQ5OTU1LDYwLjY3NDMwNjIgWiBNMjQuNzU2OTg4NSw0Ni43OTg1MzM1IEwyNS4yNDQ5ODc4LDQ0Ljg3NTM2NTMgQzIzLjM0NTk5MDMsNDQuNDAxMjY4MSAyMS42ODU5OTI1LDQzLjc4MDM3OTQgMjAuNDQyOTk0Miw0My4wODAxNDM4IEwxOS40NTQ5OTU1LDQ0LjgwNDk0NSBDMjAuODcxOTkzNiw0NS42MDMzNzIyIDIyLjY1NDk5MTIsNDYuMjc0ODQ0NiAyNC43NTY5ODg1LDQ2Ljc5ODUzMzUgTDI0Ljc1Njk4ODUsNDYuNzk4NTMzNSBaIE0xOS40NTQ5OTU1LDI4LjkzNTU4MzkgTDIwLjQ0Mjk5NDIsMjcuMjEwNzgyNyBDMjEuNjgzOTkyNSwyNy45MTEwMTgyIDIzLjM0NDk5MDMsMjguNTMwOTE1MSAyNS4yNDQ5ODc4LDI5LjAwNjAwNDEgTDI0Ljc1Njk4ODUsMzAuOTI5MTcyMyBDMjIuNjUyOTkxMiwzMC40MDQ0OTE2IDIwLjg2OTk5MzYsMjkuNzMzMDE5MyAxOS40NTQ5OTU1LDI4LjkzNTU4MzkgTDE5LjQ1NDk5NTUsMjguOTM1NTgzOSBaIiBpZD0iQW1hem9uLUR5bmFtb0RCX0ljb25fNjRfU3F1aWQiIGZpbGw9IiNGRkZGRkYiPjwvcGF0aD4KICAgIDwvZz4KPC9zdmc+" x="902" y="700" width="30" height="30"/>
+  <text x="940" y="718" fill="#0284C7" font-size="11.5" font-weight="700">Amazon DynamoDB State Store</text>
+  <text x="940" y="734" fill="#64748B" font-size="10">Table: document_processing_jobs (Billing: PAY_PER_REQUEST / On-Demand)</text>
+
+  <text x="905" y="760" fill="#334155" font-size="10.5">• Partition Key: <tspan font-family="monospace">job_id (String)</tspan> | Real-time state machine tracking</text>
+  <text x="905" y="780" fill="#334155" font-size="10.5">• Status Lifecycle: <tspan font-family="monospace">RECEIVED_VIA_S3_EVENT -&gt; PROCESSING -&gt; COMPLETED / FAILED</tspan></text>
+  <text x="905" y="800" fill="#334155" font-size="10.5">• Execution Metrics: execution_time_seconds, model_used, page_count, output_urls</text>
+  <text x="905" y="820" fill="#0284C7" font-size="10" font-weight="700">• Sub-10ms read/write latency with zero provisioned capacity overhead ($0.00 base)</text>
+
+  <!-- ==================== CONNECTING ARROWS ==================== -->
+  <!-- 1. Client to Core -->
+  <path d="M250 250 L280 250" stroke="#0284C7" stroke-width="1.8" fill="none" marker-end="url(#arr-blue)"/>
+  <rect x="254" y="238" width="22" height="13" rx="2" fill="#FFFFFF" stroke="#BAE6FD" stroke-width="0.8"/>
+  <text x="265" y="248" fill="#0284C7" font-size="8" font-weight="700" text-anchor="middle">HTTP</text>
+
+  <!-- 2. Tier 1 to Tier 2 (on image/scanned) -->
+  <path d="M505 340 L505 360" stroke="#EA580C" stroke-width="1.8" fill="none" marker-end="url(#arr-orange)"/>
+  <rect x="470" y="344" width="70" height="14" rx="3" fill="#FFFFFF" stroke="#FED7AA" stroke-width="0.8"/>
+  <text x="505" y="354" fill="#EA580C" font-size="8" font-weight="700" text-anchor="middle">Scan Escalate</text>
+
+  <!-- 3. Tier 1 to Tier 3 (clean top corridor) -->
+  <path d="M680 115 L680 102 L1130 102 L1130 115" stroke="#16A34A" stroke-width="1.8" fill="none" marker-end="url(#arr-green)"/>
+  <rect x="850" y="95" width="110" height="15" rx="3" fill="#FFFFFF" stroke="#BBF7D0" stroke-width="0.8"/>
+  <text x="905" y="106" fill="#16A34A" font-size="8.5" font-weight="700" text-anchor="middle">Fast-Path Native Text</text>
+
+  <!-- 4. Tier 2 to External Endpoints -->
+  <path d="M710 490 L740 490" stroke="#0284C7" stroke-width="1.8" fill="none" marker-end="url(#arr-blue)"/>
+  <rect x="713" y="476" width="34" height="14" rx="2" fill="#FFFFFF" stroke="#BAE6FD" stroke-width="0.8"/>
+  <text x="730" y="486" fill="#0284C7" font-size="8" font-weight="700" text-anchor="middle">Dispatch</text>
+
+  <!-- 5. External Endpoints to Tier 3 Translator -->
+  <path d="M1080 380 L1110 380" stroke="#8C4FFF" stroke-width="1.8" fill="none" marker-end="url(#arr-purple)"/>
+  <rect x="1083" y="366" width="34" height="14" rx="2" fill="#FFFFFF" stroke="#E9D5FF" stroke-width="0.8"/>
+  <text x="1100" y="376" fill="#8C4FFF" font-size="8" font-weight="700" text-anchor="middle">OCR Text</text>
+
+  <!-- 6. Tier 3 to Storage (downwards) -->
+  <path d="M1280 610 L1280 650" stroke="#1E293B" stroke-width="1.8" fill="none" marker-end="url(#arr-dark)"/>
+  <rect x="1245" y="623" width="70" height="14" rx="3" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="0.8"/>
+  <text x="1280" y="633" fill="#1E293B" font-size="8" font-weight="700" text-anchor="middle">Persist &amp; State</text>
+
+  <!-- Footer -->
+  <line x1="30" y1="875" x2="1470" y2="875" stroke="#CBD5E1" stroke-width="1"/>
+  <text x="30" y="890" fill="#64748B" font-size="9">FinOps Spend: $0.00 (Free Tier Always Free + Scale-to-Zero) | HUCE Internship Report 2026 | Lam Quang Huy (0212267)</text>
+  <text x="1470" y="890" fill="#64748B" font-size="9" text-anchor="end">Production Hybrid OCR Engine: PyMuPDF Vector (0.1s) + Dual Selective OCR (Qwen2.5-VL / Bedrock)</text>
+</svg>
